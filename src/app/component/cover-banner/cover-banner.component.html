@@ -1,0 +1,10 @@
+<div class="cover-container">
+    <div class="banner" *ngFor="let item of banners">
+        <img [src]="item.image" alt="item.title">
+        <div class="banner-content">
+            <h2>{{item?.title}}</h2>
+            <p>{{item?.subtitle}}</p>
+        </div>
+        <button class="shop-now">Shop Now</button>
+    </div>
+</div>

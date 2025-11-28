@@ -3,9 +3,10 @@
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    background: #ff5500;
+    background: #ff6600;
     color: white;
     top: 0;
+    position: fixed;
 }
 .logo img{
     height: 40px;
@@ -18,11 +19,12 @@
 }
 .search-area{
     width: 100%;
-    background: #ff5500;
+    background: #ff6600;
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    
+    top: 60px;
+    position: fixed;
 }
 input{
     width: 35%;
@@ -50,11 +52,12 @@ input{
 }
 li a{
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 900;
     cursor: pointer;
     color: white;
     text-decoration: none;
 }
 li a:hover{
-    background: #ff6600;
+    background: #fff3e6 ;
+    color: #ff5500;
 }

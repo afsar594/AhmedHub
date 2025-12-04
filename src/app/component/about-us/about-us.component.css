@@ -1,0 +1,46 @@
+.about-container{
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 22px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+.image{
+    width: 100%;
+    max-height:350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.title{
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    /* color: #222; */
+    color: #e65c00;
+}
+h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* color: #0f62fe; */
+    color: #ff6600;
+}
+.section-text{
+    color: #555;
+    margin-bottom: 12px;
+    white-space: pre-line;
+}
+ul{
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+ul li{
+    color: #0f62fe;
+    text-decoration: none;
+}
+a{
+    color: #0f62fe;
+}

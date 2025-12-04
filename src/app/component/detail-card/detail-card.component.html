@@ -1,0 +1,43 @@
+<div class="detail-container" *ngFor="let item of product">
+    <div class="image-box">
+        <img [src]="item.image" [alt]="item.title">
+    </div>
+    <div class="content-box">
+
+        <h2 class="title">{{item.title}}</h2>
+        <div class="price-row">
+            <p class="new-price">$ {{item.price}}</p>
+            <P class="old-Price">$ {{item.oldPrice}}</P>
+            <p class="discount">$ {{item.discount}}</p>
+        </div>
+        <p class="description"> This Men’s Classic Warm Hoodie is made with soft premium fleece
+            to keep you warm, comfortable, and stylish in winter.
+            Perfect for daily wear, outings, gym, and casual use.</p>
+          
+            <div class="quantity-box">
+                <h2>Quantity</h2>
+            <button (click)="decrease()">-</button>
+            <span>{{quantity}}</span>
+            <button (click)="increase()">+</button>
+            <!-- <p class="new-price">$ {{item.price}}</p> -->
+             <p class="new-price">$ {{totalPriceFix(item.price , quantity)}}</p>
+          </div> 
+          <div class="color-option">
+          <div class="color-circle"
+          *ngFor="let color of colors"
+          [style.backgroundColor]="color"
+          (click)="selectcolor=color"
+          [class.active]="selectcolor===color">
+          </div>
+          </div>
+          <div class="size-button">
+            <button *ngFor="let size of sizes" class="size-btn"
+            [class.active]="selectedsize===size"
+            (click)="selectedsize=size">
+                {{size}}
+            </button>
+          </div>
+        <button class="buy-btn">Buy Now</button>
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>

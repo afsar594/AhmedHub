@@ -50,6 +50,7 @@ input{
     display: flex;
     gap: 25px;
     margin-left: auto;
+    padding-right: 55px;
 }
 li a{
     font-size: 13px;

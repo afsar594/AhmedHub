@@ -39,10 +39,10 @@ padding: 30px;
 }
 .shop-now{
 position: absolute;
-top: 89%;
-left: 72%;
+top: 80%;
+left: 71%;
 transform: translateY(-50%,-50%);
-padding: 15px 20px;
+padding: 10px 15px;
 background-color: #ff6600;
 color: white;
 font-size: 18px;

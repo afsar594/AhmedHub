@@ -1,11 +1,30 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm!: FormGroup; 
 
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]]
+    });
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      console.log('Form Values:', this.loginForm.value);
+      alert('Login successful!');
+    } else {
+      this.loginForm.markAllAsTouched(); 
+    }
+  }
 }

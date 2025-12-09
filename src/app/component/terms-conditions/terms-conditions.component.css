@@ -1,0 +1,28 @@
+.terms-container{
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e65c00;
+}
+h2{
+    color: #ff6600;
+    margin-top: 20px;
+}
+ul{
+    list-style: disc;
+    padding-left: 20px;
+}
+a{
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}

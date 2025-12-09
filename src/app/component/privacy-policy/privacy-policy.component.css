@@ -1,0 +1,33 @@
+.privacy-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+    color: #e65c00;
+}
+
+h2 {
+  margin-top: 25px;
+  color: #ff6600;
+}
+
+ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

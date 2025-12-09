@@ -13,6 +13,7 @@ import { LoginComponent } from './component/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: CoverBannerComponent },
+// {path:'cover-banner', component:CoverBannerComponent},
   { path: 'shop', component: SaleProductComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },

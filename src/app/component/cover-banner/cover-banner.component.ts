@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cover-banner',
-  imports: [CommonModule],
+  imports: [CommonModule , RouterLink],
   templateUrl: './cover-banner.component.html',
   styleUrl: './cover-banner.component.css'
 })

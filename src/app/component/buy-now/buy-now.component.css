@@ -1,48 +1,116 @@
-.checkout-container{
-    width: 90%;
-    max-width: 900px;
-    margin: auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #e2e2e2;
+/* Main container */
+.checkout-container {
+  max-width: 550px;
+  margin: 35px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
 }
-.form-row{
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 20px 30px;
+
+/* Heading */
+.checkout-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #e65c00;
+  font-size: 26px;
+  font-weight: 600;
 }
-.form-group{
-    display: flex;
-flex-direction: column;
+
+/* Form group */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #444;
+  font-weight: 600;
 }
-label{
-    
-    color: #444;
-    font-weight: 600;
-    margin-bottom: 5px;
-    margin-top: 15px;
+
+/* Inputs & Selects */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.25s ease;
 }
-input , select{
-padding: 10px 12px;
-border: 1px solid #d9d9d9;
-border-radius: 5px;
-font-size: 14px;
+
+/* On focus */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 4px rgba(255, 102, 0, 0.4);
+  outline: none;
 }
-h2{
-    color: #ff6600;
+
+/* Save button */
+.save-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #ff6600, #e65c00);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: 0.3s;
 }
-.save-btn{
-    background: #1493dd;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    display: block;
-    margin-top: 20px;
+
+.save-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
-.save-btn:hover{
-    background: #ff6600;
+
+/* Error text */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 8px;
 }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .checkout-container {
+    padding: 18px;
+  }
+
+  .checkout-container h2 {
+    font-size: 22px;
+  }
+
+  .save-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+/* Make form-group elements full width */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* spacing between label + input/select */
+}
+
+/* Make all inputs and selects same width */
+.form-group input,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box; /* ensure padding/border included in width */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Optional: set max-width for form container */
+.checkout-container {
+  max-width: 500px; 
+  margin: 0 auto;
+}
+

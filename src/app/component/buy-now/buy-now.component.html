@@ -1,30 +1,62 @@
 <div class="checkout-container">
-<h2>Delivery Information</h2>
+  <h2>Delivery Information</h2>
 
-<div class="form-row">
+  <form [formGroup]="deliveryForm" (ngSubmit)="save()">
 
-<div class="form-group">
-    <label>Full Name</label>
-    <input type="text" placeholder="Enter your first and last name">
-    <label> Province </label>
-    <select>
-        <option>Please choose your province</option>
+    <div class="form-group">
+
+      <!-- Full Name -->
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your first and last name" formControlName="fullName">
+      <div class="error" *ngIf="deliveryForm.get('fullName')?.touched && deliveryForm.get('fullName')?.invalid">
+        Full name is required.
+      </div>
+
+      <!-- Province -->
+      <label>Province</label>
+      <select formControlName="province">
+        <option value="">Please choose your province</option>
         <option>Punjab</option>
         <option>Sindh</option>
         <option>KPK</option>
         <option>Balochistan</option>
-    </select>
-<label>House No / Street</label>
-<input type="text" placeholder="Please Enter">
-<label>Area</label>
-<select>
-    <option>Please choose your area</option>
-</select>
-<label>Colony / Landmark</label>
-<input type="text" placeholder="Please enter">
-<label>Address</label>
-<input type="text" placeholder="For Example: House # 123, Street # 123">
-</div>
-</div>
- <button class="save-btn">SAVE</button>
+      </select>
+      <div class="error" *ngIf="deliveryForm.get('province')?.touched && deliveryForm.get('province')?.invalid">
+        Province is required.
+      </div>
+
+      <!-- House -->
+      <label>House No / Street</label>
+      <input type="text" placeholder="Please Enter" formControlName="house">
+      <div class="error" *ngIf="deliveryForm.get('house')?.touched && deliveryForm.get('house')?.invalid">
+        House no / Street is required.
+      </div>
+
+      <!-- Area -->
+      <label>Area</label>
+      <select formControlName="area">
+        <option value="">Please choose your area</option>
+      </select>
+      <div class="error" *ngIf="deliveryForm.get('area')?.touched && deliveryForm.get('area')?.invalid">
+        Area is required.
+      </div>
+
+      <!-- Colony -->
+      <label>Colony / Landmark</label>
+      <input type="text" placeholder="Please enter" formControlName="colony">
+      <div class="error" *ngIf="deliveryForm.get('colony')?.touched && deliveryForm.get('colony')?.invalid">
+        Colony or landmark is required.
+      </div>
+
+      <!-- Address -->
+      <label>Address</label>
+      <input type="text" placeholder="For Example: House # 123, Street # 123" formControlName="address">
+      <div class="error" *ngIf="deliveryForm.get('address')?.touched && deliveryForm.get('address')?.invalid">
+        Address is required.
+      </div>
+
+    </div>
+
+    <button class="save-btn" type="submit">SAVE</button>
+  </form>
 </div>

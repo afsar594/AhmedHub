@@ -50,4 +50,6 @@ export class DetailCardComponent {
   selectcolor = '';
   sizes = ['S', 'M', 'L', 'XL'];
   selectedsize = '';
+  
+  
 }

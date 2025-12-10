@@ -1,13 +1,13 @@
-<div class="detail-container" *ngFor="let item of product">
+<div class="detail-container">
   <div class="image-box">
-    <img [src]="item.image" [alt]="item.title" />
+    <img [src]="record.image" [alt]="record.title" />
   </div>
   <div class="content-box">
-    <h2 class="title">{{ item.title }}</h2>
+    <h2 class="title">{{ record.title }}</h2>
     <div class="price-row">
-      <p class="new-price">$ {{ item.price }}</p>
-      <P class="old-Price">$ {{ item.oldPrice }}</P>
-      <p class="discount">$ {{ item.discount }}</p>
+      <p class="new-price">$ {{ record.price }}</p>
+      <P class="old-Price">$ {{ record.oldPrice }}</P>
+      <p class="discount">$ {{ record.discount }}</p>
     </div>
     <p class="description">
       This Men’s Classic Warm Hoodie is made with soft premium fleece to keep
@@ -20,10 +20,10 @@
       <button (click)="decrease()">-</button>
       <span>{{ quantity }}</span>
       <button (click)="increase()">+</button>
-      <!-- <p class="new-price">$ {{item.price}}</p> -->
-      <p class="new-price">$ {{ totalPriceFix(item.price, quantity) }}</p>
+      <!-- <p class="new-price">$ {{record.price}}</p> -->
+      <p class="new-price">$ {{ totalPriceFix(record.price, quantity) }}</p>
     </div>
-    
+
     <div class="color-option">
       <div
         class="color-circle"

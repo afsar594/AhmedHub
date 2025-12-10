@@ -32,6 +32,7 @@
 .footer-links {
   list-style: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .footer-links li {

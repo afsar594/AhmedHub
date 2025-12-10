@@ -12,6 +12,9 @@ import { LoginComponent } from './component/login/login.component';
 import { DetailCardComponent } from './component/detail-card/detail-card.component';
 import { BuyNowComponent } from './component/buy-now/buy-now.component';
 import { CartPageComponent } from './component/cart-page/cart-page.component';
+import { AdminLoginComponent } from './admin-component/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin-component/admin-dashboard/admin-dashboard.component';
+import { AdminAddProductComponent } from './admin-component/admin-add-product/admin-add-product.component';
 
 
 export const routes: Routes = [
@@ -29,5 +32,8 @@ export const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path:'detail-page', component:DetailCardComponent},
   {path:'form-page', component:BuyNowComponent},
-  {path:'cart-page',component:CartPageComponent}
+  {path:'cart-page',component:CartPageComponent},
+  {path:'admin-panel', component:AdminLoginComponent},
+  {path:'dashboard', component:AdminDashboardComponent},
+  {path:'adminproductmanagement', component:AdminAddProductComponent}
 ];

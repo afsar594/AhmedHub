@@ -17,7 +17,7 @@
 <section class="product-sale">
   <h2>Young Girl’s Collection</h2>
   <p class="on-sale">Trendy and stylish items for 18+ women:</p>
-  <div class="product">
+  <div class="product" (click)="navigateToDetail()">
     <div class="product-card" *ngFor="let item of girlproduct">
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>
@@ -33,7 +33,7 @@
 <section class="product-sale">
   <h2>Kids Collection (4–12 years old, 15+ items)</h2>
   <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
-  <div class="product">
+  <div class="product" (click)="navigateToDetail()">
     <div class="product-card" *ngFor="let item of kidproducts">
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>

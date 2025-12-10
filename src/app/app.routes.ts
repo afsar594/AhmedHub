@@ -9,18 +9,25 @@ import { TermsConditionsComponent } from './component/terms-conditions/terms-con
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { LoginComponent } from './component/login/login.component';
+import { DetailCardComponent } from './component/detail-card/detail-card.component';
+import { BuyNowComponent } from './component/buy-now/buy-now.component';
+import { CartPageComponent } from './component/cart-page/cart-page.component';
 
 
 export const routes: Routes = [
   { path: '', component: CoverBannerComponent },
+  {path:'home', component:CoverBannerComponent},
 // {path:'cover-banner', component:CoverBannerComponent},
   { path: 'shop', component: SaleProductComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'faq', component: FAQComponent },
   { path: 'shippingpolicy', component: ShippingPolicyComponent },
-  { path: 'Terms & Conditions', component: TermsConditionsComponent },
+  { path: 'terms-conditions', component: TermsConditionsComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   {path:'login' , component:LoginComponent},
-  {path: 'signup', component: SignupComponent}
+  {path: 'signup', component: SignupComponent},
+  {path:'detail-page', component:DetailCardComponent},
+  {path:'form-page', component:BuyNowComponent},
+  {path:'cart-page',component:CartPageComponent}
 ];

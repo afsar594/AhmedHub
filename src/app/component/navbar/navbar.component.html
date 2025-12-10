@@ -4,20 +4,21 @@
             alt="logo">
     </div>
     <ul class="top-links">
-        <li><a href="home">Home</a></li>
-        <li><a href="shop">Shop</a></li>
-        <li><a href="aboutus">About Us</a></li>
-        <li><a href="contact">Contact</a></li>
-        <li><a href="faq">FAQ</a></li>
-        <li><a href="shippingpolicy">Shipping Policy</a></li>
-        <li><a href="term&conditions">Terms & Conditions</a></li>
-        <li><a href="privacypolicy">Privacy Policy</a></li>
-        <li><a href="login">Login</a></li>
-        <li><a href="signup">Signup</a></li>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/shop">Shop</a></li>
+        <li><a routerLink="/aboutus">About Us</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+        <li><a routerLink="/faq">FAQ</a></li>
+        <li><a routerLink="/shippingpolicy">Shipping Policy</a></li>
+        <!-- <li><a routerLink="/term&conditions">Terms & Conditions</a></li> -->
+         <li><a routerLink="/terms-conditions">Terms & Conditions</a></li>
+        <li><a routerLink="/privacypolicy">Privacy Policy</a></li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/signup">Signup</a></li>
     </ul>
 </nav>
 <div class="search-area">
     <input type="text" placeholder="Search in AhmedHub">
     <img class="search-img" src="https://cdn-icons-png.flaticon.com/128/3482/3482644.png" alt="search icon">
-    <img class="cart-icon" src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png" alt="cart-icon">
+    <img class="cart-icon"  (click)="navigateTocart()" src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png" alt="cart-icon">
 </div>

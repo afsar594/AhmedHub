@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-card',
@@ -52,4 +53,14 @@ export class DetailCardComponent {
   selectedsize = '';
   
   
+constructor(private router: Router){}
+
+
+navigateToForm(){
+  this.router.navigate(['form-page'])
+}
+navigateTocart(){
+  this.router.navigate(['cart-page'])
+}
+
 }

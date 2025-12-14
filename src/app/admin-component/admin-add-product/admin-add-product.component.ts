@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 interface Product {
   id: number;
   name: string;
-  price: number | string;
+  price: number;
   image: string;
+  quantity: number;
 }
 
 @Component({
@@ -17,46 +18,52 @@ interface Product {
   styleUrls: ['./admin-add-product.component.css']
 })
 export class AdminAddProductComponent {
-  products: any[] = [];
-  productName = '';
-  productPrice: number | string = '';
-  productImage = '';
-  productQuantity: number | string = ''; 
+
+  products: Product[] = [];
+
+  productName: string = '';
+  productPrice: number | '' = '';
+  productImage: string = '';
+  productQuantity: number | '' = '';
+
   editId: number | null = null;
 
   addProduct() {
-    const newProduct = {
+    const newProduct: Product = {
       id: Date.now(),
       name: this.productName,
-      price: this.productPrice,
+      price: Number(this.productPrice),
       image: this.productImage,
-      quantity: this.productQuantity  
+      quantity: Number(this.productQuantity)
     };
+
     this.products.push(newProduct);
     this.clearForm();
   }
 
   updateProduct() {
     const index = this.products.findIndex(p => p.id === this.editId);
+
     if (index !== -1) {
       this.products[index] = {
         ...this.products[index],
         name: this.productName,
-        price: this.productPrice,
+        price: Number(this.productPrice),
         image: this.productImage,
-        quantity: this.productQuantity 
+        quantity: Number(this.productQuantity)
       };
     }
+
     this.clearForm();
     this.editId = null;
   }
 
-  editProduct(p: any) {
+  editProduct(p: Product) {
     this.editId = p.id;
     this.productName = p.name;
     this.productPrice = p.price;
     this.productImage = p.image;
-    this.productQuantity = p.quantity; 
+    this.productQuantity = p.quantity;
   }
 
   deleteProduct(id: number) {
@@ -72,6 +79,10 @@ export class AdminAddProductComponent {
     this.productName = '';
     this.productPrice = '';
     this.productImage = '';
-    this.productQuantity = ''; 
+    this.productQuantity = '';
+  }
+
+  isFormValid(): boolean {
+    return !!this.productName && !!this.productPrice && !!this.productImage && !!this.productQuantity;
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-card',
@@ -8,18 +8,19 @@ import { Router } from '@angular/router';
   templateUrl: './detail-card.component.html',
   styleUrl: './detail-card.component.css',
 })
-export class DetailCardComponent {
+export class DetailCardComponent implements OnInit {
   quantity = 1;
-  product = [
-    {
-      title: 'Men’s Classic Warm Hoodie',
-      image:
-        'https://i.pinimg.com/1200x/85/06/26/850626136d53b0ec52bc37e9a35f4c1f.jpg',
-      price: 15.99,
-      oldPrice: 22.99,
-      discount: '-30%',
-    },
-  ];
+  // product = [
+  //   {
+  //     title: 'Men’s Classic Warm Hoodie',
+  //     image:
+  //       'https://i.pinimg.com/1200x/85/06/26/850626136d53b0ec52bc37e9a35f4c1f.jpg',
+  //     price: 15.99,
+  //     oldPrice: 22.99,
+  //     discount: '-30%',
+  //   },
+  // ];
+  record: any;
   totalPriceFix(p: any, q: any) {
     let total = p * q;
     return total.toFixed(2);
@@ -51,16 +52,17 @@ export class DetailCardComponent {
   selectcolor = '';
   sizes = ['S', 'M', 'L', 'XL'];
   selectedsize = '';
-  
-  
-constructor(private router: Router){}
 
+  constructor(private router: Router, public route: ActivatedRoute) {}
+  ngOnInit() {
+    this.record = history.state.data;
+    console.log('Received Data:', this.record);
+  }
 
-navigateToForm(){
-  this.router.navigate(['form-page'])
-}
-navigateTocart(){
-  this.router.navigate(['cart-page'])
-}
-
+  navigateToForm() {
+    this.router.navigate(['form-page']);
+  }
+  navigateTocart() {
+    this.router.navigate(['cart-page']);
+  }
 }

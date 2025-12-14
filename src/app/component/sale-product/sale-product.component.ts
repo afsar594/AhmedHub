@@ -13,14 +13,13 @@ export class SaleProductComponent implements OnInit {
   Bosyproducts: any;
   girlproduct: any;
   kidproducts: any;
-  constructor(private samina: ApiService,private router:Router) {}
+  constructor(private samina: ApiService, private router: Router) {}
   ngOnInit() {
     this.Bosyproducts = this.samina.products;
     this.girlproduct = this.samina.girlproduct;
     this.kidproducts = this.samina.kidproducts;
   }
-  navigateToDetail()
-  {
-this.router.navigate(['detail-page'])
+  navigateToDetail(data: any) {
+    this.router.navigate(['detail-page'], { state: { data: data } });
   }
 }

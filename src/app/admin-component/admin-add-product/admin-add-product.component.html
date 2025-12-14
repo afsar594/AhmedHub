@@ -2,36 +2,74 @@
   <h2>Admin Product Management</h2>
 
   <!-- Add / Update Product Form -->
-  <div class="form-container">
-  <input [(ngModel)]="productName" placeholder="Product Name" />
-  <input [(ngModel)]="productPrice" type="number" placeholder="Price" />
-  <input [(ngModel)]="productImage" placeholder="Image URL" />
-  <input [(ngModel)]="productQuantity" type="number" placeholder="Quantity" />  <!-- New -->
+  <form #productForm="ngForm" class="form-container">
 
-  <button *ngIf="!editId" (click)="addProduct()">Add Product</button>
-  <button *ngIf="editId" (click)="updateProduct()">Update Product</button>
-  <button *ngIf="editId" (click)="cancelEdit()">Cancel</button>
-</div>
+    <input
+      name="name"
+      [(ngModel)]="productName"
+      placeholder="Product Name"
+      required
+    />
+
+    <input
+      name="price"
+      [(ngModel)]="productPrice"
+      type="number"
+      placeholder="Price"
+      required
+      min="1"
+    />
+
+    <input
+      name="image"
+      [(ngModel)]="productImage"
+      placeholder="Image URL"
+      required
+    />
+
+    <input
+      name="quantity"
+      [(ngModel)]="productQuantity"
+      type="number"
+      placeholder="Quantity"
+      required
+      min="1"
+    />
+
+    <!-- Buttons -->
+<button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">Add Product</button>
+<button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">Update Product</button>
+<button *ngIf="editId" (click)="cancelEdit()">Cancel</button>
+
+
+    <!-- Error Message -->
+    <p class="error" *ngIf="productForm.invalid && productForm.touched">
+       Please fill all product details correctly
+    </p>
+
+  </form>
 
   <!-- Product List Table -->
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Quantity</th> <!-- New -->
-    <th>Image</th>
-    <th>Actions</th>
-  </tr>
-  <tr *ngFor="let p of products">
-    <td>{{p.name}}</td>
-    <td>{{p.price}}</td>
-    <td>{{p.quantity}}</td> <!-- New -->
-    <td><img [src]="p.image" alt="{{p.name}}" class="product-img"/></td>
-    <td>
-      <button (click)="editProduct(p)">Edit</button>
-      <button (click)="deleteProduct(p.id)">Delete</button>
-    </td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
 
+    <tr *ngFor="let p of products">
+      <td>{{ p.name }}</td>
+      <td>{{ p.price }}</td>
+      <td>{{ p.quantity }}</td>
+      <td>
+        <img [src]="p.image" alt="{{p.name}}" class="product-img" />
+      </td>
+      <td>
+        <button (click)="editProduct(p)">Edit</button>
+        <button (click)="deleteProduct(p.id)">Delete</button>
+      </td>
+    </tr>
+  </table>
 </div>

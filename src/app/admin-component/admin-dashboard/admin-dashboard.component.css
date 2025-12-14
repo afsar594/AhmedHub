@@ -3,7 +3,7 @@
   margin-bottom: 15px;
   text-align: center;
 }
-.dashboard{
+/* .dashboard{
   color: #ff6600;
   cursor: pointer;
   text-align: right;
@@ -16,7 +16,46 @@
 }
 .dashboard:hover{
   background: #e65c00;
+} */
+
+
+.admin-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: black;
+  border: 1px solid #ff6600;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 20px;
 }
+
+.admin-action:hover {
+  background: #ff6600;
+  /* color: #000; */
+}
+
+.admin-action h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.admin-action p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.arrow {
+  font-size: 22px;
+  font-weight: bold;
+}
+
 
 .dashboard-grid {
   display: grid;

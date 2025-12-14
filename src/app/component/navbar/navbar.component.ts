@@ -5,15 +5,17 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-navbar',
   imports: [RouterLink],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+  constructor(private router: Router) {}
 
-constructor(private router: Router){}
+  navigateTocart(): void {
+    this.router.navigate(['cart-page']);
+  }
+  menuOpen: boolean = false;
 
-
-navigateTocart(): void{
-  this.router.navigate(['cart-page'])
-}
-
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 }

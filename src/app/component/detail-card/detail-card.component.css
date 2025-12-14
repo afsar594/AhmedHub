@@ -1,171 +1,248 @@
-.detail-container{
-    width: 85%;
-    background: #ffffff ;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    margin: 40px auto;
-    gap: 40px;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
+/* ===============================
+   BASE LAYOUT
+================================ */
+.detail-container {
+  width: 85%;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  margin: 40px auto;
+  display: flex;
+  gap: 40px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.image-box{
-    width: 45%;
-    border-radius: 15px;
-    overflow: hidden;
-    background: #f3f3f3;
+/* ===============================
+   IMAGE SECTION
+================================ */
+.image-box {
+  width: 45%;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #f3f3f3;
 }
-.image-box img{
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+.image-box:hover img {
+  transform: scale(1.08);
+  cursor: zoom-in;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.content-box {
+  width: 55%;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.new-price {
+  font-size: 28px;
+  color: #ff6600;
+  font-weight: 700;
+}
+
+.old-Price {
+  font-size: 18px;
+  text-decoration: line-through;
+  color: #999;
+}
+
+.discount {
+  font-weight: bold;
+}
+
+.description {
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   QUANTITY
+================================ */
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quantity-box h2 {
+  font-size: 18px;
+  color: #ff6600;
+}
+
+.quantity-box button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: #999;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.quantity-box span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.quantity-box .new-price {
+  margin-left: auto;
+  border: 1px solid #000;
+  padding: 8px 14px;
+  border-radius: 20px;
+}
+
+/* ===============================
+   COLOR & SIZE
+================================ */
+.color-option {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.color-circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.color-circle.active {
+  border: 2px solid #000;
+  transform: scale(1.1);
+}
+
+.size-button {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.size-btn {
+  padding: 8px 16px;
+  border: 2px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.size-btn.active {
+  border-color: #000;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.buy-btn,
+.cart-btn {
+  width: 45%;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.buy-btn {
+  background: #ff6600;
+  color: #fff;
+  border: none;
+}
+
+.cart-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+}
+
+/* ===============================
+   TABLET
+================================ */
+@media (max-width: 1024px) {
+  .detail-container {
+    width: 95%;
+  }
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .detail-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .image-box,
+  .content-box {
     width: 100%;
-    height: auto;
-    transition: transform 0.4s ease;
+  }
+
+  .quantity-box .new-price {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .color-option {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .buy-btn,
+  .cart-btn {
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .cart-btn {
+    margin-left: 0;
+  }
 }
 
-.image-box:hover img{
-    transform: scale(1.1);
-    zoom: 200px;
-    cursor: zoom-in;
-}
-.title{
-    font: 28px;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-.price-row{
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    gap: 12px;
-}
-.content-box{
-    width: 55%;
-}
-.new-price{
-    font-size: 28px;
-    color: #ff6600;
-    font-weight: 700;
-}
-.old-Price{
-    /* color: #ff6600; */
-    font-size: 18px;
-    text-decoration: line-through;
-    color: #999;
-}
-.discount{
-    color: black;
-    font-weight: 16px;
-    font-weight: bold;;
-}
-.description{
-font-size: 17px;
-line-height: 1.5;
-/* margin-bottom: 10px; */
-}
-.quantity-box{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    /* padding-bottom: 10px; */
-}
-.quantity-box h2{
-    font-size: 18px;
-    color: #ff6600;
-}
+/* ===============================
+   SMALL MOBILE
+================================ */
+@media (max-width: 480px) {
+  .title {
+    font-size: 20px;
+  }
 
-.quantity-box button{
-    width: 35px;
-    height: 35px;
-    border: none;
-    background: #999;
-    color: white;
-    font-size: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.quantity-box:hover button{
-background: #998;
-}
-.quantity-box span{
-    font-size: 18px;
-    font-weight: bold;
-}
-.quantity-box .new-price{
-    margin-left: 250px;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 20px;
-}
-.buy-btn{
-    width: 45%;
-    padding: 12px 20px;
-    background:#ff6600 ;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    transition: 0.3s;
-    gap: 10px;
-}
-.buy-btn:hover{
-    background: #e65c00;
-}
-.cart-btn{
-    width: 45%;
-    padding: 12px;
-    background-color:#222 ;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-     margin-left: 20px;
-}
-.cart-btn:hover{
-    background: black;
-}
-.color-option{
-    /* display: flex; */
-    width: 100px;
-    display: grid;
-    grid-template-columns: repeat(6 , 1fr);
-    gap: 12px;
-    margin: 15px 0;
-    margin-bottom: 50px;
-}
-.color-circle{
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: 0.3s ease;
+  .new-price {
+    font-size: 22px;
+  }
 
-}
-.color-circle.active{
-    border: 2px solid #000;
-    transform: scale(1.15);
-}
-.size-button{
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-}
-.size-btn{
-    padding: 8px 16px;
-    border: 2px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: 0.2s ease;
-}
-.size-btn:hover{
-    border-color: #ff6600;
-}
-.size-btn.active{
-    border-color: #000;
-    background: #f7f7f7;
+  .description {
+    font-size: 15px;
+  }
+
+  .color-circle {
+    width: 30px;
+    height: 30px;
+  }
 }

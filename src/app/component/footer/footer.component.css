@@ -1,63 +1,106 @@
 .footer {
   background: #ff6600;
-  color: #ddd;
+  color: white;
   padding: 50px 20px 20px;
   margin-top: 60px;
 }
 
+/* Container */
 .footer-container {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
+}
+
+/* Sections */
+.footer-section {
+  min-width: 0;
 }
 
 .footer-logo {
   font-size: 26px;
   font-weight: bold;
-  color: #ffffff;
+  color: #fff;
+  margin-bottom: 10px;
 }
 
 .footer-title {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   color: #fff;
 }
 
 .footer-text {
   font-size: 14px;
-  color: white;
   line-height: 1.6;
+  color: #fff;
 }
 
+/* Links */
 .footer-links {
   list-style: none;
   padding: 0;
-  cursor: pointer;
+  margin: 0;
 }
 
 .footer-links li {
-  margin: 6px 0;
+  margin: 8px 0;
   font-size: 14px;
 }
 
 .footer-links a {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .footer-links a:hover {
-  color: #fff;
+  opacity: 0.8;
 }
 
+/* Bottom */
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
   padding-top: 15px;
-  border-top: 1px solid #333;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 14px;
-  color:white;
 }
-ul{
-    color: white;
+
+/* ===============================
+   RESPONSIVE BREAKPOINTS
+================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-size: 22px;
+  }
+
+  .footer-title {
+    font-size: 16px;
+  }
+
+  .footer-links li {
+    font-size: 13px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+  }
 }

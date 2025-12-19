@@ -19,8 +19,8 @@ import { AdminAddProductComponent } from './admin-component/admin-add-product/ad
 
 export const routes: Routes = [
   { path: '', component: CoverBannerComponent },
-  {path:'home', component:CoverBannerComponent},
-// {path:'cover-banner', component:CoverBannerComponent},
+  { path: 'home', component: CoverBannerComponent },
+  // {path:'cover-banner', component:CoverBannerComponent},
   { path: 'shop', component: SaleProductComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
@@ -28,12 +28,13 @@ export const routes: Routes = [
   { path: 'shippingpolicy', component: ShippingPolicyComponent },
   { path: 'terms-conditions', component: TermsConditionsComponent },
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
-  {path:'login' , component:LoginComponent},
-  {path: 'signup', component: SignupComponent},
-  {path:'detail-page', component:DetailCardComponent},
-  {path:'form-page', component:BuyNowComponent},
-  {path:'cart-page',component:CartPageComponent},
-  {path:'admin-panel', component:AdminLoginComponent},
-  {path:'dashboard', component:AdminDashboardComponent},
-  {path:'adminproductmanagement', component:AdminAddProductComponent}
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'detail-page', component: DetailCardComponent },
+  { path: 'form-page', component: BuyNowComponent },
+  { path: 'cart-page', component: CartPageComponent },
+  { path: 'admin-panel', component: AdminLoginComponent },
+  { path: 'dashboard', component: AdminDashboardComponent },
+  { path: 'adminproductmanagement', component: AdminAddProductComponent },
+  
 ];

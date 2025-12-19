@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink , RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -24,4 +24,13 @@ export class NavbarComponent {
   navigateToCart(): void {
     this.router.navigate(['cart-page']);
   }
+
+
+
+  activeLink = '';
+
+setActive(link: string) {
+  this.activeLink = link;
+}
+
 }

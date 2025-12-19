@@ -1,0 +1,14 @@
+<div class="slider">
+  <div
+    class="slide"
+    [style.backgroundImage]="'url(' + slides[currentIndex].image + ')'"
+  >
+    <div class="content">
+      <h2>{{ slides[currentIndex].title }}</h2>
+      <button>{{ slides[currentIndex].btn }}</button>
+    </div>
+  </div>
+
+  <span class="nav left" (click)="prev()">‹</span>
+  <span class="nav right" (click)="next()">›</span>
+</div>

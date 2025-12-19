@@ -6,32 +6,23 @@
     />
   </div>
 
-  <!-- Hamburger icon (mobile only) -->
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
 
-  <!-- Navigation links -->
   <ul class="top-links" [class.active]="menuOpen">
-    <li><a routerLink="/home" (click)="closeMenu()">Home</a></li>
-    <li><a routerLink="/shop" (click)="closeMenu()">Shop</a></li>
-    <li><a routerLink="/aboutus" (click)="closeMenu()">About Us</a></li>
-    <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
-    <li><a routerLink="/faq" (click)="closeMenu()">FAQ</a></li>
-    <li>
-      <a routerLink="/shippingpolicy" (click)="closeMenu()">Shipping Policy</a>
-    </li>
-    <li>
-      <a routerLink="/terms-conditions" (click)="closeMenu()"
-        >Terms & Conditions</a
-      >
-    </li>
-    <li>
-      <a routerLink="/privacypolicy" (click)="closeMenu()">Privacy Policy</a>
-    </li>
-    <li><a routerLink="/login" (click)="closeMenu()">Login</a></li>
-    <li><a routerLink="/signup" (click)="closeMenu()">Signup</a></li>
-    <li><a routerLink="/admin-panel" (click)="closeMenu()">Admin Panel</a></li>
+    <li><a routerLink="/home" (click)="setActive('home')" [class.active]="activeLink==='home'">Home</a></li>
+    <li><a routerLink="/shop" (click)="setActive('shop')" [class.active]="activeLink==='shop'">Shop</a></li>
+    <li><a routerLink="/aboutus" (click)="setActive('about')" [class.active]="activeLink==='about'">About Us</a></li>
+    <li><a routerLink="/contact" (click)="setActive('contact')" [class.active]="activeLink==='contact'">Contact</a></li>
+    <li><a routerLink="/faq" (click)="setActive('faq')" [class.active]="activeLink==='faq'">FAQ</a></li>
+    <li><a routerLink="/shippingpolicy" (click)="setActive('shipping')" [class.active]="activeLink==='shipping'">Shipping Policy</a></li>
+    <li><a routerLink="/terms-conditions" (click)="setActive('terms')" [class.active]="activeLink==='terms'">Terms & Conditions</a></li>
+    <li><a routerLink="/privacypolicy" (click)="setActive('privacy')" [class.active]="activeLink==='privacy'">Privacy Policy</a></li>
+    <li><a routerLink="/login" (click)="setActive('login')" [class.active]="activeLink==='login'">Login</a></li>
+    <li><a routerLink="/signup" (click)="setActive('signup')" [class.active]="activeLink==='signup'">Signup</a></li>
+    <li><a routerLink="/admin-panel" (click)="setActive('admin')" [class.active]="activeLink==='admin'">Admin Panel</a></li>
   </ul>
 </nav>
+
 
 <div class="search-area">
   <input type="text" placeholder="Search in AhmedHub" />

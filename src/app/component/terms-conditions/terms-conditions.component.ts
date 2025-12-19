@@ -45,7 +45,7 @@ isList: true,
     },
     {
       title: 'Privacy',
-      description: `Your use of the Website is also governed by our <a href="/privacy-policy">Privacy Policy</a>.`
+      description: `Your use of the Website is also governed by our <a href="/privacypolicy">Privacy Policy</a>.`
     },
     {
       title: 'Changes to Terms',

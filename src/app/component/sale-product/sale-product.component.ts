@@ -2,10 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Router } from '@angular/router';
+import { ShopSliderComponent } from '../shop-slider/shop-slider.component';
+
+
+
 
 @Component({
   selector: 'app-sale-product',
-  imports: [CommonModule],
+  imports: [CommonModule , ShopSliderComponent],
   templateUrl: './sale-product.component.html',
   styleUrl: './sale-product.component.css',
 })

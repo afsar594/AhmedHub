@@ -2,15 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
+
 
 @Component({
   selector: 'app-admin-add-product',
@@ -21,7 +13,7 @@ interface Product {
 })
 export class AdminAddProductComponent {
 
-  products: Product[] = [];
+  products: any;
 
   productName = '';
   productBrand = '';
@@ -29,7 +21,8 @@ export class AdminAddProductComponent {
   productPrice: number | '' = '';
   productImage = '';
   productQuantity: number | '' = '';
-
+  productCategory = null;
+itemCategory:any
   editId: number | null = null;
 
   onImageSelect(event: any) {
@@ -44,70 +37,22 @@ export class AdminAddProductComponent {
   }
 
   addProduct() {
-    this.products.push({
-      id: Date.now(),
-      name: this.productName,
-      brand: this.productBrand,
-      description: this.productDescription,
-      price: Number(this.productPrice),
-      image: this.productImage,
-      quantity: Number(this.productQuantity)
-    });
-    this.clearForm();
-  }
-
-  updateProduct() {
-    const index = this.products.findIndex(p => p.id === this.editId);
-    if (index !== -1) {
-      this.products[index] = {
-        ...this.products[index],
-        name: this.productName,
-        brand: this.productBrand,
-        description: this.productDescription,
-        price: Number(this.productPrice),
-        image: this.productImage,
-        quantity: Number(this.productQuantity)
-      };
+    let paylod={
+  itemId: 0,
+  itemName: this.productName,
+  price: Number(this.productPrice),
+  img:  this.productImage,
+  qty: Number(this.productQuantity),
+  classifiedId: this.productCategory==='Kids'?1 : this.productCategory==='Young Girl'?2 :this.productCategory==='Young Boy'?3:0,
+  category: this.itemCategory,
+  brand: this.productBrand,
+  detail: this.productDescription,
+  createdDate: new Date()
     }
-    this.cancelEdit();
-  }
+     
+console.log("form data",paylod)
+    
 
-  editProduct(p: Product) {
-    this.editId = p.id;
-    this.productName = p.name;
-    this.productBrand = p.brand;
-    this.productDescription = p.description;
-    this.productPrice = p.price;
-    this.productImage = p.image;
-    this.productQuantity = p.quantity;
-  }
 
-  deleteProduct(id: number) {
-    this.products = this.products.filter(p => p.id !== id);
-  }
-
-  cancelEdit() {
-    this.clearForm();
-    this.editId = null;
-  }
-
-  clearForm() {
-    this.productName = '';
-    this.productBrand = '';
-    this.productDescription = '';
-    this.productPrice = '';
-    this.productImage = '';
-    this.productQuantity = '';
-  }
-
-  isFormValid() {
-    return (
-      this.productName &&
-      this.productBrand &&
-      this.productDescription &&
-      this.productPrice &&
-      this.productImage &&
-      this.productQuantity
-    );
   }
 }

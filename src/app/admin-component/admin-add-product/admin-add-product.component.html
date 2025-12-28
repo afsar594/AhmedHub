@@ -39,11 +39,44 @@
       min="1"
       required
     />
+ <input
+      name="itemCategory"
+      [(ngModel)]="itemCategory"
+      type="number"
+      placeholder="Category"
+      min="1"
+      required
+    />
+    <!-- CATEGORY RADIO BUTTONS -->
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="category" value="Young Boy"
+               [(ngModel)]="productCategory" required />
+        Young Boy
+      </label>
 
-    <button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">Add Product</button>
-    <button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">Update Product</button>
-    <button *ngIf="editId" (click)="cancelEdit()">Cancel</button>
+      <label>
+        <input type="radio" name="category" value="Young Girl"
+               [(ngModel)]="productCategory" required />
+        Young Girl
+      </label>
 
+      <label>
+        <input type="radio" name="category" value="Kids"
+               [(ngModel)]="productCategory" required />
+        Kids
+      </label>
+    </div>
+
+    <button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">
+      Add Product
+    </button>
+
+    <button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">
+      Update Product
+    </button>
+
+    <butto>Cancel</button>
   </form>
 
   <table>
@@ -53,6 +86,7 @@
       <th>Description</th>
       <th>Price</th>
       <th>Quantity</th>
+      <th>Category</th>
       <th>Image</th>
       <th>Actions</th>
     </tr>
@@ -63,12 +97,13 @@
       <td>{{ p.description }}</td>
       <td>{{ p.price }}</td>
       <td>{{ p.quantity }}</td>
+      <td>{{ p.category }}</td>
       <td>
         <img [src]="p.image" class="product-img" />
       </td>
       <td>
-        <button (click)="editProduct(p)">Edit</button>
-        <button (click)="deleteProduct(p.id)">Delete</button>
+        <button >Edit</button>
+        <button >Delete</button>
       </td>
     </tr>
   </table>

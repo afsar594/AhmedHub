@@ -1,29 +1,33 @@
 <div class="product-management-container">
   <h2>Admin Product Management</h2>
 
-  <!-- Add / Update Product Form -->
   <form #productForm="ngForm" class="form-container">
 
-    <input
-      name="name"
-      [(ngModel)]="productName"
-      placeholder="Product Name"
-      required
-    />
+    <input name="name" [(ngModel)]="productName" placeholder="Product Name" required />
+
+    <input name="brand" [(ngModel)]="productBrand" placeholder="Brand Name" required />
+
+    <textarea
+      name="description"
+      [(ngModel)]="productDescription"
+      placeholder="Product Description"
+      rows="2"
+      required>
+    </textarea>
 
     <input
       name="price"
       [(ngModel)]="productPrice"
       type="number"
       placeholder="Price"
-      required
       min="1"
+      required
     />
 
     <input
-      name="image"
-      [(ngModel)]="productImage"
-      placeholder="Image URL"
+      type="file"
+      accept="image/*"
+      (change)="onImageSelect($event)"
       required
     />
 
@@ -32,27 +36,21 @@
       [(ngModel)]="productQuantity"
       type="number"
       placeholder="Quantity"
-      required
       min="1"
+      required
     />
 
-    <!-- Buttons -->
-<button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">Add Product</button>
-<button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">Update Product</button>
-<button *ngIf="editId" (click)="cancelEdit()">Cancel</button>
-
-
-    <!-- Error Message -->
-    <p class="error" *ngIf="productForm.invalid && productForm.touched">
-       Please fill all product details correctly
-    </p>
+    <button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">Add Product</button>
+    <button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">Update Product</button>
+    <button *ngIf="editId" (click)="cancelEdit()">Cancel</button>
 
   </form>
 
-  <!-- Product List Table -->
   <table>
     <tr>
       <th>Name</th>
+      <th>Brand</th>
+      <th>Description</th>
       <th>Price</th>
       <th>Quantity</th>
       <th>Image</th>
@@ -61,10 +59,12 @@
 
     <tr *ngFor="let p of products">
       <td>{{ p.name }}</td>
+      <td>{{ p.brand }}</td>
+      <td>{{ p.description }}</td>
       <td>{{ p.price }}</td>
       <td>{{ p.quantity }}</td>
       <td>
-        <img [src]="p.image" alt="{{p.name}}" class="product-img" />
+        <img [src]="p.image" class="product-img" />
       </td>
       <td>
         <button (click)="editProduct(p)">Edit</button>

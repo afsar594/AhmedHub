@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 interface Product {
   id: number;
   name: string;
+  brand: string;
+  description: string;
   price: number;
   image: string;
   quantity: number;
@@ -21,46 +23,60 @@ export class AdminAddProductComponent {
 
   products: Product[] = [];
 
-  productName: string = '';
+  productName = '';
+  productBrand = '';
+  productDescription = '';
   productPrice: number | '' = '';
-  productImage: string = '';
+  productImage = '';
   productQuantity: number | '' = '';
 
   editId: number | null = null;
 
+  onImageSelect(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.productImage = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
   addProduct() {
-    const newProduct: Product = {
+    this.products.push({
       id: Date.now(),
       name: this.productName,
+      brand: this.productBrand,
+      description: this.productDescription,
       price: Number(this.productPrice),
       image: this.productImage,
       quantity: Number(this.productQuantity)
-    };
-
-    this.products.push(newProduct);
+    });
     this.clearForm();
   }
 
   updateProduct() {
     const index = this.products.findIndex(p => p.id === this.editId);
-
     if (index !== -1) {
       this.products[index] = {
         ...this.products[index],
         name: this.productName,
+        brand: this.productBrand,
+        description: this.productDescription,
         price: Number(this.productPrice),
         image: this.productImage,
         quantity: Number(this.productQuantity)
       };
     }
-
-    this.clearForm();
-    this.editId = null;
+    this.cancelEdit();
   }
 
   editProduct(p: Product) {
     this.editId = p.id;
     this.productName = p.name;
+    this.productBrand = p.brand;
+    this.productDescription = p.description;
     this.productPrice = p.price;
     this.productImage = p.image;
     this.productQuantity = p.quantity;
@@ -77,12 +93,21 @@ export class AdminAddProductComponent {
 
   clearForm() {
     this.productName = '';
+    this.productBrand = '';
+    this.productDescription = '';
     this.productPrice = '';
     this.productImage = '';
     this.productQuantity = '';
   }
 
-  isFormValid(): boolean {
-    return !!this.productName && !!this.productPrice && !!this.productImage && !!this.productQuantity;
+  isFormValid() {
+    return (
+      this.productName &&
+      this.productBrand &&
+      this.productDescription &&
+      this.productPrice &&
+      this.productImage &&
+      this.productQuantity
+    );
   }
 }

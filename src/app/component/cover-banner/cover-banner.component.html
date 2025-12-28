@@ -1,10 +1,10 @@
 <div class="cover-container">
-    <div class="banner" *ngFor="let item of banners">
-        <img [src]="item.image" alt="item.title">
-        <div class="banner-content">
-            <h2>{{item?.title}}</h2>
-            <p>{{item?.subtitle}}</p>
-        </div>
-        <button class="shop-now" routerLink="/shop">Shop Now</button>
+  <div class="banner" *ngFor="let item of banners">
+    <img [src]="item.image" alt="item.title" />
+    <div class="banner-content">
+      <h2>{{ item?.title }}</h2>
+      <p>{{ item?.subtitle }}</p>
     </div>
+    <button class="shop-now" (click)="Navigate(item.id)">Shop Now</button>
+  </div>
 </div>

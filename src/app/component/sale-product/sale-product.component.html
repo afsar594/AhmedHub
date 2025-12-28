@@ -1,30 +1,39 @@
-
-
 <app-shop-slider></app-shop-slider>
 
-
-
 <section class="product-sale">
-  <h2>Young Boy’s Collection</h2>
-  <p class="on-sale">Essential fashion items for 18+ men:</p>
+  <div *ngIf="product[0]?.classifiedId == 3">
+    <h2>Young Boy’s Collection</h2>
+    <p class="on-sale">Essential fashion items for 18+ men:</p>
+  </div>
+
+  <div *ngIf="product[0]?.classifiedId == 2">
+    <h2>Young Girl’s Collection</h2>
+    <p class="on-sale">Trendy and stylish items for 18+ women:</p>
+  </div>
+
+  <div *ngIf="product[0]?.classifiedId == 1">
+    <h2>Kids Collection (4–12 years old, 15+ items)</h2>
+    <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
+  </div>
+
   <div class="product">
     <div
       class="product-card"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of Bosyproducts"
+      *ngFor="let item of product"
     >
-      <img [src]="item.image" [alt]="item.title" />
-      <h3>{{ item.title }}</h3>
+      <img [src]="item.img" [alt]="item.title" />
+      <h3>{{ item.itemName }}</h3>
       <div class="price-row">
         <p class="price">$ {{ item.price }}</p>
         <p class="oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount">{{ item.discount }}</span>
+        <span class="discount">{{ item.discount ?? 50 }}</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="product-sale">
+<!-- <section class="product-sale">
   <h2>Young Girl’s Collection</h2>
   <p class="on-sale">Trendy and stylish items for 18+ women:</p>
   <div class="product">
@@ -63,4 +72,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

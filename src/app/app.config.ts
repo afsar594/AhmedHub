@@ -7,10 +7,13 @@
 //   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
 // };
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { LoaderInterceptor } from './service/interceptors/loader.interceptor';
 
 export const appConfig = {
   providers: [
-    provideRouter(routes)
-  ]
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([LoaderInterceptor])),
+  ],
 };

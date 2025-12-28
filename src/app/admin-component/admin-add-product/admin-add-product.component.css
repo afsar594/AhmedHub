@@ -4,7 +4,7 @@
   padding: 25px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -58,7 +58,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #eee;
   padding: 10px;
   text-align: center;
@@ -74,4 +75,13 @@ th {
   height: 55px;
   object-fit: cover;
   border-radius: 6px;
+}
+.btn {
+  background-color: red;
+  color: white;
+  margin-left: 5px;
+}
+.btn1 {
+  background-color: blue;
+  color: white;
 }

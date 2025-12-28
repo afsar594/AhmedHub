@@ -2,17 +2,27 @@
   <h2>Admin Product Management</h2>
 
   <form #productForm="ngForm" class="form-container">
+    <input
+      name="name"
+      [(ngModel)]="productName"
+      placeholder="Product Name"
+      required
+    />
 
-    <input name="name" [(ngModel)]="productName" placeholder="Product Name" required />
-
-    <input name="brand" [(ngModel)]="productBrand" placeholder="Brand Name" required />
+    <input
+      name="brand"
+      [(ngModel)]="productBrand"
+      placeholder="Brand Name"
+      required
+    />
 
     <textarea
       name="description"
       [(ngModel)]="productDescription"
       placeholder="Product Description"
       rows="2"
-      required>
+      required
+    >
     </textarea>
 
     <input
@@ -39,10 +49,10 @@
       min="1"
       required
     />
- <input
+    <input
       name="itemCategory"
       [(ngModel)]="itemCategory"
-      type="number"
+      type="text"
       placeholder="Category"
       min="1"
       required
@@ -50,33 +60,56 @@
     <!-- CATEGORY RADIO BUTTONS -->
     <div class="radio-group">
       <label>
-        <input type="radio" name="category" value="Young Boy"
-               [(ngModel)]="productCategory" required />
+        <input
+          type="radio"
+          name="category"
+          value="Young Boy"
+          [(ngModel)]="productCategory"
+          required
+        />
         Young Boy
       </label>
 
       <label>
-        <input type="radio" name="category" value="Young Girl"
-               [(ngModel)]="productCategory" required />
+        <input
+          type="radio"
+          name="category"
+          value="Young Girl"
+          [(ngModel)]="productCategory"
+          required
+        />
         Young Girl
       </label>
 
       <label>
-        <input type="radio" name="category" value="Kids"
-               [(ngModel)]="productCategory" required />
+        <input
+          type="radio"
+          name="category"
+          value="Kids"
+          [(ngModel)]="productCategory"
+          required
+        />
         Kids
       </label>
     </div>
 
-    <button *ngIf="!editId" (click)="addProduct()" [disabled]="!isFormValid()">
+    <button
+      *ngIf="!Isbtn"
+      [disabled]="
+        productName == '' ||
+        productPrice == '' ||
+        productQuantity == '' ||
+        itemCategory == '' ||
+        productImage == ''
+      "
+      (click)="addProduct()"
+    >
       Add Product
     </button>
 
-    <button *ngIf="editId" (click)="updateProduct()" [disabled]="!isFormValid()">
-      Update Product
-    </button>
+    <button *ngIf="Isbtn" (click)="addProduct()">Update Product</button>
 
-    <butto>Cancel</button>
+    <button *ngIf="Isbtn" (click)="ResetForm()">Cancel</button>
   </form>
 
   <table>
@@ -91,19 +124,19 @@
       <th>Actions</th>
     </tr>
 
-    <tr *ngFor="let p of products">
-      <td>{{ p.name }}</td>
+    <tr *ngFor="let p of DataItem">
+      <td>{{ p.itemName }}</td>
       <td>{{ p.brand }}</td>
-      <td>{{ p.description }}</td>
+      <td>{{ p.detail }}</td>
       <td>{{ p.price }}</td>
-      <td>{{ p.quantity }}</td>
+      <td>{{ p.qty }}</td>
       <td>{{ p.category }}</td>
       <td>
-        <img [src]="p.image" class="product-img" />
+        <img [src]="p.img" class="product-img" />
       </td>
       <td>
-        <button >Edit</button>
-        <button >Delete</button>
+        <button class="btn1" (click)="EditProduct(p)">Edit</button>
+        <button class="btn" (click)="DeleteProduct(p)">Delete</button>
       </td>
     </tr>
   </table>

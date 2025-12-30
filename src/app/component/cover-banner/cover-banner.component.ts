@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cover-banner',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './cover-banner.component.html',
   styleUrl: './cover-banner.component.css',
 })

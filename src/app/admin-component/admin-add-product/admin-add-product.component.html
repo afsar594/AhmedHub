@@ -1,63 +1,7 @@
 <div class="product-management-container">
   <h2>Admin Product Management</h2>
 
-  <form #productForm="ngForm" class="form-container">
-    <input
-      name="name"
-      [(ngModel)]="productName"
-      placeholder="Product Name"
-      required
-    />
-
-    <input
-      name="brand"
-      [(ngModel)]="productBrand"
-      placeholder="Brand Name"
-      required
-    />
-
-    <textarea
-      name="description"
-      [(ngModel)]="productDescription"
-      placeholder="Product Description"
-      rows="2"
-      required
-    >
-    </textarea>
-
-    <input
-      name="price"
-      [(ngModel)]="productPrice"
-      type="number"
-      placeholder="Price"
-      min="1"
-      required
-    />
-
-    <input
-      type="file"
-      accept="image/*"
-      (change)="onImageSelect($event)"
-      required
-    />
-
-    <input
-      name="quantity"
-      [(ngModel)]="productQuantity"
-      type="number"
-      placeholder="Quantity"
-      min="1"
-      required
-    />
-    <input
-      name="itemCategory"
-      [(ngModel)]="itemCategory"
-      type="text"
-      placeholder="Category"
-      min="1"
-      required
-    />
-    <!-- CATEGORY RADIO BUTTONS -->
+ <!-- CATEGORY RADIO BUTTONS -->
     <div class="radio-group">
       <label>
         <input
@@ -93,6 +37,91 @@
       </label>
     </div>
 
+
+  <form #productForm="ngForm" class="form-container">
+    <input
+      name="name"
+      [(ngModel)]="productName"
+      placeholder="Product Name"
+      required
+    />
+
+    <input
+      name="brand"
+      [(ngModel)]="productBrand"
+      placeholder="Brand Name"
+      required
+    />
+
+
+    <input
+      name="price"
+      [(ngModel)]="productPrice"
+      type="number"
+      placeholder="Price"
+      min="1"
+      required
+    />
+
+    <input
+    name="Old-Price"
+    type="number"
+    placeholder="old-price"
+    min="0"
+    >
+
+    <input
+    name="discount"
+    type="number"
+    placeholder="Discount % (e.g 20)"
+    min="0"
+    max="100">
+
+    <input
+      type="file"
+      accept="image/*"
+      (change)="onImageSelect($event)"
+      required
+    />
+
+    <input
+      name="quantity"
+      [(ngModel)]="productQuantity"
+      type="number"
+      placeholder="Quantity"
+      min="1"
+      required
+    />
+    <input
+      name="itemCategory"
+      [(ngModel)]="itemCategory"
+      type="text"
+      placeholder="Category"
+      min="1"
+      required
+    />
+
+
+<input
+type="text"
+placeholder="Or type color name (Red, Blue…)"
+>
+
+<input
+type="color"
+id="productColor"
+>
+  </form>
+    <textarea
+  name="description"
+  [(ngModel)]="productDescription"
+  placeholder="Product Full Description"
+  rows="5"
+  class="desc-box"
+  required>
+</textarea>
+
+<div class="btn-container">
     <button
       *ngIf="!Isbtn"
       [disabled]="
@@ -110,7 +139,8 @@
     <button *ngIf="Isbtn" (click)="addProduct()">Update Product</button>
 
     <button *ngIf="Isbtn" (click)="ResetForm()">Cancel</button>
-  </form>
+ </div>
+
 
   <table>
     <tr>
@@ -118,8 +148,11 @@
       <th>Brand</th>
       <th>Description</th>
       <th>Price</th>
+      <th>Discount</th>
+      <th>Old Price</th>
       <th>Quantity</th>
       <th>Category</th>
+      <th>Color</th>
       <th>Image</th>
       <th>Actions</th>
     </tr>
@@ -129,10 +162,21 @@
       <td>{{ p.brand }}</td>
       <td>{{ p.detail }}</td>
       <td>{{ p.price }}</td>
+      <td class="old-price">$ {{p.oldprice}}</td>
+      <td class="discount-test">
+        <span *ngIf="p.discount>0">-{{p.discount}}%</span>
+        <span *ngIf="p.discount===0">No Discount</span>
+      </td>
       <td>{{ p.qty }}</td>
       <td>{{ p.category }}</td>
       <td>
         <img [src]="p.img" class="product-img" />
+      </td>
+      <td>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <div [style.background]="p.color" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>
+<span>{{p.color.text}}</span>
+        </div>
       </td>
       <td>
         <button class="btn1" (click)="EditProduct(p)">Edit</button>

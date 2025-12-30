@@ -9,10 +9,13 @@
 
 .login-card {
   background: #fff;
+  box-sizing: border-box;
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  width: 350px;
+  max-width: 450px;
+  width: 100%;
+  margin: 0 15px;
   text-align: center;
 }
 
@@ -32,6 +35,7 @@
   color: #333;
 }
 .input-group input {
+  box-sizing: border-box;
   width: 100%;
   padding: 10px 15px;
   border: 1px solid #ccc;
@@ -39,6 +43,10 @@
   font-size: 14px;
 }
 
+.input-group input:focus{
+  border: 1px solid #ff6600;
+  outline: none;
+}
 .error small {
   color: red;
   font-size: 12px;

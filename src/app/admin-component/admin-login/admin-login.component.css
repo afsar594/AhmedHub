@@ -21,6 +21,11 @@
   border: 1px solid #ccc;
 }
 
+.login-container input:focus{
+  border: 1px solid #ff6600;
+  outline: none;
+}
+
 .login-container button {
   width: 95%;
   padding: 10px;

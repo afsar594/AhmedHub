@@ -1,147 +1,69 @@
 <div class="product-management-container">
   <h2>Admin Product Management</h2>
 
- <!-- CATEGORY RADIO BUTTONS -->
+  <form [formGroup]="productForm" class="form-container">
+
+    <!-- CATEGORY -->
     <div class="radio-group">
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Young Boy"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Young Boy
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Young Girl"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Young Girl
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Kids"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Kids
-      </label>
+      <label><input type="radio" value="Young Boy" formControlName="productCategory"> Young Boy</label>
+      <label><input type="radio" value="Young Girl" formControlName="productCategory"> Young Girl</label>
+      <label><input type="radio" value="Kids" formControlName="productCategory"> Kids</label>
     </div>
 
+    <!-- SIZES (UNCHANGED) -->
+    <div class="size-box">
+      <div class="size-option">
+        <label>
+          <input type="checkbox" (change)="toggleSize('S', $event)"> S
+        </label>
+        <label>
+          <input type="checkbox" (change)="toggleSize('M', $event)"> M
+        </label>
+        <label>
+          <input type="checkbox" (change)="toggleSize('L', $event)"> L
+        </label>
+        <label>
+          <input type="checkbox" (change)="toggleSize('XL', $event)"> XL
+        </label>
+      </div>
+    </div>
 
-  <form #productForm="ngForm" class="form-container">
-    <input
-      name="name"
-      [(ngModel)]="productName"
-      placeholder="Product Name"
-      required
-    />
+    <input formControlName="name" placeholder="Product Name">
+    <input formControlName="brand" placeholder="Brand Name">
+    <input type="number" formControlName="price" placeholder="Price">
+    <input type="number" formControlName="oldprice" placeholder="Old Price">
+    <input type="number" formControlName="discount" placeholder="Discount %">
+    <input type="number" formControlName="quantity" placeholder="Quantity">
+    <input formControlName="itemCategory" placeholder="Category">
 
-    <input
-      name="brand"
-      [(ngModel)]="productBrand"
-      placeholder="Brand Name"
-      required
-    />
+    <input type="file" accept="image/*" (change)="onImageSelect($event)">
 
+    <!-- COLOR INPUT -->
+    <div class="color-input">
+      <input type="color" formControlName="currentColor">
+      <button type="button" class="small-btn" (click)="addColor()">Add</button>
+    </div>
 
-    <input
-      name="price"
-      [(ngModel)]="productPrice"
-      type="number"
-      placeholder="Price"
-      min="1"
-      required
-    />
+    <!-- COLOR CHIPS -->
+    <div class="color-list">
+      <div class="color-chip" *ngFor="let c of colors.controls; let i = index">
+        <span class="color-dot" [style.background]="c.value.value"></span>
+        <span class="color-text">{{ c.value.value }}</span>
+        <span class="remove" (click)="removeColor(i)">✕</span>
+      </div>
+    </div>
 
-    <input
-    name="Old-Price"
-    type="number"
-    placeholder="old-price"
-    min="0"
-    >
+    <!-- DESCRIPTION (MOVED BELOW ALL INPUTS) -->
+    <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 
-    <input
-    name="discount"
-    type="number"
-    placeholder="Discount % (e.g 20)"
-    min="0"
-    max="100">
-
-    <input
-      type="file"
-      accept="image/*"
-      (change)="onImageSelect($event)"
-      required
-    />
-
-    <input
-      name="quantity"
-      [(ngModel)]="productQuantity"
-      type="number"
-      placeholder="Quantity"
-      min="1"
-      required
-    />
-    <input
-      name="itemCategory"
-      [(ngModel)]="itemCategory"
-      type="text"
-      placeholder="Category"
-      min="1"
-      required
-    />
-
-
-<input
-type="text"
-placeholder="Or type color name (Red, Blue…)"
->
-
-<input
-type="color"
-id="productColor"
->
+    <div class="btn-container">
+      <button type="button" class="small-btn" [disabled]="productForm.invalid" (click)="addProduct()" *ngIf="!Isbtn">Add Product</button>
+      <button type="button" class="small-btn" (click)="addProduct()" *ngIf="Isbtn">Update Product</button>
+      <button type="button" class="small-btn" (click)="ResetForm()" *ngIf="Isbtn">Cancel</button>
+    </div>
   </form>
-    <textarea
-  name="description"
-  [(ngModel)]="productDescription"
-  placeholder="Product Full Description"
-  rows="5"
-  class="desc-box"
-  required>
-</textarea>
 
-<div class="btn-container">
-    <button
-      *ngIf="!Isbtn"
-      [disabled]="
-        productName == '' ||
-        productPrice == '' ||
-        productQuantity == '' ||
-        itemCategory == '' ||
-        productImage == ''
-      "
-      (click)="addProduct()"
-    >
-      Add Product
-    </button>
-
-    <button *ngIf="Isbtn" (click)="addProduct()">Update Product</button>
-
-    <button *ngIf="Isbtn" (click)="ResetForm()">Cancel</button>
- </div>
-
-
+  <!-- PRODUCT TABLE -->
   <table>
     <tr>
       <th>Name</th>
@@ -152,32 +74,29 @@ id="productColor"
       <th>Old Price</th>
       <th>Quantity</th>
       <th>Category</th>
+      <th>Sizes</th>
       <th>Color</th>
       <th>Image</th>
       <th>Actions</th>
     </tr>
 
     <tr *ngFor="let p of DataItem">
-      <td>{{ p.itemName }}</td>
-      <td>{{ p.brand }}</td>
-      <td>{{ p.detail }}</td>
-      <td>{{ p.price }}</td>
-      <td class="old-price">$ {{p.oldprice}}</td>
-      <td class="discount-test">
-        <span *ngIf="p.discount>0">-{{p.discount}}%</span>
-        <span *ngIf="p.discount===0">No Discount</span>
-      </td>
-      <td>{{ p.qty }}</td>
-      <td>{{ p.category }}</td>
+      <td>{{p.itemName}}</td>
+      <td>{{p.brand}}</td>
+      <td>{{p.detail}}</td>
+      <td>{{p.price}}</td>
+      <td>{{p.discount>0 ? '-' + p.discount + '%' : 'No Discount'}}</td>
+      <td>{{p.oldprice}}</td>
+      <td>{{p.qty}}</td>
+      <td>{{p.category}}</td>
+      <td>{{p.sizes?.join(', ')}}</td>
       <td>
-        <img [src]="p.img" class="product-img" />
-      </td>
-      <td>
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <div [style.background]="p.color" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>
-<span>{{p.color.text}}</span>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div [style.background]="p.color?.value" style="width:20px;height:20px;border-radius:50%;border:1px solid #ccc;"></div>
+          <span>{{p.color?.text}}</span>
         </div>
       </td>
+      <td><img [src]="p.img" class="product-img"></td>
       <td>
         <button class="btn1" (click)="EditProduct(p)">Edit</button>
         <button class="btn" (click)="DeleteProduct(p)">Delete</button>

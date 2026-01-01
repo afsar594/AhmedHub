@@ -55,10 +55,12 @@ input[type='text']{
 }
 
 .radio-group {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
-  gap: auto;
-  margin-bottom: 15px;
+  /* gap: 12px; */
+  /* margin-bottom: 15px; */
+  /* border: 1px solid #ddd; */
+  border-radius: 6px;
 }
 
 .radio-group label {
@@ -68,13 +70,87 @@ input[type='text']{
   border-radius: 6px;
   transition: background 0.3s;
 }
+.color-input{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  /* margin-bottom: 10px; */
+}
+.color-list{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ✅ FIXED SIZE CHIP */
+.color-chip{
+  position: relative;
+  width: 90px;        /* 🔒 FIXED WIDTH */
+  height: 36px;        /* 🔒 FIXED HEIGHT */
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  background: #fff;
+
+  font-size: 13px;
+  overflow: hidden;    /* text bahar na nikle */
+}
+
+/* color dot */
+.color-dot{
+  width: 18px;
+  height: 18px;
+  min-width: 14px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+/* text cut ho jay agar zyada ho */
+.color-text{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* ❌ remove button */
+.color-chip .remove{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #000;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s ease;
+  cursor: pointer;
+  
+}
+
+.color-chip:hover .remove{
+  opacity: 1;
+  visibility: visible;
+}
 
 .desc-box{
-  width: 97%;
-  min-height: 100px;
-  resize: vertical;
+  /* width: 100%;
+  min-height: 100px; */
+  resize: none;
   font-size: 15px;
-  padding: 15px;
+  /* padding: 15px; */
   line-height: 1.8;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -88,10 +164,13 @@ input[type='text']{
 }
 
 .btn-container{
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 25px;
+  /* gap: 12px; */
+  /* margin: 30px 0 10px; */
+  /* padding-top: 15px; */
+  /* border-top: 1px dashed #eee; */
 }
 
 button {
@@ -102,6 +181,42 @@ button {
   color: #fff;
   cursor: pointer;
   
+}
+
+.size-box{
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 15px; */
+}
+.size-box input{
+  accent-color: #ff6600;
+
+}
+.size-title{
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+.size-option{
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.size-option label{
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 10px;
+}
+.size-box label:hover{
+  border-color: #ff6600;
 }
 
 button:disabled {
@@ -150,4 +265,11 @@ th {
   .radio-group { flex-direction: column; }
   .button-container { flex-direction: column; }
   .btn, .btn1, button { width: 100%; }
+}
+@media (max-width:768px){
+  .color-chip{
+    width: 100px;
+    height: 34px;
+    font-size: 12px;
+  }
 }

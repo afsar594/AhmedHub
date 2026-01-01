@@ -1,122 +1,167 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-admin-add-product',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './admin-add-product.component.html',
   styleUrls: ['./admin-add-product.component.css'],
 })
 export class AdminAddProductComponent implements OnInit {
-  products: any;
-
-  productName = '';
-  productBrand = '';
-  productDescription = '';
-  productPrice: number | '' = '';
-  productImage = '';
-  productQuantity: number | '' = '';
-  productCategory: any = 'Young Boy';
-  itemCategory: any;
-  editId: number | null = null;
+  productForm!: FormGroup;
+  DataItem: any = [];
   Isbtn: boolean = false;
-  DataItem: any;
   SaveData: any;
-  constructor(private api: ApiService) {}
+  selectedSizes: string[] = [];
+
+  constructor(private fb: FormBuilder, private api: ApiService) {}
+
   ngOnInit(): void {
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      brand: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(1)]],
+      oldprice: [''],
+      discount: [''],
+      quantity: ['', Validators.required],
+      itemCategory: ['', Validators.required],
+      productCategory: ['Young Boy', Validators.required],
+      description: ['', Validators.required],
+      image: ['', Validators.required],
+      sizes: this.fb.array([]),
+      currentColor: [''],
+      colors: this.fb.array([]),
+    });
     this.getAll();
   }
+
+  get colors(): FormArray {
+    return this.productForm.get('colors') as FormArray;
+  }
+
+  get sizes(): FormArray {
+    return this.productForm.get('sizes') as FormArray;
+  }
+
+  toggleSize(size: string, event: any) {
+    if (event.target.checked) {
+      this.sizes.push(this.fb.control(size));
+    } else {
+      const index = this.sizes.controls.findIndex(x => x.value === size);
+      if (index !== -1) this.sizes.removeAt(index);
+    }
+  }
+
+  addColor() {
+    const color = this.productForm.get('currentColor')?.value;
+    if (!color) return;
+    if (this.colors.value.some((c: any) => c.value === color)) return;
+    this.colors.push(this.fb.group({ value: color }));
+    this.productForm.get('currentColor')?.reset();
+  }
+
+  removeColor(index: number) {
+    this.colors.removeAt(index);
+  }
+
   onImageSelect(event: any) {
     const file = event.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = () => {
-      this.productImage = reader.result as string;
+      this.productForm.patchValue({ image: reader.result });
     };
     reader.readAsDataURL(file);
   }
 
   addProduct() {
-    let paylod = {
-      itemId: this.SaveData != null ? this.SaveData.itemId : 0,
-      itemName: this.productName,
-      price: Number(this.productPrice),
-      img: this.productImage,
-      qty: Number(this.productQuantity),
+    const formValue = this.productForm.value;
+    const payload = {
+      itemId: this.SaveData ? this.SaveData.itemId : 0,
+      itemName: formValue.name,
+      brand: formValue.brand,
+      price: Number(formValue.price),
+      oldprice: Number(formValue.oldprice),
+      discount: Number(formValue.discount),
+      qty: Number(formValue.quantity),
+      category: formValue.itemCategory,
       classifiedId:
-        this.productCategory === 'Kids'
+        formValue.productCategory === 'Kids'
           ? 1
-          : this.productCategory === 'Young Girl'
+          : formValue.productCategory === 'Young Girl'
           ? 2
-          : this.productCategory === 'Young Boy'
-          ? 3
-          : 0,
-      category: this.itemCategory,
-      brand: this.productBrand,
-      detail: this.productDescription,
+          : 3,
+      detail: formValue.description,
+      img: formValue.image,
+      sizes: this.selectedSizes,
+      color: this.colors.value.length > 0 ? this.colors.value[0] : null,
       createdDate: new Date(),
     };
-    if (paylod.itemId == 0) {
-      this.saveProduct(paylod);
-    } else {
-      this.update(paylod);
-    }
+
+    if (payload.itemId === 0) this.saveProduct(payload);
+    else this.updateProduct(payload);
   }
-  saveProduct(paylod: any) {
-    this.api.saveItems(paylod).subscribe((res) => {
-      console.log('save response', res);
+
+  saveProduct(payload: any) {
+    this.api.saveItems(payload).subscribe(() => {
       this.getAll();
       this.ResetForm();
     });
   }
-  update(paylod: any) {
-    this.api.UpdateItems(paylod.itemId, paylod).subscribe((res) => {
-      console.log('data Updated');
+
+  updateProduct(payload: any) {
+    this.api.UpdateItems(payload.itemId, payload).subscribe(() => {
       this.getAll();
+      this.ResetForm();
     });
   }
+
+  EditProduct(p: any) {
+    this.Isbtn = true;
+    this.SaveData = p;
+    this.selectedSizes = p.sizes || [];
+
+    this.productForm.patchValue({
+      name: p.itemName,
+      brand: p.brand,
+      price: p.price,
+      oldprice: p.oldprice,
+      discount: p.discount,
+      quantity: p.qty,
+      itemCategory: p.category,
+      productCategory:
+        p.classifiedId === 1
+          ? 'Kids'
+          : p.classifiedId === 2
+          ? 'Young Girl'
+          : 'Young Boy',
+      description: p.detail,
+      image: p.img,
+    });
+
+    this.colors.clear();
+    if (p.color) this.colors.push(this.fb.group({ value: p.color.value }));
+  }
+
+  ResetForm() {
+    this.Isbtn = false;
+    this.SaveData = null;
+    this.selectedSizes = [];
+    this.colors.clear();
+    this.productForm.reset({ productCategory: 'Young Boy' });
+  }
+
   getAll() {
     this.api.getItemsAll().subscribe((res: any) => {
       if (res.isSuccess) this.DataItem = res.data;
     });
   }
-  EditProduct(p: any) {
-    this.productName = p.itemName;
-    this.productBrand = p.brand;
-    this.productDescription = p.detail;
-    this.productPrice = p.price;
-    this.productImage = p.img;
-    this.productQuantity = p.qty;
-    this.itemCategory = p.category;
-    this.productCategory =
-      p.classifiedId == 1
-        ? 'Kids'
-        : p.classifiedId == 2
-        ? 'Young Girl'
-        : p.classifiedId == 3
-        ? 'Young Boy'
-        : 0;
-    this.Isbtn = true;
-    this.SaveData = p;
-  }
-  ResetForm() {
-    this.productName = '';
-    this.productBrand = '';
-    this.productDescription = '';
-    this.productPrice = '';
-    this.productImage = '';
-    this.productQuantity = '';
-    this.itemCategory = '';
-    this.productCategory = '';
-    this.Isbtn = false;
-  }
+
   DeleteProduct(p: any) {
-    this.api.DeleteItems(p.itemId).subscribe((res) => {
-      this.getAll();
-    });
+    this.api.DeleteItems(p.itemId).subscribe(() => this.getAll());
   }
 }

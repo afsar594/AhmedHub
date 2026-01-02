@@ -3,45 +3,52 @@
 
   <form [formGroup]="productForm" class="form-container">
 
-    <!-- CATEGORY -->
+    <!-- PRODUCT CATEGORY -->
     <div class="radio-group">
       <label><input type="radio" value="Young Boy" formControlName="productCategory"> Young Boy</label>
       <label><input type="radio" value="Young Girl" formControlName="productCategory"> Young Girl</label>
       <label><input type="radio" value="Kids" formControlName="productCategory"> Kids</label>
     </div>
 
-    <!-- SIZES (UNCHANGED) -->
+    <!-- SIZES -->
     <div class="size-box">
+      <span class="size-title">Sizes:</span>
       <div class="size-option">
-        <label>
-          <input type="checkbox" (change)="toggleSize('S', $event)"> S
-        </label>
-        <label>
-          <input type="checkbox" (change)="toggleSize('M', $event)"> M
-        </label>
-        <label>
-          <input type="checkbox" (change)="toggleSize('L', $event)"> L
-        </label>
-        <label>
-          <input type="checkbox" (change)="toggleSize('XL', $event)"> XL
-        </label>
+        <label><input type="checkbox" (change)="toggleSize('S', $event)"> S</label>
+        <label><input type="checkbox" (change)="toggleSize('M', $event)"> M</label>
+        <label><input type="checkbox" (change)="toggleSize('L', $event)"> L</label>
+        <label><input type="checkbox" (change)="toggleSize('XL', $event)"> XL</label>
       </div>
     </div>
 
+    <!-- PRODUCT INFO -->
     <input formControlName="name" placeholder="Product Name">
     <input formControlName="brand" placeholder="Brand Name">
-    <input type="number" formControlName="price" placeholder="Price">
-    <input type="number" formControlName="oldprice" placeholder="Old Price">
+    <input type="number" min="1" formControlName="price" placeholder="Price">
+    <input type="number" min="0" formControlName="oldprice" placeholder="Old Price">
     <input type="number" formControlName="discount" placeholder="Discount %">
-    <input type="number" formControlName="quantity" placeholder="Quantity">
+    <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
     <input formControlName="itemCategory" placeholder="Category">
+    <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 
-    <input type="file" accept="image/*" (change)="onImageSelect($event)">
+    <!-- IMAGE DRAG & DROP -->
+    <div class="image-dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+      <p>Drag & drop images here or click to select</p>
+      <input type="file" accept="image/*" (change)="onImageSelect($event)" multiple>
+    </div>
 
-    <!-- COLOR INPUT -->
+    <!-- IMAGE PREVIEW -->
+    <div class="image-preview-container">
+      <div *ngFor="let img of images.controls; let i = index" class="preview-box">
+        <img [src]="img.value" class="preview-img">
+        <button type="button" (click)="removeImage(i)">✕</button>
+      </div>
+    </div>
+
+    <!-- COLOR PICKER -->
     <div class="color-input">
       <input type="color" formControlName="currentColor">
-      <button type="button" class="small-btn" (click)="addColor()">Add</button>
+      <button type="button" class="small-btn" (click)="addColor()">Add Color</button>
     </div>
 
     <!-- COLOR CHIPS -->
@@ -53,14 +60,13 @@
       </div>
     </div>
 
-    <!-- DESCRIPTION (MOVED BELOW ALL INPUTS) -->
-    <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
-
+    <!-- FORM ACTIONS -->
     <div class="btn-container">
       <button type="button" class="small-btn" [disabled]="productForm.invalid" (click)="addProduct()" *ngIf="!Isbtn">Add Product</button>
       <button type="button" class="small-btn" (click)="addProduct()" *ngIf="Isbtn">Update Product</button>
-      <button type="button" class="small-btn" (click)="ResetForm()" *ngIf="Isbtn">Cancel</button>
+      <button type="button" class="small-btn cancel" (click)="ResetForm()" *ngIf="Isbtn">Cancel</button>
     </div>
+
   </form>
 
   <!-- PRODUCT TABLE -->
@@ -75,11 +81,10 @@
       <th>Quantity</th>
       <th>Category</th>
       <th>Sizes</th>
-      <th>Color</th>
-      <th>Image</th>
+      <th>Colors</th>
+      <th>Images</th>
       <th>Actions</th>
     </tr>
-
     <tr *ngFor="let p of DataItem">
       <td>{{p.itemName}}</td>
       <td>{{p.brand}}</td>
@@ -90,16 +95,17 @@
       <td>{{p.qty}}</td>
       <td>{{p.category}}</td>
       <td>{{p.sizes?.join(', ')}}</td>
+      <td class="color-display">
+        <div *ngFor="let c of p.color" class="color-dot-table" [style.background]="c.value"></div>
+      </td>
       <td>
-        <div style="display:flex;align-items:center;gap:5px;">
-          <div [style.background]="p.color?.value" style="width:20px;height:20px;border-radius:50%;border:1px solid #ccc;"></div>
-          <span>{{p.color?.text}}</span>
+        <div *ngFor="let img of p.images">
+          <img [src]="img" class="product-img">
         </div>
       </td>
-      <td><img [src]="p.img" class="product-img"></td>
       <td>
-        <button class="btn1" (click)="EditProduct(p)">Edit</button>
-        <button class="btn" (click)="DeleteProduct(p)">Delete</button>
+        <button class="small-btn" (click)="EditProduct(p)">Edit</button>
+        <button class="small-btn cancel" (click)="DeleteProduct(p)">Delete</button>
       </td>
     </tr>
   </table>

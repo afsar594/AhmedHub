@@ -11,8 +11,10 @@ import { ApiService } from '../../service/api.service';
   styleUrls: ['./admin-add-product.component.css'],
 })
 export class AdminAddProductComponent implements OnInit {
+  ItemDiscount = '';
+  ItemOldPrice = '';
   products: any;
-
+  itemColor: string = '#000000'; // default color
   productName = '';
   productBrand = '';
   productDescription = '';
@@ -44,8 +46,11 @@ export class AdminAddProductComponent implements OnInit {
     let paylod = {
       itemId: this.SaveData != null ? this.SaveData.itemId : 0,
       itemName: this.productName,
+      discount: this.ItemDiscount,
+      OldPrice: this.ItemOldPrice,
       price: Number(this.productPrice),
       img: this.productImage,
+      color: this.itemColor,
       qty: Number(this.productQuantity),
       classifiedId:
         this.productCategory === 'Kids'
@@ -86,6 +91,9 @@ export class AdminAddProductComponent implements OnInit {
   }
   EditProduct(p: any) {
     this.productName = p.itemName;
+    this.itemColor = p?.color;
+    this.ItemDiscount = p?.discount;
+    this.ItemOldPrice = p?.oldPrice;
     this.productBrand = p.brand;
     this.productDescription = p.detail;
     this.productPrice = p.price;
@@ -112,11 +120,18 @@ export class AdminAddProductComponent implements OnInit {
     this.productQuantity = '';
     this.itemCategory = '';
     this.productCategory = '';
+    this.itemColor = '';
+    this.ItemDiscount;
+    this.ItemOldPrice;
+    this.itemColor;
     this.Isbtn = false;
   }
   DeleteProduct(p: any) {
     this.api.DeleteItems(p.itemId).subscribe((res) => {
       this.getAll();
     });
+  }
+  onColorChange() {
+    console.log('Selected color:', this.itemColor);
   }
 }

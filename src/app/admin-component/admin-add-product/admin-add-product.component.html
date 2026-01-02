@@ -1,42 +1,41 @@
 <div class="product-management-container">
   <h2>Admin Product Management</h2>
 
- <!-- CATEGORY RADIO BUTTONS -->
-    <div class="radio-group">
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Young Boy"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Young Boy
-      </label>
+  <!-- CATEGORY RADIO BUTTONS -->
+  <div class="radio-group">
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="Young Boy"
+        [(ngModel)]="productCategory"
+        required
+      />
+      Young Boy
+    </label>
 
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Young Girl"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Young Girl
-      </label>
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="Young Girl"
+        [(ngModel)]="productCategory"
+        required
+      />
+      Young Girl
+    </label>
 
-      <label>
-        <input
-          type="radio"
-          name="category"
-          value="Kids"
-          [(ngModel)]="productCategory"
-          required
-        />
-        Kids
-      </label>
-    </div>
-
+    <label>
+      <input
+        type="radio"
+        name="category"
+        value="Kids"
+        [(ngModel)]="productCategory"
+        required
+      />
+      Kids
+    </label>
+  </div>
 
   <form #productForm="ngForm" class="form-container">
     <input
@@ -53,7 +52,6 @@
       required
     />
 
-
     <input
       name="price"
       [(ngModel)]="productPrice"
@@ -64,18 +62,21 @@
     />
 
     <input
-    name="Old-Price"
-    type="number"
-    placeholder="old-price"
-    min="0"
-    >
+      name="Old-Price"
+      type="number"
+      [(ngModel)]="ItemOldPrice"
+      placeholder="old-price"
+      min="0"
+    />
 
     <input
-    name="discount"
-    type="number"
-    placeholder="Discount % (e.g 20)"
-    min="0"
-    max="100">
+      name="discount"
+      type="number"
+      [(ngModel)]="ItemDiscount"
+      placeholder="Discount % (e.g 20)"
+      min="0"
+      max="100"
+    />
 
     <input
       type="file"
@@ -101,27 +102,30 @@
       required
     />
 
+    <input
+      type="text"
+      placeholder="Or type color name (Red, Blue…)"
+      [(ngModel)]="itemColor"
+      (change)="onColorChange()"
+    />
 
-<input
-type="text"
-placeholder="Or type color name (Red, Blue…)"
->
-
-<input
-type="color"
-id="productColor"
->
+    <input
+      type="color"
+      id="productColor"
+      (change)="onColorChange()"
+      [(ngModel)]="itemColor"
+    />
   </form>
-    <textarea
-  name="description"
-  [(ngModel)]="productDescription"
-  placeholder="Product Full Description"
-  rows="5"
-  class="desc-box"
-  required>
-</textarea>
+  <textarea
+    name="description"
+    [(ngModel)]="productDescription"
+    placeholder="Product Full Description"
+    rows="5"
+    class="desc-box"
+    required
+  ></textarea>
 
-<div class="btn-container">
+  <div class="btn-container">
     <button
       *ngIf="!Isbtn"
       [disabled]="
@@ -139,8 +143,7 @@ id="productColor"
     <button *ngIf="Isbtn" (click)="addProduct()">Update Product</button>
 
     <button *ngIf="Isbtn" (click)="ResetForm()">Cancel</button>
- </div>
-
+  </div>
 
   <table>
     <tr>
@@ -162,23 +165,32 @@ id="productColor"
       <td>{{ p.brand }}</td>
       <td>{{ p.detail }}</td>
       <td>{{ p.price }}</td>
-      <td class="old-price">$ {{p.oldprice}}</td>
+      <td class="old-price">$ {{ p.oldprice }}</td>
       <td class="discount-test">
-        <span *ngIf="p.discount>0">-{{p.discount}}%</span>
-        <span *ngIf="p.discount===0">No Discount</span>
+        <span *ngIf="p.discount > 0">-{{ p.discount }}%</span>
+        <span *ngIf="p.discount === 0">No Discount</span>
       </td>
       <td>{{ p.qty }}</td>
       <td>{{ p.category }}</td>
+
       <td>
-        <img [src]="p.img" class="product-img" />
-      </td>
-      <td>
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <div [style.background]="p.color" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>
-<span>{{p.color.text}}</span>
+        <div style="display: flex; align-items: center; gap: 5px">
+          <div
+            [style.background]="p.color"
+            style="
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              border: 1px solid #ccc;
+            "
+          ></div>
+          <span>{{ p?.color?.text }}</span>
         </div>
       </td>
       <td>
+        <img [src]="p.img" class="product-img" />
+      </td>
+      <td style="display: flex">
         <button class="btn1" (click)="EditProduct(p)">Edit</button>
         <button class="btn" (click)="DeleteProduct(p)">Delete</button>
       </td>

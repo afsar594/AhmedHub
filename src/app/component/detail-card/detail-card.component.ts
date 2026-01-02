@@ -10,16 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailCardComponent implements OnInit {
   quantity = 1;
-  // product = [
-  //   {
-  //     title: 'Men’s Classic Warm Hoodie',
-  //     image:
-  //       'https://i.pinimg.com/1200x/85/06/26/850626136d53b0ec52bc37e9a35f4c1f.jpg',
-  //     price: 15.99,
-  //     oldPrice: 22.99,
-  //     discount: '-30%',
-  //   },
-  // ];
+
   record: any;
   totalPriceFix(p: any, q: any) {
     let total = p * q;

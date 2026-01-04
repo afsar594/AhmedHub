@@ -2,22 +2,47 @@
   <h2>Admin Product Management</h2>
 
   <form [formGroup]="productForm" class="form-container">
-
     <!-- PRODUCT CATEGORY -->
     <div class="radio-group">
-      <label><input type="radio" value="Young Boy" formControlName="productCategory"> Young Boy</label>
-      <label><input type="radio" value="Young Girl" formControlName="productCategory"> Young Girl</label>
-      <label><input type="radio" value="Kids" formControlName="productCategory"> Kids</label>
+      <label
+        ><input
+          type="radio"
+          value="Young Boy"
+          formControlName="productCategory"
+        />
+        Young Boy</label
+      >
+      <label
+        ><input
+          type="radio"
+          value="Young Girl"
+          formControlName="productCategory"
+        />
+        Young Girl</label
+      >
+      <label
+        ><input type="radio" value="Kids" formControlName="productCategory" />
+        Kids</label
+      >
     </div>
 
     <!-- SIZES -->
     <div class="size-box">
       <span class="size-title">Sizes:</span>
       <div class="size-option">
-        <label><input type="checkbox" (change)="toggleSize('S', $event)"> S</label>
-        <label><input type="checkbox" (change)="toggleSize('M', $event)"> M</label>
-        <label><input type="checkbox" (change)="toggleSize('L', $event)"> L</label>
-        <label><input type="checkbox" (change)="toggleSize('XL', $event)"> XL</label>
+        <label
+          ><input type="checkbox" (change)="toggleSize('S', $event)" /> S</label
+        >
+        <label
+          ><input type="checkbox" (change)="toggleSize('M', $event)" /> M</label
+        >
+        <label
+          ><input type="checkbox" (change)="toggleSize('L', $event)" /> L</label
+        >
+        <label
+          ><input type="checkbox" (change)="toggleSize('XL', $event)" />
+          XL</label
+        >
       </div>
     </div>
 
@@ -38,7 +63,11 @@
     <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 
     <!-- IMAGE DRAG & DROP -->
-    <div class="image-dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+    <div
+      class="image-dropzone"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)"
+    >
       <p>Drag & drop images here or click to select</p>
       <small>(Images + 1 vedio allowed)</small>
       <input type="file"
@@ -61,8 +90,10 @@
 
     <!-- COLOR PICKER -->
     <div class="color-input">
-      <input type="color" formControlName="currentColor">
-      <button type="button" class="small-btn" (click)="addColor()">Add Color</button>
+      <input type="color" formControlName="currentColor" />
+      <button type="button" class="small-btn" (click)="addColor()">
+        Add Color
+      </button>
     </div>
 
     <!-- COLOR CHIPS -->
@@ -76,11 +107,32 @@
 
     <!-- FORM ACTIONS -->
     <div class="btn-container">
-      <button type="button" class="small-btn" [disabled]="productForm.invalid" (click)="addProduct()" *ngIf="!Isbtn">Add Product</button>
-      <button type="button" class="small-btn" (click)="addProduct()" *ngIf="Isbtn">Update Product</button>
-      <button type="button" class="small-btn cancel" (click)="ResetForm()" *ngIf="Isbtn">Cancel</button>
+      <button
+        type="button"
+        class="small-btn"
+        [disabled]="productForm.invalid"
+        (click)="addProduct()"
+        *ngIf="!Isbtn"
+      >
+        Add Product
+      </button>
+      <button
+        type="button"
+        class="small-btn"
+        (click)="addProduct()"
+        *ngIf="Isbtn"
+      >
+        Update Product
+      </button>
+      <button
+        type="button"
+        class="small-btn cancel"
+        (click)="ResetForm()"
+        *ngIf="Isbtn"
+      >
+        Cancel
+      </button>
     </div>
-
   </form>
 
   <!-- PRODUCT TABLE -->
@@ -123,7 +175,11 @@
       <td>{{p.category}}</td>
       <td>{{p.sizes?.join(', ')}}</td>
       <td class="color-display">
-        <div *ngFor="let c of p.color" class="color-dot-table" [style.background]="c.value"></div>
+        <div
+          *ngFor="let c of p.color"
+          class="color-dot-table"
+          [style.background]="c.value"
+        ></div>
       </td>
       <td>
         <div *ngFor="let img of p.images" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2px;">

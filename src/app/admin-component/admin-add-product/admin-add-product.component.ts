@@ -223,7 +223,7 @@ processFiles(files: FileList) {
     if (event.target.checked) {
       this.sizes.push(this.fb.control(size));
     } else {
-      const index = this.sizes.controls.findIndex(x => x.value === size);
+      const index = this.sizes.controls.findIndex((x) => x.value === size);
       if (index !== -1) this.sizes.removeAt(index);
     }
   }
@@ -243,7 +243,7 @@ processFiles(files: FileList) {
 
   // Auto Discount Calculation
   autoDiscountCalculation() {
-    this.productForm.valueChanges.subscribe(val => {
+    this.productForm.valueChanges.subscribe((val) => {
       const price = Number(val.price);
       const oldprice = Number(val.oldprice);
       if (oldprice > 0 && price > 0 && oldprice > price) {
@@ -328,15 +328,20 @@ processFiles(files: FileList) {
 
     // Clear & set images
     this.images.clear();
-    if (p.images?.length > 0) p.images.forEach((img: any) => this.images.push(this.fb.control(img)));
+    if (p.images?.length > 0)
+      p.images.forEach((img: any) => this.images.push(this.fb.control(img)));
 
     // Clear & set colors
     this.colors.clear();
-    if (p.color?.length > 0) p.color.forEach((c: any) => this.colors.push(this.fb.group({ value: c.value })));
+    if (p.color?.length > 0)
+      p.color.forEach((c: any) =>
+        this.colors.push(this.fb.group({ value: c.value }))
+      );
 
     // Clear & set sizes
     this.sizes.clear();
-    if (p.sizes?.length > 0) p.sizes.forEach((s: any) => this.sizes.push(this.fb.control(s)));
+    if (p.sizes?.length > 0)
+      p.sizes.forEach((s: any) => this.sizes.push(this.fb.control(s)));
   }
 
   ResetForm() {
@@ -345,7 +350,13 @@ processFiles(files: FileList) {
     this.sizes.clear();
     this.colors.clear();
     this.images.clear();
-    this.productForm.reset({ productCategory: 'Young Boy', price: 1, oldprice: 0, discount: 0, quantity: 0 });
+    this.productForm.reset({
+      productCategory: 'Young Boy',
+      price: 1,
+      oldprice: 0,
+      discount: 0,
+      quantity: 0,
+    });
   }
 
   getAll() {
@@ -353,7 +364,6 @@ processFiles(files: FileList) {
       if (res.isSuccess) this.DataItem = res.data;
     });
   }
-
   DeleteProduct(p: any) {
     const ok = window.confirm('Are you sure you want to delete this product? This action cannot be undone.');
     if(!ok) return;

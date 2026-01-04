@@ -1,6 +1,6 @@
 <div class="detail-container">
   <div class="image-box">
-    <img [src]="record.image" [alt]="record.title" />
+    <img [src]="record.img" [alt]="record.title" />
   </div>
   <div class="content-box">
     <h2 class="title">{{ record.title }}</h2>
@@ -10,9 +10,7 @@
       <p class="discount">$ {{ record.discount }}</p>
     </div>
     <p class="description">
-      This Men’s Classic Warm Hoodie is made with soft premium fleece to keep
-      you warm, comfortable, and stylish in winter. Perfect for daily wear,
-      outings, gym, and casual use.
+      {{ record.detail }}
     </p>
 
     <div class="quantity-box">

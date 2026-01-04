@@ -28,22 +28,36 @@
     <input type="number" min="0" formControlName="oldprice" placeholder="Old Price">
     <input type="number" formControlName="discount" placeholder="Discount %">
     <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
+    <p *ngIf="productForm.get('quantity')?.value <= 5 && productForm.get('quantity')?.value > 0" class="low-stock">
+      Only {{ productForm.get('quantity')?.value }} left!
+    </p>
+    <p *ngIf="productForm.get('quantity')?.value === 0" class="out-stock">
+  Out of Stock
+</p>
     <input formControlName="itemCategory" placeholder="Category">
     <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 
     <!-- IMAGE DRAG & DROP -->
     <div class="image-dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
       <p>Drag & drop images here or click to select</p>
-      <input type="file" accept="image/*" (change)="onImageSelect($event)" multiple>
+      <small>(Images + 1 vedio allowed)</small>
+      <input type="file"
+       accept="image/* , video/*" (change)="onFileSelect($event)" multiple>
     </div>
 
     <!-- IMAGE PREVIEW -->
     <div class="image-preview-container">
       <div *ngFor="let img of images.controls; let i = index" class="preview-box">
-        <img [src]="img.value" class="preview-img">
+        <img [src]="img.value" >
         <button type="button" (click)="removeImage(i)">✕</button>
       </div>
-    </div>
+
+    <!-- vedio preview -->
+     <div class="preview-box" *ngIf="video">
+      <video [src]="video" controls></video>
+      <span class="remove-btn" (click)="removeVideo()">✕</span>
+     </div>
+</div>
 
     <!-- COLOR PICKER -->
     <div class="color-input">
@@ -70,7 +84,9 @@
   </form>
 
   <!-- PRODUCT TABLE -->
+   <div class="product-table-container">
   <table>
+    <thead>
     <tr>
       <th>Name</th>
       <th>Brand</th>
@@ -85,28 +101,48 @@
       <th>Images</th>
       <th>Actions</th>
     </tr>
+    </thead>
+    <tbody>
     <tr *ngFor="let p of DataItem">
       <td>{{p.itemName}}</td>
       <td>{{p.brand}}</td>
-      <td>{{p.detail}}</td>
+      <td style="text-align: left;">{{p.detail}}</td>
       <td>{{p.price}}</td>
       <td>{{p.discount>0 ? '-' + p.discount + '%' : 'No Discount'}}</td>
       <td>{{p.oldprice}}</td>
       <td>{{p.qty}}</td>
+      <!-- <td>
+  <p *ngIf="+productForm.get('quantity')?.value <= 5 && +productForm.get('quantity')?.value > 0" class="low-stock">
+  Only {{ productForm.get('quantity')?.value }} left!
+</p>
+<p *ngIf="+productForm.get('quantity')?.value === 0" class="out-stock">
+  Out of Stock
+</p>
+</td> -->
+
       <td>{{p.category}}</td>
       <td>{{p.sizes?.join(', ')}}</td>
       <td class="color-display">
         <div *ngFor="let c of p.color" class="color-dot-table" [style.background]="c.value"></div>
       </td>
       <td>
-        <div *ngFor="let img of p.images">
+        <div *ngFor="let img of p.images" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2px;">
           <img [src]="img" class="product-img">
         </div>
       </td>
-      <td>
+      <td class="action-buttons">
+        
         <button class="small-btn" (click)="EditProduct(p)">Edit</button>
         <button class="small-btn cancel" (click)="DeleteProduct(p)">Delete</button>
+        <button
+    class="status-btn"
+    [ngClass]="p.status ? 'active' : 'inactive'"
+    (click)="toggleStatus(p)"
+  >
+    {{ p.status ? 'Active' : 'Inactive' }}
+  </button>
       </td>
     </tr>
+    </tbody>
   </table>
 </div>

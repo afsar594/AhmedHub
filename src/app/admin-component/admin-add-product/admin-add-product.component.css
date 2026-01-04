@@ -388,6 +388,30 @@ td .small-btn {
   text-overflow: ellipsis; /* if text is too long */
 }
 
+.status-btn {
+  padding: 5px 12px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+  transition: 0.2s;
+}
+
+.status-btn.active {
+  background-color: #28a745; /* Green for Active */
+}
+
+.status-btn.inactive {
+  background-color: #dc3545; /* Red for Inactive */
+}
+
+.status-btn:hover {
+  opacity: 0.8;
+}
+
+
 td .small-btn.cancel {
   background-color: red;
 }
@@ -465,29 +489,7 @@ td > div {
   .btn-container {
     flex-direction: column;
   }
-  .status-btn {
-  padding: 5px 12px;
-  margin-left: 5px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: white;
-  transition: 0.2s;
-}
-
-.status-btn.active {
-  background-color: #28a745; /* Green for Active */
-}
-
-.status-btn.inactive {
-  background-color: #dc3545; /* Red for Inactive */
-}
-
-.status-btn:hover {
-  opacity: 0.8;
-}
-
+  
 
   .color-chip {
     width: 100px;

@@ -389,14 +389,25 @@ td .small-btn {
 }
 
 .status-btn {
-  padding: 5px 12px;
+  /* padding: 5px 12px;
   margin-left: 5px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   font-size: 13px;
   color: white;
-  transition: 0.2s;
+  transition: 0.2s; */
+  padding: 4px 8px;       /* chhota padding */
+  font-size: 11px;        /* chhoti font size */
+  min-width: 50px;        /* fixed minimum width */
+  height: 28px;            /* fixed height */
+  line-height: 1;          /* text vertically center */
+  border-radius: 4px;      /* thoda rounded */
+  overflow: hidden;        /* content cannot overflow */
+  white-space: nowrap;     /* prevent text wrap */
+  text-overflow: ellipsis;
+  border: none;
+  color: white;
 }
 
 .status-btn.active {

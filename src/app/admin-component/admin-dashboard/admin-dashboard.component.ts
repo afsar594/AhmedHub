@@ -1,8 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetCardComponent } from '../widget-card/widget-card.component';
 import { WidgetChartComponent } from '../widget-chart/widget-chart.component';
 import { Router } from '@angular/router';
+
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  totalQuantity: number;
+  sold: number;
+}
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,12 +19,16 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     WidgetCardComponent,
-    WidgetChartComponent
+    WidgetChartComponent,
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
+  
+
+ lowStockProducts: Product[] = [];
+outOfStockProducts: Product[] = [];
 
   stats = {
     totalProducts: 150,
@@ -31,17 +44,32 @@ export class AdminDashboardComponent {
   weeklyLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   weeklySales = [50, 70, 95, 120, 15.49, 180, 110];
 
-  products = [
-    { id: 1, name: 'Men’s Classic Warm Hoodie', price: 15.99, sold: 120 },
-    { id: 2, name: 'Graphic Typography T-shirt', price: 19.5, sold: 90 },
-    { id: 3, name: 'Denim Jacket', price: 15.49, sold: 150 },
-    { id: 4, name: 'Bomber Jacket', price: 10.99, sold: 60 },
-    { id: 5, name: 'Oversized T-shirt', price: 15.49, sold: 110 }
-  ];
+products: Product[] = [
+  { id: 1, name: 'Men’s Classic Warm Hoodie', price: 15.99, totalQuantity: 130, sold: 120 },
+  { id: 2, name: 'Graphic Typography T-shirt', price: 19.5, totalQuantity: 95, sold: 90 },
+  { id: 3, name: 'Denim Jacket', price: 15.49, totalQuantity: 150, sold: 150 },
+  { id: 4, name: 'Bomber Jacket', price: 10.99, totalQuantity: 80, sold: 60 },
+  { id: 5, name: 'Oversized T-shirt', price: 15.49, totalQuantity: 112, sold: 110 }
+];
 
-  constructor(private router: Router){}
 
-  navigatetoadminproduct(){
+  constructor(private router: Router){
+    
+  }
+
+  
+ngOnInit(): void {
+    this.lowStockProducts=this.products.filter(p => {
+      const remaining = p.totalQuantity - p.sold;
+      return remaining > 0 && remaining <=5;
+    });
+    this.outOfStockProducts=this.products.filter(p=>{
+      const remaining=p.totalQuantity - p.sold;
+      return remaining ===0;
+    });
+
+  }
+    navigatetoadminproduct(){
     this.router.navigate(['adminproductmanagement'])
   }
 

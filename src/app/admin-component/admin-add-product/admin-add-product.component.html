@@ -53,12 +53,6 @@
     <input type="number" min="0" formControlName="oldprice" placeholder="Old Price">
     <input type="number" formControlName="discount" placeholder="Discount %">
     <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
-    <p *ngIf="productForm.get('quantity')?.value <= 5 && productForm.get('quantity')?.value > 0" class="low-stock">
-      Only {{ productForm.get('quantity')?.value }} left!
-    </p>
-    <p *ngIf="productForm.get('quantity')?.value === 0" class="out-stock">
-  Out of Stock
-</p>
     <input formControlName="itemCategory" placeholder="Category">
     <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 

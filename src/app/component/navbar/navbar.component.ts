@@ -13,7 +13,7 @@ export class NavbarComponent {
 
   constructor(private router: Router) {}
 
-  toggleMenu(): void {
+  toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
 

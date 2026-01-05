@@ -18,6 +18,30 @@
   background: #e65c00;
 } */
 
+.stock-alerts{
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+.alert{
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.low-stock{
+  background: #fff3cd;
+  color: #ff6600;
+  font-weight: 600;
+}
+.out-stock {
+  background: #f8d7da;
+  color: #ff6600;
+  font-weight: 600;
+  
+}
+
+
 
 .admin-action {
   display: flex;

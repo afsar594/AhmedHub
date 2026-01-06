@@ -1,4 +1,16 @@
 /* Default (Desktop – already fine) */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+.home-wrapper {
+  height: calc(100vh - 70px - 60px);
+  display: flex;
+  align-items: stretch;
+}
 .cover-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

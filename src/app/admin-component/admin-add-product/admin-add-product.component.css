@@ -9,6 +9,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
 h2 {
   text-align: center;
   color: #ff6600;
@@ -63,29 +64,52 @@ h2 {
   gap: 10px;
   margin-top: 10px;
 }
-
-.preview-box {
+.preview-box{
   position: relative;
   width: 90px;
   height: 90px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+}
+.preview-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.preview-box img {
-  max-width: 80px;
-  max-height: 80px;
-  object-fit: contain;
+.preview-box video{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+/* REMOVE BUTTON */
+.preview-box .remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 .preview-box button {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: 4px;
+  right: 4px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -241,24 +265,49 @@ h2 {
   background-color: #5a6268;
 }
 
-/* ===== Product Table ===== */
+
+/* ===== Product Table Container ===== */
+.product-table-container {
+  width: 100%;
+  overflow-x: auto; /* horizontal scroll on smaller screens */
+  margin-top: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background: #fff;
+}
+
+
+/* Table layout */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
+  table-layout: fixed; 
+  min-width: 900px;   
+}
+.desc-col{
+  width: 13%;              
+  text-align: left;
+  white-space: normal;
+  line-height: 1.5;
 }
 
-th,
-td {
+
+
+th, td {
   border: 1px solid #eee;
   padding: 10px;
   text-align: center;
   font-size: 14px;
+  vertical-align: middle;
+  word-wrap: break-word; 
 }
 
 th {
   background: #ff6600;
-  color: white;
+  color: #fff;
+  font-weight: 600;
+    white-space: nowrap;
+
 }
 
 .product-img {
@@ -268,6 +317,7 @@ th {
   border-radius: 6px;
 }
 
+/* Color display inside table */
 .color-dot-table {
   width: 20px;
   height: 20px;
@@ -282,7 +332,118 @@ th {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  flex-wrap: wrap;
 }
+
+/* Images inside table */
+td img {
+  margin: 2px;
+  border-radius: 6px;
+}
+
+/* Buttons inside table */
+/* ===== Table Action Buttons ===== */
+td .small-btn {
+  padding: 4px 8px;       
+  font-size: 11px;       
+  min-width: 50px;       
+  height: 28px;            
+  line-height: 1;          
+  border-radius: 4px;     
+  overflow: hidden;        
+  white-space: nowrap;     
+  text-overflow: ellipsis; 
+}
+
+.status-btn {
+  padding: 4px 8px;       
+  font-size: 11px;        
+  min-width: 50px;        
+  height: 28px;            
+  line-height: 1;          
+  border-radius: 4px;      
+  overflow: hidden;        
+  white-space: nowrap;     
+  text-overflow: ellipsis;
+  border: none;
+  color: white;
+}
+
+.status-btn.active {
+  background-color: #28a745; /* Green for Active */
+}
+
+.status-btn.inactive {
+  background-color: #dc3545; /* Red for Inactive */
+}
+
+.status-btn:hover {
+  opacity: 0.8;
+}
+
+
+td .small-btn.cancel {
+  background-color: red;
+}
+
+td .small-btn.cancel:hover {
+  background-color: rgb(175, 15, 15);
+}
+
+td .small-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Make button container align properly */
+td > div {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;  
+  align-items: center;
+}
+
+/* ===== Responsive adjustments ===== */
+@media screen and (max-width: 768px) {
+  td .small-btn {
+    font-size: 10px;
+    padding: 3px 6px;
+    min-width: 45px;
+    height: 26px;
+  }
+}
+
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 992px) {
+  table {
+    min-width: 700px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  th, td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .product-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .color-dot-table {
+    width: 16px;
+    height: 16px;
+  }
+
+  td .small-btn {
+    font-size: 10px;
+    min-width: 40px;
+    padding: 3px 6px;
+  }
+}
+
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
@@ -298,6 +459,7 @@ th {
   .btn-container {
     flex-direction: column;
   }
+  
 
   .color-chip {
     width: 100px;
@@ -305,3 +467,4 @@ th {
     font-size: 12px;
   }
 }
+

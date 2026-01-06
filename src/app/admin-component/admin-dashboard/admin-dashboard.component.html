@@ -12,6 +12,8 @@
 
 <h2 class="title">Admin Dashboard</h2>
 
+
+
 <!-- Widgets -->
 <div class="dashboard-grid">
   <app-widget-card title="Total Products" [value]="stats.totalProducts"></app-widget-card>
@@ -19,6 +21,28 @@
   <app-widget-card title="Daily Sales" [value]="stats.dailySales"></app-widget-card>
   <app-widget-card title="Weekly Sales" [value]="stats.weeklySales"></app-widget-card>
   <app-widget-card title="Monthly Sales" [value]="stats.monthlySales"></app-widget-card>
+</div>
+
+<!-- Stock alert section -->
+<div class="stock-alerts"
+*ngIf="lowStockProducts.length || outOfStockProducts.length">
+
+<div class="alert low-stock" *ngIf="lowStockProducts.length">
+<h4 style="color: black;">⚠ Low Stock Products</h4>
+<div *ngFor="let p of lowStockProducts">
+  {{p.name}} - Only {{p.totalQuantity - p.sold}} left
+</div>
+</div>
+
+<div class="alert out-stock" *ngIf="outOfStockProducts.length">
+  <h4 style="color: black;">⛔ Out of Stock</h4>
+
+  <div *ngFor="let p of outOfStockProducts">
+    {{ p.name }}
+  </div>
+
+
+</div>
 </div>
 
 <!-- Bar Chart -->

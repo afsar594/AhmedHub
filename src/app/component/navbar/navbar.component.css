@@ -6,6 +6,7 @@
   align-items: center;
   background: #ff6600;
   color: white;
+  
 }
 
 
@@ -71,49 +72,73 @@
   text-decoration: none;
 }
 
-.top-links li a:hover {
+/* .top-links li a:hover {
   background: #fff3e6;
   color: #ff5500;
-}
-
-/* ===== Tablet (≤ 992px) ===== */
-@media (max-width: 992px) {
-  .search-area input {
-    width: 50%;
-    margin-left: 15%;
-  }
-
-  .top-links {
-    gap: 15px;
-    padding-right: 20px;
-  }
+} */
+/* Hamburger button - hidden on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
 }
 
 /* ===== Mobile (≤ 600px) ===== */
 @media (max-width: 600px) {
-  .navbar {
-    justify-content: space-between;
-    padding: 10px 15px;
+  .menu-toggle {
+    display: block;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
   }
 
   .top-links {
-    display: none; /* hide menu */
+    display: none; /* hide menu default */
+    flex-direction: column; /* vertical menu */
+    gap: 0; /* reset gap for column */
+    position: absolute;
+    top: 60px; /* navbar height */
+    left: 0;
+    right: 0;
+    background: #ff6600;
+    z-index: 99;
+  }
+
+  .top-links.active {
+    display: flex; /* show menu when active */
+  }
+
+  .top-links li a {
+    padding: 12px 20px;
+    border-bottom: 1px solid #ff5500;
+    width: 100%;
+    box-sizing: border-box;
+    display: block; /* full width click */
+    text-align: left;
+  }
+
+  /* Active link highlight on mobile */
+  .top-links li a.active {
+    background: #fff3e6;
+    color: #ff5500;
   }
 
   .search-area {
+    width: 100%;
     padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .search-area input {
-    width: 100%;
+    width: 70%;
     margin-left: 0;
   }
 
-  .search-area img {
-    width: 45px;
-  }
-
+  .search-area img,
   .cart-icon {
-    font-size: 22px;
+    width: 35px;
+    height: 35px;
   }
 }

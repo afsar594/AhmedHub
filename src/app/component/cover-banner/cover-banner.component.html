@@ -1,3 +1,5 @@
+
+<div class="home-wrapper">
 <div class="cover-container">
   <div class="banner" *ngFor="let item of banners">
     <img [src]="item.image" alt="item.title" />
@@ -7,4 +9,5 @@
     </div>
     <button class="shop-now" (click)="Navigate(item.id)">Shop Now</button>
   </div>
+</div>
 </div>

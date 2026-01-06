@@ -9,6 +9,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
 h2 {
   text-align: center;
   color: #ff6600;
@@ -264,51 +265,6 @@ object-fit: cover;
   background-color: #5a6268;
 }
 
-/* ===== Product Table ===== */
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-}
-
-th,
-td {
-  border: 1px solid #eee;
-  padding: 10px;
-  text-align: center;
-  font-size: 14px;
-}
-
-th {
-  background: #ff6600;
-  color: white;
-}
-
-
-.product-img {
-  width: 55px;
-  height: 55px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.color-dot-table {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.color-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-} */
-
-
 
 /* ===== Product Table Container ===== */
 .product-table-container {
@@ -320,13 +276,22 @@ th {
   background: #fff;
 }
 
+
 /* Table layout */
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* all columns uniform width */
-  min-width: 900px;   /* ensures scroll on small screens */
+  table-layout: fixed; 
+  min-width: 900px;   
 }
+.desc-col{
+  width: 13%;              
+  text-align: left;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+
 
 th, td {
   border: 1px solid #eee;
@@ -334,13 +299,15 @@ th, td {
   text-align: center;
   font-size: 14px;
   vertical-align: middle;
-  word-wrap: break-word; /* long text wraps neatly */
+  word-wrap: break-word; 
 }
 
 th {
   background: #ff6600;
   color: #fff;
   font-weight: 600;
+    white-space: nowrap;
+
 }
 
 .product-img {
@@ -377,34 +344,26 @@ td img {
 /* Buttons inside table */
 /* ===== Table Action Buttons ===== */
 td .small-btn {
-  padding: 4px 8px;       /* chhota padding */
-  font-size: 11px;        /* chhoti font size */
-  min-width: 50px;        /* fixed minimum width */
-  height: 28px;            /* fixed height */
-  line-height: 1;          /* text vertically center */
-  border-radius: 4px;      /* thoda rounded */
-  overflow: hidden;        /* content cannot overflow */
-  white-space: nowrap;     /* prevent text wrap */
-  text-overflow: ellipsis; /* if text is too long */
+  padding: 4px 8px;       
+  font-size: 11px;       
+  min-width: 50px;       
+  height: 28px;            
+  line-height: 1;          
+  border-radius: 4px;     
+  overflow: hidden;        
+  white-space: nowrap;     
+  text-overflow: ellipsis; 
 }
 
 .status-btn {
-  /* padding: 5px 12px;
-  margin-left: 5px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: white;
-  transition: 0.2s; */
-  padding: 4px 8px;       /* chhota padding */
-  font-size: 11px;        /* chhoti font size */
-  min-width: 50px;        /* fixed minimum width */
-  height: 28px;            /* fixed height */
-  line-height: 1;          /* text vertically center */
-  border-radius: 4px;      /* thoda rounded */
-  overflow: hidden;        /* content cannot overflow */
-  white-space: nowrap;     /* prevent text wrap */
+  padding: 4px 8px;       
+  font-size: 11px;        
+  min-width: 50px;        
+  height: 28px;            
+  line-height: 1;          
+  border-radius: 4px;      
+  overflow: hidden;        
+  white-space: nowrap;     
   text-overflow: ellipsis;
   border: none;
   color: white;
@@ -440,7 +399,7 @@ td > div {
   display: flex;
   gap: 4px;
   justify-content: center;
-  flex-wrap: wrap;  /* wrap if screen small */
+  flex-wrap: wrap;  
   align-items: center;
 }
 

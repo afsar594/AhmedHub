@@ -136,7 +136,7 @@
     <tr>
       <th>Name</th>
       <th>Brand</th>
-      <th>Description</th>
+      <th class="desc-col">Description</th>
       <th>Price</th>
       <th>Discount</th>
       <th>Old Price</th>
@@ -152,7 +152,7 @@
     <tr *ngFor="let p of DataItem">
       <td>{{p.itemName}}</td>
       <td>{{p.brand}}</td>
-      <td style="text-align: left;">{{p.detail}}</td>
+      <td class="desc-col" style="text-align: left;">{{p.detail}}</td>
       <td>{{p.price}}</td>
       <td>{{p.discount>0 ? '-' + p.discount + '%' : 'No Discount'}}</td>
       <td>{{p.oldprice}}</td>

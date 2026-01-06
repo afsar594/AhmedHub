@@ -13,9 +13,10 @@ import { ApiService } from '../../service/api.service';
 })
 export class AdminAddProductComponent implements OnInit {
   productForm!: FormGroup;
-  DataItem: any = [];
+  DataItem: any;
   Isbtn: boolean = false;
   SaveData: any;
+  itemColor: any;
 
   constructor(private fb: FormBuilder, private api: ApiService) {}
 
@@ -120,6 +121,7 @@ export class AdminAddProductComponent implements OnInit {
 
   // Add / Update Product
   addProduct() {
+    debugger;
     const val = this.productForm.value;
     const payload = {
       itemId: this.SaveData ? this.SaveData.itemId : 0,
@@ -218,7 +220,7 @@ export class AdminAddProductComponent implements OnInit {
 
   getAll() {
     this.api.getItemsAll().subscribe((res: any) => {
-      if (res.isSuccess) this.DataItem = res.data;
+      if (res.isSuccess) this.DataItem = res?.data;
     });
   }
   DeleteProduct(p: any) {

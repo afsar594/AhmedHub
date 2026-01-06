@@ -47,14 +47,28 @@
     </div>
 
     <!-- PRODUCT INFO -->
-    <input formControlName="name" placeholder="Product Name">
-    <input formControlName="brand" placeholder="Brand Name">
-    <input type="number" min="1" formControlName="price" placeholder="Price">
-    <input type="number" min="0" formControlName="oldprice" placeholder="Old Price">
-    <input type="number" formControlName="discount" placeholder="Discount %">
-    <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
-    <input formControlName="itemCategory" placeholder="Category">
-    <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
+    <input formControlName="name" placeholder="Product Name" />
+    <input formControlName="brand" placeholder="Brand Name" />
+    <input type="number" min="1" formControlName="price" placeholder="Price" />
+    <input
+      type="number"
+      min="0"
+      formControlName="oldprice"
+      placeholder="Old Price"
+    />
+    <input type="number" formControlName="discount" placeholder="Discount %" />
+    <input
+      type="number"
+      min="0"
+      formControlName="quantity"
+      placeholder="Quantity"
+    />
+    <input formControlName="itemCategory" placeholder="Category" />
+    <textarea
+      formControlName="description"
+      class="desc-box"
+      placeholder="Product Description"
+    ></textarea>
 
     <!-- IMAGE DRAG & DROP -->
     <div
@@ -64,23 +78,30 @@
     >
       <p>Drag & drop images here or click to select</p>
       <small>(Images + 1 vedio allowed)</small>
-      <input type="file"
-       accept="image/* , video/*" (change)="onFileSelect($event)" multiple>
+      <input
+        type="file"
+        accept="image/* , video/*"
+        (change)="onFileSelect($event)"
+        multiple
+      />
     </div>
 
     <!-- IMAGE PREVIEW -->
     <div class="image-preview-container">
-      <div *ngFor="let img of images.controls; let i = index" class="preview-box">
-        <img [src]="img.value" >
+      <div
+        *ngFor="let img of images.controls; let i = index"
+        class="preview-box"
+      >
+        <img [src]="img.value" />
         <button type="button" (click)="removeImage(i)">✕</button>
       </div>
 
-    <!-- vedio preview -->
-     <div class="preview-box" *ngIf="video">
-      <video [src]="video" controls></video>
-      <span class="remove-btn" (click)="removeVideo()">✕</span>
-     </div>
-</div>
+      <!-- vedio preview -->
+      <div class="preview-box" *ngIf="video">
+        <video [src]="video" controls></video>
+        <span class="remove-btn" (click)="removeVideo()">✕</span>
+      </div>
+    </div>
 
     <!-- COLOR PICKER -->
     <div class="color-input">
@@ -130,34 +151,34 @@
   </form>
 
   <!-- PRODUCT TABLE -->
-   <div class="product-table-container">
-  <table>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Brand</th>
-      <th class="desc-col">Description</th>
-      <th>Price</th>
-      <th>Discount</th>
-      <th>Old Price</th>
-      <th>Quantity</th>
-      <th>Category</th>
-      <th>Sizes</th>
-      <th>Colors</th>
-      <th>Images</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let p of DataItem">
-      <td>{{p.itemName}}</td>
-      <td>{{p.brand}}</td>
-      <td class="desc-col" style="text-align: left;">{{p.detail}}</td>
-      <td>{{p.price}}</td>
-      <td>{{p.discount>0 ? '-' + p.discount + '%' : 'No Discount'}}</td>
-      <td>{{p.oldprice}}</td>
-      <td>{{p.qty}}</td>
-      <!-- <td>
+  <div class="product-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Brand</th>
+          <th class="desc-col">Description</th>
+          <th>Price</th>
+          <th>Discount</th>
+          <th>Old Price</th>
+          <th>Quantity</th>
+          <th>Category</th>
+          <th>Sizes</th>
+          <th>Colors</th>
+          <th>Images</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of DataItem">
+          <td>{{ p.itemName }}</td>
+          <td>{{ p.brand }}</td>
+          <td class="desc-col" style="text-align: left">{{ p.detail }}</td>
+          <td>{{ p.price }}</td>
+          <td>{{ p.discount > 0 ? "-" + p.discount + "%" : "No Discount" }}</td>
+          <td>{{ p.oldprice }}</td>
+          <td>{{ p.qty }}</td>
+          <!-- <td>
   <p *ngIf="+productForm.get('quantity')?.value <= 5 && +productForm.get('quantity')?.value > 0" class="low-stock">
   Only {{ productForm.get('quantity')?.value }} left!
 </p>
@@ -166,33 +187,35 @@
 </p>
 </td> -->
 
-      <td>{{p.category}}</td>
-      <td>{{p.sizes?.join(', ')}}</td>
-      <td class="color-display">
-        <div
+          <td>{{ p.category }}</td>
+          <td>{{ p.sizes?.join(", ") }}</td>
+          <td class="color-display">
+            <!-- <div
           *ngFor="let c of p.color"
           class="color-dot-table"
           [style.background]="c.value"
-        ></div>
-      </td>
-      <td>
-        <div *ngFor="let img of p.images" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2px;">
-          <img [src]="img" class="product-img">
-        </div>
-      </td>
-      <td class="action-buttons">
-        
-        <button class="small-btn" (click)="EditProduct(p)">Edit</button>
-        <button class="small-btn cancel" (click)="DeleteProduct(p)">Delete</button>
-        <button
-    class="status-btn"
-    [ngClass]="p.status ? 'active' : 'inactive'"
-    (click)="toggleStatus(p)"
-  >
-    {{ p.status ? 'Active' : 'Inactive' }}
-  </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        ></div> -->
+          </td>
+          <td>
+            <!-- <div *ngFor="let img of p.images">
+          <img [src]="img" class="product-img" />
+        </div> -->
+          </td>
+          <td style="display: flex">
+            <button class="small-btn" (click)="EditProduct(p)">Edit</button>
+            <button class="small-btn cancel" (click)="DeleteProduct(p)">
+              Delete
+            </button>
+            <button
+              class="status-btn"
+              [ngClass]="p.status ? 'active' : 'inactive'"
+              (click)="toggleStatus(p)"
+            >
+              {{ p.status ? "Active" : "Inactive" }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

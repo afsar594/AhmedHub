@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators , FormControl  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
@@ -17,6 +17,9 @@ export class AdminAddProductComponent implements OnInit {
   Isbtn: boolean = false;
   SaveData: any;
   itemColor: any;
+
+  searchControl = new FormControl('');
+  filteredData: any[] = [];
 
   constructor(private fb: FormBuilder, private api: ApiService) {}
 
@@ -38,6 +41,9 @@ export class AdminAddProductComponent implements OnInit {
       colors: this.fb.array([]),
       status: [true],
     });
+
+this.filteredData = this.DataItem;
+
     this.DataItem = [
       {
         itemId: 1,
@@ -105,6 +111,19 @@ export class AdminAddProductComponent implements OnInit {
       },
     ];
 
+      this.filteredData = [...this.DataItem];
+
+this.searchControl.valueChanges.subscribe(value => {
+  const search = (value || '').toLowerCase();
+
+  this.filteredData = this.DataItem.filter((p: any) =>
+    (p.itemName || '').toLowerCase().includes(search) ||
+    (p.category || '').toLowerCase().includes(search) ||
+    (p.brand || '').toLowerCase().includes(search)
+  );
+});
+
+
     // 🔹 Dummy ke liye backend ko temporarily comment karo
     // this.getAll();
 
@@ -114,6 +133,9 @@ export class AdminAddProductComponent implements OnInit {
   //   this.getAll();
   //   this.autoDiscountCalculation();
   // }
+
+
+  
 
   // FormArray getters
   get images(): FormArray {

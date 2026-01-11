@@ -5,7 +5,7 @@
   padding: 30px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -37,7 +37,7 @@ h2 {
 .form-container input:focus,
 .form-container textarea:focus {
   border-color: #ff6600;
-  box-shadow: 0 0 8px rgba(255,102,0,0.3);
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
   outline: none;
 }
 
@@ -64,7 +64,8 @@ h2 {
   gap: 10px;
   margin-top: 10px;
 }
-.preview-box{
+
+.preview-box {
   position: relative;
   width: 90px;
   height: 90px;
@@ -76,17 +77,19 @@ h2 {
   align-items: center;
   justify-content: center;
 }
-.preview-box img{
+
+.preview-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.preview-box video{
-width: 100%;
-height: 100%;
-object-fit: cover;
+.preview-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
+
 /* REMOVE BUTTON */
 .preview-box .remove-btn {
   position: absolute;
@@ -103,7 +106,7 @@ object-fit: cover;
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .preview-box button {
@@ -269,10 +272,10 @@ object-fit: cover;
 /* ===== Product Table Container ===== */
 .product-table-container {
   width: 100%;
-  overflow-x: auto; /* horizontal scroll on smaller screens */
+  overflow-x: auto;
   margin-top: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   background: #fff;
 }
 
@@ -281,11 +284,13 @@ object-fit: cover;
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; 
-  min-width: 900px;   
+  /* table-layout: fixed;  */
+  min-width: 900px;
+  table-layout: auto;
 }
-.desc-col{
-  width: 13%;              
+
+.desc-col {
+  width: 13%;
   text-align: left;
   white-space: normal;
   line-height: 1.5;
@@ -293,20 +298,21 @@ table {
 
 
 
-th, td {
+th,
+td {
   border: 1px solid #eee;
   padding: 10px;
   text-align: center;
   font-size: 14px;
   vertical-align: middle;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 
 th {
   background: #ff6600;
   color: #fff;
   font-weight: 600;
-    white-space: nowrap;
+  white-space: nowrap;
 
 }
 
@@ -343,39 +349,72 @@ td img {
 
 /* Buttons inside table */
 /* ===== Table Action Buttons ===== */
+
+/* ===== Search Box ===== */
+.search-box {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* ===== Search Input ===== */
+.search-box input[type="search"] {
+  width: 260px;
+  padding: 7px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Placeholder */
+.search-box input[type="search"]::placeholder {
+  color: #9ca3af;
+}
+
+/* Focus state */
+.search-box input[type="search"]:focus {
+  border-color: #ff6600;
+  /* box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12); */
+}
+
+
 td .small-btn {
-  padding: 4px 8px;       
-  font-size: 11px;       
-  min-width: 50px;       
-  height: 28px;            
-  line-height: 1;          
-  border-radius: 4px;     
-  overflow: hidden;        
-  white-space: nowrap;     
-  text-overflow: ellipsis; 
+  padding: 4px 8px;
+  font-size: 11px;
+  min-width: 50px;
+  height: 28px;
+  line-height: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 
 .status-btn {
-  padding: 4px 8px;       
-  font-size: 11px;        
-  min-width: 50px;        
-  height: 28px;            
-  line-height: 1;          
-  border-radius: 4px;      
-  overflow: hidden;        
-  white-space: nowrap;     
+  padding: 4px 8px;
+  font-size: 11px;
+  min-width: 50px;
+  height: 28px;
+  line-height: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   border: none;
   color: white;
 }
 
 .status-btn.active {
-  background-color: #28a745; /* Green for Active */
+  background-color: #28a745;
+  /* Green for Active */
 }
 
 .status-btn.inactive {
-  background-color: #dc3545; /* Red for Inactive */
+  background-color: #dc3545;
+  /* Red for Inactive */
 }
 
 .status-btn:hover {
@@ -396,11 +435,11 @@ td .small-btn:hover {
 }
 
 /* Make button container align properly */
-td > div {
+td>div {
   display: flex;
   gap: 4px;
   justify-content: center;
-  flex-wrap: wrap;  
+  flex-wrap: wrap; 
   align-items: center;
 }
 
@@ -423,7 +462,9 @@ td > div {
 }
 
 @media screen and (max-width: 768px) {
-  th, td {
+
+  th,
+  td {
     padding: 8px;
     font-size: 12px;
   }
@@ -443,11 +484,18 @@ td > div {
     min-width: 40px;
     padding: 3px 6px;
   }
+
+  td .status-btn {
+    font-size: 10px;
+    min-width: 40px;
+    padding: 3px 6px;
+  }
 }
 
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
+
   .form-container input,
   textarea {
     flex: 1 1 100%;
@@ -460,7 +508,7 @@ td > div {
   .btn-container {
     flex-direction: column;
   }
-  
+
 
   .color-chip {
     width: 100px;
@@ -468,4 +516,3 @@ td > div {
     font-size: 12px;
   }
 }
-

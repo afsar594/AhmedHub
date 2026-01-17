@@ -5,14 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
+  removeBg(imageBase64: string) {
+    return this.http.post(`${this.baseUrl}Item/RemoveBg`, {
+      image: imageBase64,
+    });
+  }
 
-removeBg(imageBase64:string){
-
-  return this.http.post(`${this.baseUrl}Item/RemoveBg` , {image: imageBase64});
-}
-
-
-  
   // products = [
   //   {
   //     image:
@@ -419,7 +417,7 @@ removeBg(imageBase64:string){
     return this.http.get(`${this.baseUrl}Item?id=${id}`);
   }
   getItemsAll() {
-    return this.http.get(`${this.baseUrl}Item/Gettall`);
+    return this.http.get(`${this.baseUrl}Item`);
   }
 
   saveItems(data: any) {

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators , FormControl  } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
@@ -41,91 +47,91 @@ discount: [0, Validators.min(0)],
       colors: this.fb.array([]),
       status: [true],
     });
+    this.getAll();
 
-this.filteredData = this.DataItem;
+    // this.filteredData = this.DataItem;
 
-    this.DataItem = [
-      {
-        itemId: 1,
-        itemName: 'Cool T-Shirt',
-        brand: 'BrandX',
-        price: 500,
-        oldprice: 700,
-        discount: 29,
-        qty: 20,
-        category: 'Clothing',
-        classifiedId: 3,
-        detail:
-          'High quality cotton t-shirt for young boys. Comfortable and trendy design.',
-        sizes: ['S', 'M', 'L'],
-        color: [{ value: '#ff0000' }, { value: '#0000ff' }],
-        images: [
-          'https://i.pinimg.com/1200x/46/72/0d/46720dacf89fe86096d7157cddbf7ff8.jpg',
-          'https://i.pinimg.com/736x/b9/98/8a/b9988a39dab7e7fb741b6e8febfb57f1.jpg',
-        ],
-        createdDate: new Date(),
-      },
-      {
-        itemId: 2,
-        itemName: 'Stylish Jacket',
-        brand: 'BrandY',
-        price: 1200,
-        oldprice: 1500,
-        discount: 20,
-        qty: 10,
-        category: 'Winter Wear',
-        classifiedId: 2,
-        detail:
-          'Warm and stylish jacket suitable for young girls. Perfect for winter season.',
-        sizes: ['M', 'L', 'XL'],
-        color: [
-          { value: '#00ff00' },
-          { value: '#ffff00' },
-          { value: '#0000ff' },
-        ],
-        images: [
-          'https://i.pinimg.com/1200x/09/1f/f3/091ff3982274db868af8175bcb12fd6a.jpg',
-          'https://i.pinimg.com/736x/92/bb/a3/92bba38a680b10ef7110e94841c85208.jpg',
-          'https://i.pinimg.com/1200x/4c/08/b6/4c08b6bb54e1bf7b7ce431ec82835e22.jpg',
-        ],
-        createdDate: new Date(),
-      },
-      {
-        itemId: 3,
-        itemName: 'Kids Sneakers',
-        brand: 'BrandZ',
-        price: 800,
-        oldprice: 1000,
-        discount: 20,
-        qty: 15,
-        category: 'Footwear',
-        classifiedId: 1,
-        detail:
-          'Comfortable sneakers for kids. Colorful design and durable material.',
-        sizes: ['S', 'M'],
-        color: [{ value: '#ff9900' }, { value: '#6600ff' }],
-        images: [
-          'https://i.pinimg.com/1200x/c4/13/55/c4135537d9c8125ffcaa728d01951da2.jpg',
-        ],
-        createdDate: new Date(),
-      },
-    ];
+    // this.DataItem = [
+    //   {
+    //     itemId: 1,
+    //     itemName: 'Cool T-Shirt',
+    //     brand: 'BrandX',
+    //     price: 500,
+    //     oldprice: 700,
+    //     discount: 29,
+    //     qty: 20,
+    //     category: 'Clothing',
+    //     classifiedId: 3,
+    //     detail:
+    //       'High quality cotton t-shirt for young boys. Comfortable and trendy design.',
+    //     sizes: ['S', 'M', 'L'],
+    //     color: [{ value: '#ff0000' }, { value: '#0000ff' }],
+    //     images: [
+    //       'https://i.pinimg.com/1200x/46/72/0d/46720dacf89fe86096d7157cddbf7ff8.jpg',
+    //       'https://i.pinimg.com/736x/b9/98/8a/b9988a39dab7e7fb741b6e8febfb57f1.jpg',
+    //     ],
+    //     createdDate: new Date(),
+    //   },
+    //   {
+    //     itemId: 2,
+    //     itemName: 'Stylish Jacket',
+    //     brand: 'BrandY',
+    //     price: 1200,
+    //     oldprice: 1500,
+    //     discount: 20,
+    //     qty: 10,
+    //     category: 'Winter Wear',
+    //     classifiedId: 2,
+    //     detail:
+    //       'Warm and stylish jacket suitable for young girls. Perfect for winter season.',
+    //     sizes: ['M', 'L', 'XL'],
+    //     color: [
+    //       { value: '#00ff00' },
+    //       { value: '#ffff00' },
+    //       { value: '#0000ff' },
+    //     ],
+    //     images: [
+    //       'https://i.pinimg.com/1200x/09/1f/f3/091ff3982274db868af8175bcb12fd6a.jpg',
+    //       'https://i.pinimg.com/736x/92/bb/a3/92bba38a680b10ef7110e94841c85208.jpg',
+    //       'https://i.pinimg.com/1200x/4c/08/b6/4c08b6bb54e1bf7b7ce431ec82835e22.jpg',
+    //     ],
+    //     createdDate: new Date(),
+    //   },
+    //   {
+    //     itemId: 3,
+    //     itemName: 'Kids Sneakers',
+    //     brand: 'BrandZ',
+    //     price: 800,
+    //     oldprice: 1000,
+    //     discount: 20,
+    //     qty: 15,
+    //     category: 'Footwear',
+    //     classifiedId: 1,
+    //     detail:
+    //       'Comfortable sneakers for kids. Colorful design and durable material.',
+    //     sizes: ['S', 'M'],
+    //     color: [{ value: '#ff9900' }, { value: '#6600ff' }],
+    //     images: [
+    //       'https://i.pinimg.com/1200x/c4/13/55/c4135537d9c8125ffcaa728d01951da2.jpg',
+    //     ],
+    //     createdDate: new Date(),
+    //   },
+    // ];
 
-      this.filteredData = [...this.DataItem];
+    // this.filteredData = [...this.DataItem];
 
-this.searchControl.valueChanges.subscribe(value => {
-  const search = (value || '').toLowerCase();
+    this.searchControl.valueChanges.subscribe((value) => {
+      const search = (value || '').toLowerCase();
 
-  this.filteredData = this.DataItem.filter((p: any) =>
-    (p.itemName || '').toLowerCase().includes(search) ||
-    (p.category || '').toLowerCase().includes(search) ||
-    (p.brand || '').toLowerCase().includes(search)
-  );
-});
-
+      this.filteredData = this.DataItem.filter(
+        (p: any) =>
+          (p.itemName || '').toLowerCase().includes(search) ||
+          (p.category || '').toLowerCase().includes(search) ||
+          (p.brand || '').toLowerCase().includes(search)
+      );
+    });
 
     // 🔹 Dummy ke liye backend ko temporarily comment karo
-    // this.getAll();
 
     this.autoDiscountCalculation();
   }
@@ -133,9 +139,6 @@ this.searchControl.valueChanges.subscribe(value => {
   //   this.getAll();
   //   this.autoDiscountCalculation();
   // }
-
-
-  
 
   // FormArray getters
   get images(): FormArray {
@@ -276,29 +279,48 @@ autoDiscountCalculation() {
 }
 
 
-  // Add / Update Product
   addProduct() {
     const val = this.productForm.value;
+
     const payload = {
       itemId: this.SaveData ? this.SaveData.itemId : 0,
       itemName: val.name,
-      brand: val.brand,
       price: Number(val.price),
-      oldprice: Number(val.oldprice),
+      oldPrice: Number(val.oldprice),
       discount: Number(val.discount),
       qty: Number(val.quantity),
-      category: val.itemCategory,
+      img: '',
+      detail: val.description,
+      color: val.colors?.map((c: any) => c.value).join(','),
+
       classifiedId:
         val.productCategory === 'Kids'
           ? 1
           : val.productCategory === 'Young Girl'
           ? 2
           : 3,
-      detail: val.description,
-      images: val.images, // multiple images
-      sizes: val.sizes,
-      color: val.colors.length > 0 ? val.colors : [],
+
+      category: val.itemCategory,
+      brand: val.brand,
       createdDate: new Date(),
+
+      itemColors: val.colors?.map((x: any) => ({
+        id: x.id ?? 0,
+        itemId: 0,
+        colorCodes: x.value,
+      })),
+
+      itemSizes: val.sizes?.map((x: any) => ({
+        id: x.id ?? 0,
+        itemId: 0,
+        sizeNames: x,
+      })),
+
+      itemImages: val.images?.map((x: any) => ({
+        id: x.id ?? 0,
+        itemId: 0,
+        imgPaths: x,
+      })),
     };
 
     if (payload.itemId === 0) this.saveProduct(payload);
@@ -323,7 +345,6 @@ autoDiscountCalculation() {
   EditProduct(p: any) {
     this.Isbtn = true;
     this.SaveData = p;
-
     this.productForm.patchValue({
       name: p.itemName,
       brand: p.brand,
@@ -344,20 +365,24 @@ autoDiscountCalculation() {
 
     // Clear & set images
     this.images.clear();
-    if (p.images?.length > 0)
-      p.images.forEach((img: any) => this.images.push(this.fb.control(img)));
+    if (p.itemImages?.length > 0)
+      p.itemImages.forEach((img: any) =>
+        this.images.push(this.fb.control(img.imgPaths))
+      );
 
     // Clear & set colors
     this.colors.clear();
-    if (p.color?.length > 0)
-      p.color.forEach((c: any) =>
-        this.colors.push(this.fb.group({ value: c.value }))
+    if (p.itemColors?.length > 0)
+      p.itemColors.forEach((c: any) =>
+        this.colors.push(this.fb.group({ value: c.colorCodes }))
       );
 
     // Clear & set sizes
     this.sizes.clear();
-    if (p.sizes?.length > 0)
-      p.sizes.forEach((s: any) => this.sizes.push(this.fb.control(s)));
+    if (p.itemSizes?.length > 0)
+      p.itemSizes.forEach((s: any) =>
+        this.sizes.push(this.fb.control(s.sizeNames))
+      );
   }
 
   ResetForm() {
@@ -387,7 +412,10 @@ autoDiscountCalculation() {
 
   getAll() {
     this.api.getItemsAll().subscribe((res: any) => {
-      if (res.isSuccess) this.DataItem = res?.data;
+      if (res.isSuccess) {
+        this.DataItem = res?.data;
+        console.log('dataTime', this.DataItem);
+      }
     });
   }
   DeleteProduct(p: any) {

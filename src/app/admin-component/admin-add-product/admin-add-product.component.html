@@ -153,10 +153,10 @@
   <!-- PRODUCT TABLE -->
   <div class="search-box">
     <input
-  type="search"
-  [formControl]="searchControl"
-  placeholder="Search product..."
-/>
+      type="search"
+      [formControl]="searchControl"
+      placeholder="Search product..."
+    />
     <table>
       <thead>
         <tr>
@@ -175,13 +175,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of filteredData">
+        <tr *ngFor="let p of DataItem">
           <td>{{ p.itemName }}</td>
           <td>{{ p.brand }}</td>
           <td class="desc-col" style="text-align: left">{{ p.detail }}</td>
           <td>{{ p.price }}</td>
           <td>{{ p.discount > 0 ? "-" + p.discount + "%" : "No Discount" }}</td>
-          <td>{{ p.oldprice }}</td>
+          <td>{{ p.oldPrice }}</td>
           <td>{{ p.qty }}</td>
           <!-- <td>
   <p *ngIf="+productForm.get('quantity')?.value <= 5 && +productForm.get('quantity')?.value > 0" class="low-stock">
@@ -193,38 +193,37 @@
 </td> -->
 
           <td>{{ p.category }}</td>
-          <td>{{ p.sizes?.join(", ") }}</td>
+          <!-- <td>{{ "xl" }}</td> -->
+          <td>
+            <div *ngFor="let c of p?.itemSizes">
+              {{ c.sizeNames }}
+            </div>
+          </td>
           <td class="color-display">
             <div
-          *ngFor="let c of p.color"
-          class="color-dot-table"
-          [style.background]="c.value"
-        ></div>
+              *ngFor="let c of p?.itemColors"
+              class="color-dot-table"
+              [style.background]="c.colorCodes"
+            ></div>
           </td>
-          <td class="image-cell">
-  <div class="product-img-wrapper">
-    <img *ngFor="let img of p.images" [src]="img" class="product-img" />
-  </div>
-</td>
-
           <td>
-  <div class="btn-group">
-    <button class="small-btn edit" (click)="EditProduct(p)">Edit</button>
-
-    <button class="small-btn delete" (click)="DeleteProduct(p)">
-      Delete
-    </button>
-
-    <button
-      class="status-btn"
-      [ngClass]="p.status ? 'active' : 'inactive'"
-      (click)="toggleStatus(p)"
-    >
-      {{ p.status ? "Active" : "Inactive" }}
-    </button>
-  </div>
-</td>
-
+            <div *ngFor="let img of p.images">
+          <img [src]="img" class="product-img" />
+        </div>
+          </td>
+          <td >
+            <button class="small-btn" (click)="EditProduct(p)">Edit</button>
+            <button class="small-btn cancel" (click)="DeleteProduct(p)">
+              Delete
+            </button>
+            <button
+              class="status-btn"
+              [ngClass]="p.status ? 'active' : 'inactive'"
+              (click)="toggleStatus(p)"
+            >
+              {{ p.status ? "Active" : "Inactive" }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

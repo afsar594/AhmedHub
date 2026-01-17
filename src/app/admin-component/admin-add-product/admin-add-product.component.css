@@ -1,6 +1,6 @@
 /* ===== Container ===== */
 .product-management-container {
-  max-width: 950px;
+  max-width: 1150px;
   margin: 40px auto;
   padding: 30px;
   background: #fff;
@@ -290,7 +290,7 @@ table {
 }
 
 .desc-col {
-  width: 13%;
+  width: 15%;
   text-align: left;
   white-space: normal;
   line-height: 1.5;
@@ -316,12 +316,37 @@ th {
 
 }
 
+.image-cell {
+  width: 160px;  
+  max-width: 160px;
+}
+
+.product-img-wrapper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;  
+  align-items: center;
+  overflow-x: hidden; 
+}
+
 .product-img {
-  width: 55px;
-  height: 55px;
+  width: 55px;      
+  height: 55px;    
   object-fit: cover;
   border-radius: 6px;
+  border: 2px solid #e5e7eb;
+  padding: 2px;
+  background: #fff;
+  transition: all 0.25s ease;
+  flex: 0 0 auto;  
 }
+
+.product-img:hover {
+  border-color: #2563eb;
+  transform: scale(1.05);  
+}
+
+
 
 /* Color display inside table */
 .color-dot-table {
@@ -376,9 +401,13 @@ td img {
 /* Focus state */
 .search-box input[type="search"]:focus {
   border-color: #ff6600;
-  /* box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12); */
 }
 
+.btn-group {
+  display: flex;
+  gap: 10px;             
+  align-items: center;
+}
 
 td .small-btn {
   padding: 4px 8px;
@@ -408,19 +437,27 @@ td .small-btn {
 }
 
 .status-btn.active {
-  background-color: #28a745;
-  /* Green for Active */
+  background: #198754;
+  color: #fff;
 }
 
 .status-btn.inactive {
-  background-color: #dc3545;
-  /* Red for Inactive */
+  background: #6c757d;
+  color: #fff;
 }
 
 .status-btn:hover {
   opacity: 0.8;
 }
 
+/* delete */
+.small-btn.delete {
+  background: #dc3545;
+  color: #fff;
+}
+.small-btn.delete:hover {
+  background: #bb2d3b;
+}
 
 td .small-btn.cancel {
   background-color: red;
@@ -430,9 +467,9 @@ td .small-btn.cancel:hover {
   background-color: rgb(175, 15, 15);
 }
 
-td .small-btn:hover {
+/* td .small-btn:hover {
   background-color: #0056b3;
-}
+} */
 
 /* Make button container align properly */
 td>div {

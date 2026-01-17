@@ -29,7 +29,7 @@ export class AdminAddProductComponent implements OnInit {
       brand: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(1)]],
       oldprice: ['', [Validators.min(0)]],
-      discount: ['', [Validators.required, Validators.min(0)]],
+discount: [0, Validators.min(0)],
       quantity: ['', [Validators.required, Validators.min(0)]],
       itemCategory: ['', Validators.required],
       productCategory: ['Young Boy', Validators.required],
@@ -255,22 +255,29 @@ this.searchControl.valueChanges.subscribe(value => {
   }
 
   // Auto Discount Calculation
-  autoDiscountCalculation() {
-    this.productForm.valueChanges.subscribe((val) => {
-      const price = Number(val.price);
-      const oldprice = Number(val.oldprice);
-      if (oldprice > 0 && price > 0 && oldprice > price) {
-        const discount = Math.round(((oldprice - price) / oldprice) * 100);
-        this.productForm.patchValue({ discount }, { emitEvent: false });
-      } else {
-        this.productForm.patchValue({ discount: 0 }, { emitEvent: false });
-      }
-    });
-  }
+autoDiscountCalculation() {
+  this.productForm.valueChanges.subscribe((val) => {
+
+    const price = Number(val.price);
+    const oldprice = Number(val.oldprice);
+
+    if (isNaN(price) || isNaN(oldprice)) {
+      this.productForm.patchValue({ discount: 0 }, { emitEvent: false });
+      return;
+    }
+
+    if (oldprice > 0 && price > 0 && oldprice > price) {
+      const discount = Math.round(((oldprice - price) / oldprice) * 100);
+      this.productForm.patchValue({ discount }, { emitEvent: false });
+    } else {
+      this.productForm.patchValue({ discount: 0 }, { emitEvent: false });
+    }
+  });
+}
+
 
   // Add / Update Product
   addProduct() {
-    debugger;
     const val = this.productForm.value;
     const payload = {
       itemId: this.SaveData ? this.SaveData.itemId : 0,
@@ -332,6 +339,7 @@ this.searchControl.valueChanges.subscribe(value => {
           ? 'Young Girl'
           : 'Young Boy',
       description: p.detail,
+      video:p.video || ''
     });
 
     // Clear & set images
@@ -355,16 +363,26 @@ this.searchControl.valueChanges.subscribe(value => {
   ResetForm() {
     this.Isbtn = false;
     this.SaveData = null;
+
     this.sizes.clear();
     this.colors.clear();
     this.images.clear();
+
     this.productForm.reset({
+      name:'',
+      brand:'',
       productCategory: 'Young Boy',
-      price: 1,
-      oldprice: 0,
-      discount: 0,
-      quantity: 0,
+      price: '',
+      oldprice: '',
+      discount: '',
+      quantity: '',
+      itemCategory:'',
+      description:'',
+      video:'',
+      currentColor:'',
+      status: true
     });
+    this.filteredData = [... this.DataItem];
   }
 
   getAll() {

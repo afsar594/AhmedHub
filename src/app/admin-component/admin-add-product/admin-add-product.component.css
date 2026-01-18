@@ -317,15 +317,16 @@ th {
 
 .product-img-wrapper {
   display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
+  gap: 5px;
+  flex-wrap: wrap;
   align-items: center;
   overflow-x: hidden;
+  max-width: 250px;
 }
 
 .product-img {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   object-fit: cover;
   border-radius: 6px;
   border: 2px solid #e5e7eb;
@@ -356,6 +357,7 @@ th {
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
+  max-width: 80px;
 }
 
 /* Images inside table */
@@ -464,10 +466,10 @@ td .small-btn.cancel:hover {
 
 /* Make button container align properly */
 td > div {
-  display: flex;
+  display: inline;
   gap: 4px;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
 }
 

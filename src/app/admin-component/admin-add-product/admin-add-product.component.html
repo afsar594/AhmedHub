@@ -62,6 +62,39 @@
           />
           XL</label
         >
+        =======
+        <label
+          ><input
+            type="checkbox"
+            [checked]="sizes.value.includes('S')"
+            (change)="toggleSize('S', $event)"
+          />
+          S</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [checked]="sizes.value.includes('M')"
+            (change)="toggleSize('M', $event)"
+          />
+          M</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [checked]="sizes.value.includes('L')"
+            (change)="toggleSize('L', $event)"
+          />
+          L</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [checked]="sizes.value.includes('XL')"
+            (change)="toggleSize('XL', $event)"
+          />
+          XL</label
+        >
       </div>
     </div>
 
@@ -200,19 +233,9 @@
           <td class="desc-col" style="text-align: left">{{ p.detail }}</td>
           <td>{{ p.price }}</td>
           <td>{{ p.discount > 0 ? "-" + p.discount + "%" : "No Discount" }}</td>
-          <td>{{ p.oldPrice }}</td>
+          <td>{{ p.oldprice }}</td>
           <td>{{ p.qty }}</td>
-          <!-- <td>
-  <p *ngIf="+productForm.get('quantity')?.value <= 5 && +productForm.get('quantity')?.value > 0" class="low-stock">
-  Only {{ productForm.get('quantity')?.value }} left!
-</p>
-<p *ngIf="+productForm.get('quantity')?.value === 0" class="out-stock">
-  Out of Stock
-</p>
-</td> -->
-
           <td>{{ p.category }}</td>
-          <!-- <td>{{ "xl" }}</td> -->
           <td>
             <div *ngFor="let c of p?.itemSizes">
               {{ c.sizeNames }}

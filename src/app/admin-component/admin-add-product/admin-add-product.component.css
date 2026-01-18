@@ -6,9 +6,8 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 h2 {
   text-align: center;
@@ -265,9 +264,8 @@ h2 {
 }
 
 .small-btn.cancel:hover {
-  background-color: #5a6268;
+  background-color: #ee0707;
 }
-
 
 /* ===== Product Table Container ===== */
 .product-table-container {
@@ -278,7 +276,6 @@ h2 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   background: #fff;
 }
-
 
 /* Table layout */
 table {
@@ -296,8 +293,6 @@ table {
   line-height: 1.5;
 }
 
-
-
 th,
 td {
   border: 1px solid #eee;
@@ -313,40 +308,37 @@ th {
   color: #fff;
   font-weight: 600;
   white-space: nowrap;
-
 }
 
 .image-cell {
-  width: 160px;  
+  width: 160px;
   max-width: 160px;
 }
 
 .product-img-wrapper {
   display: flex;
   gap: 8px;
-  flex-wrap: nowrap;  
+  flex-wrap: nowrap;
   align-items: center;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 .product-img {
-  width: 55px;      
-  height: 55px;    
+  width: 55px;
+  height: 55px;
   object-fit: cover;
   border-radius: 6px;
   border: 2px solid #e5e7eb;
   padding: 2px;
   background: #fff;
   transition: all 0.25s ease;
-  flex: 0 0 auto;  
+  flex: 0 0 auto;
 }
 
 .product-img:hover {
   border-color: #2563eb;
-  transform: scale(1.05);  
+  transform: scale(1.05);
 }
-
-
 
 /* Color display inside table */
 .color-dot-table {
@@ -405,7 +397,7 @@ td img {
 
 .btn-group {
   display: flex;
-  gap: 10px;             
+  gap: 10px;
   align-items: center;
 }
 
@@ -420,7 +412,6 @@ td .small-btn {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 
 .status-btn {
   padding: 4px 8px;
@@ -472,11 +463,11 @@ td .small-btn.cancel:hover {
 } */
 
 /* Make button container align properly */
-td>div {
+td > div {
   display: flex;
   gap: 4px;
   justify-content: center;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -490,7 +481,6 @@ td>div {
   }
 }
 
-
 /* ===== Responsive ===== */
 @media screen and (max-width: 992px) {
   table {
@@ -499,7 +489,6 @@ td>div {
 }
 
 @media screen and (max-width: 768px) {
-
   th,
   td {
     padding: 8px;
@@ -529,10 +518,8 @@ td>div {
   }
 }
 
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-
   .form-container input,
   textarea {
     flex: 1 1 100%;
@@ -545,7 +532,6 @@ td>div {
   .btn-container {
     flex-direction: column;
   }
-
 
   .color-chip {
     width: 100px;

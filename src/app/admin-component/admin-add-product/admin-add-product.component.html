@@ -4,45 +4,26 @@
   <form [formGroup]="productForm" class="form-container">
     <!-- PRODUCT CATEGORY -->
     <div class="radio-group">
-      <label
-        ><input
-          type="radio"
-          value="Young Boy"
-          formControlName="productCategory"
-        />
-        Young Boy</label
-      >
-      <label
-        ><input
-          type="radio"
-          value="Young Girl"
-          formControlName="productCategory"
-        />
-        Young Girl</label
-      >
-      <label
-        ><input type="radio" value="Kids" formControlName="productCategory" />
-        Kids</label
-      >
+      <label><input type="radio" value="Young Boy" formControlName="productCategory" />
+        Young Boy</label>
+      <label><input type="radio" value="Young Girl" formControlName="productCategory" />
+        Young Girl</label>
+      <label><input type="radio" value="Kids" formControlName="productCategory" />
+        Kids</label>
     </div>
 
     <!-- SIZES -->
     <div class="size-box">
       <span class="size-title">Sizes:</span>
       <div class="size-option">
-        <label
-          ><input type="checkbox"  [checked]="sizes.value.includes('S')" (change)="toggleSize('S', $event)" /> S</label
-        >
-        <label
-          ><input type="checkbox"  [checked]="sizes.value.includes('M')" (change)="toggleSize('M', $event)" /> M</label
-        >
-        <label
-          ><input type="checkbox"  [checked]="sizes.value.includes('L')" (change)="toggleSize('L', $event)" /> L</label
-        >
-        <label
-          ><input type="checkbox"  [checked]="sizes.value.includes('XL')" (change)="toggleSize('XL', $event)" />
-          XL</label
-        >
+        <label><input type="checkbox" [checked]="sizes.value.includes('S')" (change)="toggleSize('S', $event)" />
+          S</label>
+        <label><input type="checkbox" [checked]="sizes.value.includes('M')" (change)="toggleSize('M', $event)" />
+          M</label>
+        <label><input type="checkbox" [checked]="sizes.value.includes('L')" (change)="toggleSize('L', $event)" />
+          L</label>
+        <label><input type="checkbox" [checked]="sizes.value.includes('XL')" (change)="toggleSize('XL', $event)" />
+          XL</label>
       </div>
     </div>
 
@@ -50,48 +31,22 @@
     <input formControlName="name" placeholder="Product Name" />
     <input formControlName="brand" placeholder="Brand Name" />
     <input type="number" min="1" formControlName="price" placeholder="Price" />
-    <input
-      type="number"
-      min="0"
-      formControlName="oldprice"
-      placeholder="Old Price"
-    />
+    <input type="number" min="0" formControlName="oldprice" placeholder="Old Price" />
     <input type="number" formControlName="discount" placeholder="Discount %" />
-    <input
-      type="number"
-      min="0"
-      formControlName="quantity"
-      placeholder="Quantity"
-    />
+    <input type="number" min="0" formControlName="quantity" placeholder="Quantity" />
     <input formControlName="itemCategory" placeholder="Category" />
-    <textarea
-      formControlName="description"
-      class="desc-box"
-      placeholder="Product Description"
-    ></textarea>
+    <textarea formControlName="description" class="desc-box" placeholder="Product Description"></textarea>
 
     <!-- IMAGE DRAG & DROP -->
-    <div
-      class="image-dropzone"
-      (drop)="onDrop($event)"
-      (dragover)="onDragOver($event)"
-    >
+    <div class="image-dropzone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
       <p>Drag & drop images here or click to select</p>
       <small>(Images + 1 vedio allowed)</small>
-      <input
-        type="file"
-        accept="image/* , video/*"
-        (change)="onFileSelect($event)"
-        multiple
-      />
+      <input type="file" accept="image/* , video/*" (change)="onFileSelect($event)" multiple />
     </div>
 
     <!-- IMAGE PREVIEW -->
     <div class="image-preview-container">
-      <div
-        *ngFor="let img of images.controls; let i = index"
-        class="preview-box"
-      >
+      <div *ngFor="let img of images.controls; let i = index" class="preview-box">
         <img [src]="img.value" />
         <button type="button" (click)="removeImage(i)">✕</button>
       </div>
@@ -122,29 +77,13 @@
 
     <!-- FORM ACTIONS -->
     <div class="btn-container">
-      <button
-        type="button"
-        class="small-btn"
-        [disabled]="productForm.invalid"
-        (click)="addProduct()"
-        *ngIf="!Isbtn"
-      >
+      <button type="button" class="small-btn" [disabled]="productForm.invalid" (click)="addProduct()" *ngIf="!Isbtn">
         Add Product
       </button>
-      <button
-        type="button"
-        class="small-btn"
-        (click)="addProduct()"
-        *ngIf="Isbtn"
-      >
+      <button type="button" class="small-btn" (click)="addProduct()" *ngIf="Isbtn">
         Update Product
       </button>
-      <button
-        type="button"
-        class="small-btn cancel"
-        (click)="ResetForm()"
-        *ngIf="Isbtn"
-      >
+      <button type="button" class="small-btn cancel" (click)="ResetForm()" *ngIf="Isbtn">
         Cancel
       </button>
     </div>
@@ -152,11 +91,7 @@
 
   <!-- PRODUCT TABLE -->
   <div class="search-box">
-    <input
-      type="search"
-      [formControl]="searchControl"
-      placeholder="Search product..."
-    />
+    <input type="search" [formControl]="searchControl" placeholder="Search product..." />
     <table>
       <thead>
         <tr>
@@ -181,48 +116,32 @@
           <td class="desc-col" style="text-align: left">{{ p.detail }}</td>
           <td>{{ p.price }}</td>
           <td>{{ p.discount > 0 ? "-" + p.discount + "%" : "No Discount" }}</td>
-          <td>{{ p.oldPrice }}</td>
+          <td>{{ p.oldprice }}</td>
           <td>{{ p.qty }}</td>
-          <!-- <td>
-  <p *ngIf="+productForm.get('quantity')?.value <= 5 && +productForm.get('quantity')?.value > 0" class="low-stock">
-  Only {{ productForm.get('quantity')?.value }} left!
-</p>
-<p *ngIf="+productForm.get('quantity')?.value === 0" class="out-stock">
-  Out of Stock
-</p>
-</td> -->
-
           <td>{{ p.category }}</td>
-          <!-- <td>{{ "xl" }}</td> -->
           <td>
             <div *ngFor="let c of p?.itemSizes">
               {{ c.sizeNames }}
             </div>
           </td>
           <td class="color-display">
-            <div
-              *ngFor="let c of p?.itemColors"
-              class="color-dot-table"
-              [style.background]="c.colorCodes"
-            ></div>
+            <div *ngFor="let c of p?.itemColors" class="color-dot-table" [style.background]="c.colorCodes"></div>
           </td>
           <td>
             <div *ngFor="let img of p.images">
-          <img [src]="img" class="product-img" />
-        </div>
+              <img [src]="img" class="product-img" />
+            </div>
           </td>
-          <td >
-            <button class="small-btn" (click)="EditProduct(p)">Edit</button>
-            <button class="small-btn cancel" (click)="DeleteProduct(p)">
-              Delete
-            </button>
-            <button
-              class="status-btn"
-              [ngClass]="p.status ? 'active' : 'inactive'"
-              (click)="toggleStatus(p)"
-            >
-              {{ p.status ? "Active" : "Inactive" }}
-            </button>
+          <td>
+            <div class="btn-group">
+              <button class="small-btn" (click)="EditProduct(p)">Edit</button>
+              <button class="small-btn cancel" (click)="DeleteProduct(p)">
+                Delete
+              </button>
+              <button class="status-btn" [ngClass]="p.status ? 'active' : 'inactive'" (click)="toggleStatus(p)">
+                {{ p.status ? "Active" : "Inactive" }}
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

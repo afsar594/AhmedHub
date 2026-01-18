@@ -1,31 +1,57 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule , RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginForm!: FormGroup; 
+  loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private router: Router,
+  ) {
+    // Validators.email
+    // , Validators.minLength(5), Validators.maxLength(8)
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]]
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Form Values:', this.loginForm.value);
-      alert('Login successful!');
+
+      let payload = {
+        Id: 0,
+        Username: this.loginForm.get('email')?.value,
+        Email: '',
+        Pwd: this.loginForm.get('password')?.value,
+        Role: '',
+      };
+      this.api.login(payload).subscribe((res: any) => {
+        if (res.isSuccess) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert(res.message);
+        }
+      });
     } else {
-      this.loginForm.markAllAsTouched(); 
+      this.loginForm.markAllAsTouched();
     }
   }
 }

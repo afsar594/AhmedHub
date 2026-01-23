@@ -45,7 +45,8 @@ export class LoginComponent {
       };
       this.api.login(payload).subscribe((res: any) => {
         if (res.isSuccess) {
-          this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/dashboard']);
+          this.router.navigate(['cart-page']);
         } else {
           alert(res.message);
         }

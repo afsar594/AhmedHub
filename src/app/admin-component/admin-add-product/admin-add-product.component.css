@@ -357,7 +357,7 @@ th {
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
-  max-width: 80px;
+  max-width: 100px;
 }
 
 /* Images inside table */
@@ -399,7 +399,7 @@ td img {
 
 .btn-group {
   display: flex;
-  gap: 10px;
+  gap: 10px;             
   align-items: center;
 }
 
@@ -407,7 +407,7 @@ td .small-btn {
   padding: 4px 8px;
   font-size: 11px;
   min-width: 50px;
-  height: 28px;
+  height: 28px; 
   line-height: 1;
   border-radius: 4px;
   overflow: hidden;

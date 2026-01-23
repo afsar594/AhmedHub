@@ -7,17 +7,23 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm!: FormGroup;
   submitted = false;
   showPassword = false; // ✅ track show/hide password
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    // private api: ApiService,
+    // private router: Router,
+  ) {
+    // Validators.email
+    // , Validators.minLength(5), Validators.maxLength(8)
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]]
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 

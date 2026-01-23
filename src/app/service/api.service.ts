@@ -429,4 +429,12 @@ export class ApiService {
   DeleteItems(id: number) {
     return this.http.delete(`${this.baseUrl}Item/${id}`);
   }
+  // for user creadential
+
+  login(user: any) {
+    return this.http.post(`${this.baseUrl}User/login`, user);
+  }
+  register(user: any) {
+    return this.http.post(`${this.baseUrl}User/signup`, user);
+  }
 }

@@ -1,6 +1,7 @@
 
 <!-- <h2 class="dashboard"  (click)="navigatetoadminproduct()">Admin Product Management</h2>  -->
 
+<h2 class="title">Admin Dashboard</h2>
 
 <div class="admin-action" (click)="navigatetoadminproduct()">
   <div class="text">
@@ -9,10 +10,6 @@
   </div>
   <span class="arrow">→</span>
 </div>
-
-<h2 class="title">Admin Dashboard</h2>
-
-
 
 <!-- Widgets -->
 <div class="dashboard-grid">
@@ -46,6 +43,7 @@
 </div>
 
 <!-- Bar Chart -->
+ <div class="charts-row">
 <div class="chart-section">
   <h3>Product-wise Sales</h3>
   <app-widget-chart 
@@ -63,6 +61,7 @@
     [data]="weeklySales"
     chartType="line">
   </app-widget-chart>
+</div>
 </div>
 
 <!-- Table -->

@@ -365,7 +365,7 @@ th {
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
-  max-width: 80px;
+  max-width: 100px;
 }
 
 /* Images inside table */
@@ -405,17 +405,18 @@ td img {
   border-color: #ff6600;
 }
 
-.btn-group {
-  display: flex;
-  gap: 10px;             
-  align-items: center;
+
+
+td.action-cell {
+  width: 90px;      /* ✅ sirf jitni zarurat */
+  padding: 6px;
 }
 
 td .small-btn {
   padding: 4px 8px;
   font-size: 11px;
   min-width: 50px;
-  height: 28px;
+  height: 28px; 
   line-height: 1;
   border-radius: 4px;
   overflow: hidden;
@@ -556,3 +557,29 @@ td>div {
     font-size: 12px;
   }
 }
+
+/* ================= PROFESSIONAL SCROLLBAR ================= */
+
+.product-table-container {
+  scrollbar-width: thin;                
+  scrollbar-color: #cbd5e1 transparent;  
+}
+
+.product-table-container::-webkit-scrollbar {
+  height: 6px;            
+}
+
+.product-table-container::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.product-table-container::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;   
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.product-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;   
+}
+

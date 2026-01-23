@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule , RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm!: FormGroup; 
+  loginForm!: FormGroup;
+  submitted = false;
+  showPassword = false; // ✅ track show/hide password
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
@@ -21,11 +22,18 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.submitted = true;
     if (this.loginForm.valid) {
       console.log('Form Values:', this.loginForm.value);
       alert('Login successful!');
-    } else {
-      this.loginForm.markAllAsTouched(); 
     }
+  }
+
+  hasError(controlName: string, errorName: string) {
+    return this.submitted && this.loginForm.get(controlName)?.hasError(errorName);
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

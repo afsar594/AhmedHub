@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===== GLOBAL SCROLL & LAYOUT FIX ===== */
+
+/* 1️⃣ Box sizing for all elements */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2️⃣ Body & html overflow control */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;  
+}
+
+/* 4️⃣ Main table / content container fix */
+.product-table-container {
+  max-height: calc(100vh - 150px); 
+  overflow-x: auto;                
+  overflow-y: hidden;              
+}
+
+/* 5️⃣ Optional: beautiful scrollbar for table */
+/* .product-table-container::-webkit-scrollbar {
+  height: 6px;                 
+}
+
+.product-table-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-table-container::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.product-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+} */
+
+/* Firefox */
+/* .product-table-container {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+} */

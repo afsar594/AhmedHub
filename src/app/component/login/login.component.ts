@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +41,9 @@ export class LoginComponent {
   }
 
   hasError(controlName: string, errorName: string) {
-    return this.submitted && this.loginForm.get(controlName)?.hasError(errorName);
+    return (
+      this.submitted && this.loginForm.get(controlName)?.hasError(errorName)
+    );
   }
 
   togglePassword() {

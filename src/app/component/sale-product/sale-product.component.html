@@ -1,48 +1,32 @@
+<!-- <app-shop-slider></app-shop-slider>
+<section class="product-sale" *ngIf="groupedProducts?.length">
+  <ng-container *ngFor="let group of groupedProducts">
+    <h2>{{ group.caption.title }}</h2>
+    <p class="on-sale">{{ group.caption.desc }}</p>
 
-<!-- 
-<app-shop-slider></app-shop-slider> -->
-
-<!-- <section class="product-sale" *ngIf="product?.length">
-  
-  <ng-container *ngIf="product[0].classifiedId === 3">
-    <h2>Young Boy’s Collection</h2>
-    <p class="on-sale">Essential fashion items for 18+ men:</p>
-  </ng-container>
-
- 
-  <ng-container *ngIf="product[0].classifiedId === 2">
-    <h2>Young Girl’s Collection</h2>
-    <p class="on-sale">Trendy and stylish items for 18+ women:</p>
-  </ng-container>
-
-  
-  <ng-container *ngIf="product[0].classifiedId === 1">
-    <h2>Kids Collection (4–12 years old, 15+ items)</h2>
-    <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
-  </ng-container>
-
- 
-  <div class="product">
-    <div
-      class="product-card"
-      *ngFor="let item of product"
-      (click)="navigateToDetail(item)"
-    >
-      <img
-        [src]="item.itemImages?.[0]?.imgPaths || 'assets/no-image.png'"
-        [alt]="item.itemName"
-      />
-
-      <h3>{{ item.itemName }}</h3>
-
-      <div class="price-row">
-        <p class="price">$ {{ item.price }}</p>
-        <p class="oldPrice" *ngIf="item.oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount"> {{ item.discount ?? 50 }}% </span>
+    <div class="product-row">
+      <div
+        class="product-card"
+        *ngFor="let item of group.products"
+        (click)="navigateToDetail(item)"
+      >
+        <img
+          [src]="item.itemImages?.[0]?.imgPaths || 'assets/no-image.png'"
+          [alt]="item.itemName"
+        />
+        <h3>{{ item.itemName }}</h3>
+        <div class="price-row">
+          <p class="price">$ {{ item.price }}</p>
+          <p class="oldPrice" *ngIf="item.oldPrice">$ {{ item.oldPrice }}</p>
+          <span class="discount">{{ item.discount ?? 0 }}%</span>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </section> -->
+
+
+
 
 <!-- <section class="product-sale">
   <h2>Young Girl’s Collection</h2>

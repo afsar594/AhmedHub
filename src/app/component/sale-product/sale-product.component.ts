@@ -12,6 +12,11 @@ import { ShopSliderComponent } from '../shop-slider/shop-slider.component';
   styleUrls: ['./sale-product.component.css'],
 })
 export class SaleProductComponent implements OnInit {
+
+Bosyproducts: any[] = [];
+girlproduct: any[] = [];
+kidproducts: any[] = [];
+
   product: any[] = [];
   groupedProducts: any[] = [];
   selectedClassifiedId: number | null = null;
@@ -44,9 +49,16 @@ export class SaleProductComponent implements OnInit {
       if (res.isSuccess) {
         this.product = res.data;
         this.groupProductsByCategory();
+        this.assignCategoryArrays();
       }
     });
   }
+
+assignCategoryArrays() {
+  this.Bosyproducts = this.product.filter(p => p.classifiedId === 3);
+  this.girlproduct = this.product.filter(p => p.classifiedId === 2);
+  this.kidproducts = this.product.filter(p => p.classifiedId === 1);
+}
 
   getAllProductClassifiedId(id: number) {
     this.selectedClassifiedId = id;

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -31,33 +36,14 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       console.log('Form Values:', this.loginForm.value);
-<<<<<<< HEAD
-
-      let payload = {
-        Id: 0,
-        Username: this.loginForm.get('email')?.value,
-        Email: '',
-        Pwd: this.loginForm.get('password')?.value,
-        Role: '',
-      };
-      this.api.login(payload).subscribe((res: any) => {
-        if (res.isSuccess) {
-          // this.router.navigate(['/dashboard']);
-          this.router.navigate(['cart-page']);
-        } else {
-          alert(res.message);
-        }
-      });
-    } else {
-      this.loginForm.markAllAsTouched();
-=======
       alert('Login successful!');
->>>>>>> 1141c4925f3f6dd9d81b9922363baf4b31d57d9d
     }
   }
 
   hasError(controlName: string, errorName: string) {
-    return this.submitted && this.loginForm.get(controlName)?.hasError(errorName);
+    return (
+      this.submitted && this.loginForm.get(controlName)?.hasError(errorName)
+    );
   }
 
   togglePassword() {

@@ -1,33 +1,41 @@
 /* ================================
-   Base Styles
+   Base Styles (Enhanced)
 ================================ */
 .product-sale {
-  padding: 20px;
-  background: #fff;
+  padding: 50px 6%;
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+}
+
+.product-sale:not(:last-child) {
+  border-bottom: 1px solid #eee;
 }
 
 h2 {
-  font-size: 26px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
 }
 
 .on-sale {
   color: #ff6600;
-  margin-bottom: 20px;
-  font-weight: bold;
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 /* ================================
-   Product Grid
+   Product Grid (Same but cleaner)
 ================================ */
 .product {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
+  gap: 22px;
 }
 
 /* ================================
-   Product Card
+   Product Card (UNCHANGED CORE)
 ================================ */
 .product-card {
   background: #fff;
@@ -36,27 +44,31 @@ h2 {
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
 .product-card img {
   width: 100%;
   height: 180px;
   object-fit: contain;
+  background: #f7f7f7;
+  border-radius: 6px;
 }
 
 .product-card h3 {
-  font-size: 18px;
-  margin: 10px 0;
-  font-weight: 600;
+  font-size: 17px;
+  margin: 12px 0 10px;
+  font-weight: 700;
+  color: #222;
 }
 
 /* ================================
-   Price Section
+   Price Section (Refined)
 ================================ */
 .price-row {
   display: flex;
@@ -65,25 +77,31 @@ h2 {
 }
 
 .price {
-  font-size: 21px;
+  font-size: 20px;
   color: #ff6600;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 .oldPrice {
   color: #999;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: line-through;
 }
 
 .discount {
-  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff6600;
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 13px;
   font-weight: bold;
-  color: #333;
+  border-radius: 20px;
 }
 
 /* ================================
-   Responsive Design
+   Responsive Design (Improved)
 ================================ */
 
 /* Large screens */
@@ -100,11 +118,11 @@ h2 {
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .product-card img {
-    height: 160px;
+    height: 165px;
   }
 }
 
@@ -115,7 +133,7 @@ h2 {
   }
 
   .product-sale {
-    padding: 15px;
+    padding: 40px 5%;
   }
 
   .product-card img {
@@ -123,7 +141,7 @@ h2 {
   }
 
   .price {
-    font-size: 19px;
+    font-size: 18px;
   }
 }
 
@@ -134,7 +152,7 @@ h2 {
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .on-sale {
@@ -146,11 +164,11 @@ h2 {
   }
 
   .price {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .oldPrice,
   .discount {
-    font-size: 14px;
+    font-size: 13px;
   }
 }

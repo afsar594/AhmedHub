@@ -44,7 +44,10 @@ export class DetailCardComponent implements OnInit {
   sizes = ['S', 'M', 'L', 'XL'];
   selectedsize = '';
 
-  constructor(private router: Router, public route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    public route: ActivatedRoute,
+  ) {}
   ngOnInit() {
     this.record = history.state.data;
     console.log('Received Data:', this.record);
@@ -53,7 +56,9 @@ export class DetailCardComponent implements OnInit {
   navigateToForm() {
     this.router.navigate(['form-page']);
   }
-  navigateTocart() {
-    this.router.navigate(['cart-page']);
+  navigateTocart(data: any) {
+    this.router.navigate(['cart-page'], { state: { data: data } });
+
+    // this.router.navigate(['/login']);
   }
 }

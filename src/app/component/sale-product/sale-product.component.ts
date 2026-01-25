@@ -1,45 +1,101 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ShopSliderComponent } from '../shop-slider/shop-slider.component';
-import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-sale-product',
+  standalone: true,
   imports: [CommonModule, ShopSliderComponent],
   templateUrl: './sale-product.component.html',
-  styleUrl: './sale-product.component.css',
+  styleUrls: ['./sale-product.component.css'],
 })
 export class SaleProductComponent implements OnInit {
-  Bosyproducts: any;
-  girlproduct: any;
-  kidproducts: any;
+  product: any[] = [];
+  groupedProducts: any[] = [];
+  selectedClassifiedId: number | null = null;
   Id: any;
-  product: any;
+
   constructor(
     private api: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
+
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      console.log(params['id']);
       this.Id = params['id'];
+      if (this.Id > 0) {
+        this.getAllProductClassifiedId(Number(this.Id));
+      } else {
+        this.getAllProduct();
+      }
     });
-
-    // this.Bosyproducts = this.api.products;
-    // this.girlproduct = this.api.girlproduct;
-    // this.kidproducts = this.api.kidproducts;
-    this.getAllProduct(Number(this.Id));
   }
+
   navigateToDetail(data: any) {
     this.router.navigate(['detail-page'], { state: { data: data } });
   }
-  getAllProduct(id: number) {
+
+  getAllProduct() {
+    this.selectedClassifiedId = null;
+    this.api.getItemsAll().subscribe((res: any) => {
+      if (res.isSuccess) {
+        this.product = res.data;
+        this.groupProductsByCategory();
+      }
+    });
+  }
+
+  getAllProductClassifiedId(id: number) {
+    this.selectedClassifiedId = id;
     this.api.getItems(id).subscribe((res: any) => {
       if (res.isSuccess) {
         this.product = res.data;
+        this.groupProductsByCategory();
       }
+    });
+  }
+
+  getCaption(classifiedId: number) {
+    switch (classifiedId) {
+      case 3:
+        return {
+          title: 'Young Boy’s Collection',
+          desc: 'Essential fashion items for 18+ men',
+        };
+      case 2:
+        return {
+          title: 'Young Girl’s Collection',
+          desc: 'Trendy and stylish items for 18+ women',
+        };
+      case 1:
+        return {
+          title: 'Kids Collection (4–12 years old)',
+          desc: 'Cool and comfortable clothes for boys & girls',
+        };
+      default:
+        return { title: 'Other Collection', desc: '' };
+    }
+  }
+
+  groupProductsByCategory() {
+    const groups: { [key: number]: any[] } = {};
+    this.product.forEach((item) => {
+      if (!groups[item.classifiedId]) {
+        groups[item.classifiedId] = [];
+      }
+      groups[item.classifiedId].push(item);
+    });
+
+    this.groupedProducts = Object.keys(groups).map((key) => {
+      const classifiedId = Number(key);
+      return {
+        classifiedId,
+        caption: this.getCaption(classifiedId),
+        products: groups[classifiedId],
+      };
     });
   }
 }

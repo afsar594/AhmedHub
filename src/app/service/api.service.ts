@@ -414,7 +414,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getItems(id: any) {
-    return this.http.get(`${this.baseUrl}Item?id=${id}`);
+    return this.http.get(`${this.baseUrl}Item/itemGetByClassifiedId?id=${id}`);
   }
   getItemsAll() {
     return this.http.get(`${this.baseUrl}Item`);

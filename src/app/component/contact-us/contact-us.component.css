@@ -54,3 +54,45 @@ h1 {
   margin-bottom: 10px;
   font-size: 22px;
 }
+.contact-form-box {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff6600;
+}
+
+.contact-form-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form-box input,
+.contact-form-box textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.contact-form-box button {
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.contact-form-box button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

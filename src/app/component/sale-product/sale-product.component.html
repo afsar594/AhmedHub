@@ -25,9 +25,36 @@
   </ng-container>
 </section> -->
 
+<!-- <app-shop-slider></app-shop-slider> -->
+
+<!-- 👕 Young Boy -->
+<!-- <section class="product-sale">
+  <h2>Young Boy’s Collection</h2>
+  <p class="on-sale">Essential fashion items for 18+ men:</p>
+
+  <div class="product">
+    <div
+      class="product-card"
+      (click)="navigateToDetail(item)"
+      *ngFor="let item of Bosyproducts"
+    >
+      <img [src]="item.image" [alt]="item.title" />
+      <h3>{{ item.title }}</h3>
+
+      <div class="price-row">
+        <p class="price">$ {{ item.price }}</p>
+        <p class="oldPrice">$ {{ item.oldPrice }}</p>
+        <span class="discount">- {{ item.discount }}</span>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- 👗 Young Girl -->
 <!-- <section class="product-sale">
   <h2>Young Girl’s Collection</h2>
   <p class="on-sale">Trendy and stylish items for 18+ women:</p>
+
   <div class="product">
     <div
       class="product-card"
@@ -36,18 +63,21 @@
     >
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>
+
       <div class="price-row">
         <p class="price">$ {{ item.price }}</p>
         <p class="oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount">{{ item.discount }}</span>
+        <span class="discount">- {{ item.discount }}</span>
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="product-sale">
-  <h2>Kids Collection (4–12 years old, 15+ items)</h2>
+<!-- 🧒 Kids -->
+<!-- <section class="product-sale">
+  <h2>Kids Collection (4–12 years old)</h2>
   <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
+
   <div class="product">
     <div
       class="product-card"
@@ -69,66 +99,72 @@
 <app-shop-slider></app-shop-slider>
 
 <section class="product-sale">
-  <h2>Young Boy’s Collection</h2>
-  <p class="on-sale">Essential fashion items for 18+ men:</p>
-
-  <div class="product">
+  <div class="section-header" *ngIf="Bosyproducts.length > 0">
+    <h2>Young Boy’s Collection</h2>
+    <p class="on-sale">Essential fashion items for 18+ men</p>
+  </div>
+  <div class="product-grid">
     <div
       class="product-card"
+      *ngFor="let item of Bosyproducts"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of groupedProducts"
     >
-      <img [src]="item.image" [alt]="item.title" />
+      <div class="img-box">
+        <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
+      </div>
       <h3>{{ item.title }}</h3>
-
       <div class="price-row">
-        <p class="price">$ {{ item.price }}</p>
-        <p class="oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount">- {{ item.discount }}</span>
+        <span class="price">Rs {{ item.price }}</span>
+        <span class="oldPrice">Rs {{ item.oldPrice }}</span>
+        <span class="discount">-{{ item.discount }}%</span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="product-sale">
-  <h2>Young Girl’s Collection</h2>
-  <p class="on-sale">Trendy and stylish items for 18+ women:</p>
-
-  <div class="product">
+  <div class="section-header" *ngIf="girlproduct.length > 0">
+    <h2>Young Girl’s Collection</h2>
+    <p class="on-sale">Trendy and stylish items for women</p>
+  </div>
+  <div class="product-grid">
     <div
       class="product-card"
+      *ngFor="let item of girlproduct"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of groupedProducts"
     >
-      <img [src]="item.image" [alt]="item.title" />
+      <div class="img-box">
+        <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
+      </div>
       <h3>{{ item.title }}</h3>
-
       <div class="price-row">
-        <p class="price">$ {{ item.price }}</p>
-        <p class="oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount">{{ item.discount }}</span>
+        <span class="price">Rs {{ item.price }}</span>
+        <span class="oldPrice">Rs {{ item.oldPrice }}</span>
+        <span class="discount">-{{ item.discount }}%</span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="product-sale">
-  <h2>Kids Collection (4–12 years old, 15+ items)</h2>
-  <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
-
-  <div class="product">
+  <div class="section-header" *ngIf="kidproducts.length > 0">
+    <h2>Kids Collection (4–12 years)</h2>
+    <p class="on-sale">Cool & comfortable outfits for kids</p>
+  </div>
+  <div class="product-grid">
     <div
       class="product-card"
+      *ngFor="let item of kidproducts"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of groupedProducts"
     >
-      <img [src]="item.image" [alt]="item.title" />
+      <div class="img-box">
+        <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
+      </div>
       <h3>{{ item.title }}</h3>
-
       <div class="price-row">
-        <p class="price">$ {{ item.price }}</p>
-        <p class="oldPrice">$ {{ item.oldPrice }}</p>
-        <span class="discount">{{ item.discount }}</span>
+        <span class="price">Rs {{ item.price }}</span>
+        <span class="oldPrice">Rs {{ item.oldPrice }}</span>
+        <span class="discount">-{{ item.discount }}%</span>
       </div>
     </div>
   </div>

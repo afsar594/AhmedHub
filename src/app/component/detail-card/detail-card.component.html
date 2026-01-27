@@ -1,6 +1,6 @@
 <div class="detail-container">
   <div class="image-box">
-    <img [src]="record.itemImages[0].imgPaths" [alt]="record.title" />
+    <img [src]="record.image" [alt]="record.title" />
   </div>
   <div class="content-box">
     <h2 class="title">{{ record.title }}</h2>
@@ -25,10 +25,10 @@
     <div class="color-option">
       <div
         class="color-circle"
-        *ngFor="let color of record.itemColors"
-        [style.backgroundColor]="color.colorCodes"
-        (click)="selectcolor = color.colorCodes"
-        [class.active]="selectcolor === color.colorCodes"
+        *ngFor="let color of record.colors"
+        [style.backgroundColor]="color"
+        (click)="selectcolor = color"
+        [class.active]="selectcolor === color"
       ></div>
     </div>
     <div class="size-button">

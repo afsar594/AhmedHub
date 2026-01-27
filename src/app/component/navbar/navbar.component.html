@@ -25,12 +25,18 @@
 
 
 <div class="search-area">
-  <input type="text" placeholder="Search in AhmedHub" />
+  <input
+    type="text"
+    placeholder="Search in AhmedHub"
+    [(ngModel)]="searchText"
+    (keyup.enter)="onSearch()"
+  />
 
   <img
     class="search-img"
     src="https://cdn-icons-png.flaticon.com/128/3482/3482644.png"
     alt="search"
+    (click)="onSearch()"
   />
 
   <img
@@ -40,3 +46,4 @@
     (click)="navigateToCart()"
   />
 </div>
+

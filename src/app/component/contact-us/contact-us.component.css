@@ -83,6 +83,14 @@ h1 {
   font-size: 14px;
 }
 
+.contact-form-box input:focus,
+.contact-form-box textarea:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+  outline: none;
+}
+
+
 .contact-form-box button {
   background: #ff6600;
   color: #fff;

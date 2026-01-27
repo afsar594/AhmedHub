@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule, } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +10,9 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   menuOpen = false;
+  activeLink = '';
+
+  searchText: string = '';
 
   constructor(private router: Router) {}
 
@@ -25,12 +28,16 @@ export class NavbarComponent {
     this.router.navigate(['cart-page']);
   }
 
+  setActive(link: string) {
+    this.activeLink = link;
+  }
 
-
-  activeLink = '';
-
-setActive(link: string) {
-  this.activeLink = link;
+  onSearch() {
+    if (this.searchText.trim()) {
+      this.router.navigate(['/sale-product'], {
+        queryParams: { search: this.searchText }
+      });
+    }
+  }
 }
 
-}

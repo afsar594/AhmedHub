@@ -28,7 +28,6 @@ export class SaleProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // 🔹 Backend code commented
     this.route.queryParams.subscribe((params) => {
       this.Id = params['id'];
       if (this.Id > 0) {
@@ -37,8 +36,6 @@ export class SaleProductComponent implements OnInit {
         // this.getItemsAll();
       }
     });
-
-    // 🔹 Load dummy data
     this.loadDummyData();
   }
   getAllProductClassifiedId(id: any) {

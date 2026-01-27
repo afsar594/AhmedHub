@@ -33,7 +33,7 @@ export class SaleProductComponent implements OnInit {
       if (this.Id > 0) {
         // this.getAllProductClassifiedId(Number(this.Id));
       } else {
-        // this.getItemsAll();
+        //this.getItemsAll();
       }
     });
     this.loadDummyData();
@@ -41,37 +41,33 @@ export class SaleProductComponent implements OnInit {
   getAllProductClassifiedId(id: any) {
     this.api.getItems(id).subscribe((res: any) => {
       if (res.isSuccess) {
-        const items = res.data.map(
-          (x: {
-            itemId: any;
-            itemName: any;
-            price: any;
-            oldPrice: any;
-            discount: any;
-            itemImages: string | any[];
-            classifiedId: any;
-          }) => ({
-            id: x.itemId,
-            title: x.itemName,
-            price: x.price,
-            oldPrice: x.oldPrice,
-            discount: x.discount,
-            image: x.itemImages?.length
-              ? x.itemImages[0].imgPaths
-              : 'assets/no-image.png',
-            classifiedId: x.classifiedId,
-          }),
-        );
+        const items = res.data.map((x: any) => ({
+          id: x.itemId,
+          title: x.itemName,
+          price: x.price,
+          oldPrice: x.oldPrice,
+          discount: x.discount,
+          qty: x.qty,
 
-        this.Bosyproducts = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 1,
-        );
-        this.girlproduct = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 2,
-        );
-        this.kidproducts = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 3,
-        );
+          image: x.itemImages?.length
+            ? x.itemImages[0].imgPaths
+            : 'assets/no-image.png',
+
+          images: x.itemImages?.map((img: any) => img.imgPaths) || [],
+
+          colors: x.itemColors?.map((c: any) => c.colorCodes) || [],
+
+          sizes: x.itemSizes?.map((s: any) => s.sizeNames) || [],
+
+          classifiedId: x.classifiedId,
+          category: x.category,
+          brand: x.brand,
+          detail: x.detail,
+        }));
+
+        this.Bosyproducts = items.filter((x: any) => x.classifiedId === 1);
+        this.girlproduct = items.filter((x: any) => x.classifiedId === 2);
+        this.kidproducts = items.filter((x: any) => x.classifiedId === 3);
       }
     });
   }
@@ -124,6 +120,7 @@ export class SaleProductComponent implements OnInit {
         price: 2500,
         oldPrice: 3200,
         discount: 20,
+        detail: 'abc samina',
       },
       {
         classifiedId: 3,
@@ -133,6 +130,7 @@ export class SaleProductComponent implements OnInit {
         price: 2500,
         oldPrice: 3200,
         discount: 20,
+        detail: 'abc samina',
       },
       {
         classifiedId: 3,
@@ -142,6 +140,7 @@ export class SaleProductComponent implements OnInit {
         price: 3800,
         oldPrice: 4500,
         discount: 15,
+        detail: 'abc samina',
       },
       {
         classifiedId: 3,
@@ -151,6 +150,7 @@ export class SaleProductComponent implements OnInit {
         price: 5200,
         oldPrice: 6000,
         discount: 13,
+        detail: 'abc samina',
       },
       {
         classifiedId: 3,
@@ -160,6 +160,7 @@ export class SaleProductComponent implements OnInit {
         price: 3100,
         oldPrice: 3700,
         discount: 16,
+        detail: 'abc samina',
       },
       {
         classifiedId: 3,
@@ -169,6 +170,7 @@ export class SaleProductComponent implements OnInit {
         price: 2800,
         oldPrice: 3400,
         discount: 18,
+        detail: 'abc samina',
       },
 
       {
@@ -179,6 +181,7 @@ export class SaleProductComponent implements OnInit {
         price: 3800,
         oldPrice: 4500,
         discount: 15,
+        detail: 'abc samina',
       },
       {
         classifiedId: 2,
@@ -188,6 +191,7 @@ export class SaleProductComponent implements OnInit {
         price: 4200,
         oldPrice: 5000,
         discount: 18,
+        detail: 'abc samina',
       },
       {
         classifiedId: 2,
@@ -197,6 +201,7 @@ export class SaleProductComponent implements OnInit {
         price: 5600,
         oldPrice: 6500,
         discount: 12,
+        detail: 'abc samina',
       },
       {
         classifiedId: 1,
@@ -206,6 +211,7 @@ export class SaleProductComponent implements OnInit {
         price: 2800,
         oldPrice: 3500,
         discount: 10,
+        detail: 'abc samina',
       },
       {
         classifiedId: 1,
@@ -215,6 +221,7 @@ export class SaleProductComponent implements OnInit {
         price: 1900,
         oldPrice: 2400,
         discount: 8,
+        detail: 'abc samina',
       },
     ];
 

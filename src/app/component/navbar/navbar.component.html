@@ -25,13 +25,7 @@
 
 
 <div class="search-area">
-    <input
-    type="text"
-    placeholder="Search in AhmedHub"
-    [formControl]="searchControl"
-    class="search-input"
-    (keydown.enter)="submitSearch()"
-  />
+  <input type="text" placeholder="Search in AhmedHub" />
 
   <img
     class="search-img"
@@ -45,10 +39,4 @@
     alt="cart"
     (click)="navigateToCart()"
   />
- <ul class="search-results" *ngIf="filteredProducts.length > 0">
-    <li *ngFor="let product of filteredProducts"
-        (click)="selectProduct(product)">
-      {{ product.title }}
-    </li>
-  </ul>
 </div>

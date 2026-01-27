@@ -1,4 +1,4 @@
-<!-- <app-shop-slider></app-shop-slider>
+<app-shop-slider></app-shop-slider>
 <section class="product-sale" *ngIf="groupedProducts?.length">
   <ng-container *ngFor="let group of groupedProducts">
     <h2>{{ group.caption.title }}</h2>
@@ -23,10 +23,7 @@
       </div>
     </div>
   </ng-container>
-</section> -->
-
-
-
+</section>
 
 <!-- <section class="product-sale">
   <h2>Young Girl’s Collection</h2>
@@ -67,13 +64,10 @@
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
+<!-- <app-shop-slider></app-shop-slider>
 
-
-<app-shop-slider></app-shop-slider>
-
-<!-- 👕 Young Boy -->
 <section class="product-sale">
   <h2>Young Boy’s Collection</h2>
   <p class="on-sale">Essential fashion items for 18+ men:</p>
@@ -82,7 +76,7 @@
     <div
       class="product-card"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of Bosyproducts"
+      *ngFor="let item of groupedProducts"
     >
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>
@@ -96,7 +90,6 @@
   </div>
 </section>
 
-<!-- 👗 Young Girl -->
 <section class="product-sale">
   <h2>Young Girl’s Collection</h2>
   <p class="on-sale">Trendy and stylish items for 18+ women:</p>
@@ -105,7 +98,7 @@
     <div
       class="product-card"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of girlproduct"
+      *ngFor="let item of groupedProducts"
     >
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>
@@ -119,7 +112,6 @@
   </div>
 </section>
 
-<!-- 🧒 Kids -->
 <section class="product-sale">
   <h2>Kids Collection (4–12 years old, 15+ items)</h2>
   <p class="on-sale">Cool and comfortable clothes for boys & girls:</p>
@@ -128,7 +120,7 @@
     <div
       class="product-card"
       (click)="navigateToDetail(item)"
-      *ngFor="let item of kidproducts"
+      *ngFor="let item of groupedProducts"
     >
       <img [src]="item.image" [alt]="item.title" />
       <h3>{{ item.title }}</h3>
@@ -140,4 +132,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

@@ -25,7 +25,12 @@
 
 
 <div class="search-area">
-  <input type="text" placeholder="Search in AhmedHub" />
+  <input 
+  type="text" 
+  placeholder="Search in AhmedHub" 
+  [(ngModel)]="searchTerm" 
+  (input)="onSearchChange()" 
+/>
 
   <img
     class="search-img"

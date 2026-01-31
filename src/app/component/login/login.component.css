@@ -170,6 +170,38 @@ body, html {
   text-align: left;
 }
 
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+}
+
+.remember input {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+
+.forgot {
+  color: #ff6600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
 /* ===== Password Eye Icon ===== */
 /* .password-box {
   position: relative;

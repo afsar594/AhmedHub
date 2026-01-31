@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
   signupForm!: FormGroup;
+    submitted = false;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -76,4 +78,14 @@ export class SignupComponent {
       this.signupForm.markAllAsTouched();
     }
   }
+
+    togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+
+       forgotPassword() {
+    alert('Please contact admin to reset your password.');
+  }
+
 }

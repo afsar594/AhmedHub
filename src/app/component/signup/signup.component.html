@@ -3,26 +3,38 @@
     <h2>Sign Up</h2>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-      <div class="input-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" formControlName="name" placeholder="Enter your name">
+      <div class="input-box">
+        <input type="text" id="name" formControlName="name" >
+        <label class="char-label">
+        <span>N</span><span>a</span><span>m</span><span>e</span>
+        </label>
         <div class="error" *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid">
           <small>Name is required</small>
         </div>
       </div>
 
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+      <div class="input-box">
+                <input type="email" id="email" formControlName="email">
+        <label class="char-label">
+          <span>E</span><span>m</span><span>a</span><span>i</span><span>l</span>
+        </label>
         <div class="error" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
           <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</small>
           <small *ngIf="signupForm.get('email')?.errors?.['email']">Enter a valid email</small>
         </div>
       </div>
 
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+      <div class="input-box">
+                <input type="password" id="password" formControlName="password" >
+        <label class="char-label">
+          <span>P</span><span>a</span><span>s</span><span>s</span><span>w</span
+          ><span>o</span><span>r</span><span>d</span>
+        </label>
+        <!-- Show password checkbox -->
+        <div class="show-password">
+          <input type="checkbox" id="showPass" (change)="togglePassword()" />
+          <!-- <label for="showPass"></label> -->
+        </div>
         <div class="error" *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
           <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</small>
           <small *ngIf="signupForm.get('password')?.errors?.['minlength'] || signupForm.get('password')?.errors?.['maxlength']">
@@ -31,9 +43,13 @@
         </div>
       </div>
 
-      <div class="input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password">
+      <div class="input-box">
+                <input type="password" id="confirmPassword" formControlName="confirmPassword">
+        <label class="char-label">
+          <span>C</span><span>o</span><span>n</span><span>f</span><span>i</span><span>r</span><span>m</span>
+          <span>P</span><span>a</span><span>s</span><span>s</span><span>w</span
+          ><span>o</span><span>r</span><span>d</span>
+        </label>
         <div class="error" *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.errors?.['passwordMismatch']">
           <small>Passwords do not match</small>
         </div>

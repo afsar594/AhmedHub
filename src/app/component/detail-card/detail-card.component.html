@@ -1,14 +1,52 @@
 <div class="detail-container">
+
+  <!-- ================= IMAGE SECTION ================= -->
   <div class="image-box">
-    <img [src]="record.image" [alt]="record.title" />
+
+    <!-- MAIN IMAGE (backend se) -->
+    <!-- <div class="main-image">
+      <img [src]="activeImage" [alt]="record.title" />
+    </div> -->
+
+    <div class="main-image">
+  <img [src]="displayedImage" [alt]="record.title" />
+</div>
+
+    <!-- THUMBNAILS WITH ARROWS -->
+    <div class="thumb-wrapper">
+
+      <span class="thumb-nav" (click)="prevThumb()">&#10094;</span>
+
+      <div class="thumb-row">
+        <div
+          class="thumb"
+          *ngFor="let img of visibleThumbs"
+          [class.active]="activeImage === img"
+          (mouseenter)="onThumbHover(img)"
+  (mouseleave)="onThumbLeave()"
+          (click)="setActiveImage(img)"
+        >
+          <img [src]="img" />
+        </div>
+      </div>
+
+      <span class="thumb-nav" (click)="nextThumb()">&#10095;</span>
+
+    </div>
+
   </div>
+
+  <!-- ================= CONTENT ================= -->
   <div class="content-box">
+
     <h2 class="title">{{ record.title }}</h2>
+
     <div class="price-row">
       <p class="new-price">$ {{ record.price }}</p>
-      <P class="old-Price">$ {{ record.oldPrice }}</P>
+      <p class="old-Price">$ {{ record.oldPrice }}</p>
       <p class="discount">$ {{ record.discount }}</p>
     </div>
+
     <p class="description">
       {{ record.detail }}
     </p>
@@ -18,8 +56,10 @@
       <button (click)="decrease()">-</button>
       <span>{{ quantity }}</span>
       <button (click)="increase()">+</button>
-      <!-- <p class="new-price">$ {{record.price}}</p> -->
-      <p class="new-price">$ {{ totalPriceFix(record.price, quantity) }}</p>
+<p class="total-price">
+  Total Price:
+  <span>$ {{ totalPriceFix(record.price, quantity) }}</span>
+</p>
     </div>
 
     <div class="color-option">
@@ -31,6 +71,7 @@
         [class.active]="selectcolor === color"
       ></div>
     </div>
+
     <div class="size-button">
       <button
         *ngFor="let size of record.itemSizes"
@@ -38,12 +79,14 @@
         [class.active]="selectedsize === size.sizeNames"
         (click)="selectedsize = size.sizeNames"
       >
-        {{ size.sizeNames | json }}
+        {{ size.sizeNames }}
       </button>
     </div>
+
     <button class="buy-btn" (click)="navigateToForm()">Buy Now</button>
     <button class="cart-btn" (click)="navigateTocart(record)">
       Add to Cart
     </button>
+
   </div>
 </div>

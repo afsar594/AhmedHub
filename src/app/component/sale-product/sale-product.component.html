@@ -98,17 +98,13 @@
 
 <app-shop-slider></app-shop-slider>
 
-<section class="product-sale">
+<section class="product-sale" *ngIf="filteredBoys.length > 0">
   <div class="section-header" *ngIf="Bosyproducts.length > 0">
     <h2>Young Boy’s Collection</h2>
     <p class="on-sale">Essential fashion items for 18+ men</p>
   </div>
   <div class="product-grid">
-    <div
-      class="product-card"
-      *ngFor="let item of Bosyproducts"
-      (click)="navigateToDetail(item)"
-    >
+    <div class="product-card" *ngFor="let item of filteredBoys" (click)="navigateToDetail(item)">
       <div class="img-box">
         <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
       </div>
@@ -122,17 +118,13 @@
   </div>
 </section>
 
-<section class="product-sale">
+<section class="product-sale"  *ngIf="filteredGirls.length > 0">
   <div class="section-header" *ngIf="girlproduct.length > 0">
     <h2>Young Girl’s Collection</h2>
     <p class="on-sale">Trendy and stylish items for women</p>
   </div>
   <div class="product-grid">
-    <div
-      class="product-card"
-      *ngFor="let item of girlproduct"
-      (click)="navigateToDetail(item)"
-    >
+    <div class="product-card" *ngFor="let item of filteredGirls" (click)="navigateToDetail(item)">
       <div class="img-box">
         <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
       </div>
@@ -146,17 +138,13 @@
   </div>
 </section>
 
-<section class="product-sale">
+<section class="product-sale" *ngIf="filteredKids.length > 0">
   <div class="section-header" *ngIf="kidproducts.length > 0">
     <h2>Kids Collection (4–12 years)</h2>
     <p class="on-sale">Cool & comfortable outfits for kids</p>
   </div>
   <div class="product-grid">
-    <div
-      class="product-card"
-      *ngFor="let item of kidproducts"
-      (click)="navigateToDetail(item)"
-    >
+    <div class="product-card" *ngFor="let item of filteredKids" (click)="navigateToDetail(item)">
       <div class="img-box">
         <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
       </div>
@@ -169,3 +157,12 @@
     </div>
   </div>
 </section>
+
+
+<!-- No results message -->
+<div *ngIf="noResults" class="no-results">
+  <p>
+    Sorry, we couldn’t find any <span>products</span> matching your search.  
+    Try different keywords or check back later.
+  </p>
+</div>

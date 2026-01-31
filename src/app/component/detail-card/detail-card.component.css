@@ -19,20 +19,81 @@
 .image-box {
   width: 45%;
   border-radius: 15px;
-  overflow: hidden;
   background: #f3f3f3;
+  padding: 15px;
 }
 
-.image-box img {
+/* ===== MAIN IMAGE (FIXED SIZE) ===== */
+.main-image {
   width: 100%;
-  height: auto;
-  transition: transform 0.4s ease;
+  height: 420px;                 /* 🔒 FIXED HEIGHT */
+  border-radius: 15px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.image-box:hover img {
-  transform: scale(1.08);
-  cursor: zoom-in;
+.main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;           /* 🔥 image kabhi cut nahi hogi */
 }
+
+/* ===============================
+   THUMBNAILS (NEECHY CARD KE)
+================================ */
+.thumb-wrapper {
+  margin-top: 15px;              /* 🔽 main image ke neechy */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;       /* thumbnails center align hon */
+}
+
+.thumb-nav {
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+  padding: 5px 10px;
+}
+
+.thumb-row {
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  flex-wrap: nowrap;             /* horizontal scroll */
+  justify-content: center;       /* balance spacing */
+  scroll-behavior: smooth;
+}
+
+.thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  cursor: pointer;
+  border: 2px solid transparent;
+  flex: 0 0 auto;               /* 🔒 size fix */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;           /* image poori dikhe */
+}
+
+.thumb.active {
+  border-color: #ff6600;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.5); /* active highlight */
+}
+
 
 /* ===============================
    CONTENT
@@ -77,6 +138,10 @@
   margin-bottom: 15px;
 }
 
+.main-image img {
+  transition: opacity 0.25s ease-in-out;
+}
+
 /* ===============================
    QUANTITY
 ================================ */
@@ -107,12 +172,25 @@
   font-weight: bold;
 }
 
-.quantity-box .new-price {
+/* ===============================
+   TOTAL PRICE (SMALL & CLEAN)
+================================ */
+.total-price {
   margin-left: auto;
-  border: 1px solid #000;
-  padding: 8px 14px;
-  border-radius: 20px;
+  font-size: 14px;      /* 🔽 chhota text */
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.total-price span {
+  font-size: 18px;      /* 🔽 amount thora hi bold */
+  font-weight: 700;
+  color: #ff6600;       /* theme color same */
+}
+
 
 /* ===============================
    COLOR & SIZE
@@ -204,6 +282,10 @@
     width: 100%;
   }
 
+  .main-image {
+    height: 300px;
+  }
+
   .quantity-box .new-price {
     width: 100%;
     margin-left: 0;
@@ -244,5 +326,10 @@
   .color-circle {
     width: 30px;
     height: 30px;
+  }
+
+  .thumb {
+    width: 60px;
+    height: 60px;
   }
 }

@@ -1,7 +1,14 @@
-<div class="faq-container">
-<h2>Frequently Asked Questions</h2>
-<div class="catagory" *ngFor="let item of faqCategories" [class.open]="item.open">
-    <h3 (click)="item.open=!item.open">{{item.q}}</h3>
-    <p>{{item.a}}</p>
-</div>
+<div class="faq-wrapper">
+  <h1>Frequently Asked Questions (FAQs)</h1>
+  <p class="subtitle">Find answers to the most common questions</p>
+
+  <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+    <div class="faq-question" (click)="toggleAnswer(i)">
+      <span>{{ faq.question }}</span>
+      <span class="toggle-symbol">{{ faq.open ? '-' : '+' }}</span>
+    </div>
+    <div class="faq-answer" *ngIf="faq.open">
+      <p>{{ faq.answer }}</p>
+    </div>
+  </div>
 </div>

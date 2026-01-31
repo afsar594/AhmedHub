@@ -1,66 +1,243 @@
+
+.login-card {
+  /* background: #ffffff; */
+  padding: 50px 35px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* soft shadow */
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
 .login-container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(135deg, #ff6600, #e65c00); */
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.password-box {
+  position: relative;
+}
+
+/* .password-box input {
+  width: 100%;
+  padding-right: 40px; 
+  padding-left: 10px;
+  height: 45px;
+  font-size: 14px;
+  border: 1px solid #ff6600;
+  border-radius: 8px;
+  outline: none;
+} */
+
+.password-box input:focus {
+  border-color: #ff9933;
+  /* box-shadow: 0 0 10px rgba(255,102,0,0.3); */
+}
+
+/* Eye icon inside input */
+.show-password {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  /* background: #ffffff; */
+}
+
+/* ===== Login Card ===== */
 .login-card {
-  background: #fff;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  box-sizing: border-box;
+  /* background: #fff; */
+  padding: 50px 35px;
+  border-radius: 20px;
   max-width: 450px;
   width: 100%;
   text-align: center;
-  margin: 0 15px;
+  position: relative;
 }
 
+/* ===== Login Heading ===== */
 .login-card h2 {
-  margin-bottom: 25px;
-  color: #e65c00;
+  font-size: 30px;
+  font-weight: 700;
+  color: #ff6600; /* theme color */
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.input-group {
-  margin-bottom: 20px;
-  text-align: left;
+/* ===== Input Boxes ===== */
+.input-box {
+  position: relative;
+  margin-bottom: 30px;
 }
-.input-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
-}
-.input-group input {
+
+.input-box input {
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
+  padding: 15px 15px;
+  border: 1px solid #555555; 
   border-radius: 8px;
   font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
 }
 
-.error small {
-  color: red;
+.input-box input:focus ~ label span,
+.input-box input.ng-dirty ~ label span {
+  color: #ff6600; 
+  transform: translateY(-22px);
   font-size: 12px;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff6600;
-  border: none;
+
+/* ===== Remove browser autofill blue color ===== */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000000 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* ===== Label inside input ===== */
+/* ===== Input Boxes Default ===== */
+.input-box input {
+  width: 95%;
+  padding: 15px 15px;
+  padding-right: 0px; 
+  font-size: 14px;
+  border: 1px solid #555555; 
   border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+/* ===== Input Focus / Click ===== */
+.input-box input:focus {
+  border-color: #ff6600; /* theme color border */
+  /* box-shadow: 0 0 10px rgba(255, 102, 0, 0.15); */
+}
+
+/* ===== Floating Label ===== */
+.input-box label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  color: #555555; 
+  transition: all 0.3s;
+}
+
+/* ===== Each letter (stagger effect optional) ===== */
+.input-box label span {
+  background: #fff;
+  padding: 0 1px;
   transition: 0.3s;
 }
+
+/* ===== When Input Focused or Filled ===== */
+.input-box input:focus ~ label span,
+.input-box input.ng-dirty ~ label span {
+  transform: translateY(-22px);
+  font-size: 12px;
+  color: #ff6600; 
+}
+
+/* Stagger effect for label letters */
+.input-box label span:nth-child(1) {
+  transition-delay: 0ms;
+}
+.input-box label span:nth-child(2) {
+  transition-delay: 50ms;
+}
+.input-box label span:nth-child(3) {
+  transition-delay: 100ms;
+}
+.input-box label span:nth-child(4) {
+  transition-delay: 150ms;
+}
+.input-box label span:nth-child(5) {
+  transition-delay: 200ms;
+}
+.input-box label span:nth-child(6) {
+  transition-delay: 250ms;
+}
+.input-box label span:nth-child(7) {
+  transition-delay: 300ms;
+}
+.input-box label span:nth-child(8) {
+  transition-delay: 350ms;
+}
+
+/* ===== Error Messages ===== */
+.error small {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+  text-align: left;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+}
+
+.remember input {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+
+.forgot {
+  color: #ff6600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+
+/* ===== Button ===== */
+button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff9933, #ff6600); /* gradient button */
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
 button:hover {
-  background-color: #e65c00;
+  background: linear-gradient(135deg, #ff6600, #ff9933);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .signup-text {
@@ -74,4 +251,15 @@ button:hover {
 }
 .signup-text a:hover {
   color: #e65c00;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 35px 25px;
+  }
+
+  .login-card h2 {
+    font-size: 24px;
+  }
 }

@@ -18,6 +18,9 @@ export class LoginComponent {
   loginForm!: FormGroup;
   submitted = false;
   showPassword = false; // ✅ track show/hide password
+    rememberMe = false;
+    username = '';
+    password = '';
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +34,7 @@ export class LoginComponent {
       password: ['', [Validators.required]],
     });
   }
+  
 
   onSubmit() {
     this.submitted = true;
@@ -49,4 +53,10 @@ export class LoginComponent {
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
+   forgotPassword() {
+    alert('Please contact admin to reset your password.');
+  }
+
 }
+
+

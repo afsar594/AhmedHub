@@ -1,50 +1,61 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems: any[] = [];
+  private storageKey = 'cart_items';
 
-  // Cart ko observe karne ke liye
-  private cartSubject = new BehaviorSubject<any[]>([]);
-  cart$ = this.cartSubject.asObservable();
+  // get cart
+  getCartItems(): any[] {
+    const cart = localStorage.getItem(this.storageKey);
+    return cart ? JSON.parse(cart) : [];
+  }
 
-  constructor() {}
+  // save cart
+  private saveCart(cart: any[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(cart));
+  }
 
-  // Add product to cart
+  // add to cart
   addToCart(product: any) {
-    const existingProduct = this.cartItems.find(
+    const cart = this.getCartItems();
+
+    const existing = cart.find(
       (item) => item.id === product.id
     );
 
-    if (existingProduct) {
-      existingProduct.quantity += 1;
+    if (existing) {
+      existing.qty += 1;
     } else {
-      this.cartItems.push({
-        ...product,
-        quantity: 1,
+      cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        oldPrice: product.oldPrice,
+        img: product.img,
+        qty: 1,
       });
     }
 
-    this.cartSubject.next(this.cartItems);
+    this.saveCart(cart);
   }
 
-  // Get all cart items
-  getCartItems() {
-    return this.cartItems;
+  // remove single item
+  removeItem(id: number) {
+    const cart = this.getCartItems().filter(
+      (item) => item.id !== id
+    );
+    this.saveCart(cart);
   }
 
-  // Remove item
-  removeFromCart(id: any) {
-    this.cartItems = this.cartItems.filter((item) => item.id !== id);
-    this.cartSubject.next(this.cartItems);
-  }
-
-  // Clear cart
+  // clear all
   clearCart() {
-    this.cartItems = [];
-    this.cartSubject.next(this.cartItems);
+    localStorage.removeItem(this.storageKey);
+  }
+
+  // update qty (important)
+  updateCart(cart: any[]) {
+    this.saveCart(cart);
   }
 }

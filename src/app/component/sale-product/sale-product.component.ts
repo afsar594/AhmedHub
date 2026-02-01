@@ -21,67 +21,102 @@ export class SaleProductComponent implements OnInit {
   groupedProducts: any[] = [];
   selectedClassifiedId: number | null = null;
   Id: any;
-
   filteredBoys: any[] = [];
-filteredGirls: any[] = [];
-filteredKids: any[] = [];
-noResults: boolean = false;
+  filteredGirls: any[] = [];
+  filteredKids: any[] = [];
+  noResults: boolean = false;
 
   constructor(
     private api: ApiService,
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService 
+    private searchService: SearchService,
   ) {}
 
-//   ngOnInit() {
-//     this.route.queryParams.subscribe((params) => {
-//       this.Id = params['id'];
-//       if (this.Id > 0) {
-//         // this.getAllProductClassifiedId(Number(this.Id));
-//       } else {
-//         //this.getItemsAll();
-//       }
-//       this.searchService.searchText$.subscribe((query: string) => {
-//     const q = query.toLowerCase();
-//     this.filteredBoys = this.Bosyproducts.filter(item => item.title.toLowerCase().includes(q));
-//     this.filteredGirls = this.girlproduct.filter(item => item.title.toLowerCase().includes(q));
-//     this.filteredKids = this.kidproducts.filter(item => item.title.toLowerCase().includes(q));
-// });
-//     });
-//     this.loadDummyData();
-//   }
-
-
-
   ngOnInit() {
-    this.loadDummyData();
-
-    // Subscribe to search
     this.searchService.searchText$.subscribe((query: string) => {
       this.applySearch(query);
     });
+    this.route.queryParams.subscribe((params) => {
+      this.Id = params['id'];
+      if (this.Id > 0) {
+        this.getAllProductClassifiedId(Number(this.Id));
+      } else {
+        this.getItemsAll();
+      }
+      this.searchService.searchText$.subscribe((query: string) => {
+        const q = query.toLowerCase();
+        this.filteredBoys = this.Bosyproducts.filter((item) =>
+          item.title.toLowerCase().includes(q),
+        );
+        this.filteredGirls = this.girlproduct.filter((item) =>
+          item.title.toLowerCase().includes(q),
+        );
+        this.filteredKids = this.kidproducts.filter((item) =>
+          item.title.toLowerCase().includes(q),
+        );
+      });
+    });
+    // this.loadDummyData();
   }
 
-   applySearch(query: string) {
+  applySearch(query: string) {
     const q = query.toLowerCase();
-    this.filteredBoys = this.Bosyproducts.filter(p => p.title.toLowerCase().includes(q));
-    this.filteredGirls = this.girlproduct.filter(p => p.title.toLowerCase().includes(q));
-    this.filteredKids = this.kidproducts.filter(p => p.title.toLowerCase().includes(q));
+    this.filteredBoys = this.Bosyproducts.filter((p) =>
+      p.title.toLowerCase().includes(q),
+    );
+    this.filteredGirls = this.girlproduct.filter((p) =>
+      p.title.toLowerCase().includes(q),
+    );
+    this.filteredKids = this.kidproducts.filter((p) =>
+      p.title.toLowerCase().includes(q),
+    );
     // Check if all arrays are empty
-  this.noResults =
-    this.filteredBoys.length === 0 &&
-    this.filteredGirls.length === 0 &&
-    this.filteredKids.length === 0;
+    this.noResults =
+      this.filteredBoys.length === 0 &&
+      this.filteredGirls.length === 0 &&
+      this.filteredKids.length === 0;
   }
 
   loadDummyData() {
     this.product = [
-      { classifiedId: 3, title: 'Men T-Shirt', price: 2500, oldPrice: 3200, discount: 20, image: 'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg' },
-      { classifiedId: 3, title: 'Slim Fit Denim Jeans', price: 5200, oldPrice: 6000, discount: 13, image: 'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg' },
-      { classifiedId: 2, title: 'Girls Kurti', price: 4200, oldPrice: 5000, discount: 18, image: 'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg' },
-      { classifiedId: 1, title: 'Kids Hoodie', price: 2800, oldPrice: 3500, discount: 10, image: 'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg' },
-       {
+      {
+        classifiedId: 3,
+        title: 'Men T-Shirt',
+        price: 2500,
+        oldPrice: 3200,
+        discount: 20,
+        image:
+          'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
+      },
+      {
+        classifiedId: 3,
+        title: 'Slim Fit Denim Jeans',
+        price: 5200,
+        oldPrice: 6000,
+        discount: 13,
+        image:
+          'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
+      },
+      {
+        classifiedId: 2,
+        title: 'Girls Kurti',
+        price: 4200,
+        oldPrice: 5000,
+        discount: 18,
+        image:
+          'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg',
+      },
+      {
+        classifiedId: 1,
+        title: 'Kids Hoodie',
+        price: 2800,
+        oldPrice: 3500,
+        discount: 10,
+        image:
+          'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg',
+      },
+      {
         classifiedId: 3,
         title: 'Men T-Shirt',
         image:
@@ -157,11 +192,9 @@ noResults: boolean = false;
     this.assignCategoryArrays();
   }
 
-
-
   getAllProductClassifiedId(id: any) {
     this.api.getItems(id).subscribe((res: any) => {
-      if (res.isSuccess) {
+      if (res?.isSuccess && Array.isArray(res.data)) {
         const items = res.data.map((x: any) => ({
           id: x.itemId,
           title: x.itemName,
@@ -175,9 +208,7 @@ noResults: boolean = false;
             : 'assets/no-image.png',
 
           images: x.itemImages?.map((img: any) => img.imgPaths) || [],
-
           colors: x.itemColors?.map((c: any) => c.colorCodes) || [],
-
           sizes: x.itemSizes?.map((s: any) => s.sizeNames) || [],
 
           classifiedId: x.classifiedId,
@@ -186,9 +217,26 @@ noResults: boolean = false;
           detail: x.detail,
         }));
 
-        this.Bosyproducts = items.filter((x: any) => x.classifiedId === 1);
-        this.girlproduct = items.filter((x: any) => x.classifiedId === 2);
-        this.kidproducts = items.filter((x: any) => x.classifiedId === 3);
+        this.Bosyproducts = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 3,
+        );
+        this.girlproduct = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 2,
+        );
+        this.kidproducts = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 1,
+        );
+
+        // ✅ Filtered Lists (for UI)
+        this.filteredBoys = [...this.Bosyproducts];
+        this.filteredGirls = [...this.girlproduct];
+        this.filteredKids = [...this.kidproducts];
+
+        // ✅ No Result Check
+        this.noResults =
+          this.filteredBoys.length === 0 &&
+          this.filteredGirls.length === 0 &&
+          this.filteredKids.length === 0;
       }
     });
   }
@@ -197,7 +245,7 @@ noResults: boolean = false;
   }
   getItemsAll() {
     this.api.getItemsAll().subscribe((res: any) => {
-      if (res.isSuccess) {
+      if (res?.isSuccess && Array.isArray(res.data)) {
         const items = res.data.map((x: any) => ({
           id: x.itemId,
           title: x.itemName,
@@ -211,9 +259,7 @@ noResults: boolean = false;
             : 'assets/no-image.png',
 
           images: x.itemImages?.map((img: any) => img.imgPaths) || [],
-
           colors: x.itemColors?.map((c: any) => c.colorCodes) || [],
-
           sizes: x.itemSizes?.map((s: any) => s.sizeNames) || [],
 
           classifiedId: x.classifiedId,
@@ -222,10 +268,26 @@ noResults: boolean = false;
           detail: x.detail,
         }));
 
-        this.Bosyproducts = items.filter((x: any) => x.classifiedId === 1);
-        this.girlproduct = items.filter((x: any) => x.classifiedId === 2);
-        this.kidproducts = items.filter((x: any) => x.classifiedId === 3);
-        
+        this.Bosyproducts = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 3,
+        );
+        this.girlproduct = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 2,
+        );
+        this.kidproducts = items.filter(
+          (x: { classifiedId: number }) => x.classifiedId === 1,
+        );
+
+        // ✅ Filtered Lists (for UI)
+        this.filteredBoys = [...this.Bosyproducts];
+        this.filteredGirls = [...this.girlproduct];
+        this.filteredKids = [...this.kidproducts];
+
+        // ✅ No Result Check
+        this.noResults =
+          this.filteredBoys.length === 0 &&
+          this.filteredGirls.length === 0 &&
+          this.filteredKids.length === 0;
       }
     });
   }
@@ -356,9 +418,14 @@ noResults: boolean = false;
     this.girlproduct = this.product.filter((p) => p.classifiedId === 2);
     this.kidproducts = this.product.filter((p) => p.classifiedId === 1);
 
-    this.filteredBoys = [...this.Bosyproducts];
-this.filteredGirls = [...this.girlproduct];
-this.filteredKids = [...this.kidproducts];
+    this.filteredBoys = [...this.filteredBoys];
+    this.filteredGirls = [...this.girlproduct];
+    this.filteredKids = [...this.kidproducts];
+    console.log('filteredKids', this.filteredKids);
+
+    console.log('filteredGirls', this.filteredGirls);
+
+    console.log('filteredKids', this.filteredKids);
   }
 
   getCaption(classifiedId: number) {

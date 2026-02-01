@@ -8,9 +8,9 @@
     Clear All
   </button>
   <div class="cart-item" *ngFor="let item of cartItems">
-    <img [src]="item.img" class="item-img" />
+    <img [src]="item.image" class="item-img" />
     <div class="item-info">
-      <h3>{{ item.title }}</h3>
+      <h3>{{ item.itemName }}</h3>
       <p class="price">
         $. {{ item.price }}
         <span class="old-price">$. {{ item.oldPrice }} </span>

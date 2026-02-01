@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -10,10 +11,18 @@ import { CommonModule } from '@angular/common';
 })
 export class CartPageComponent implements OnInit {
   cartItems: any;
-  constructor() {}
+  constructor(private api: ApiService) {}
   ngOnInit(): void {
-    this.cartItems = history.state.data;
-    console.log('Received Data:', this.cartItems);
+    // this.cartItems = history.state.data;
+    this.GetAllItemCard();
+  }
+  GetAllItemCard() {
+    this.api.GetAllItemCard().subscribe((r: any) => {
+      if (r.isSuccess) {
+        this.cartItems = r.data;
+        console.log('Received Data:', this.cartItems);
+      }
+    });
   }
 
   // cartItems:any[] = [
@@ -50,10 +59,16 @@ export class CartPageComponent implements OnInit {
   }
 
   removeItem(id: number) {
-    this.cartItems = this.cartItems.filter((x: { id: number }) => x.id !== id);
+    // this.cartItems = this.cartItems.filter((x: { id: number }) => x.id !== id);
+    this.api.DeleteCart(id).subscribe((R: any) => {
+      this.GetAllItemCard();
+    });
   }
 
   clearAll() {
+    this.api.DeleteAll().subscribe((R: any) => {
+      this.GetAllItemCard();
+    });
     this.cartItems = [];
   }
 

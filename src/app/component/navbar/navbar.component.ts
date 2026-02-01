@@ -3,21 +3,35 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { SearchService } from '../../service/search.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink , RouterModule , FormsModule ,CommonModule ],
+  imports: [RouterLink, RouterModule, FormsModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   menuOpen = false;
-   activeLink = '';
-    searchTerm: string = '';
+  activeLink = '';
+  searchTerm: string = '';
+  cartCount: any; // example value
 
-  constructor(private router: Router, private searchService: SearchService) {}
-
+  constructor(
+    private router: Router,
+    private searchService: SearchService,
+    private api: ApiService,
+  ) {
+    this.GetAllItemCard();
+  }
+  GetAllItemCard() {
+    this.api.GetAllItemCard().subscribe((r: any) => {
+      if (r.isSuccess) {
+        this.cartCount = r.data.length;
+      }
+    });
+  }
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
@@ -30,12 +44,11 @@ export class NavbarComponent {
     this.router.navigate(['cart-page']);
   }
 
-setActive(link: string) {
-  this.activeLink = link;
-}
-
-onSearchChange() {
-    this.searchService.setSearchText(this.searchTerm);
+  setActive(link: string) {
+    this.activeLink = link;
   }
 
+  onSearchChange() {
+    this.searchService.setSearchText(this.searchTerm);
+  }
 }

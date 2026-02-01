@@ -6,9 +6,7 @@
   align-items: center;
   background: #ff6600;
   color: white;
-  
 }
-
 
 .top-links li a.active {
   background: #fff3e6;
@@ -16,7 +14,6 @@
   padding: 6px 10px;
   border-radius: 4px;
 }
-
 
 .logo img {
   height: 40px;
@@ -141,4 +138,26 @@
     width: 35px;
     height: 35px;
   }
+}
+.cart-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cart-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: rgb(0, 255, 98);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
 }

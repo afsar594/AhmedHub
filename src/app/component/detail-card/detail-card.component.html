@@ -1,20 +1,17 @@
 <div class="detail-container">
-
   <!-- ================= IMAGE SECTION ================= -->
   <div class="image-box">
-
     <!-- MAIN IMAGE (backend se) -->
     <!-- <div class="main-image">
       <img [src]="activeImage" [alt]="record.title" />
     </div> -->
 
     <div class="main-image">
-  <img [src]="displayedImage" [alt]="record.title" />
-</div>
+      <img [src]="displayedImage" [alt]="record.title" />
+    </div>
 
     <!-- THUMBNAILS WITH ARROWS -->
     <div class="thumb-wrapper">
-
       <span class="thumb-nav" (click)="prevThumb()">&#10094;</span>
 
       <div class="thumb-row">
@@ -23,7 +20,7 @@
           *ngFor="let img of visibleThumbs"
           [class.active]="activeImage === img"
           (mouseenter)="onThumbHover(img)"
-  (mouseleave)="onThumbLeave()"
+          (mouseleave)="onThumbLeave()"
           (click)="setActiveImage(img)"
         >
           <img [src]="img" />
@@ -31,14 +28,11 @@
       </div>
 
       <span class="thumb-nav" (click)="nextThumb()">&#10095;</span>
-
     </div>
-
   </div>
 
   <!-- ================= CONTENT ================= -->
   <div class="content-box">
-
     <h2 class="title">{{ record.title }}</h2>
 
     <div class="price-row">
@@ -56,10 +50,10 @@
       <button (click)="decrease()">-</button>
       <span>{{ quantity }}</span>
       <button (click)="increase()">+</button>
-<p class="total-price">
-  Total Price:
-  <span>$ {{ totalPriceFix(record.price, quantity) }}</span>
-</p>
+      <p class="total-price">
+        Total Price:
+        <span>$ {{ totalPriceFix(record.price, quantity) }}</span>
+      </p>
     </div>
 
     <div class="color-option">
@@ -74,12 +68,12 @@
 
     <div class="size-button">
       <button
-        *ngFor="let size of record.itemSizes"
+        *ngFor="let size of record.sizes"
         class="size-btn"
-        [class.active]="selectedsize === size.sizeNames"
-        (click)="selectedsize = size.sizeNames"
+        [class.active]="selectedsize === size"
+        (click)="selectedsize = size"
       >
-        {{ size.sizeNames }}
+        {{ size }}
       </button>
     </div>
 
@@ -87,6 +81,5 @@
     <button class="cart-btn" (click)="navigateTocart(record)">
       Add to Cart
     </button>
-
   </div>
 </div>

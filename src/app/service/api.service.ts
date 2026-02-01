@@ -37,4 +37,18 @@ export class ApiService {
   register(user: any) {
     return this.http.post(`${this.baseUrl}User/signup`, user);
   }
+  //  for Card Api
+
+  saveCard(payload: any) {
+    return this.http.post(`${this.baseUrl}Cart`, payload);
+  }
+  GetAllItemCard() {
+    return this.http.get(`${this.baseUrl}Cart`);
+  }
+  DeleteCart(id: number) {
+    return this.http.delete(`${this.baseUrl}Cart/${id}`);
+  }
+  DeleteAll() {
+    return this.http.delete(`${this.baseUrl}Cart`);
+  }
 }

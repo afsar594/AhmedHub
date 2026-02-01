@@ -9,28 +9,104 @@
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
 
   <ul class="top-links" [class.active]="menuOpen">
-    <li><a routerLink="/home" (click)="setActive('home')" [class.active]="activeLink==='home'">Home</a></li>
-    <li><a routerLink="/shop" (click)="setActive('shop')" [class.active]="activeLink==='shop'">Shop</a></li>
-    <li><a routerLink="/aboutus" (click)="setActive('about')" [class.active]="activeLink==='about'">About Us</a></li>
-    <li><a routerLink="/contact" (click)="setActive('contact')" [class.active]="activeLink==='contact'">Contact</a></li>
-    <li><a routerLink="/faq" (click)="setActive('faq')" [class.active]="activeLink==='faq'">FAQ</a></li>
-    <li><a routerLink="/shippingpolicy" (click)="setActive('shipping')" [class.active]="activeLink==='shipping'">Shipping Policy</a></li>
-    <li><a routerLink="/terms-conditions" (click)="setActive('terms')" [class.active]="activeLink==='terms'">Terms & Conditions</a></li>
-    <li><a routerLink="/privacypolicy" (click)="setActive('privacy')" [class.active]="activeLink==='privacy'">Privacy Policy</a></li>
-    <li><a routerLink="/login" (click)="setActive('login')" [class.active]="activeLink==='login'">Login</a></li>
-    <li><a routerLink="/signup" (click)="setActive('signup')" [class.active]="activeLink==='signup'">Signup</a></li>
-    <li><a routerLink="/admin-panel" (click)="setActive('admin')" [class.active]="activeLink==='admin'">Admin Panel</a></li>
+    <li>
+      <a
+        routerLink="/home"
+        (click)="setActive('home')"
+        [class.active]="activeLink === 'home'"
+        >Home</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/shop"
+        (click)="setActive('shop')"
+        [class.active]="activeLink === 'shop'"
+        >Shop</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/aboutus"
+        (click)="setActive('about')"
+        [class.active]="activeLink === 'about'"
+        >About Us</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/contact"
+        (click)="setActive('contact')"
+        [class.active]="activeLink === 'contact'"
+        >Contact</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/faq"
+        (click)="setActive('faq')"
+        [class.active]="activeLink === 'faq'"
+        >FAQ</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/shippingpolicy"
+        (click)="setActive('shipping')"
+        [class.active]="activeLink === 'shipping'"
+        >Shipping Policy</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/terms-conditions"
+        (click)="setActive('terms')"
+        [class.active]="activeLink === 'terms'"
+        >Terms & Conditions</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/privacypolicy"
+        (click)="setActive('privacy')"
+        [class.active]="activeLink === 'privacy'"
+        >Privacy Policy</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/login"
+        (click)="setActive('login')"
+        [class.active]="activeLink === 'login'"
+        >Login</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/signup"
+        (click)="setActive('signup')"
+        [class.active]="activeLink === 'signup'"
+        >Signup</a
+      >
+    </li>
+    <li>
+      <a
+        routerLink="/admin-panel"
+        (click)="setActive('admin')"
+        [class.active]="activeLink === 'admin'"
+        >Admin Panel</a
+      >
+    </li>
   </ul>
 </nav>
 
-
 <div class="search-area">
-  <input 
-  type="text" 
-  placeholder="Search in AhmedHub" 
-  [(ngModel)]="searchTerm" 
-  (input)="onSearchChange()" 
-/>
+  <input
+    type="text"
+    placeholder="Search in AhmedHub"
+    [(ngModel)]="searchTerm"
+    (input)="onSearchChange()"
+  />
 
   <img
     class="search-img"
@@ -38,10 +114,16 @@
     alt="search"
   />
 
-  <img
-    class="cart-icon"
-    src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png"
-    alt="cart"
-    (click)="navigateToCart()"
-  />
+  <div class="cart-container" (click)="navigateToCart()">
+    <img
+      class="cart-icon"
+      src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png"
+      alt="cart"
+    />
+
+    <!-- Badge -->
+    <span class="cart-badge" *ngIf="cartCount > 0">
+      {{ cartCount }}
+    </span>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-detail-card',
@@ -15,9 +16,8 @@ export class DetailCardComponent implements OnInit {
   // 🔹 MAIN IMAGE (backend wali)
   activeImage = '';
 
-    allImages: string[] = [];        // backend + dummy images
-    hoverImage: string | null = null;
-
+  allImages: string[] = []; // backend + dummy images
+  hoverImage: string | null = null;
 
   // 🔹 THUMB CONTROL
   thumbStartIndex = 0;
@@ -44,26 +44,27 @@ export class DetailCardComponent implements OnInit {
   constructor(
     private router: Router,
     public route: ActivatedRoute,
+    private api: ApiService,
   ) {}
 
   ngOnInit() {
     this.record = history.state.data;
-
+    console.log('record', this.record);
     // 🔹 backend image ko main image bana diya
-    this.activeImage = this.record.image;
+    this.activeImage = this.record.images[0];
   }
 
   /* ================= THUMB LOGIC ================= */
 
   get visibleThumbs() {
-    return this.dummyThumbs.slice(
+    return this.record.images.slice(
       this.thumbStartIndex,
-      this.thumbStartIndex + this.thumbLimit
+      this.thumbStartIndex + this.thumbLimit,
     );
   }
 
   nextThumb() {
-    if (this.thumbStartIndex + this.thumbLimit < this.dummyThumbs.length) {
+    if (this.thumbStartIndex + this.thumbLimit < this.record.images.length) {
       this.thumbStartIndex++;
     }
   }
@@ -79,18 +80,16 @@ export class DetailCardComponent implements OnInit {
   }
 
   onThumbHover(img: string) {
-  this.hoverImage = img;
-}
+    this.hoverImage = img;
+  }
 
-onThumbLeave() {
-  this.hoverImage = null;
-}
+  onThumbLeave() {
+    this.hoverImage = null;
+  }
 
-
-get displayedImage(): string {
-  return this.hoverImage ? this.hoverImage : this.activeImage;
-}
-
+  get displayedImage(): string {
+    return this.hoverImage ? this.hoverImage : this.activeImage;
+  }
 
   /* ================= PRICE ================= */
 
@@ -114,7 +113,28 @@ get displayedImage(): string {
   }
 
   navigateTocart(data: any) {
-    this.router.navigate(['cart-page'], { state: { data: data } });
-    // this.router.navigate(['/login']);
+    // this.router.navigate(['cart-page'], { state: { data: data } });
+    // // this.router.navigate(['/login']);
+    let payload = {
+      id: 0,
+      itemId: data.id,
+      itemName: data.title,
+      price: data.price,
+      oldPrice: data.oldPrice,
+      discount: data.discount,
+      qty: this.quantity,
+      img: '',
+      image: this.activeImage,
+      detail: data.detail,
+      color: this.selectcolor,
+      classifiedId: data.classifiedId,
+      category: data.category,
+      brand: data.brand,
+      createdDate: '2026-02-01T00:35:26.160Z',
+      currentUser: 'string',
+    };
+    this.api.saveCard(payload).subscribe((res: any) => {
+      alert(res.message);
+    });
   }
 }

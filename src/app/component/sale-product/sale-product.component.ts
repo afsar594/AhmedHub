@@ -39,11 +39,11 @@ export class SaleProductComponent implements OnInit {
     });
     this.route.queryParams.subscribe((params) => {
       this.Id = params['id'];
-      if (this.Id > 0) {
-        this.getAllProductClassifiedId(Number(this.Id));
-      } else {
-        this.getItemsAll();
-      }
+      // if (this.Id > 0) {
+      //   this.getAllProductClassifiedId(Number(this.Id));
+      // } else {
+      //   this.getItemsAll();
+      // }
       this.searchService.searchText$.subscribe((query: string) => {
         const q = query.toLowerCase();
         this.filteredBoys = this.Bosyproducts.filter((item) =>
@@ -57,7 +57,7 @@ export class SaleProductComponent implements OnInit {
         );
       });
     });
-    // this.loadDummyData();
+    this.loadDummyData();
   }
 
   applySearch(query: string) {
@@ -176,7 +176,6 @@ export class SaleProductComponent implements OnInit {
         discount: 18,
         detail: 'abc samina',
       },
-
       {
         classifiedId: 3,
         title: 'Casual Shirt',

@@ -40,9 +40,9 @@ export class SaleProductComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.Id = params['id'];
       if (this.Id > 0) {
-        this.getAllProductClassifiedId(Number(this.Id));
+        // this.getAllProductClassifiedId(Number(this.Id));
       } else {
-        this.getItemsAll();
+        // this.getItemsAll();
       }
       this.searchService.searchText$.subscribe((query: string) => {
         const q = query.toLowerCase();
@@ -57,7 +57,7 @@ export class SaleProductComponent implements OnInit {
         );
       });
     });
-    // this.loadDummyData();
+    this.loadDummyData();
   }
 
   applySearch(query: string) {

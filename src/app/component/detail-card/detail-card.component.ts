@@ -50,14 +50,14 @@ export class DetailCardComponent implements OnInit {
   ngOnInit() {
     this.record = history.state.data;
     console.log('record', this.record);
-    // 🔹 backend image ko main image bana diya
-    this.activeImage = this.record.images[0];
+    // this.activeImage = this.record?.images[0];
+    this.activeImage = this.record?.image;
   }
 
   /* ================= THUMB LOGIC ================= */
 
   get visibleThumbs() {
-    return this.record.images.slice(
+    return this.record?.images?.slice(
       this.thumbStartIndex,
       this.thumbStartIndex + this.thumbLimit,
     );

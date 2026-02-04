@@ -57,7 +57,7 @@ export class SaleProductComponent implements OnInit {
         );
       });
     });
-    this.loadDummyData();
+    // this.loadDummyData();
   }
 
   applySearch(query: string) {
@@ -78,118 +78,118 @@ export class SaleProductComponent implements OnInit {
       this.filteredKids.length === 0;
   }
 
-  loadDummyData() {
-    this.product = [
-      {
-        classifiedId: 3,
-        title: 'Men T-Shirt',
-        price: 2500,
-        oldPrice: 3200,
-        discount: 20,
-        image:
-          'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
-      },
-      {
-        classifiedId: 3,
-        title: 'Slim Fit Denim Jeans',
-        price: 5200,
-        oldPrice: 6000,
-        discount: 13,
-        image:
-          'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
-      },
-      {
-        classifiedId: 2,
-        title: 'Girls Kurti',
-        price: 4200,
-        oldPrice: 5000,
-        discount: 18,
-        image:
-          'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg',
-      },
-      {
-        classifiedId: 1,
-        title: 'Kids Hoodie',
-        price: 2800,
-        oldPrice: 3500,
-        discount: 10,
-        image:
-          'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg',
-      },
-      {
-        classifiedId: 3,
-        title: 'Men T-Shirt',
-        image:
-          'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
-        price: 2500,
-        oldPrice: 3200,
-        discount: 20,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Men T-Shirt',
-        image:
-          'https://i.pinimg.com/736x/dd/de/14/ddde149b1134c4387cd174a99b8d2e31.jpg',
-        price: 2500,
-        oldPrice: 3200,
-        discount: 20,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Casual Cotton Shirt',
-        image:
-          'https://i.pinimg.com/736x/b7/bf/8c/b7bf8c19f34698321cc08771df16914d.jpg',
-        price: 3800,
-        oldPrice: 4500,
-        discount: 15,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Slim Fit Denim Jeans',
-        image:
-          'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
-        price: 5200,
-        oldPrice: 6000,
-        discount: 13,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Classic Polo Shirt',
-        image:
-          'https://i.pinimg.com/1200x/b8/0c/ad/b80cad1bcce16ff76855f017bd1b5000.jpg',
-        price: 3100,
-        oldPrice: 3700,
-        discount: 16,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Summer Casual Shorts',
-        image:
-          'https://i.pinimg.com/1200x/df/e7/7a/dfe77afa4c428ec6b293c328b27e8d4a.jpg',
-        price: 2800,
-        oldPrice: 3400,
-        discount: 18,
-        detail: 'abc samina',
-      },
-      {
-        classifiedId: 3,
-        title: 'Casual Shirt',
-        image:
-          'https://i.pinimg.com/736x/70/be/af/70beaf7973249f8e050c5c08574739f8.jpg',
-        price: 3800,
-        oldPrice: 4500,
-        discount: 15,
-        detail: 'abc samina',
-      },
-    ];
+  // loadDummyData() {
+  //   this.product = [
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Men T-Shirt',
+  //       price: 2500,
+  //       oldPrice: 3200,
+  //       discount: 20,
+  //       image:
+  //         'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Slim Fit Denim Jeans',
+  //       price: 5200,
+  //       oldPrice: 6000,
+  //       discount: 13,
+  //       image:
+  //         'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
+  //     },
+  //     {
+  //       classifiedId: 2,
+  //       title: 'Girls Kurti',
+  //       price: 4200,
+  //       oldPrice: 5000,
+  //       discount: 18,
+  //       image:
+  //         'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg',
+  //     },
+  //     {
+  //       classifiedId: 1,
+  //       title: 'Kids Hoodie',
+  //       price: 2800,
+  //       oldPrice: 3500,
+  //       discount: 10,
+  //       image:
+  //         'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Men T-Shirt',
+  //       image:
+  //         'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
+  //       price: 2500,
+  //       oldPrice: 3200,
+  //       discount: 20,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Men T-Shirt',
+  //       image:
+  //         'https://i.pinimg.com/736x/dd/de/14/ddde149b1134c4387cd174a99b8d2e31.jpg',
+  //       price: 2500,
+  //       oldPrice: 3200,
+  //       discount: 20,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Casual Cotton Shirt',
+  //       image:
+  //         'https://i.pinimg.com/736x/b7/bf/8c/b7bf8c19f34698321cc08771df16914d.jpg',
+  //       price: 3800,
+  //       oldPrice: 4500,
+  //       discount: 15,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Slim Fit Denim Jeans',
+  //       image:
+  //         'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
+  //       price: 5200,
+  //       oldPrice: 6000,
+  //       discount: 13,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Classic Polo Shirt',
+  //       image:
+  //         'https://i.pinimg.com/1200x/b8/0c/ad/b80cad1bcce16ff76855f017bd1b5000.jpg',
+  //       price: 3100,
+  //       oldPrice: 3700,
+  //       discount: 16,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Summer Casual Shorts',
+  //       image:
+  //         'https://i.pinimg.com/1200x/df/e7/7a/dfe77afa4c428ec6b293c328b27e8d4a.jpg',
+  //       price: 2800,
+  //       oldPrice: 3400,
+  //       discount: 18,
+  //       detail: 'abc samina',
+  //     },
+  //     {
+  //       classifiedId: 3,
+  //       title: 'Casual Shirt',
+  //       image:
+  //         'https://i.pinimg.com/736x/70/be/af/70beaf7973249f8e050c5c08574739f8.jpg',
+  //       price: 3800,
+  //       oldPrice: 4500,
+  //       discount: 15,
+  //       detail: 'abc samina',
+  //     },
+  //   ];
 
-    this.assignCategoryArrays();
-  }
+  //   this.assignCategoryArrays();
+  // }
 
   getAllProductClassifiedId(id: any) {
     this.api.getItems(id).subscribe((res: any) => {
@@ -293,124 +293,124 @@ export class SaleProductComponent implements OnInit {
 
   // samina here
 
-  // loadDummyData() {
-  //   this.product = [
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Men T-Shirt',
-  //       image:
-  //         'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
-  //       price: 2500,
-  //       oldPrice: 3200,
-  //       discount: 20,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Men T-Shirt',
-  //       image:
-  //         'https://i.pinimg.com/736x/dd/de/14/ddde149b1134c4387cd174a99b8d2e31.jpg',
-  //       price: 2500,
-  //       oldPrice: 3200,
-  //       discount: 20,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Casual Cotton Shirt',
-  //       image:
-  //         'https://i.pinimg.com/736x/b7/bf/8c/b7bf8c19f34698321cc08771df16914d.jpg',
-  //       price: 3800,
-  //       oldPrice: 4500,
-  //       discount: 15,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Slim Fit Denim Jeans',
-  //       image:
-  //         'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
-  //       price: 5200,
-  //       oldPrice: 6000,
-  //       discount: 13,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Classic Polo Shirt',
-  //       image:
-  //         'https://i.pinimg.com/1200x/b8/0c/ad/b80cad1bcce16ff76855f017bd1b5000.jpg',
-  //       price: 3100,
-  //       oldPrice: 3700,
-  //       discount: 16,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Summer Casual Shorts',
-  //       image:
-  //         'https://i.pinimg.com/1200x/df/e7/7a/dfe77afa4c428ec6b293c328b27e8d4a.jpg',
-  //       price: 2800,
-  //       oldPrice: 3400,
-  //       discount: 18,
-  //       detail: 'abc samina',
-  //     },
+  loadDummyData() {
+    this.product = [
+      {
+        classifiedId: 3,
+        title: 'Men T-Shirt',
+        image:
+          'https://i.pinimg.com/1200x/ea/27/dd/ea27dd9f44ffdeac2985730a9e840a95.jpg',
+        price: 2500,
+        oldPrice: 3200,
+        discount: 20,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 3,
+        title: 'Men T-Shirt',
+        image:
+          'https://i.pinimg.com/736x/dd/de/14/ddde149b1134c4387cd174a99b8d2e31.jpg',
+        price: 2500,
+        oldPrice: 3200,
+        discount: 20,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 3,
+        title: 'Casual Cotton Shirt',
+        image:
+          'https://i.pinimg.com/736x/b7/bf/8c/b7bf8c19f34698321cc08771df16914d.jpg',
+        price: 3800,
+        oldPrice: 4500,
+        discount: 15,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 3,
+        title: 'Slim Fit Denim Jeans',
+        image:
+          'https://i.pinimg.com/1200x/cf/d5/90/cfd590f5b4972eeef508b20abc99c9f8.jpg',
+        price: 5200,
+        oldPrice: 6000,
+        discount: 13,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 3,
+        title: 'Classic Polo Shirt',
+        image:
+          'https://i.pinimg.com/1200x/b8/0c/ad/b80cad1bcce16ff76855f017bd1b5000.jpg',
+        price: 3100,
+        oldPrice: 3700,
+        discount: 16,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 3,
+        title: 'Summer Casual Shorts',
+        image:
+          'https://i.pinimg.com/1200x/df/e7/7a/dfe77afa4c428ec6b293c328b27e8d4a.jpg',
+        price: 2800,
+        oldPrice: 3400,
+        discount: 18,
+        detail: 'abc samina',
+      },
 
-  //     {
-  //       classifiedId: 3,
-  //       title: 'Casual Shirt',
-  //       image:
-  //         'https://i.pinimg.com/736x/70/be/af/70beaf7973249f8e050c5c08574739f8.jpg',
-  //       price: 3800,
-  //       oldPrice: 4500,
-  //       discount: 15,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 2,
-  //       title: 'Girls Kurti',
-  //       image:
-  //         'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg',
-  //       price: 4200,
-  //       oldPrice: 5000,
-  //       discount: 18,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 2,
-  //       title: 'Stylish Dress',
-  //       image:
-  //         'https://i.pinimg.com/736x/26/03/57/260357f985e11fda9342bbbf8484511e.jpg',
-  //       price: 5600,
-  //       oldPrice: 6500,
-  //       discount: 12,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 1,
-  //       title: 'Kids Hoodie',
-  //       image:
-  //         'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg',
-  //       price: 2800,
-  //       oldPrice: 3500,
-  //       discount: 10,
-  //       detail: 'abc samina',
-  //     },
-  //     {
-  //       classifiedId: 1,
-  //       title: 'Kids Shirt',
-  //       image:
-  //         'https://i.pinimg.com/1200x/04/c7/3b/04c73b702cf9720b093fcfd7c260960c.jpg',
-  //       price: 1900,
-  //       oldPrice: 2400,
-  //       discount: 8,
-  //       detail: 'abc samina',
-  //     },
-  //   ];
+      {
+        classifiedId: 3,
+        title: 'Casual Shirt',
+        image:
+          'https://i.pinimg.com/736x/70/be/af/70beaf7973249f8e050c5c08574739f8.jpg',
+        price: 3800,
+        oldPrice: 4500,
+        discount: 15,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 2,
+        title: 'Girls Kurti',
+        image:
+          'https://i.pinimg.com/736x/96/96/47/969647d2136d4406351461be9f5e5f73.jpg',
+        price: 4200,
+        oldPrice: 5000,
+        discount: 18,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 2,
+        title: 'Stylish Dress',
+        image:
+          'https://i.pinimg.com/736x/26/03/57/260357f985e11fda9342bbbf8484511e.jpg',
+        price: 5600,
+        oldPrice: 6500,
+        discount: 12,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 1,
+        title: 'Kids Hoodie',
+        image:
+          'https://i.pinimg.com/1200x/25/2c/87/252c87093da0e69d22aa883b951c6b77.jpg',
+        price: 2800,
+        oldPrice: 3500,
+        discount: 10,
+        detail: 'abc samina',
+      },
+      {
+        classifiedId: 1,
+        title: 'Kids Shirt',
+        image:
+          'https://i.pinimg.com/1200x/04/c7/3b/04c73b702cf9720b093fcfd7c260960c.jpg',
+        price: 1900,
+        oldPrice: 2400,
+        discount: 8,
+        detail: 'abc samina',
+      },
+    ];
 
-  //   this.assignCategoryArrays();
-  //   this.groupProductsByCategory();
-  // }
+    this.assignCategoryArrays();
+    this.groupProductsByCategory();
+  }
 
   assignCategoryArrays() {
     this.Bosyproducts = this.product.filter((p) => p.classifiedId === 3);

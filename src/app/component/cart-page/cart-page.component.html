@@ -1,30 +1,109 @@
-<div class="cart-container">
-  <h2>Your Cart</h2>
-  <button
-    class="clear-btn"
-    (click)="clearAll()"
-    *ngIf="this.cartItems.length > 0"
-  >
-    Clear All
-  </button>
-  <div class="cart-item" *ngFor="let item of cartItems">
-    <img [src]="item.image" class="item-img" />
-    <div class="item-info">
-      <h3>{{ item.itemName }}</h3>
-      <p class="price">
-        $. {{ item.price }}
-        <span class="old-price">$. {{ item.oldPrice }} </span>
-      </p>
-      <div class="qty-box">
-        <button (click)="decreaseQty(item)">-</button>
-        <span>{{ item.qty }}</span>
-        <button (click)="increaseQty(item)">+</button>
+
+<div class="cart-page-container">
+  <form [formGroup]="cartForm">
+
+    <!-- HEADER -->
+    <div class="cart-header">
+      <h2>
+        <input
+          type="checkbox"
+          formControlName="selectAll"
+          (change)="toggleSelectAll()"
+          class="cart-checkbox"
+        />
+        Your Cart
+      </h2>
+
+      <button
+        type="button"
+        class="clear-btn"
+        (click)="deleteSelected()"
+        *ngIf="cartItems.length > 0"
+      >
+        Delete Selected
+      </button>
+    </div>
+
+    <!-- ✅ ITEMS -->
+    <div formArrayName="items">
+      <div
+        class="cart-item"
+        *ngFor="let item of cartItems; let i = index"
+      >
+        <!-- CHECKBOX -->
+        <input
+          type="checkbox"
+          class="item-checkbox"
+          [formControlName]="i"
+          (change)="onItemCheckChange()"
+        />
+
+        <img [src]="item.image" class="item-img" />
+
+        <div class="item-info">
+          <h3>{{ item.itemName }}</h3>
+
+          <p class="price">
+            $ {{ item.price }}
+            <span class="old-price">$ {{ item.oldPrice }}</span>
+          </p>
+
+          <div class="qty-box">
+            <button type="button" (click)="decreaseQty(item)">-</button>
+            <span>{{ item.qty }}</span>
+            <button type="button" (click)="increaseQty(item)">+</button>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="remove-btn"
+          (click)="removeItem(item.id, item.itemName)"
+        >
+          Remove
+        </button>
       </div>
     </div>
-    <button class="remove-btn" (click)="removeItem(item.id)">Remove</button>
-  </div>
-  <div class="total-box" *ngIf="cartItems.length > 0">
+
+  </form>
+  <!-- <div class="total-box" *ngIf="cartItems.length > 0">
     <h3>Total: $. {{ total }}</h3>
     <button class="checkout-btn">Proceed to Checkout</button>
+  </div> -->
+
+
+
+<!-- Right: Summary Box -->
+<div class="cart-summary-area">
+  <h3>Order Summary</h3>
+
+  <div class="summary-row">
+    <span>Subtotal ({{ cartItems.length }} items)</span>
+    <span>$ {{ total }}</span>
   </div>
+
+  <div class="summary-row">
+    <span>Shipping Fee</span>
+    <span>$ 0</span>
+  </div>
+
+  <input
+    type="text"
+    placeholder="Enter Voucher Code"
+    class="voucher-input"
+  />
+
+  <button class="apply-btn">APPLY</button>
+
+  <hr />
+
+  <div class="summary-total">
+    <span>Total</span>
+    <span> {{ total }}</span>
+  </div>
+
+  <button class="checkout-btn">
+    PROCEED TO CHECKOUT
+  </button>
+</div>
 </div>

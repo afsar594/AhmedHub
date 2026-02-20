@@ -50,8 +50,8 @@ export class DetailCardComponent implements OnInit {
   ngOnInit() {
     this.record = history.state.data;
     console.log('record', this.record);
-    // this.activeImage = this.record?.images[0];
-    this.activeImage = this.record?.image;
+    this.activeImage = this.record?.images[0];
+    // this.activeImage = this.record?.image;
   }
 
   /* ================= THUMB LOGIC ================= */

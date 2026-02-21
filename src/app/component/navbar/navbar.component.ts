@@ -26,10 +26,8 @@ export class NavbarComponent {
     this.GetAllItemCard();
   }
   GetAllItemCard() {
-    this.api.GetAllItemCard().subscribe((r: any) => {
-      if (r.isSuccess) {
-        this.cartCount = r.data.length;
-      }
+    this.api.cartCount$.subscribe(count => {
+      this.cartCount = count;
     });
   }
   toggleMenu() {

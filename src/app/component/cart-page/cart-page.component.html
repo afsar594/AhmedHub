@@ -1,14 +1,12 @@
-
 <div class="cart-page-container">
+
   <form [formGroup]="cartForm">
 
-    <!-- HEADER -->
     <div class="cart-header">
       <h2>
         <input
           type="checkbox"
           formControlName="selectAll"
-          (change)="toggleSelectAll()"
           class="cart-checkbox"
         />
         Your Cart
@@ -17,25 +15,34 @@
       <button
         type="button"
         class="clear-btn"
-        (click)="deleteSelected()"
         *ngIf="cartItems.length > 0"
+        (click)="deleteSelected()"
       >
         Delete Selected
       </button>
+
+      <button
+        type="button"
+        class="clear-btn"
+        *ngIf="cartItems.length > 0"
+        (click)="clearAll()"
+      >
+        Clear All
+      </button>
     </div>
 
-    <!-- ✅ ITEMS -->
     <div formArrayName="items">
+
       <div
         class="cart-item"
         *ngFor="let item of cartItems; let i = index"
+        [formGroupName]="i"
       >
-        <!-- CHECKBOX -->
+
         <input
           type="checkbox"
+          formControlName="selected"
           class="item-checkbox"
-          [formControlName]="i"
-          (change)="onItemCheckChange()"
         />
 
         <img [src]="item.image" class="item-img" />
@@ -45,7 +52,9 @@
 
           <p class="price">
             $ {{ item.price }}
-            <span class="old-price">$ {{ item.oldPrice }}</span>
+            <span class="old-price" *ngIf="item.oldPrice">
+              $ {{ item.oldPrice }}
+            </span>
           </p>
 
           <div class="qty-box">
@@ -62,48 +71,58 @@
         >
           Remove
         </button>
+
       </div>
+
+    </div>
+
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      Your cart is empty.
     </div>
 
   </form>
-  <!-- <div class="total-box" *ngIf="cartItems.length > 0">
-    <h3>Total: $. {{ total }}</h3>
-    <button class="checkout-btn">Proceed to Checkout</button>
-  </div> -->
 
 
+  <div class="cart-summary-area">
 
-<!-- Right: Summary Box -->
-<div class="cart-summary-area">
-  <h3>Order Summary</h3>
+    <h3>Order Summary</h3>
 
-  <div class="summary-row">
-    <span>Subtotal ({{ cartItems.length }} items)</span>
-    <span>$ {{ total }}</span>
+    <div class="summary-row">
+      <span>Subtotal ({{ cartItems.length }} items)</span>
+      <span>$ {{ total }}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Shipping Fee</span>
+      <span>$ 0</span>
+    </div>
+
+    <input
+      type="text"
+      placeholder="Enter Voucher Code"
+      class="voucher-input"
+    />
+
+    <button class="apply-btn" type="button">
+      APPLY
+    </button>
+
+    <hr />
+
+    <div class="summary-total">
+      <span>Total</span>
+      <span>$ {{ total }}</span>
+    </div>
+
+    <button
+      class="checkout-btn"
+      type="button"
+      (click)="checkout()"
+      [disabled]="cartItems.length === 0"
+    >
+      PROCEED TO CHECKOUT
+    </button>
+
   </div>
 
-  <div class="summary-row">
-    <span>Shipping Fee</span>
-    <span>$ 0</span>
-  </div>
-
-  <input
-    type="text"
-    placeholder="Enter Voucher Code"
-    class="voucher-input"
-  />
-
-  <button class="apply-btn">APPLY</button>
-
-  <hr />
-
-  <div class="summary-total">
-    <span>Total</span>
-    <span> {{ total }}</span>
-  </div>
-
-  <button class="checkout-btn">
-    PROCEED TO CHECKOUT
-  </button>
-</div>
 </div>

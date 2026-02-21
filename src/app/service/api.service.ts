@@ -1,10 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+
+  private cartCount = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCount.asObservable();
+
+  setCartCount(count: number) {
+    this.cartCount.next(count);
+  }
+
   removeBg(imageBase64: string) {
     return this.http.post(`${this.baseUrl}Item/RemoveBg`, {
       image: imageBase64,

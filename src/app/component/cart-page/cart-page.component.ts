@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../service/api.service';
 import {
   FormArray,
@@ -11,7 +12,7 @@ import {
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css'],
 })
@@ -19,7 +20,11 @@ export class CartPageComponent implements OnInit {
   cartItems: any[] = [];
   cartForm!: FormGroup;
 
-  constructor(private api: ApiService, private fb: FormBuilder) {}
+  constructor(
+    private api: ApiService,
+    private fb: FormBuilder,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -48,7 +53,7 @@ export class CartPageComponent implements OnInit {
       if (r.isSuccess) {
         this.cartItems = r.data || [];
         this.buildFormArray();
-         this.api.setCartCount(this.cartItems.length);
+        this.api.setCartCount(this.cartItems.length);
       }
     });
   }
@@ -61,7 +66,7 @@ export class CartPageComponent implements OnInit {
         this.fb.group({
           id: [item.id],
           selected: [false],
-        })
+        }),
       );
     });
   }
@@ -80,7 +85,9 @@ export class CartPageComponent implements OnInit {
     const name = itemName || 'this item';
 
     if (
-      window.confirm(`Are you sure you want to remove "${name}" from your cart?`)
+      window.confirm(
+        `Are you sure you want to remove "${name}" from your cart?`,
+      )
     ) {
       this.api.DeleteCart(id).subscribe(() => {
         this.GetAllItemCard();
@@ -124,7 +131,7 @@ export class CartPageComponent implements OnInit {
     return this.cartItems.reduce(
       (acc: number, item: { price: number; qty: number }) =>
         acc + item.price * item.qty,
-      0
+      0,
     );
   }
 
@@ -133,29 +140,27 @@ export class CartPageComponent implements OnInit {
     return total.toFixed(2);
   }
 
- checkout() {
+  checkout() {
+    const selectedItems = this.items.controls
+      .map((control, index) => ({
+        selected: control.value.selected,
+        item: this.cartItems[index],
+      }))
+      .filter((x) => x.selected)
+      .map((x) => x.item);
 
-  const selectedItems = this.items.controls
-    .map((control, index) => ({
-      selected: control.value.selected,
-      item: this.cartItems[index]
-    }))
-    .filter(x => x.selected)
-    .map(x => x.item);
+    if (selectedItems.length === 0) {
+      alert('Please select at least one item to proceed.');
+      return;
+    }
+    const confirmCheckout = window.confirm(
+      `Are you sure you want to proceed with ${selectedItems.length} item(s)?`,
+    );
 
-  if (selectedItems.length === 0) {
-    alert('Please select at least one item to proceed.');
-    return;
+    if (confirmCheckout) {
+      console.log('Selected Items for Checkout:', selectedItems);
+
+      this.router.navigate(['/form-page'], { state: { data: selectedItems } });
+    }
   }
-  const confirmCheckout = window.confirm(
-    `Are you sure you want to proceed with ${selectedItems.length} item(s)?`
-  );
-
-  if (confirmCheckout) {
-    console.log('Selected Items for Checkout:', selectedItems);
-
-    //Yahan aap navigation ya API call kar sakte ho
-    // this.router.navigate(['/checkout'], { state: { data: selectedItems } });
-  }
-}
 }

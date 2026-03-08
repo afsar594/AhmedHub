@@ -16,7 +16,6 @@ import { AdminLoginComponent } from './admin-component/admin-login/admin-login.c
 import { AdminDashboardComponent } from './admin-component/admin-dashboard/admin-dashboard.component';
 import { AdminAddProductComponent } from './admin-component/admin-add-product/admin-add-product.component';
 
-
 export const routes: Routes = [
   { path: '', component: CoverBannerComponent },
   { path: 'home', component: CoverBannerComponent },
@@ -36,5 +35,4 @@ export const routes: Routes = [
   { path: 'admin-panel', component: AdminLoginComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'adminproductmanagement', component: AdminAddProductComponent },
-  
 ];

@@ -1,128 +1,200 @@
 <div class="cart-page-container">
-
-  <form [formGroup]="cartForm">
-
+  <div class="cart-content">
+    <!-- Cart Header -->
     <div class="cart-header">
-      <h2>
-        <input
-          type="checkbox"
-          formControlName="selectAll"
-          class="cart-checkbox"
-        />
-        Your Cart
-      </h2>
-
-      <button
-        type="button"
-        class="clear-btn"
-        *ngIf="cartItems.length > 0"
-        (click)="deleteSelected()"
-      >
-        Delete Selected
-      </button>
-
-      <button
-        type="button"
-        class="clear-btn"
-        *ngIf="cartItems.length > 0"
-        (click)="clearAll()"
-      >
-        Clear All
-      </button>
+      <div class="header-content">
+        <h1 class="cart-title">Shopping Cart</h1>
+        <div class="cart-actions">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            *ngIf="cartItems.length > 0"
+            (click)="deleteSelected()"
+          >
+            <i class="icon-trash"></i>
+            Delete Selected
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline"
+            *ngIf="cartItems.length > 0"
+            (click)="clearAll()"
+          >
+            <i class="icon-clear"></i>
+            Clear All
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div formArrayName="items">
-
-      <div
-        class="cart-item"
-        *ngFor="let item of cartItems; let i = index"
-        [formGroupName]="i"
-      >
-
-        <input
-          type="checkbox"
-          formControlName="selected"
-          class="item-checkbox"
-        />
-
-        <img [src]="item.image" class="item-img" />
-
-        <div class="item-info">
-          <h3>{{ item.itemName }}</h3>
-
-          <p class="price">
-            $ {{ item.price }}
-            <span class="old-price" *ngIf="item.oldPrice">
-              $ {{ item.oldPrice }}
-            </span>
-          </p>
-
-          <div class="qty-box">
-            <button type="button" (click)="decreaseQty(item)">-</button>
-            <span>{{ item.qty }}</span>
-            <button type="button" (click)="increaseQty(item)">+</button>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          class="remove-btn"
-          (click)="removeItem(item.id, item.itemName)"
-        >
-          Remove
-        </button>
-
+    <!-- Cart Items -->
+    <form [formGroup]="cartForm" class="cart-form">
+      <div class="select-all-section" *ngIf="cartItems.length > 0">
+        <label class="checkbox-container">
+          <input
+            type="checkbox"
+            formControlName="selectAll"
+            class="cart-checkbox"
+          />
+          <span class="checkmark"></span>
+          Select All Items ({{ cartItems.length }})
+        </label>
       </div>
 
-    </div>
+      <div formArrayName="items" class="cart-items-list">
+        <div
+          class="cart-item-card"
+          *ngFor="let item of cartItems; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="item-selection">
+            <label class="checkbox-container">
+              <input
+                type="checkbox"
+                formControlName="selected"
+                class="item-checkbox"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </div>
 
-    <div *ngIf="cartItems.length === 0" class="empty-cart">
-      Your cart is empty.
-    </div>
+          <div class="item-image">
+            <img
+              [src]="item.image"
+              [alt]="item.itemName"
+              class="product-image"
+            />
+          </div>
 
-  </form>
+          <div class="item-details">
+            <h3 class="product-name">{{ item.itemName }}</h3>
+            <div class="product-price">
+              <span class="current-price">$ {{ item.price }}</span>
+              <span class="original-price" *ngIf="item.oldPrice">
+                $ {{ item.oldPrice }}
+              </span>
+            </div>
+          </div>
 
+          <div class="item-quantity">
+            <div class="quantity-controls">
+              <button
+                type="button"
+                class="qty-btn qty-decrease"
+                (click)="decreaseQty(item)"
+                [disabled]="item.qty <= 1"
+              >
+                <i class="icon-minus"></i>
+              </button>
+              <span class="qty-value">{{ item.qty }}</span>
+              <button
+                type="button"
+                class="qty-btn qty-increase"
+                (click)="increaseQty(item)"
+              >
+                <i class="icon-plus"></i>
+              </button>
+            </div>
+          </div>
 
-  <div class="cart-summary-area">
+          <div class="item-total">
+            <span class="total-price"
+              >$ {{ totalPriceFix(item.price, item.qty) }}</span
+            >
+          </div>
 
-    <h3>Order Summary</h3>
+          <div class="item-actions">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="removeItem(item.id, item.itemName)"
+            >
+              <i class="icon-remove"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
-    <div class="summary-row">
-      <span>Subtotal ({{ cartItems.length }} items)</span>
-      <span>$ {{ total }}</span>
-    </div>
-
-    <div class="summary-row">
-      <span>Shipping Fee</span>
-      <span>$ 0</span>
-    </div>
-
-    <input
-      type="text"
-      placeholder="Enter Voucher Code"
-      class="voucher-input"
-    />
-
-    <button class="apply-btn" type="button">
-      APPLY
-    </button>
-
-    <hr />
-
-    <div class="summary-total">
-      <span>Total</span>
-      <span>$ {{ total }}</span>
-    </div>
-
-    <button
-      class="checkout-btn"
-      type="button"
-      (click)="checkout()"
-      [disabled]="cartItems.length === 0"
-    >
-      PROCEED TO CHECKOUT
-    </button>
-
+      <!-- Empty Cart State -->
+      <div *ngIf="cartItems.length === 0" class="empty-cart-state">
+        <div class="empty-cart-icon">
+          <i class="icon-cart-empty"></i>
+        </div>
+        <h3>Your cart is empty</h3>
+        <p>Add some products to get started</p>
+        <button class="btn btn-primary" routerLink="/shop">
+          Continue Shopping
+        </button>
+      </div>
+    </form>
   </div>
 
+  <!-- Order Summary Sidebar -->
+  <div class="cart-sidebar" *ngIf="cartItems.length > 0">
+    <div class="order-summary">
+      <h2 class="summary-title">Order Summary</h2>
+
+      <div class="summary-details">
+        <div class="summary-row">
+          <span>Subtotal ({{ cartItems.length }} items)</span>
+          <span class="amount">$ {{ total.toFixed(2) }}</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="amount free-shipping">Free</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Tax</span>
+          <span class="amount">$ 0.00</span>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="summary-total">
+        <span class="total-label">Total</span>
+        <span class="total-amount">$ {{ total.toFixed(2) }}</span>
+      </div>
+
+      <!-- Voucher Section -->
+      <div class="voucher-section">
+        <div class="voucher-input-group">
+          <input
+            type="text"
+            placeholder="Enter voucher code"
+            class="voucher-input"
+          />
+          <button class="btn btn-voucher" type="button">Apply</button>
+        </div>
+        <p class="voucher-note">Enter your voucher code to get discount</p>
+      </div>
+
+      <button
+        class="btn btn-primary btn-checkout"
+        type="button"
+        (click)="checkout()"
+        [disabled]="cartItems.length === 0"
+      >
+        <i class="icon-checkout"></i>
+        Proceed to Checkout
+      </button>
+
+      <div class="checkout-benefits">
+        <div class="benefit-item">
+          <i class="icon-shield"></i>
+          <span>Secure checkout</span>
+        </div>
+        <div class="benefit-item">
+          <i class="icon-truck"></i>
+          <span>Free shipping</span>
+        </div>
+        <div class="benefit-item">
+          <i class="icon-return"></i>
+          <span>Easy returns</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

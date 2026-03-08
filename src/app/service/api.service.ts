@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-
   private cartCount = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCount.asObservable();
 
@@ -59,5 +58,8 @@ export class ApiService {
   }
   DeleteAll() {
     return this.http.delete(`${this.baseUrl}Cart`);
+  }
+  postCheckout(payload: any) {
+    return this.http.post(`${this.baseUrl}Checkout`, payload);
   }
 }

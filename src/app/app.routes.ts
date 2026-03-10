@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'detail-page', component: DetailCardComponent },
-  { path: 'form-page', component: BuyNowComponent },
+  { path: 'buy-now', component: BuyNowComponent },
   { path: 'cart-page', component: CartPageComponent },
   { path: 'admin-panel', component: AdminLoginComponent },
   { path: 'dashboard', component: AdminDashboardComponent },

@@ -1,65 +1,107 @@
-<div class="checkout-wrapper">
+<div class="checkout-page">
+  <div class="checkout-wrapper">
+    <!-- LEFT SIDE : DELIVERY FORM -->
+    <div class="checkout-card">
+      <h2 class="title">Delivery Information</h2>
 
-  <!-- LEFT SIDE FORM -->
-  <div class="checkout-container">
-    <h2>Delivery Information</h2>
+      <form [formGroup]="deliveryForm" (ngSubmit)="save()">
+        <div class="form-grid">
+          <div class="field">
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder="Enter full name"
+              formControlName="fullName"
+            />
+          </div>
 
-    <form [formGroup]="deliveryForm" (ngSubmit)="save()">
+          <div class="field">
+            <label>Phone</label>
+            <input
+              type="text"
+              placeholder="03XXXXXXXXX"
+              formControlName="phone"
+            />
+          </div>
 
-      <div class="form-grid">
+          <div class="field">
+            <label>Province</label>
+            <select formControlName="province">
+              <option value="">Choose Province</option>
+              <option>Punjab</option>
+              <option>Sindh</option>
+              <option>KPK</option>
+              <option>Balochistan</option>
+            </select>
+          </div>
 
-        <div class="field">
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter your first and last name" formControlName="fullName">
+          <div class="field">
+            <label>Area</label>
+            <select formControlName="area">
+              <option value="">Choose Area</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>House No / Street</label>
+            <input
+              type="text"
+              placeholder="House number / street"
+              formControlName="house"
+            />
+          </div>
+
+          <div class="field">
+            <label>Landmark</label>
+            <input
+              type="text"
+              placeholder="Nearby landmark"
+              formControlName="colony"
+            />
+          </div>
+
+          <div class="field full">
+            <label>Complete Address</label>
+            <textarea
+              rows="3"
+              placeholder="Full delivery address"
+              formControlName="address"
+            ></textarea>
+          </div>
         </div>
 
-        <div class="field">
-          <label>Province</label>
-          <select formControlName="province">
-            <option value="">Choose Province</option>
-            <option>Punjab</option>
-            <option>Sindh</option>
-            <option>KPK</option>
-            <option>Balochistan</option>
-          </select>
-        </div>
+        <!-- SINGLE CHECKOUT BUTTON -->
+        <button type="submit" class="checkout-btn">Place Order</button>
+      </form>
+    </div>
 
-        <div class="field">
-          <label>House No / Street</label>
-          <input type="text" placeholder="Enter house no" formControlName="house">
-        </div>
+    <!-- RIGHT SIDE : ORDER SUMMARY -->
+    <div class="order-card">
+      <h3>Order Summary</h3>
 
-        <div class="field">
-          <label>Area</label>
-          <select formControlName="area">
-            <option value="">Choose Area</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Colony / Landmark</label>
-          <input type="text" placeholder="Enter landmark" formControlName="colony">
-        </div>
-
-        <div class="field">
-          <label>Address</label>
-          <input type="text" placeholder="Full address" formControlName="address">
-        </div>
-
+      <div class="order-row">
+        <span>Items</span>
+        <span>{{ this.selectedItems.length }}</span>
       </div>
 
-      <button class="save-btn" type="submit">SAVE</button>
+      <div class="order-row">
+        <span>Subtotal</span>
+        <span>Rs {{ subtotal() }}</span>
+      </div>
 
-    </form>
+      <div class="order-row">
+        <span>Delivery Fee</span>
+        <span>Rs 100</span>
+      </div>
+
+      <div class="order-row total">
+        <span>Total</span>
+        <span>Rs {{ subtotal() + 100 }}</span>
+      </div>
+
+      <p class="payment-note">
+        Payment Method: <strong>Cash on Delivery</strong>
+      </p>
+    </div>
   </div>
-
-
-  <!-- RIGHT SIDE BOX -->
-  <div class="order-box">
-    <h3>Order Summary</h3>
-    <p>Items: 3</p>
-    <p>Total: Rs 2500</p>
-    <button>Checkout</button>
-  </div>
-
 </div>

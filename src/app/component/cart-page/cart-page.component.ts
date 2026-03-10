@@ -160,7 +160,7 @@ export class CartPageComponent implements OnInit {
     if (confirmCheckout) {
       console.log('Selected Items for Checkout:', selectedItems);
 
-      this.router.navigate(['/form-page'], { state: { data: selectedItems } });
+      this.router.navigate(['/buy-now'], { state: { data: selectedItems } });
     }
   }
 }

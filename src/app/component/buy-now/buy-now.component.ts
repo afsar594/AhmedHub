@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buy-now',
@@ -18,13 +19,15 @@ export class BuyNowComponent {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
+    private route: Router,
   ) {
     this.deliveryForm = this.fb.group({
       fullName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^03[0-9]{9}$')]],
       province: ['', Validators.required],
-      house: ['', Validators.required],
       area: ['', Validators.required],
-      colony: ['', Validators.required],
+      house: ['', Validators.required],
+      colony: [''],
       address: ['', Validators.required],
     });
   }
@@ -34,6 +37,11 @@ export class BuyNowComponent {
     const data = navigation.data;
     this.selectedItems = data;
     console.log('selectedItems', this.selectedItems);
+  }
+  subtotal() {
+    return this.selectedItems?.reduce((sum: number, item: any) => {
+      return sum + item.price * item.qty;
+    }, 0);
   }
   save() {
     // if (this.deliveryForm.invalid) {
@@ -73,7 +81,10 @@ export class BuyNowComponent {
         };
       });
       this.api.postCheckout(payload).subscribe((res) => {
-        console.log(res);
+        if (res) {
+          this.route.navigate(['/shop']);
+          console.log(res);
+        }
       });
     }
   }

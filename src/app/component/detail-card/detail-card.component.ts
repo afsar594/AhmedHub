@@ -99,7 +99,9 @@ export class DetailCardComponent implements OnInit {
   }
 
   increase() {
-    this.quantity++;
+    if (this.record.qty && this.quantity < this.record.qty) {
+      this.quantity++;
+    }
   }
 
   decrease() {
@@ -109,7 +111,7 @@ export class DetailCardComponent implements OnInit {
   }
 
   navigateToForm() {
-    this.router.navigate(['form-page']);
+    this.router.navigate(['buy-now']);
   }
 
   navigateTocart(data: any) {

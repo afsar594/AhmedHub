@@ -1,116 +1,81 @@
-/* Main container */
-.checkout-container {
-  max-width: 550px;
-  margin: 35px auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
-  font-family: 'Poppins', sans-serif;
+/* Main Layout */
+.checkout-wrapper{
+  display:flex;
+  gap:30px;
+  max-width:1000px;
+  margin:auto;
 }
 
-/* Heading */
-.checkout-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #e65c00;
-  font-size: 26px;
-  font-weight: 600;
+/* Left form */
+.checkout-container{
+  flex:2;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,0,0,0.08);
 }
 
-/* Form group */
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #444;
-  font-weight: 600;
+/* Grid for fields */
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  gap:15px;
 }
 
-/* Inputs & Selects */
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: 0.25s ease;
+/* Fields */
+.field{
+  display:flex;
+  flex-direction:column;
 }
 
-/* On focus */
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #ff6600;
-  box-shadow: 0 0 4px rgba(255, 102, 0, 0.4);
-  outline: none;
+.field label{
+  font-size:14px;
+  margin-bottom:5px;
+  font-weight:600;
+}
+
+.field input,
+.field select{
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
 }
 
 /* Save button */
-.save-btn {
-  width: 100%;
-  background: linear-gradient(90deg, #ff6600, #e65c00);
-  color: #fff;
-  border: none;
-  padding: 14px;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  margin-top: 10px;
-  transition: 0.3s;
+.save-btn{
+  margin-top:20px;
+  width:100%;
+  padding:12px;
+  background:#ff6600;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-.save-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+/* Right side order box */
+.order-box{
+  flex:1;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,0,0,0.08);
+  height:fit-content;
 }
 
-/* Error text */
-.error {
-  color: red;
-  font-size: 13px;
-  margin-top: -8px;
-  margin-bottom: 8px;
+.order-box h3{
+  margin-bottom:15px;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .checkout-container {
-    padding: 18px;
+/* Mobile responsive */
+@media(max-width:768px){
+
+  .checkout-wrapper{
+    flex-direction:column;
   }
 
-  .checkout-container h2 {
-    font-size: 22px;
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
-  .save-btn {
-    font-size: 15px;
-    padding: 12px;
-  }
 }
-/* Make form-group elements full width */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* spacing between label + input/select */
-}
-
-/* Make all inputs and selects same width */
-.form-group input,
-.form-group select {
-  width: 100%;
-  box-sizing: border-box; /* ensure padding/border included in width */
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-/* Optional: set max-width for form container */
-.checkout-container {
-  max-width: 500px; 
-  margin: 0 auto;
-}
-

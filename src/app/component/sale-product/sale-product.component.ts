@@ -9,7 +9,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 @Component({
   selector: 'app-sale-product',
   standalone: true,
-  imports: [CommonModule, ShopSliderComponent, NavbarComponent],
+  imports: [CommonModule, ShopSliderComponent],
   templateUrl: './sale-product.component.html',
   styleUrls: ['./sale-product.component.css'],
 })

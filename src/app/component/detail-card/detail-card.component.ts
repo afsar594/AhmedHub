@@ -110,8 +110,10 @@ export class DetailCardComponent implements OnInit {
     }
   }
 
-  navigateToForm() {
-    this.router.navigate(['buy-now']);
+  navigateToForm(data:any) {
+    data.qty=this.quantity
+    // this.router.navigate(['buy-now']);
+    this.router.navigate(['buy-now'], { state: { data: data } });
   }
 
   navigateTocart(data: any) {

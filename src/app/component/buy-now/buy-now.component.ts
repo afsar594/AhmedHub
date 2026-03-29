@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class BuyNowComponent implements OnInit {
   deliveryForm: FormGroup;
-  selectedItems: any[] = [];
+  selectedItems: any;
   checkoutArray: any[] = [];
   areasByProvince: any = {
     Punjab: ['Lahore', 'Faisalabad', 'Multan'],
@@ -46,7 +46,47 @@ export class BuyNowComponent implements OnInit {
 
   ngOnInit(): void {
     const navigation = history.state;
-    this.selectedItems = navigation.data || [];
+   if (navigation.data != null) {
+
+  if (Array.isArray(navigation.data)) {
+    this.selectedItems=navigation.data;
+  } else {
+  const item = navigation.data;
+
+const result = {
+  id: 0, 
+  itemId: item.id,
+  itemName: item.title,
+  price: item.price,
+  oldPrice: item.oldPrice,
+  discount: item.discount,
+  qty: item.qty,
+  img: "",
+
+  detail: item.detail,
+  color: "",
+
+  classifiedId: item.classifiedId,
+  category: item.category,
+  brand: item.brand,
+
+  createdDate: new Date().toISOString(),
+  CurrentUser: "21",
+
+  image: item.image, // base64 aa raha hai
+
+  subTotal: item.qty * item.price,
+  shippingFee: 100,
+  tax: 0,
+  totalAmount: (item.qty * item.price) + 100
+};
+
+console.log(result);
+    this.selectedItems = [result];
+  }
+
+}
+    // this.selectedItems = navigation.data || [];
     console.log('Selected Items:', this.selectedItems);
 
     // Update area options when province changes
@@ -56,12 +96,12 @@ export class BuyNowComponent implements OnInit {
     });
   }
 
-  subtotal(): number {
-    return this.selectedItems.reduce(
-      (sum, item) => sum + item.price * item.qty,
-      0,
-    );
-  }
+subtotal(): number {
+  return this.selectedItems.reduce(
+    (sum: number, item: { qty: number; price: number; }) => sum + item.qty * item.price,
+    0
+  );
+}
 
  save() {
   // 1. Validate form
@@ -98,7 +138,7 @@ export class BuyNowComponent implements OnInit {
             return {
               id: x.id || 0,
               itemId: x.itemId,
-              itemName: x.itemName,
+              itemName: x.itemName?x.itemName:x.title,
               price: x.price,
               oldPrice: x.oldPrice,
               discount: x.discount,

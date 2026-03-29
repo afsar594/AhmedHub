@@ -1,3 +1,10 @@
+<app-alert-modal
+  [visible]="showModal"
+  [title]="modalTitle"
+  [message]="modalMessage"
+  (onConfirm)="handleConfirm()"
+  (onCancel)="showModal=false"
+></app-alert-modal>
 <div class="cart-page-container">
   <div class="cart-content">
     <!-- Cart Header -->

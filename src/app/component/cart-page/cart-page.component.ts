@@ -8,11 +8,12 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, AlertModalComponent],
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css'],
 })
@@ -71,6 +72,17 @@ export class CartPageComponent implements OnInit {
     });
   }
 
+showModal = false;
+modalTitle = '';
+modalMessage = '';
+modalAction: (() => void) | null = null;
+
+handleConfirm() {
+  if (this.modalAction) this.modalAction();
+  this.showModal = false;
+}
+
+
   increaseQty(item: any) {
     item.qty++;
   }
@@ -81,49 +93,45 @@ export class CartPageComponent implements OnInit {
     }
   }
 
-  removeItem(id: number, itemName?: string) {
-    const name = itemName || 'this item';
+removeItem(id: number, itemName?: string) {
+  this.modalTitle = 'Remove Item';
+  this.modalMessage = `Are you sure you want to remove "${itemName}" from your cart?`;
+  this.modalAction = () => {
+    this.api.DeleteCart(id).subscribe(() => this.GetAllItemCard());
+  };
+  this.showModal = true;
+}
 
-    if (
-      window.confirm(
-        `Are you sure you want to remove "${name}" from your cart?`,
-      )
-    ) {
-      this.api.DeleteCart(id).subscribe(() => {
-        this.GetAllItemCard();
-      });
-    }
+deleteSelected() {
+  const selectedIds = this.items.controls
+    .filter(c => c.value.selected)
+    .map(c => c.value.id);
+
+  if(selectedIds.length === 0) {
+    alert('Please select at least one item.');
+    return;
   }
 
-  deleteSelected() {
-    const selectedIds = this.items.controls
-      .filter((control) => control.value.selected)
-      .map((control) => control.value.id);
+  this.modalTitle = 'Delete Selected';
+  this.modalMessage = 'Are you sure you want to delete selected items?';
+  this.modalAction = () => {
+    selectedIds.forEach(id => this.api.DeleteCart(id).subscribe());
+    setTimeout(() => this.GetAllItemCard(), 500);
+  };
+  this.showModal = true;
+}
 
-    if (selectedIds.length === 0) {
-      alert('Please select at least one item.');
-      return;
-    }
-
-    if (window.confirm('Are you sure you want to delete selected items?')) {
-      selectedIds.forEach((id: number) => {
-        this.api.DeleteCart(id).subscribe();
-      });
-
-      setTimeout(() => {
-        this.GetAllItemCard();
-      }, 500);
-    }
-  }
-
-  clearAll() {
-    if (window.confirm('Are you sure you want to clear your entire cart?')) {
-      this.api.DeleteAll().subscribe(() => {
-        this.cartItems = [];
-        this.buildFormArray();
-      });
-    }
-  }
+ clearAll() {
+  this.modalTitle = 'Clear Cart';
+  this.modalMessage = 'Are you sure you want to clear your entire cart?';
+  this.modalAction = () => {
+    this.api.DeleteAll().subscribe(() => {
+      this.cartItems = [];
+      this.buildFormArray();
+    });
+  };
+  this.showModal = true;
+}
 
   get total(): number {
     if (!this.cartItems || this.cartItems.length === 0) return 0;
@@ -140,27 +148,22 @@ export class CartPageComponent implements OnInit {
     return total.toFixed(2);
   }
 
-  checkout() {
-    const selectedItems = this.items.controls
-      .map((control, index) => ({
-        selected: control.value.selected,
-        item: this.cartItems[index],
-      }))
-      .filter((x) => x.selected)
-      .map((x) => x.item);
+checkout() {
+  const selectedItems = this.items.controls
+    .map((control, index) => ({ selected: control.value.selected, item: this.cartItems[index] }))
+    .filter(x => x.selected)
+    .map(x => x.item);
 
-    if (selectedItems.length === 0) {
-      alert('Please select at least one item to proceed.');
-      return;
-    }
-    const confirmCheckout = window.confirm(
-      `Are you sure you want to proceed with ${selectedItems.length} item(s)?`,
-    );
-
-    if (confirmCheckout) {
-      console.log('Selected Items for Checkout:', selectedItems);
-
-      this.router.navigate(['/buy-now'], { state: { data: selectedItems } });
-    }
+  if(selectedItems.length === 0) {
+    alert('Please select at least one item to proceed.');
+    return;
   }
+
+  this.modalTitle = 'Proceed to Checkout';
+  this.modalMessage = `Are you sure you want to proceed with ${selectedItems.length} item(s)?`;
+  this.modalAction = () => {
+    this.router.navigate(['/buy-now'], { state: { data: selectedItems } });
+  };
+  this.showModal = true;
+}
 }

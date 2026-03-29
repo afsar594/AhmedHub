@@ -1,77 +1,86 @@
 <div class="checkout-page">
   <div class="checkout-wrapper">
+
     <!-- LEFT SIDE : DELIVERY FORM -->
     <div class="checkout-card">
       <h2 class="title">Delivery Information</h2>
 
       <form [formGroup]="deliveryForm" (ngSubmit)="save()">
+
         <div class="form-grid">
-          <div class="field">
+
+          <!-- Full Name -->
+          <div class="field" [ngClass]="{'error-blink': deliveryForm.get('fullName')?.touched && deliveryForm.get('fullName')?.invalid}">
             <label>Full Name</label>
-            <input
-              type="text"
-              placeholder="Enter full name"
-              formControlName="fullName"
-            />
+            <input type="text" placeholder="Enter full name" formControlName="fullName" />
+            <small class="error" *ngIf="deliveryForm.get('fullName')?.touched && deliveryForm.get('fullName')?.invalid">
+              Full Name is required.
+            </small>
           </div>
 
-          <div class="field">
+          <!-- Phone -->
+          <div class="field" [ngClass]="{'error-blink': deliveryForm.get('phone')?.touched && deliveryForm.get('phone')?.invalid}">
             <label>Phone</label>
-            <input
-              type="text"
-              placeholder="03XXXXXXXXX"
-              formControlName="phone"
-            />
+            <input type="text" placeholder="03XXXXXXXXX" formControlName="phone" />
+            <small class="error" *ngIf="deliveryForm.get('phone')?.touched && deliveryForm.get('phone')?.invalid">
+              Enter valid Pakistani phone number.
+            </small>
           </div>
 
-          <div class="field">
+          <!-- Province -->
+          <div class="field" [ngClass]="{'error-blink': deliveryForm.get('province')?.touched && deliveryForm.get('province')?.invalid}">
             <label>Province</label>
             <select formControlName="province">
               <option value="">Choose Province</option>
-              <option>Punjab</option>
-              <option>Sindh</option>
-              <option>KPK</option>
-              <option>Balochistan</option>
+              <option *ngFor="let p of ['Punjab', 'Sindh', 'KPK', 'Balochistan']">{{ p }}</option>
             </select>
+            <small class="error" *ngIf="deliveryForm.get('province')?.touched && deliveryForm.get('province')?.invalid">
+              Province is required.
+            </small>
           </div>
 
-          <div class="field">
+          <!-- Area -->
+          <div class="field" [ngClass]="{'error-blink': deliveryForm.get('area')?.touched && deliveryForm.get('area')?.invalid}">
             <label>Area</label>
             <select formControlName="area">
               <option value="">Choose Area</option>
+              <option *ngFor="let a of availableAreas">{{ a }}</option>
             </select>
+            <small class="error" *ngIf="deliveryForm.get('area')?.touched && deliveryForm.get('area')?.invalid">
+              Area is required.
+            </small>
           </div>
 
-          <div class="field">
+          <!-- House / Street -->
+          <div class="field" [ngClass]="{'error-blink': deliveryForm.get('house')?.touched && deliveryForm.get('house')?.invalid}">
             <label>House No / Street</label>
-            <input
-              type="text"
-              placeholder="House number / street"
-              formControlName="house"
-            />
+            <input type="text" placeholder="House number / street" formControlName="house" />
+            <small class="error" *ngIf="deliveryForm.get('house')?.touched && deliveryForm.get('house')?.invalid">
+              House No / Street is required.
+            </small>
           </div>
 
+          <!-- Landmark -->
           <div class="field">
             <label>Landmark</label>
-            <input
-              type="text"
-              placeholder="Nearby landmark"
-              formControlName="colony"
-            />
+            <input type="text" placeholder="Nearby landmark" formControlName="colony" />
           </div>
 
-          <div class="field full">
+          <!-- Complete Address -->
+          <div class="field full" [ngClass]="{'error-blink': deliveryForm.get('address')?.touched && deliveryForm.get('address')?.invalid}">
             <label>Complete Address</label>
-            <textarea
-              rows="3"
-              placeholder="Full delivery address"
-              formControlName="address"
-            ></textarea>
+            <textarea rows="3" placeholder="Full delivery address" formControlName="address"></textarea>
+            <small class="error" *ngIf="deliveryForm.get('address')?.touched && deliveryForm.get('address')?.invalid">
+              Complete address is required.
+            </small>
           </div>
+
         </div>
 
-        <!-- SINGLE CHECKOUT BUTTON -->
-        <button type="submit" class="checkout-btn">Place Order</button>
+        <!-- Submit Button -->
+        <button type="submit" class="checkout-btn">
+          Place Order
+        </button>
       </form>
     </div>
 
@@ -81,7 +90,7 @@
 
       <div class="order-row">
         <span>Items</span>
-        <span>{{ this.selectedItems.length }}</span>
+        <span>{{ selectedItems.length }}</span>
       </div>
 
       <div class="order-row">

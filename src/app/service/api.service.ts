@@ -62,4 +62,7 @@ export class ApiService {
   postCheckout(payload: any) {
     return this.http.post(`${this.baseUrl}Checkout`, payload);
   }
+   UserShippingAddress(payload: any) {
+    return this.http.post(`${this.baseUrl}UserShippingAddress/signup`, payload);
+  }
 }

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CoverBannerComponent } from './component/cover-banner/cover-banner.component';
+// import { CoverBannerComponent } from './component/cover-banner/cover-banner.component';
 import { SaleProductComponent } from './component/sale-product/sale-product.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
@@ -17,8 +17,8 @@ import { CartPageComponent } from './component/cart-page/cart-page.component';
 // import { AdminAddProductComponent } from './admin-component/admin-add-product/admin-add-product.component';
 
 export const routes: Routes = [
-  { path: '', component: CoverBannerComponent },
-  { path: 'home', component: CoverBannerComponent },
+  { path: '', component: SaleProductComponent },
+  // { path: 'home', component: CoverBannerComponent },
   // {path:'cover-banner', component:CoverBannerComponent},
   { path: 'shop', component: SaleProductComponent },
   { path: 'aboutus', component: AboutUsComponent },

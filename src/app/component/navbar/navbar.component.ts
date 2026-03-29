@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { SearchService } from '../../service/search.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -17,13 +18,21 @@ export class NavbarComponent {
   activeLink = '';
   searchTerm: string = '';
   cartCount: any; // example value
-
+  currentUrl: string = '';
   constructor(
     private router: Router,
     private searchService: SearchService,
     private api: ApiService,
   ) {
     this.GetAllItemCard();
+  }
+   ngOnInit() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentUrl = event.url;
+        console.log('Updated URL:', this.currentUrl);
+      });
   }
   GetAllItemCard() {
     this.api.cartCount$.subscribe(count => {

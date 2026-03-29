@@ -4,11 +4,12 @@ import { ApiService } from '../../service/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ShopSliderComponent } from '../shop-slider/shop-slider.component';
 import { SearchService } from '../../service/search.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-sale-product',
   standalone: true,
-  imports: [CommonModule, ShopSliderComponent],
+  imports: [CommonModule, ShopSliderComponent, NavbarComponent],
   templateUrl: './sale-product.component.html',
   styleUrls: ['./sale-product.component.css'],
 })

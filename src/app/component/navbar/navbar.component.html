@@ -10,7 +10,7 @@
 
   <ul class="top-links" [class.active]="menuOpen">
     <li>
-      <a
+      <a style="cursor: pointer;"
         routerLink="/home"
         (click)="setActive('home')"
         [class.active]="activeLink === 'home'"
@@ -100,7 +100,7 @@
   </ul>
 </nav>
 
-<div class="search-area">
+<div class="search-area" *ngIf="currentUrl=='/shop'">
   <input
     type="text"
     placeholder="Search in AhmedHub"

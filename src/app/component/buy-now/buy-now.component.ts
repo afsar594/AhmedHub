@@ -46,46 +46,44 @@ export class BuyNowComponent implements OnInit {
 
   ngOnInit(): void {
     const navigation = history.state;
-   if (navigation.data != null) {
+    if (navigation.data != null) {
+      if (Array.isArray(navigation.data)) {
+        this.selectedItems = navigation.data;
+      } else {
+        const item = navigation.data;
 
-  if (Array.isArray(navigation.data)) {
-    this.selectedItems=navigation.data;
-  } else {
-  const item = navigation.data;
+        const result = {
+          id: 0,
+          itemId: item.id,
+          itemName: item.title,
+          price: item.price,
+          oldPrice: item.oldPrice,
+          discount: item.discount,
+          qty: item.qty,
+          img: '',
 
-const result = {
-  id: 0, 
-  itemId: item.id,
-  itemName: item.title,
-  price: item.price,
-  oldPrice: item.oldPrice,
-  discount: item.discount,
-  qty: item.qty,
-  img: "",
+          detail: item.detail,
+          color: '',
 
-  detail: item.detail,
-  color: "",
+          classifiedId: item.classifiedId,
+          category: item.category,
+          brand: item.brand,
 
-  classifiedId: item.classifiedId,
-  category: item.category,
-  brand: item.brand,
+          createdDate: new Date().toISOString(),
+          CurrentUser: '21',
 
-  createdDate: new Date().toISOString(),
-  CurrentUser: "21",
+          image: item.image, // base64 aa raha hai
 
-  image: item.image, // base64 aa raha hai
+          subTotal: item.qty * item.price,
+          shippingFee: 100,
+          tax: 0,
+          totalAmount: item.qty * item.price + 100,
+        };
 
-  subTotal: item.qty * item.price,
-  shippingFee: 100,
-  tax: 0,
-  totalAmount: (item.qty * item.price) + 100
-};
-
-console.log(result);
-    this.selectedItems = [result];
-  }
-
-}
+        console.log(result);
+        this.selectedItems = [result];
+      }
+    }
     // this.selectedItems = navigation.data || [];
     console.log('Selected Items:', this.selectedItems);
 
@@ -96,89 +94,90 @@ console.log(result);
     });
   }
 
-subtotal(): number {
-  return this.selectedItems.reduce(
-    (sum: number, item: { qty: number; price: number; }) => sum + item.qty * item.price,
-    0
-  );
-}
-
- save() {
-  // 1. Validate form
-  if (this.deliveryForm.invalid) {
-    this.deliveryForm.markAllAsTouched();
-    return;
+  subtotal(): number {
+    return this.selectedItems.reduce(
+      (sum: number, item: { qty: number; price: number }) =>
+        sum + item.qty * item.price,
+      0,
+    );
   }
 
-  const formValue = this.deliveryForm.value;
+  save() {
+    // 1. Validate form
+    if (this.deliveryForm.invalid) {
+      this.deliveryForm.markAllAsTouched();
+      return;
+    }
 
-  // 2. Prepare user payload
-  const userPayload = {
-    id: 0,
-    name: formValue.fullName,
-    provinceId: 1, // fallback to 1 if not selected
-    houseNo: formValue.house,
-    phone: formValue.phone,
-    address: formValue.address,
-  };
+    const formValue = this.deliveryForm.value;
 
-  // 3. Save user shipping address
-  this.api.UserShippingAddress(userPayload).subscribe({
-    next: (userRes: any) => {
-      if (userRes && userRes.isSuccess) {
-        const userId = userRes.data.id;
-        console.log('User saved:', userRes);
+    // 2. Prepare user payload
+    const userPayload = {
+      id: 0,
+      name: formValue.fullName,
+      provinceId: 1, // fallback to 1 if not selected
+      houseNo: formValue.house,
+      phone: formValue.phone,
+      address: formValue.address,
+    };
 
-        if (this.selectedItems && this.selectedItems.length > 0) {
-          const payload = this.selectedItems.map((x: any) => {
-            const subTotal = x.price * x.qty;
-            const shippingFee = 100; // replace with dynamic delivery fee if needed
-            const tax = 0;
+    // 3. Save user shipping address
+    this.api.UserShippingAddress(userPayload).subscribe({
+      next: (userRes: any) => {
+        if (userRes && userRes.isSuccess) {
+          const userId = userRes.data.id;
+          console.log('User saved:', userRes);
 
-            return {
-              id: x.id || 0,
-              itemId: x.itemId,
-              itemName: x.itemName?x.itemName:x.title,
-              price: x.price,
-              oldPrice: x.oldPrice,
-              discount: x.discount,
-              qty: x.qty,
-              img: x.img,
-              detail: x.detail,
-              color: x.color,
-              classifiedId: x.classifiedId,
-              category: x.category,
-              brand: x.brand,
-              createdDate: x.createdDate,
-              CurrentUser: String(userId),
-              image: x.image,
-              subTotal: subTotal,
-              shippingFee: shippingFee,
-              tax: tax,
-              totalAmount: subTotal + shippingFee + tax,
-            };
-          });
+          if (this.selectedItems && this.selectedItems.length > 0) {
+            const payload = this.selectedItems.map((x: any) => {
+              const subTotal = x.price * x.qty;
+              const shippingFee = 100; // replace with dynamic delivery fee if needed
+              const tax = 0;
 
-          // 4. Save checkout
-          this.api.postCheckout(payload).subscribe({
-            next: (checkoutRes) => {
-              console.log('Checkout successful:', checkoutRes);
-              this.route.navigate(['/shop']);
-            },
-            error: (err) => {
-              console.error('Checkout failed:', err);
-            },
-          });
+              return {
+                id: x.id || 0,
+                itemId: x.itemId,
+                itemName: x.itemName ? x.itemName : x.title,
+                price: x.price,
+                oldPrice: x.oldPrice,
+                discount: x.discount,
+                qty: x.qty,
+                img: x.img,
+                detail: x.detail,
+                color: x.color,
+                classifiedId: x.classifiedId,
+                category: x.category,
+                brand: x.brand,
+                createdDate: x.createdDate,
+                CurrentUser: String(userId),
+                image: x.image,
+                subTotal: subTotal,
+                shippingFee: shippingFee,
+                tax: tax,
+                totalAmount: subTotal + shippingFee + tax,
+              };
+            });
+
+            // 4. Save checkout
+            this.api.postCheckout(payload).subscribe({
+              next: (checkoutRes) => {
+                console.log('Checkout successful:', checkoutRes);
+                this.route.navigate(['/shop']);
+              },
+              error: (err) => {
+                console.error('Checkout failed:', err);
+              },
+            });
+          } else {
+            console.warn('No items selected for checkout.');
+          }
         } else {
-          console.warn('No items selected for checkout.');
+          console.error('Failed to save user address:', userRes);
         }
-      } else {
-        console.error('Failed to save user address:', userRes);
-      }
-    },
-    error: (err) => {
-      console.error('User shipping API error:', err);
-    },
-  });
-}
+      },
+      error: (err) => {
+        console.error('User shipping API error:', err);
+      },
+    });
+  }
 }

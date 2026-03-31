@@ -1,0 +1,72 @@
+<div class="payment-page">
+
+  <!-- ALERT BAR -->
+  <div class="top-alert">
+    ⚠ Please collect bank vouchers to avail bank discounts and mega deals/flash sales.
+  </div>
+
+  <div class="payment-container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+      <h3>Select Payment Method</h3>
+
+      <div class="payment-grid">
+
+        <div class="pay-box" (click)="select('easypaisa')" [class.active]="selected==='easypaisa'">
+          <img src="https://crystalpng.com/wp-content/uploads/2024/10/Easypaisa-logo.png">
+          <span>Easypaisa</span>
+        </div>
+
+        <div class="pay-box" (click)="select('jazzcash')" [class.active]="selected==='jazzcash'">
+          <img src="https://crystalpng.com/wp-content/uploads/2024/12/new-Jazzcash-logo.png">
+          <span>JazzCash</span>
+        </div>
+
+        <div class="pay-box" (click)="select('card')" [class.active]="selected==='card'">
+          <img src="https://png.pngtree.com/png-vector/20220706/ourmid/pngtree-debit-card-payment-png-image_5705181.png">
+          <span>Credit/Debit Card</span>
+        </div>
+
+        <div class="pay-box" (click)="select('hbl')" [class.active]="selected==='hbl'">
+          <img src="https://crystalpng.com/wp-content/uploads/2024/10/HBL-logo.png">
+          <span>HBL Bank</span>
+        </div>
+
+        <div class="pay-box" (click)="select('cod')" [class.active]="selected==='cod'">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhxZ2XEVrokm0HW3UqfYoFLaxGbC7rrBO63A&s">
+          <span>Cash on Delivery</span>
+        </div>
+
+        <div class="pay-box disabled">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_41dT0GF8VCa4OKpxLqm5IfFaN_85OFJfg&s">
+          <span>Installment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+      <h4>Order Summary</h4>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>Rs. {{total}}</span>
+      </div>
+
+      <div class="summary-row total">
+        <span>Total Amount</span>
+        <span>Rs. {{total}}</span>
+      </div>
+
+      <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>
+
+    </div>
+
+  </div>
+
+</div>

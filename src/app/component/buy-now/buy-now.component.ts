@@ -28,6 +28,7 @@ export class BuyNowComponent implements OnInit {
   };
   availableAreas: string[] = [];
 
+  
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
@@ -101,6 +102,10 @@ export class BuyNowComponent implements OnInit {
       0,
     );
   }
+
+placeOrder() {
+  this.route.navigate(['/payment']);
+}
 
   save() {
     // 1. Validate form

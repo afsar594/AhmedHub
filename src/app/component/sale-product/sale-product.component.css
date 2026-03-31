@@ -1,9 +1,10 @@
-/* ================= SECTION ================= */
 .product-sale {
   margin: 60px 0;
   padding: 0 40px;
+  background: #0F172A; /* Dark Background */
 }
 
+/* ===== Header ===== */
 .section-header {
   display: flex;
   flex-direction: column;
@@ -14,68 +15,82 @@
 .section-header h2 {
   font-size: 26px;
   font-weight: 700;
-  color: #111;
+  color: #00F5D4; /* Neon Aqua */
 }
 
 .on-sale {
   font-size: 14px;
-  color: #666;
+  color: #94A3B8;
 }
 
 /* ================= GRID ================= */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 7 cards ek row me */
-  gap: 12px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
 }
 
 /* ================= CARD ================= */
 .product-card {
-  background: #fff;
+  background: #111827; /* Dark Card */
   border-radius: 16px;
-  max-width: 100%; 
+  max-width: 100%;
   padding: 14px;
   cursor: pointer;
   position: relative;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 245, 212, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 245, 212, 0.05);
   transition: all 0.35s ease;
   overflow: hidden;
 }
 
+/* Hover */
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 245, 212, 0.25);
 }
 
+/* Neon Border Effect */
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.product-card:hover::after {
+  border-color: #8B5CF6; /* Purple Glow */
+}
+
+/* ================= NO RESULTS ================= */
 .no-results {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 70vh; /* Screen ka center */
+  min-height: 70vh;
   padding: 20px;
   text-align: center;
-  background-color: #f9f9f9; /* subtle professional background */
-  color: #333;
+  background-color: #0F172A;
+  color: #FFFFFF;
 }
 
 .no-results p {
-  font-size: 1.2rem;   /* Chhoti aur classy font */
-  font-weight: 400;
+  font-size: 1.1rem;
   line-height: 1.5;
   max-width: 600px;
 }
 
 .no-results p span {
-  font-weight: 600; /* Important words highlight */
-  color: #ff4c3b;  /* Thoda attention grab color */
+  font-weight: 600;
+  color: #FF4D6D; /* Accent Pink */
 }
-
-
 
 /* ================= IMAGE ================= */
 .img-box {
-  background: #f5f5f5;
+  background: #1F2937; /* Dark Gray */
   border-radius: 14px;
   overflow: hidden;
   height: 200px;
@@ -87,7 +102,6 @@
 .img-box img {
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
   transition: transform 0.5s ease;
 }
 
@@ -99,7 +113,7 @@
 .product-card h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #222;
+  color: #FFFFFF;
   margin: 14px 0 10px;
   line-height: 1.3;
 }
@@ -114,13 +128,13 @@
 .price {
   font-size: 16px;
   font-weight: 700;
-  color: #ff6600; /* original theme color */
+  color: #00F5D4; /* Neon Aqua */
 }
 
 .oldPrice {
   font-size: 13px;
   text-decoration: line-through;
-  color: #999;
+  color: #6B7280;
 }
 
 /* ================= DISCOUNT BADGE ================= */
@@ -128,12 +142,32 @@
   position: absolute;
   top: 14px;
   left: 14px;
-  background: #ff6600; /* theme color */
-  color: #fff;
+  background: #FF4D6D; /* Accent Pink */
+  color: #FFFFFF;
   font-size: 12px;
   font-weight: 700;
   padding: 5px 10px;
   border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+}
+
+/* ================= BUTTON (optional add-to-cart) ================= */
+.product-card button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #00F5D4;
+  color: #0F172A;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-card button:hover {
+  background: #FF4D6D;
+  color: #FFFFFF;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -146,7 +180,8 @@
     font-size: 22px;
   }
 }
-  @media (max-width: 1400px) { .product-grid { grid-template-columns: repeat(6, 1fr); } }
+
+@media (max-width: 1400px) { .product-grid { grid-template-columns: repeat(6, 1fr); } }
 @media (max-width: 1200px) { .product-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 992px)  { .product-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 768px)  { .product-grid { grid-template-columns: repeat(3, 1fr); } }

@@ -1,7 +1,9 @@
+/* ================= CHECKOUT PAGE ================= */
 .checkout-page {
-  background: #f4f6f9;
+  background: #0F172A; /* dark navy background */
   min-height: 100vh;
   padding: 40px 20px;
+  color: #E0E7FF; /* light text for readability */
 }
 
 .checkout-wrapper {
@@ -12,23 +14,22 @@
 }
 
 /* LEFT CARD */
-
 .checkout-card {
   flex: 2;
-  background: #fff;
+  background: #111827; /* slightly lighter dark navy */
   padding: 30px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .title {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 25px;
+  color: #00F5D4; /* neon aqua title */
 }
 
 /* FORM */
-
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -48,29 +49,30 @@
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #444;
+  color: #CBD5E1; /* light label text */
 }
 
 .field input,
 .field select,
 .field textarea {
   padding: 11px;
-  border: 1px solid #ddd;
+  border: 1px solid #333F55; /* subtle dark border */
   border-radius: 8px;
   font-size: 14px;
+  background: #1E293B; /* input background */
+  color: #E0E7FF; /* input text */
   transition: 0.3s;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: #ff6600;
+  border-color: #00F5D4; /* neon aqua focus */
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.2);
 }
 
 /* BUTTON */
-
 .checkout-btn {
   margin-top: 25px;
   width: 100%;
@@ -79,30 +81,30 @@
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
-  background: linear-gradient(90deg, #ff6600, #ff8533);
-  color: #fff;
+  background: linear-gradient(90deg, #FF4D6D, #8B5CF6); /* pink to purple gradient */
+  color: #FFFFFF;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .checkout-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* ORDER SUMMARY */
-
 .order-card {
   flex: 1;
-  background: #fff;
+  background: #111827; /* slightly lighter dark navy */
   padding: 25px;
   border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   height: fit-content;
 }
 
 .order-card h3 {
   margin-bottom: 15px;
+  color: #00F5D4; /* neon aqua heading */
 }
 
 .order-row {
@@ -110,30 +112,31 @@
   justify-content: space-between;
   margin: 10px 0;
   font-size: 14px;
+  color: #CBD5E1; /* light text */
 }
 
 .order-row.total {
-  border-top: 1px solid #eee;
+  border-top: 1px solid #333F55;
   margin-top: 15px;
   padding-top: 12px;
   font-weight: 600;
   font-size: 16px;
 }
 
+/* PAYMENT NOTE */
 .payment-note {
   margin-top: 15px;
   font-size: 13px;
-  color: #666;
+  color: #888; /* softer text */
 }
 
 /* MOBILE */
-
 @media (max-width: 900px) {
   .checkout-wrapper {
     flex-direction: column;
   }
 
-  /* ✅ ORDER SUMMARY upar */
+  /* ORDER SUMMARY above form */
   .order-card {
     order: -1;
   }
@@ -148,20 +151,19 @@
 }
 
 /* ERROR EFFECT */
-
 .error-blink {
   animation: blink 0.6s ease-in-out 0s 3;
-  border: 1px solid red;
-  background-color: #ffe6e6;
+  border: 1px solid #FF4D6D; /* pink/red for error */
+  background-color: rgba(255,77,109,0.2); /* light pink background */
 }
 
 @keyframes blink {
-  0% { background-color: #ffe6e6; }
-  50% { background-color: #fff; }
-  100% { background-color: #ffe6e6; }
+  0% { background-color: rgba(255,77,109,0.2); }
+  50% { background-color: #111827; }
+  100% { background-color: rgba(255,77,109,0.2); }
 }
 
 small.error {
-  color: red;
+  color: #FF4D6D; /* pink/red error text */
   font-size: 12px;
 }

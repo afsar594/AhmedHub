@@ -1,7 +1,22 @@
 <div class="policy-container">
-    <h2>Shipping Policy</h2>
-    <div class="section" *ngFor="let item of policySections">
-<h3>{{item.title}}</h3>
-<p>{{item.text}}</p>
-    </div>
+
+  <h2>Privacy Policy</h2>
+  <p class="update">Last updated: March 30, 2026</p>
+
+  <!-- LINKS -->
+  <div class="links">
+    <a *ngFor="let item of policySections" [href]="'#' + item.id">
+      {{item.title}}
+    </a>
+  </div>
+
+  <!-- SECTIONS -->
+  <div *ngFor="let item of policySections" [id]="item.id" class="section">
+    <h3>{{item.title}}</h3>
+
+    <p *ngFor="let text of item.content">
+      {{text}}
+    </p>
+  </div>
+
 </div>

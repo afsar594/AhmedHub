@@ -4,30 +4,49 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   line-height: 1.7;
-  
+  background-color: #0F172A; /* dark navy */
+  color: #FFFFFF; /* default text color */
 }
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
-    color: #e65c00;
+  color: #00F5D4; /* neon aqua for primary headings */
 }
 
 h2 {
   margin-top: 25px;
-  color: #ff6600;
+  color: #8B5CF6; /* purple for secondary headings */
 }
 
 ul {
   padding-left: 20px;
   list-style: disc;
+  color: #FFFFFF; /* ensure list text is readable */
 }
 
 a {
-  color: #007bff;
+  color: #00F5D4; /* primary link color */
   text-decoration: none;
 }
 
 a:hover {
+  color: #FF4D6D; /* accent color on hover */
   text-decoration: underline;
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #FF4D6D; /* accent pink/red */
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #8B5CF6; /* secondary purple on hover */
 }

@@ -3,26 +3,28 @@
   margin: 40px auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: #FFFFFF; /* default text color */
+  background-color: #0F172A; /* dark navy background */
 }
 
 h1 {
   text-align: center;
-  color: #ff6600;
+  color: #00F5D4; /* neon aqua heading */
   margin-bottom: 10px;
 }
 
 .subtitle {
   text-align: center;
-  color: #6b7280;
+  color: #CBD5E1; /* soft light subtitle */
   margin-bottom: 30px;
   font-size: 16px;
 }
 
 .faq-item {
-  border: 1px solid #e5e7eb;
+  border: 1px solid #1E293B; /* subtle dark border */
   border-radius: 8px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5); /* darker shadow for dark theme */
   transition: all 0.2s;
 }
 
@@ -33,26 +35,28 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fcf8f6;
-  color: #ff6600;
+  background: #111827; /* slightly lighter dark section background */
+  color: #00F5D4; /* neon aqua text */
   border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
 }
 
 .faq-question:hover {
-  background: #ff6600;
-  color: #fff;
+  background: #FF4D6D; /* pink/red accent on hover */
+  color: #FFFFFF;
 }
 
 .toggle-symbol {
   font-size: 20px;
   font-weight: bold;
+  color: #8B5CF6; /* purple symbol for accent */
 }
 
 .faq-answer {
   padding: 15px 20px;
-  background: #ffffff;
-  color: #4b5563;
-  border-top: 1px solid #e5e7eb;
+  background: #1E293B; /* slightly lighter dark navy */
+  color: #CBD5E1; /* light text for readability */
+  border-top: 1px solid #333F55; /* subtle border for separation */
 }
 
 .faq-answer p {

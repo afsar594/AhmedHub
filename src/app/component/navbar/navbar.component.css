@@ -4,56 +4,84 @@
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  background: #ff6600;
-  color: white;
+  background: #0F172A; /* Dark Navy */
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(0, 245, 212, 0.2);
 }
 
+/* Active Link */
 .top-links li a.active {
-  background: #fff3e6;
-  color: #ff5500;
+  background: #8B5CF6; /* Purple */
+  color: #FFFFFF;
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
+/* Logo */
 .logo img {
   height: 40px;
   margin-right: 30px;
 }
 
+/* Cart Icon */
 .cart-icon {
   font-size: 25px;
   margin-left: 20px;
   cursor: pointer;
   background: none;
+  color: #00F5D4; /* Neon Aqua */
+  transition: 0.3s;
 }
 
+.cart-icon:hover {
+  color: #FF4D6D; /* Accent Pink */
+  transform: scale(1.1);
+}
+
+/* ===== Search Area ===== */
 .search-area {
   width: 100%;
-  background: #ff6600;
+  background: #0F172A;
   padding: 10px 20px;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid rgba(0, 245, 212, 0.2);
 }
 
 .search-area input {
   width: 35%;
   height: 40px;
-  border: none;
-  border-radius: 3px 0 0 3px;
+  border: 1px solid #00F5D4;
+  background: transparent;
+  color: #FFFFFF;
+  border-radius: 6px 0 0 6px;
   padding-left: 15px;
   font-size: 14px;
   outline: none;
   margin-left: 30%;
 }
 
+/* Placeholder */
+.search-area input::placeholder {
+  color: #94A3B8;
+}
+
+/* Search Button */
 .search-area img {
   height: 42px;
   width: 50px;
-  background: #fff3e6;
+  background: #00F5D4; /* Neon Aqua */
   cursor: pointer;
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 6px 6px 0;
+  padding: 10px;
+  transition: 0.3s;
 }
 
+.search-area img:hover {
+  background: #FF4D6D;
+}
+
+/* ===== Links ===== */
 .top-links {
   list-style: none;
   display: flex;
@@ -65,60 +93,73 @@
 .top-links li a {
   font-size: 13px;
   font-weight: 900;
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
+  transition: 0.3s;
+  position: relative;
 }
 
-/* .top-links li a:hover {
-  background: #fff3e6;
-  color: #ff5500;
-} */
-/* Hamburger button - hidden on desktop */
+/* Hover Effect (Neon Underline) */
+.top-links li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00F5D4;
+  bottom: -4px;
+  left: 0;
+  transition: 0.3s;
+}
+
+.top-links li a:hover::after {
+  width: 100%;
+}
+
+.top-links li a:hover {
+  color: #00F5D4;
+}
+
+/* ===== Hamburger ===== */
 .menu-toggle {
   display: none;
   font-size: 28px;
   cursor: pointer;
-  color: white;
+  color: #00F5D4;
 }
 
-/* ===== Mobile (≤ 600px) ===== */
+/* ===== Mobile ===== */
 @media (max-width: 600px) {
   .menu-toggle {
     display: block;
-    font-size: 28px;
-    cursor: pointer;
-    color: white;
   }
 
   .top-links {
-    display: none; /* hide menu default */
-    flex-direction: column; /* vertical menu */
-    gap: 0; /* reset gap for column */
+    display: none;
+    flex-direction: column;
+    gap: 0;
     position: absolute;
-    top: 60px; /* navbar height */
+    top: 60px;
     left: 0;
     right: 0;
-    background: #ff6600;
+    background: #0F172A;
     z-index: 99;
   }
 
   .top-links.active {
-    display: flex; /* show menu when active */
+    display: flex;
   }
 
   .top-links li a {
     padding: 12px 20px;
-    border-bottom: 1px solid #ff5500;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     width: 100%;
-    box-sizing: border-box;
-    display: block; /* full width click */
+    display: block;
     text-align: left;
   }
 
-  /* Active link highlight on mobile */
   .top-links li a.active {
-    background: #fff3e6;
-    color: #ff5500;
+    background: #8B5CF6;
+    color: #FFFFFF;
   }
 
   .search-area {
@@ -139,6 +180,8 @@
     height: 35px;
   }
 }
+
+/* ===== Cart ===== */
 .cart-container {
   position: relative;
   display: inline-block;
@@ -150,14 +193,25 @@
   height: 35px;
 }
 
+/* Badge */
 .cart-badge {
   position: absolute;
   top: -5px;
   right: -5px;
-  background: rgb(0, 255, 98);
-  color: white;
+  background: #FF4D6D; /* Accent Pink */
+  color: #FFFFFF;
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 12px;
   font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 77, 109, 0.7);
+}
+/* Glass effect */
+.navbar {
+  backdrop-filter: blur(10px);
+}
+
+/* Neon Glow */
+button, .search-area img {
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
 }

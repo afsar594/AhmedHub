@@ -1,103 +1,90 @@
 /* ===============================
-   BASE LAYOUT
+   PRODUCT DETAIL PAGE - DARK NEON THEME
 ================================ */
+
+/* ===== BASE LAYOUT ===== */
 .detail-container {
   width: 85%;
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: #0F172A; /* Dark Navy */
+  border-radius: 20px;
+  padding: 30px;
   margin: 40px auto;
   display: flex;
   gap: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial', sans-serif;
+  color: #E5E5E5; /* light text for dark bg */
 }
 
-/* ===============================
-   IMAGE SECTION
-================================ */
+/* ===== IMAGE SECTION ===== */
 .image-box {
   width: 45%;
   border-radius: 15px;
-  background: #f3f3f3;
+  background: #1E293B; /* slightly lighter navy */
   padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
-/* ===== MAIN IMAGE (FIXED SIZE) ===== */
 .main-image {
   width: 100%;
-  height: 420px;                 /* 🔒 FIXED HEIGHT */
+  height: 420px;
   border-radius: 15px;
-  background: #ffffff;
+  background: #0F172A;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .main-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;           /* 🔥 image kabhi cut nahi hogi */
+  object-fit: contain;
 }
 
-/* ===============================
-   THUMBNAILS (NEECHY CARD KE)
-================================ */
+/* ===== THUMBNAILS ===== */
 .thumb-wrapper {
-  margin-top: 15px;              /* 🔽 main image ke neechy */
+  margin-top: 15px;
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 10px;
-  justify-content: center;       /* thumbnails center align hon */
-}
-
-.thumb-nav {
-  font-size: 26px;
-  cursor: pointer;
-  user-select: none;
-  color: #333;
-  padding: 5px 10px;
 }
 
 .thumb-row {
   display: flex;
   gap: 10px;
-  overflow: hidden;
-  flex-wrap: nowrap;             /* horizontal scroll */
-  justify-content: center;       /* balance spacing */
+  overflow-x: auto;
+  flex-wrap: nowrap;
   scroll-behavior: smooth;
 }
 
 .thumb {
   width: 70px;
   height: 70px;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #ffffff;
+  border-radius: 12px;
   cursor: pointer;
+  overflow: hidden;
+  background: #1E293B;
   border: 2px solid transparent;
-  flex: 0 0 auto;               /* 🔒 size fix */
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .thumb img {
   width: 100%;
   height: 100%;
-  object-fit: contain;           /* image poori dikhe */
+  object-fit: contain;
 }
 
 .thumb.active {
-  border-color: #ff6600;
-  box-shadow: 0 0 8px rgba(255, 102, 0, 0.5); /* active highlight */
+  border-color: #00F5D4; /* Neon Aqua */
+  box-shadow: 0 0 12px #00F5D4;
 }
 
-
-/* ===============================
-   CONTENT
-================================ */
+/* ===== CONTENT SECTION ===== */
 .content-box {
   width: 55%;
 }
@@ -105,101 +92,80 @@
 .title {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  color: #00F5D4; /* Neon Aqua */
 }
 
 .price-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .new-price {
-  font-size: 28px;
-  color: #ff6600;
+  font-size: 26px;
   font-weight: 700;
+  color: #FF4D6D; /* Accent / Pink */
 }
 
 .old-Price {
   font-size: 18px;
   text-decoration: line-through;
-  color: #999;
+  color: #8B5CF6; /* Secondary Purple */
 }
 
 .discount {
-  font-weight: bold;
+  font-weight: 600;
+  color: #FF4D6D;
 }
 
 .description {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.5;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  color: #E5E5E5;
 }
 
-.main-image img {
-  transition: opacity 0.25s ease-in-out;
-}
-
-/* ===============================
-   QUANTITY
-================================ */
+/* ===== QUANTITY & ADD BUTTONS ===== */
 .quantity-box {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .quantity-box h2 {
   font-size: 18px;
-  color: #ff6600;
+  color: #00F5D4;
 }
 
 .quantity-box button {
   width: 35px;
   height: 35px;
   border: none;
-  background: #999;
-  color: white;
-  border-radius: 5px;
+  background: #1E293B;
+  color: #00F5D4;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantity-box button:hover {
+  background: #00F5D4;
+  color: #0F172A;
 }
 
 .quantity-box span {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-/* ===============================
-   TOTAL PRICE (SMALL & CLEAN)
-================================ */
-.total-price {
-  margin-left: auto;
-  font-size: 14px;      /* 🔽 chhota text */
-  font-weight: 500;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.total-price span {
-  font-size: 18px;      /* 🔽 amount thora hi bold */
-  font-weight: 700;
-  color: #ff6600;       /* theme color same */
-}
-
-
-/* ===============================
-   COLOR & SIZE
-================================ */
+/* ===== COLOR & SIZE OPTIONS ===== */
 .color-option {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
-  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .color-circle {
@@ -208,10 +174,12 @@
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .color-circle.active {
-  border: 2px solid #000;
+  border: 2px solid #00F5D4;
+  box-shadow: 0 0 10px #00F5D4;
   transform: scale(1.1);
 }
 
@@ -219,117 +187,74 @@
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
 }
 
 .size-btn {
   padding: 8px 16px;
-  border: 2px solid #ccc;
-  background: #fff;
+  border: 2px solid #8B5CF6;
+  background: #1E293B;
+  color: #E5E5E5;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .size-btn.active {
-  border-color: #000;
+  background: #8B5CF6;
+  color: white;
+  box-shadow: 0 0 8px #8B5CF6;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+/* ===== ACTION BUTTONS ===== */
 .buy-btn,
 .cart-btn {
-  width: 45%;
-  padding: 12px;
+  width: 48%;
+  padding: 14px;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .buy-btn {
-  background: #ff6600;
-  color: #fff;
+  background: #FF4D6D;
+  color: white;
   border: none;
+}
+
+.buy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px #FF4D6D;
 }
 
 .cart-btn {
-  background: #222;
-  color: #fff;
-  border: none;
-  margin-left: 10px;
+  background: #1E293B;
+  border: 2px solid #00F5D4;
+  color: #00F5D4;
 }
 
-/* ===============================
-   TABLET
-================================ */
+.cart-btn:hover {
+  background: #00F5D4;
+  color: #0F172A;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .detail-container {
-    width: 95%;
-  }
+  .detail-container { width: 95%; }
 }
 
-/* ===============================
-   MOBILE
-================================ */
 @media (max-width: 768px) {
-  .detail-container {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .image-box,
-  .content-box {
-    width: 100%;
-  }
-
-  .main-image {
-    height: 300px;
-  }
-
-  .quantity-box .new-price {
-    width: 100%;
-    margin-left: 0;
-    text-align: center;
-  }
-
-  .color-option {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .buy-btn,
-  .cart-btn {
-    width: 100%;
-    margin: 8px 0;
-  }
-
-  .cart-btn {
-    margin-left: 0;
-  }
+  .detail-container { flex-direction: column; padding: 20px; }
+  .image-box, .content-box { width: 100%; }
+  .main-image { height: 300px; }
+  .buy-btn, .cart-btn { width: 100%; margin: 8px 0; }
 }
 
-/* ===============================
-   SMALL MOBILE
-================================ */
 @media (max-width: 480px) {
-  .title {
-    font-size: 20px;
-  }
-
-  .new-price {
-    font-size: 22px;
-  }
-
-  .description {
-    font-size: 15px;
-  }
-
-  .color-circle {
-    width: 30px;
-    height: 30px;
-  }
-
-  .thumb {
-    width: 60px;
-    height: 60px;
-  }
+  .title { font-size: 22px; }
+  .new-price { font-size: 22px; }
+  .description { font-size: 15px; }
+  .color-circle { width: 30px; height: 30px; }
+  .thumb { width: 60px; height: 60px; }
 }

@@ -1,12 +1,15 @@
+/* ===== SLIDER ===== */
 .slider {
   position: relative;
   width: 100%;
-  height: 400px; 
+  height: 400px;
   overflow: hidden;
-  margin-top: 20px; /* top margin */
+  margin-top: 20px;
   border-radius: 10px;
+  background: #0F172A; /* Dark Navy Base */
 }
 
+/* ===== SLIDES ===== */
 .slide {
   width: 100%;
   height: 100%;
@@ -16,37 +19,60 @@
   align-items: center;
   justify-content: center;
   transition: background-image 0.5s ease-in-out;
+  position: relative;
 }
 
+/* Slide Content */
 .content {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.7); /* Dark Navy Overlay */
   padding: 20px 30px;
-  color: white;
+  color: #FFFFFF;
   text-align: center;
   border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4); /* Neon glow */
 }
 
+/* Slide Heading */
 .content h2 {
   font-size: 28px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #00F5D4; /* Neon Aqua */
+  text-shadow: 0 0 8px #00F5D4;
 }
 
+/* Slide Button */
 .content button {
-  background: #ff6600;
-  color: white;
+  background: #FF4D6D; /* Accent Pink */
+  color: #FFFFFF;
   border: none;
   padding: 10px 25px;
   cursor: pointer;
   font-size: 16px;
+  border-radius: 6px;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #FF4D6D;
 }
 
+.content button:hover {
+  background: #8B5CF6; /* Purple hover */
+  box-shadow: 0 0 15px #8B5CF6;
+  transform: scale(1.05);
+}
+
+/* ===== NAVIGATION ARROWS ===== */
 .nav {
   position: absolute;
   top: 50%;
   font-size: 40px;
-  color: white;
+  color: #00F5D4; /* Neon Aqua */
   cursor: pointer;
   user-select: none;
+  transition: 0.3s;
+}
+
+.nav:hover {
+  color: #FF4D6D; /* Neon Pink on hover */
+  text-shadow: 0 0 10px #FF4D6D, 0 0 20px #FF4D6D;
 }
 
 .left {
@@ -55,4 +81,14 @@
 
 .right {
   right: 15px;
+}
+/* Neon border for slides */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #00F5D4;
+  border-radius: 10px;
+  opacity: 0.3;
+  pointer-events: none;
 }

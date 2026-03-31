@@ -1,0 +1,131 @@
+/* ================= PAYMENT PAGE ================= */
+.payment-page {
+  background: #0F172A; /* dark navy */
+  padding: 30px;
+  min-height: 100vh;
+  color: #E0E7FF; /* light text */
+}
+
+/* ================= ALERT ================= */
+.top-alert {
+  background: #FFEDD5; /* light pink/red alert */
+  color: #FF4D6D; /* pink/red text */
+  padding: 10px;
+  border: 1px solid #FF4D6D; /* pink/red border */
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* ================= MAIN LAYOUT ================= */
+.payment-container {
+  display: flex;
+  gap: 25px;
+}
+
+/* LEFT COLUMN */
+.left {
+  flex: 3;
+}
+
+.left h3 {
+  margin-bottom: 15px;
+  color: #00F5D4; /* neon aqua heading */
+}
+
+/* GRID */
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 15px;
+}
+
+/* PAYMENT BOX */
+.pay-box {
+  background: #111827; /* slightly lighter dark navy */
+  border: 1px solid #333F55; /* dark border */
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #E0E7FF;
+}
+
+.pay-box img {
+  width: 40px;
+  margin-bottom: 8px;
+}
+
+.pay-box span {
+  font-size: 13px;
+  display: block;
+}
+
+/* HOVER */
+.pay-box:hover {
+  border-color: #FF4D6D; /* pink/red hover */
+  box-shadow: 0 4px 12px rgba(255,77,109,0.3);
+}
+
+/* ACTIVE */
+.pay-box.active {
+  border: 2px solid #FF4D6D; /* pink/red active */
+  background: rgba(255,77,109,0.1); /* light pink/red background */
+}
+
+/* DISABLED */
+.pay-box.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RIGHT COLUMN */
+.right {
+  flex: 1;
+  background: #111827; /* slightly lighter dark navy */
+  padding: 20px;
+  border-radius: 8px;
+  height: fit-content;
+  border: 1px solid #333F55; /* dark border */
+}
+
+.right h4 {
+  margin-bottom: 15px;
+  color: #00F5D4; /* neon aqua heading */
+}
+
+/* SUMMARY */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #CBD5E1; /* light text */
+}
+
+.summary-row.total {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+  color: #00F5D4; /* neon aqua total */
+}
+
+/* BUTTON */
+.confirm-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: linear-gradient(90deg, #FF4D6D, #8B5CF6); /* pink to purple gradient */
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.confirm-btn:hover {
+  background: linear-gradient(90deg, #8B5CF6, #FF4D6D); /* reverse gradient on hover */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}

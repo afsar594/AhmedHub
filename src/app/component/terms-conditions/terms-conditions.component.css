@@ -1,28 +1,73 @@
-.terms-container{
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
-    color: #333;
+/* Container */
+.terms-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background: #0F172A; /* dark navy */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5); /* darker shadow for contrast */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #CBD5E1; /* light text for readability */
 }
-h1{
-    text-align: center;
-    margin-bottom: 20px;
-    color: #e65c00;
+
+/* Page title */
+.terms-container h1 {
+  text-align: center;
+  color: #00F5D4; /* neon aqua heading */
+  margin-bottom: 25px;
+  font-size: 2.2rem;
 }
-h2{
-    color: #ff6600;
-    margin-top: 20px;
+
+/* Navigation */
+.terms-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
-ul{
-    list-style: disc;
-    padding-left: 20px;
+
+.terms-nav a {
+  text-decoration: none;
+  padding: 8px 14px;
+  background-color: #1E293B; /* slightly lighter dark navy */
+  color: #00F5D4; /* neon aqua links */
+  border-radius: 8px;
+  transition: 0.3s;
 }
-a{
-    color: #007bff;
-    text-decoration: none;
+
+.terms-nav a:hover {
+  background-color: #FF4D6D; /* pink/red hover */
+  color: #FFFFFF;
 }
-a:hover{
-    text-decoration: underline;
+
+/* Section styles */
+.terms-content section {
+  margin-bottom: 30px;
+  background: #111827; /* darker section background */
+  padding: 15px 20px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.terms-content h2 {
+  color: #8B5CF6; /* purple section headings */
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+}
+
+.terms-content p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #E0E7FF; /* light text for paragraphs */
+}
+
+/* Scrollable container (optional if content is long) */
+.terms-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+section {
+  scroll-margin-top: 80px; /* adjust if you have a fixed header */
 }

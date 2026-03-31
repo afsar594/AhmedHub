@@ -1,8 +1,10 @@
+/* ===== FOOTER ===== */
 .footer {
-  background: linear-gradient(135deg, #ff6600, #ff7a1a);
-  color: white;
-  padding: 20px 20px 12px;   
+  background: linear-gradient(135deg, #0F172A, #1E293B); /* Dark Navy gradient */
+  color: #FFFFFF;
+  padding: 40px 20px 20px;   
   margin-top: 25px;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Container */
@@ -17,28 +19,36 @@
 /* Sections */
 .footer-section {
   min-width: 0;
+  transition: 0.3s ease;
+}
+
+.footer-section:hover {
+  transform: translateY(-3px);
 }
 
 /* Branding */
 .footer-logo {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 6px;
-  color: white;
+  margin-bottom: 10px;
+  color: #00F5D4; /* Neon Aqua */
 }
 
 .footer-text {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   opacity: 0.95;
+  color: #94A3B8; /* soft gray */
 }
 
 /* Titles */
 .footer-title {
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
-  color: white;
+  color: #8B5CF6; /* Purple */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Links */
@@ -50,26 +60,30 @@
 }
 
 .footer-links li {
-  margin: 5px 0;
-  font-size: 13px;
+  margin: 6px 0;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 .footer-links a {
-  color: white;
+  color: #E5E7EB; /* subtle white */
   text-decoration: none;
+  transition: 0.3s;
 }
 
 .footer-links a:hover {
+  color: #FF4D6D; /* Accent Pink */
   text-decoration: underline;
 }
 
 /* Bottom */
 .footer-bottom {
   text-align: center;
-  margin-top: 20px;
-  padding-top: 8px;
-  font-size: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  margin-top: 30px;
+  padding-top: 12px;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 77, 109, 0.25); /* Neon Pink subtle */
+  color: #E5E7EB;
 }
 
 /* ===============================
@@ -92,14 +106,21 @@
   }
 
   .footer-logo {
-    font-size: 22px;
+    font-size: 24px;
+    color: #00F5D4;
   }
 
   .footer-title {
     font-size: 18px;
+    color: #8B5CF6;
   }
 
   .footer-text {
+    font-size: 13px;
+    color: #94A3B8;
+  }
+
+  .footer-links li {
     font-size: 13px;
   }
 }

@@ -1,9 +1,9 @@
 /* ===== FOOTER ===== */
 .footer {
-  background: linear-gradient(135deg, #0F172A, #1E293B); /* Dark Navy gradient */
+  background: linear-gradient(135deg, #5a79ad); /* Dark Navy gradient */
   color: #FFFFFF;
   padding: 40px 20px 20px;   
-  margin-top: 25px;
+  margin-top: 0px;
   font-family: 'Arial', sans-serif;
 }
 

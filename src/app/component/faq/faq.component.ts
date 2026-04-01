@@ -130,4 +130,5 @@ Most browsers enable cookies automatically.
     toggleAnswer(index: number) {
     this.faqs[index].open = !this.faqs[index].open;
   }
+  
 }

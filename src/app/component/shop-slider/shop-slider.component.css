@@ -5,8 +5,9 @@
   height: 400px;
   overflow: hidden;
   margin-top: 0px;
-  border-radius: 10px;
-  background: #0F172A; /* Dark Navy Base */
+  /* border-radius: 12px;  */
+  background: #0F172A;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
 /* ===== SLIDES ===== */
@@ -18,31 +19,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-image 0.5s ease-in-out;
   position: relative;
+  transition: transform 0.5s ease-in-out;
 }
 
-/* Slide Content */
+/* Neon border wrapper to avoid clipping */
+.slide-inner {
+  position: relative;
+  width: 98%;
+  height: 98%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+  border: 2px solid rgba(0,245,212,0.3);
+}
+
+/* Slide Content Overlay */
 .content {
-  background: rgba(15, 23, 42, 0.7); /* Dark Navy Overlay */
+  background: rgba(15, 23, 42, 0.75); /* slightly darker overlay */
   padding: 20px 30px;
-  color: #FFFFFF;
+  color: #E2E8F0;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4); /* Neon glow */
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+  position: relative;
+  z-index: 2;
 }
 
 /* Slide Heading */
 .content h2 {
   font-size: 28px;
   margin-bottom: 15px;
-  color: #00F5D4; /* Neon Aqua */
-  text-shadow: 0 0 8px #00F5D4;
+  color: #00F5D4;
+  text-shadow: 0 0 8px #00F5D4, 0 0 15px #00F5D4;
 }
 
 /* Slide Button */
 .content button {
-  background: #FF4D6D; /* Accent Pink */
+  background: #FF4D6D;
   color: #FFFFFF;
   border: none;
   padding: 10px 25px;
@@ -54,7 +68,7 @@
 }
 
 .content button:hover {
-  background: #8B5CF6; /* Purple hover */
+  background: #8B5CF6;
   box-shadow: 0 0 15px #8B5CF6;
   transform: scale(1.05);
 }
@@ -64,14 +78,15 @@
   position: absolute;
   top: 50%;
   font-size: 40px;
-  color: #00F5D4; /* Neon Aqua */
+  color: #00F5D4;
   cursor: pointer;
   user-select: none;
   transition: 0.3s;
+  z-index: 3;
 }
 
 .nav:hover {
-  color: #FF4D6D; /* Neon Pink on hover */
+  color: #FF4D6D;
   text-shadow: 0 0 10px #FF4D6D, 0 0 20px #FF4D6D;
 }
 
@@ -82,13 +97,14 @@
 .right {
   right: 15px;
 }
-/* Neon border for slides */
-.slide::before {
+
+/* Neon border inside slide */
+.slide-inner::before {
   content: "";
   position: absolute;
   inset: 0;
   border: 2px solid #00F5D4;
-  border-radius: 10px;
+  border-radius: 12px;
   opacity: 0.3;
   pointer-events: none;
 }

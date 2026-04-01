@@ -1,52 +1,93 @@
+/* ---------- MAIN CONTAINER ---------- */
 .privacy-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  
+  padding: 30px 25px;
+  font-family: 'Inter', sans-serif;
+  color: #E0E6F0; /* light text for dark background */
   line-height: 1.7;
-  background-color: #0F172A; /* dark navy */
-  color: #FFFFFF; /* default text color */
+  background: #273449; /* mid-section background */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-h1 {
+.privacy-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- HEADER ---------- */
+.privacy-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
   text-align: center;
+  color: #00F5D4; /* neon aqua accent */
+  margin-bottom: 15px;
+  text-shadow: 0 2px 10px rgba(0, 245, 212, 0.6);
+}
+
+.privacy-container p {
+  font-size: 1rem;
   margin-bottom: 20px;
-  color: #00F5D4; /* neon aqua for primary headings */
+  color: #CBD5E1; /* softer light gray for readability */
 }
 
-h2 {
-  margin-top: 25px;
-  color: #8B5CF6; /* purple for secondary headings */
+/* ---------- SECTION TITLES ---------- */
+.privacy-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FF4D6D; /* accent color for headings */
+  margin-bottom: 10px;
+  border-left: 5px solid #00F5D4;
+  padding-left: 10px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-ul {
-  padding-left: 20px;
-  list-style: disc;
-  color: #FFFFFF; /* ensure list text is readable */
+/* ---------- LIST ITEMS ---------- */
+.privacy-section ul {
+  list-style: inside disc;
+  margin-bottom: 20px;
+  padding-left: 15px;
 }
 
+.privacy-section ul li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 10px;
+}
+
+.privacy-section ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #00F5D4;
+  font-size: 0.9rem;
+}
+
+/* ---------- LINKS ---------- */
 a {
-  color: #00F5D4; /* primary link color */
+  color: #8B5CF6; /* neon purple for links */
   text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #FF4D6D; /* accent color on hover */
+  color: #FF4D6D; /* pink accent on hover */
   text-decoration: underline;
 }
 
-/* Buttons */
-button, .btn {
-  background-color: #FF4D6D; /* accent pink/red */
-  color: #FFFFFF;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
+/* ---------- RESPONSIVE ---------- */
+@media screen and (max-width: 768px) {
+  .privacy-container {
+    padding: 20px 15px;
+  }
 
-button:hover, .btn:hover {
-  background-color: #8B5CF6; /* secondary purple on hover */
+  .privacy-container h1 {
+    font-size: 2rem;
+  }
+
+  .privacy-section h2 {
+    font-size: 1.3rem;
+  }
 }

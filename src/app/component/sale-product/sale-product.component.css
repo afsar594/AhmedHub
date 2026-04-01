@@ -1,99 +1,82 @@
+/* ================== PAGE BACKGROUND ================== */
 .product-sale {
-  margin: 0px 0;
-  padding: 0 40px;
-  background: #0F172A; /* Dark Background */
+  margin: 0;
+  padding: 20px 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #273449; /* dark navy overall */
 }
 
-/* ===== Header ===== */
-.section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 25px;
+/* ================== HERO / HEADER ================== */
+.product-hero {
+  max-width: 1400px;
+  margin: auto;
+  padding: 60px 20px;
+  text-align: center;
+  background: #1A2639; /* slightly darker for hero */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
+.product-hero h1 {
+  color: #00F5D4;
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.product-hero p {
+  color: #E2E8F0;
+  max-width: 900px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* ================== SECTION HEADER ================== */
 .section-header h2 {
   font-size: 26px;
   font-weight: 700;
-  color: #00F5D4; /* Neon Aqua */
+  color: #00F5D4;
+  margin-bottom: 12px;
 }
 
 .on-sale {
   font-size: 14px;
-  color: #94A3B8;
+  color: white;
 }
 
-/* ================= GRID ================= */
+/* ================== PRODUCT GRID ================== */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
+  gap: 20px;
+  padding: 30px;
+  background: #1E293B; /* mid-content shade */
+  border-radius: 12px;
 }
 
-/* ================= CARD ================= */
+/* ================== PRODUCT CARD ================== */
 .product-card {
-  background: #111827; /* Dark Card */
-  border-radius: 16px;
-  max-width: 100%;
-  padding: 14px;
-  cursor: pointer;
+  background: #273449; /* lighter than grid, creates separation */
+  border-radius: 14px;
+  padding: 16px;
   position: relative;
-  border: 1px solid rgba(0, 245, 212, 0.2);
-  box-shadow: 0 6px 18px rgba(0, 245, 212, 0.05);
-  transition: all 0.35s ease;
-  overflow: hidden;
+  border: 1px solid rgba(0,245,212,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); /* subtle lift */
+  transition: all 0.3s ease;
 }
 
-/* Hover */
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 245, 212, 0.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  border-color: #00F5D4;
 }
 
-/* Neon Border Effect */
-.product-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  border: 2px solid transparent;
-  transition: 0.3s;
-}
-
-.product-card:hover::after {
-  border-color: #8B5CF6; /* Purple Glow */
-}
-
-/* ================= NO RESULTS ================= */
-.no-results {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 70vh;
-  padding: 20px;
-  text-align: center;
-  background-color: #0F172A;
-  color: #FFFFFF;
-}
-
-.no-results p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  max-width: 600px;
-}
-
-.no-results p span {
-  font-weight: 600;
-  color: #FF4D6D; /* Accent Pink */
-}
-
-/* ================= IMAGE ================= */
+/* IMAGE */
 .img-box {
-  background: #1F2937; /* Dark Gray */
-  border-radius: 14px;
+  background: #1E293B; 
+  border-radius: 10px;
   overflow: hidden;
-  height: 200px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,56 +85,52 @@
 .img-box img {
   width: 100%;
   height: 100%;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
 .product-card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
-/* ================= TITLE ================= */
+/* TITLE & PRICE */
 .product-card h3 {
   font-size: 15px;
   font-weight: 600;
-  color: #FFFFFF;
-  margin: 14px 0 10px;
+  color: #E2E8F0;
+  margin: 12px 0 8px;
   line-height: 1.3;
 }
 
-/* ================= PRICE ================= */
 .price-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .price {
   font-size: 16px;
   font-weight: 700;
-  color: #00F5D4; /* Neon Aqua */
+  color: #FF4D6D;
 }
 
 .oldPrice {
   font-size: 13px;
   text-decoration: line-through;
-  color: #6B7280;
+  color: #9CA3AF;
 }
 
-/* ================= DISCOUNT BADGE ================= */
 .discount {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #FF4D6D; /* Accent Pink */
-  color: #FFFFFF;
+  top: 10px;
+  left: 10px;
+  background: #FF4D6D;
+  color: #fff;
   font-size: 12px;
   font-weight: 700;
-  padding: 5px 10px;
+  padding: 4px 9px;
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
 }
 
-/* ================= BUTTON (optional add-to-cart) ================= */
 .product-card button {
   margin-top: 10px;
   width: 100%;
@@ -166,21 +145,24 @@
 }
 
 .product-card button:hover {
-  background: #FF4D6D;
-  color: #FFFFFF;
+  background: #8B5CF6;
+  color: #fff;
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-  .product-sale {
-    padding: 0 16px;
-  }
-
-  .section-header h2 {
-    font-size: 22px;
-  }
+/* ================== FOOTER / NO RESULTS ================== */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: #273449; /* slightly lighter than grid */
+  color: #E2E8F0;
 }
 
+.no-results span {
+  color: #FF4D6D;
+  font-weight: 600;
+}
+
+/* ================== RESPONSIVE ================== */
 @media (max-width: 1400px) { .product-grid { grid-template-columns: repeat(6, 1fr); } }
 @media (max-width: 1200px) { .product-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 992px)  { .product-grid { grid-template-columns: repeat(4, 1fr); } }

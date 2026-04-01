@@ -1,56 +1,172 @@
 <div class="payment-page">
 
-  <!-- ALERT BAR -->
+  <!-- ALERT -->
   <div class="top-alert">
     ⚠ Please collect bank vouchers to avail bank discounts and mega deals/flash sales.
   </div>
 
   <div class="payment-container">
 
-    <!-- LEFT SIDE -->
+    <!-- LEFT -->
     <div class="left">
-
       <h3>Select Payment Method</h3>
 
       <div class="payment-grid">
 
-        <div class="pay-box" (click)="select('easypaisa')" [class.active]="selected==='easypaisa'">
-          <img src="https://crystalpng.com/wp-content/uploads/2024/10/Easypaisa-logo.png">
-          <span>Easypaisa</span>
+        <!-- Easypaisa -->
+        <div class="payment-item">
+          <div class="pay-box" (click)="select('easypaisa')" [class.active]="selected==='easypaisa'">
+            <img src="https://crystalpng.com/wp-content/uploads/2024/10/Easypaisa-logo.png">
+            <span>Easypaisa</span>
+          </div>
+
+          <div class="payment-details" *ngIf="selected==='easypaisa'">
+            <p>Experience easy payments – save your Easypaisa account as default method.</p>
+            <p>Ensure account is active with sufficient balance.</p>
+            <input type="text" placeholder="Easypaisa Account Number">
+            <button>Pay Now</button>
+          </div>
         </div>
 
-        <div class="pay-box" (click)="select('jazzcash')" [class.active]="selected==='jazzcash'">
-          <img src="https://crystalpng.com/wp-content/uploads/2024/12/new-Jazzcash-logo.png">
-          <span>JazzCash</span>
+        <!-- JazzCash -->
+        <div class="payment-item">
+          <div class="pay-box" (click)="select('jazzcash')" [class.active]="selected==='jazzcash'">
+            <img src="https://crystalpng.com/wp-content/uploads/2024/12/new-Jazzcash-logo.png">
+            <span>JazzCash</span>
+          </div>
+
+          <div class="payment-details" *ngIf="selected==='jazzcash'">
+            <p>For Jazz/Warid: Enter MPIN via prompt.</p>
+            <p>Other networks: Use JazzCash App.</p>
+            <input type="text" placeholder="JazzCash Account Number">
+            <button>Pay Now</button>
+          </div>
         </div>
 
-        <div class="pay-box" (click)="select('card')" [class.active]="selected==='card'">
-          <img src="https://png.pngtree.com/png-vector/20220706/ourmid/pngtree-debit-card-payment-png-image_5705181.png">
-          <span>Credit/Debit Card</span>
+        <!-- Card -->
+        <div class="payment-item">
+          <div class="pay-box" (click)="select('card')" [class.active]="selected==='card'">
+            <img src="https://png.pngtree.com/png-vector/20220706/ourmid/pngtree-debit-card-payment-png-image_5705181.png">
+            <span>Credit/Debit Card</span>
+          </div>
+
+          <div class="payment-details" *ngIf="selected==='card'">
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Name on Card">
+            <input type="text" placeholder="Expiry MM/YY">
+            <input type="text" placeholder="CVV">
+            <button>Pay Now</button>
+          </div>
         </div>
 
-        <div class="pay-box" (click)="select('hbl')" [class.active]="selected==='hbl'">
-          <img src="https://crystalpng.com/wp-content/uploads/2024/10/HBL-logo.png">
-          <span>HBL Bank</span>
+        <!-- HBL -->
+        <div class="payment-item">
+          <div class="pay-box" (click)="select('hbl')" [class.active]="selected==='hbl'">
+            <img src="https://crystalpng.com/wp-content/uploads/2024/10/HBL-logo.png">
+            <span>HBL Bank</span>
+          </div>
+
+          <div class="payment-details" *ngIf="selected==='hbl'">
+            <input type="text" placeholder="Account Number">
+            <input type="text" placeholder="CNIC">
+            <button>Pay Now</button>
+          </div>
         </div>
 
-        <div class="pay-box" (click)="select('cod')" [class.active]="selected==='cod'">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhxZ2XEVrokm0HW3UqfYoFLaxGbC7rrBO63A&s">
-          <span>Cash on Delivery</span>
+        <!-- COD -->
+        <div class="payment-item">
+          <div class="pay-box" (click)="select('cod')" [class.active]="selected==='cod'">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhxZ2XEVrokm0HW3UqfYoFLaxGbC7rrBO63A&s">
+            <span>Cash on Delivery</span>
+          </div>
+
+          <div class="payment-details" *ngIf="selected==='cod'">
+            <p>Pay in cash upon delivery.</p>
+            <p>Cash fee may apply (max Rs.100).</p>
+            <button (click)="confirmOrder()">Confirm Order</button>
+          </div>
         </div>
 
-        <div class="pay-box disabled">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_41dT0GF8VCa4OKpxLqm5IfFaN_85OFJfg&s">
-          <span>Installment</span>
-        </div>
+        <!-- Installment -->
+        <!-- <div class="payment-item">
+          <div class="pay-box disabled">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_41dT0GF8VCa4OKpxLqm5IfFaN_85OFJfg&s">
+            <span>Installment</span>
+          </div>
+        </div> -->
 
-      </div>
+        <div class="payment-item">
+        <app-alert-modal
+  [visible]="showAlert"
+  [title]="alertTitle"
+  [message]="alertMessage"
+  (onConfirm)="placeOrderConfirmed()"
+  (onCancel)="showAlert=false"
+></app-alert-modal>
+
+  <div class="pay-box"
+       (click)="select('installment')"
+       [class.active]="selected==='installment'">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_41dT0GF8VCa4OKpxLqm5IfFaN_85OFJfg&s">
+    <span>Installment</span>
+  </div>
+
+  <div class="payment-details" *ngIf="selected==='installment'">
+
+    <p><strong>One time upfront payment</strong></p>
+
+    <!-- BANK SELECT -->
+    <select (change)="onBankChange($event)">
+      <option value="">Select one Bank</option>
+      <option *ngFor="let bank of banks" [value]="bank.name">
+        {{bank.name}}
+      </option>
+    </select>
+
+    <!-- BANK DETAIL -->
+    <div *ngIf="selectedBank">
+      <p><strong>{{selectedBank}}</strong></p>
+
+      <p *ngIf="selectedBank">
+  <strong>{{selectedBank}}</strong>
+</p>
+
+<p *ngIf="selectedBankFee">
+  {{selectedBankFee}}
+</p>
+    </div>
+
+    <!-- TENURE -->
+    <select 
+      [disabled]="!selectedBank"
+      (change)="onTenureChange($event)">
+      <option value="">Select one tenure</option>
+      <option *ngFor="let t of tenures" [value]="t">
+        {{t}}
+      </option>
+    </select>
+
+    <!-- CARD FORM (only after tenure) -->
+    <div *ngIf="selectedTenure">
+
+      <input type="text" placeholder="Card Number">
+      <input type="text" placeholder="Name on Card">
+      <input type="text" placeholder="MM/YY">
+      <input type="text" placeholder="CVV">
+
+      <button>Pay Now</button>
 
     </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="right">
+  </div>
 
+</div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
       <h4>Order Summary</h4>
 
       <div class="summary-row">
@@ -64,9 +180,7 @@
       </div>
 
       <button class="confirm-btn" (click)="confirmOrder()">Confirm Order</button>
-
     </div>
 
   </div>
-
 </div>

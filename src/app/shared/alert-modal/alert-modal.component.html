@@ -1,10 +1,10 @@
 <div class="modal-backdrop" *ngIf="visible">
   <div class="modal-container">
-    <h3>{{ title }}</h3>
-    <p>{{ message }}</p>
+    <h3 class="modal-title">{{ title }}</h3>
+    <p class="modal-message">{{ message }}</p>
     <div class="modal-actions">
-      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
-      <button class="btn btn-danger" (click)="confirm()">Confirm</button>
+      <button class="btn btn-no" (click)="cancel()">No</button>
+      <button class="btn btn-yes" (click)="confirm()">Yes</button>
     </div>
   </div>
 </div>

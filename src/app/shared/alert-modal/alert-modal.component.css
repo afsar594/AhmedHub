@@ -1,24 +1,72 @@
+/* BACKDROP */
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(15, 23, 42, 0.7); /* dark navy semi-transparent */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
+/* MODAL BOX */
 .modal-container {
-  background: #fff;
-  padding: 20px;
+  background: #1E293B; /* mid-dark section color */
+  padding: 25px 30px;
   border-radius: 12px;
-  width: 320px;
+  width: 360px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  color: #F9FAFB; /* light text */
+  font-family: Arial, sans-serif;
 }
 
+/* TITLE */
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #00F5D4; /* neon aqua */
+}
+
+/* MESSAGE */
+.modal-message {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #E0E7FF; /* lighter text for readability */
+}
+
+/* BUTTONS */
 .modal-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-no {
+  background: #273449; /* slightly lighter than modal */
+  color: #E0E7FF;
+}
+
+.btn-no:hover {
+  background: #1A2639; /* dark hover */
+}
+
+.btn-yes {
+  background: #00F5D4; /* neon aqua */
+  color: #1E293B; /* dark text */
+}
+
+.btn-yes:hover {
+  background: #00c7b0; /* darker neon hover */
 }

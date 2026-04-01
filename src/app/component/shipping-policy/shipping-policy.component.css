@@ -1,12 +1,12 @@
 /* Container */
 .policy-container {
-    width: 92%;
-    max-width: 1000px;
-    margin: 50px auto;
+    /* width: 92%; */
+    /* max-width: 1000px; */
+    /* margin: 50px auto; */
     padding: 30px;
     font-family: 'Poppins', Arial, sans-serif;
-    background: #0F172A; /* dark navy background */
-    border-radius: 16px;
+    background: #273449; /* dark navy background */
+    /* border-radius: 16px; */
     box-shadow: 0 8px 30px rgba(0,0,0,0.5); /* darker shadow for contrast */
     color: #FFFFFF; /* default text color */
 }

@@ -1,10 +1,8 @@
 /* Container */
 .terms-container {
-  max-width: 900px;
-  margin: 40px auto;
+  
   padding: 20px 30px;
-  background: #0F172A; /* dark navy */
-  border-radius: 12px;
+  background:#273449; /* dark navy */
   box-shadow: 0 6px 18px rgba(0,0,0,0.5); /* darker shadow for contrast */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #CBD5E1; /* light text for readability */

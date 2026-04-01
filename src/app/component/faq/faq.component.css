@@ -1,10 +1,10 @@
 .faq-wrapper {
-  max-width: 900px;
-  margin: 40px auto;
+  /* max-width: 900px; */
+  /* margin: 40px auto; */
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, sans-serif;
   color: #FFFFFF; /* default text color */
-  background-color: #0F172A; /* dark navy background */
+  background-color: #273449; /* dark navy background */
 }
 
 h1 {

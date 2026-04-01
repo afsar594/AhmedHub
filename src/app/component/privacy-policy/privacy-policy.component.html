@@ -1,18 +1,16 @@
-
 <div class="privacy-container">
-
-  <h1>Privacy Policy</h1>
+  <h1>{{ websiteName }} Privacy Policy</h1>
   <p><strong>Effective Date:</strong> {{ effectiveDate }}</p>
+
   <p [innerHTML]="policyIntro"></p>
 
-  <div *ngFor="let section of privacyContent">
+  <div *ngFor="let section of privacySections" class="privacy-section">
     <h2>{{ section.title }}</h2>
 
     <ul *ngIf="section.isList">
       <li *ngFor="let item of section.listItems">{{ item }}</li>
     </ul>
 
-    <p *ngIf="!section.isList" [innerHTML]="section.description"></p>
+    <p *ngIf="!section.isList" [innerHTML]="getSectionDescription(section)"></p>
   </div>
-
 </div>

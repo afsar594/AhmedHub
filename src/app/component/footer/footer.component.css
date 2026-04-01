@@ -1,10 +1,11 @@
 /* ===== FOOTER ===== */
 .footer {
-  background: linear-gradient(135deg, #5a79ad); /* Dark Navy gradient */
+  background: linear-gradient(135deg, #0F172A, #020617); /* Dark Navy Deep Gradient */
   color: #FFFFFF;
   padding: 40px 20px 20px;   
   margin-top: 0px;
   font-family: 'Arial', sans-serif;
+  border-top: 1px solid rgba(0, 245, 212, 0.2); /* Neon Aqua subtle line */
 }
 
 /* Container */
@@ -23,7 +24,7 @@
 }
 
 .footer-section:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
 }
 
 /* Branding */
@@ -32,6 +33,7 @@
   font-weight: 700;
   margin-bottom: 10px;
   color: #00F5D4; /* Neon Aqua */
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
 }
 
 .footer-text {
@@ -66,14 +68,30 @@
 }
 
 .footer-links a {
-  color: #E5E7EB; /* subtle white */
+  color: #E5E7EB;
   text-decoration: none;
   transition: 0.3s;
+  position: relative;
+}
+
+/* Hover effect (premium underline animation) */
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #FF4D6D;
+  transition: 0.3s;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
 }
 
 .footer-links a:hover {
   color: #FF4D6D; /* Accent Pink */
-  text-decoration: underline;
 }
 
 /* Bottom */
@@ -82,7 +100,7 @@
   margin-top: 30px;
   padding-top: 12px;
   font-size: 13px;
-  border-top: 1px solid rgba(255, 77, 109, 0.25); /* Neon Pink subtle */
+  border-top: 1px solid rgba(255, 77, 109, 0.25);
   color: #E5E7EB;
 }
 
@@ -107,17 +125,14 @@
 
   .footer-logo {
     font-size: 24px;
-    color: #00F5D4;
   }
 
   .footer-title {
     font-size: 18px;
-    color: #8B5CF6;
   }
 
   .footer-text {
     font-size: 13px;
-    color: #94A3B8;
   }
 
   .footer-links li {

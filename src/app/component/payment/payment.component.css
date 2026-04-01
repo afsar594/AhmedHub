@@ -1,20 +1,19 @@
 /* ================= PAYMENT PAGE ================= */
 .payment-page {
-  background: #0F172A; /* dark navy */
+  background: #273449;
   padding: 30px;
   min-height: 100vh;
-  color: #E0E7FF; /* light text */
+  color: #E0E7FF;
 }
 
 /* ================= ALERT ================= */
 .top-alert {
-  background: #FFEDD5; /* light pink/red alert */
-  color: #FF4D6D; /* pink/red text */
+  background: #FFEDD5;
+  color: #FF4D6D;
   padding: 10px;
-  border: 1px solid #FF4D6D; /* pink/red border */
+  border: 1px solid #FF4D6D;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 14px;
   border-radius: 6px;
 }
 
@@ -24,108 +23,199 @@
   gap: 25px;
 }
 
-/* LEFT COLUMN */
+/* ================= LEFT ================= */
 .left {
   flex: 3;
 }
 
 .left h3 {
+  color: #00F5D4;
   margin-bottom: 15px;
-  color: #00F5D4; /* neon aqua heading */
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .payment-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 15px;
+  display: flex;               /* 🔥 use flex for single row */
+  gap: 5px;                    /* 🔥 spacing between boxes */
+  flex-wrap: nowrap;            /* 🔥 prevent wrapping */
+  justify-content: space-between; /* 🔥 evenly distribute boxes */
+  position: relative;           /* 🔥 for details positioning */
+  width: 100%;                  /* 🔥 full width container */
 }
 
-/* PAYMENT BOX */
+/* wrapper fix */
+.payment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;                  /* 🔥 all boxes equal width */
+  max-width: calc((100% - 25px)/6); /* 🔥 6 boxes fit in one row */
+}
+
+/* ================= PAYMENT BOX ================= */
 .pay-box {
-  background: #111827; /* slightly lighter dark navy */
-  border: 1px solid #333F55; /* dark border */
-  padding: 15px;
-  text-align: center;
+  height: 110px;
+  width: 100%;  /* 🔥 same size for all */
+  background: #111827;
+  border: 1px solid #333F55;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: 0.3s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: #E0E7FF;
 }
 
 .pay-box img {
-  width: 40px;
-  margin-bottom: 8px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 6px;
 }
 
 .pay-box span {
   font-size: 13px;
+}
+
+/* hover */
+.pay-box:hover {
+  border-color: #FF4D6D;
+}
+
+/* active */
+.pay-box.active {
+  border: 2px solid #FF4D6D;
+  background: rgba(255,77,109,0.1);
+}
+
+.payment-details select {
+  width: 220px;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #333F55;
   display: block;
 }
 
-/* HOVER */
-.pay-box:hover {
-  border-color: #FF4D6D; /* pink/red hover */
-  box-shadow: 0 4px 12px rgba(255,77,109,0.3);
-}
-
-/* ACTIVE */
-.pay-box.active {
-  border: 2px solid #FF4D6D; /* pink/red active */
-  background: rgba(255,77,109,0.1); /* light pink/red background */
-}
-
-/* DISABLED */
-.pay-box.disabled {
+.payment-details select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* RIGHT COLUMN */
+/* ================= DETAILS (FULL WIDTH PANEL) ================= */
+/* .payment-details {
+  grid-column: 1 / -1; 
+  background: #1E293B;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease;
+  text-align: left;
+} */
+
+.payment-details {
+  position: absolute; /* 🔥 absolute so it doesn't push other boxes */
+  top: 120px; /* 🔥 below the boxes (pay-box height + gap) */
+  left: 0;     /* 🔥 start from left of grid */
+  width: 100%; /* 🔥 full width under boxes */
+  z-index: 10;
+  background: #1E293B;
+  padding: 20px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease;
+  text-align: left;
+  display: none; /* 🔥 hide by default */
+}
+
+.pay-box.active + .payment-details {
+  display: block; /* 🔥 only show below the clicked box */
+}
+
+/* text limit (Daraz style) */
+.payment-details p,
+.payment-details ul {
+  max-width: 600px;
+}
+
+/* inputs small + clean */
+.payment-details input {
+  width: 280px;
+  max-width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #333F55;
+  display: block;
+}
+
+/* buttons small */
+.payment-details button {
+  width: 180px;
+  padding: 10px;
+  margin-top: 10px;
+  background: #00F5D4;
+  color: #1A2639;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ================= RIGHT ================= */
 .right {
   flex: 1;
-  background: #111827; /* slightly lighter dark navy */
+  background: #111827;
   padding: 20px;
   border-radius: 8px;
   height: fit-content;
-  border: 1px solid #333F55; /* dark border */
+  border: 1px solid #333F55;
 }
 
 .right h4 {
   margin-bottom: 15px;
-  color: #00F5D4; /* neon aqua heading */
+  color: #00F5D4;
 }
 
-/* SUMMARY */
+/* summary */
 .summary-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  font-size: 14px;
-  color: #CBD5E1; /* light text */
+  color: #CBD5E1;
 }
 
 .summary-row.total {
   font-weight: bold;
   font-size: 16px;
-  margin-top: 10px;
-  color: #00F5D4; /* neon aqua total */
+  color: #00F5D4;
 }
 
-/* BUTTON */
+/* button */
 .confirm-btn {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
-  background: linear-gradient(90deg, #FF4D6D, #8B5CF6); /* pink to purple gradient */
+  background: linear-gradient(90deg, #FF4D6D, #8B5CF6);
   border: none;
   color: white;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .confirm-btn:hover {
-  background: linear-gradient(90deg, #8B5CF6, #FF4D6D); /* reverse gradient on hover */
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  background: linear-gradient(90deg, #8B5CF6, #FF4D6D);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -4,11 +4,11 @@
 
 /* ===== BASE LAYOUT ===== */
 .detail-container {
-  width: 85%;
-  background: #0F172A; /* Dark Navy */
-  border-radius: 20px;
+  /* width: 85%; */
+  background: #273449; /* Dark Navy */
+  /* border-radius: 20px; */
   padding: 30px;
-  margin: 40px auto;
+  
   display: flex;
   gap: 40px;
   font-family: 'Arial', sans-serif;

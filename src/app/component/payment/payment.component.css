@@ -2,7 +2,7 @@
 .payment-page {
   background: #273449;
   padding: 30px;
-  min-height: 100vh;
+  min-height: 133vh;
   color: #E0E7FF;
 }
 
@@ -217,5 +217,56 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* ================= RESPONSIVE FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* 🔥 Order Summary Neeche */
+  .payment-container {
+    flex-direction: column;
+  }
+
+  /* 🔥 Grid wrap */
+  .payment-grid {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* 🔥 Boxes bade + 2 per row */
+  .payment-item {
+    flex: 1 1 calc((100% - 10px)/2);
+    max-width: calc((100% - 10px)/2);
+  }
+
+  .pay-box {
+    height: 120px; /* thoda bada */
+  }
+
+  /* 🔥 OVERLAP FIX (sirf mobile pe) */
+  .payment-details {
+    position: static; /* absolute override */
+    margin-top: 10px;
+  }
+
+  /* 🔥 inputs full width */
+  .payment-details input,
+  .payment-details select,
+  .payment-details button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 500px) {
+
+  .payment-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .pay-box {
+    height: 110px;
   }
 }

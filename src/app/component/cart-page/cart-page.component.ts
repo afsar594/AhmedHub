@@ -27,10 +27,50 @@ export class CartPageComponent implements OnInit {
     private router: Router,
   ) {}
 
+  // ngOnInit(): void {
+  //   this.initializeForm();
+  //   this.GetAllItemCard();
+  // }
   ngOnInit(): void {
-    this.initializeForm();
-    this.GetAllItemCard();
-  }
+  this.initializeForm();
+
+  // Dummy data for cart
+  this.cartItems = [
+    {
+      id: 1,
+      itemName: 'Wireless Headphones',
+      price: 59.99,
+      oldPrice: 79.99,
+      qty: 1,
+      image: 'https://i.pinimg.com/736x/4e/a5/c8/4ea5c8c480625906a692bafa65ba7aad.jpg', // placeholder image
+    },
+    {
+      id: 2,
+      itemName: 'Smart Watch',
+      price: 120.0,
+      oldPrice: 149.99,
+      qty: 2,
+      image: 'https://i.pinimg.com/1200x/0b/44/0c/0b440ca1bee296393612fab487b6ee53.jpg',
+    },
+    {
+      id: 3,
+      itemName: 'Gaming Mouse',
+      price: 35.5,
+      qty: 1,
+      image: 'https://i.pinimg.com/736x/69/50/82/695082caa33e275191ef8ee05bd9b316.jpg',
+    },
+    {
+      id: 4,
+      itemName: 'Mechanical Keyboard',
+      price: 80.0,
+      oldPrice: 99.99,
+      qty: 1,
+      image: 'https://i.pinimg.com/736x/16/1b/a7/161ba756c0f45c1029b96a3c0a5b1975.jpg',
+    }
+  ];
+
+  this.buildFormArray(); // build form array for dummy data
+}
 
   initializeForm() {
     this.cartForm = this.fb.group({
@@ -107,10 +147,13 @@ deleteSelected() {
     .filter(c => c.value.selected)
     .map(c => c.value.id);
 
-  if(selectedIds.length === 0) {
-    alert('Please select at least one item.');
-    return;
-  }
+if(selectedIds.length === 0) {
+  this.modalTitle = 'No Item Selected';
+  this.modalMessage = 'Please select at least one item to delete.';
+  this.modalAction = null; // no action needed, just info
+  this.showModal = true;
+  return;
+}
 
   this.modalTitle = 'Delete Selected';
   this.modalMessage = 'Are you sure you want to delete selected items?';
@@ -154,10 +197,13 @@ checkout() {
     .filter(x => x.selected)
     .map(x => x.item);
 
-  if(selectedItems.length === 0) {
-    alert('Please select at least one item to proceed.');
-    return;
-  }
+ if(selectedItems.length === 0) {
+  this.modalTitle = 'No Item Selected';
+  this.modalMessage = 'Please select at least one item to proceed to checkout.';
+  this.modalAction = null; // only info
+  this.showModal = true;
+  return;
+}
 
   this.modalTitle = 'Proceed to Checkout';
   this.modalMessage = `Are you sure you want to proceed with ${selectedItems.length} item(s)?`;
@@ -166,4 +212,5 @@ checkout() {
   };
   this.showModal = true;
 }
+
 }

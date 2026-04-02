@@ -27,6 +27,8 @@ export class SaleProductComponent implements OnInit {
   filteredKids: any[] = [];
   noResults: boolean = false;
 
+  allFilteredProducts: any[] = [];
+
   constructor(
     private api: ApiService,
     private router: Router,
@@ -34,50 +36,69 @@ export class SaleProductComponent implements OnInit {
     private searchService: SearchService,
   ) {}
 
-  ngOnInit() {
-    this.searchService.searchText$.subscribe((query: string) => {
-      this.applySearch(query);
-    });
-    this.route.queryParams.subscribe((params) => {
-      this.Id = params['id'];
-      if (this.Id > 0) {
-        this.getAllProductClassifiedId(Number(this.Id));
-      } else {
-        this.getItemsAll();
-      }
-      this.searchService.searchText$.subscribe((query: string) => {
-        const q = query.toLowerCase();
-        this.filteredBoys = this.Bosyproducts.filter((item) =>
-          item.title.toLowerCase().includes(q),
-        );
-        this.filteredGirls = this.girlproduct.filter((item) =>
-          item.title.toLowerCase().includes(q),
-        );
-        this.filteredKids = this.kidproducts.filter((item) =>
-          item.title.toLowerCase().includes(q),
-        );
-      });
-    });
-    this.loadDummyData();
-  }
+  // ngOnInit() {
+  //   this.searchService.searchText$.subscribe((query: string) => {
+  //     this.applySearch(query);
+  //   });
+  //   this.route.queryParams.subscribe((params) => {
+  //     this.Id = params['id'];
+  //     if (this.Id > 0) {
+  //       this.getAllProductClassifiedId(Number(this.Id));
+  //     } else {
+  //       this.getItemsAll();
+  //     }
+  //     this.searchService.searchText$.subscribe((query: string) => {
+  //       const q = query.toLowerCase();
+  //       this.filteredBoys = this.Bosyproducts.filter((item) =>
+  //         item.title.toLowerCase().includes(q),
+  //       );
+  //       this.filteredGirls = this.girlproduct.filter((item) =>
+  //         item.title.toLowerCase().includes(q),
+  //       );
+  //       this.filteredKids = this.kidproducts.filter((item) =>
+  //         item.title.toLowerCase().includes(q),
+  //       );
+  //     });
+  //   });
+  //   this.loadDummyData();
+  // }
 
-  applySearch(query: string) {
-    const q = query.toLowerCase();
-    this.filteredBoys = this.Bosyproducts.filter((p) =>
-      p.title.toLowerCase().includes(q),
-    );
-    this.filteredGirls = this.girlproduct.filter((p) =>
-      p.title.toLowerCase().includes(q),
-    );
-    this.filteredKids = this.kidproducts.filter((p) =>
-      p.title.toLowerCase().includes(q),
-    );
-    // Check if all arrays are empty
-    this.noResults =
-      this.filteredBoys.length === 0 &&
-      this.filteredGirls.length === 0 &&
-      this.filteredKids.length === 0;
-  }
+  ngOnInit() {
+  this.route.queryParams.subscribe((params) => {
+    this.Id = params['id'];
+    if (this.Id > 0) {
+      this.getAllProductClassifiedId(Number(this.Id));
+    } else {
+      this.getItemsAll();
+    }
+  });
+
+  // Subscribe search text only once
+  this.searchService.searchText$.subscribe((query: string) => {
+    this.applySearch(query);
+  });
+
+  // Dummy data load (optional)
+  this.loadDummyData();
+}
+
+  // applySearch(query: string) {
+  //   const q = query.toLowerCase();
+  //   this.filteredBoys = this.Bosyproducts.filter((p) =>
+  //     p.title.toLowerCase().includes(q),
+  //   );
+  //   this.filteredGirls = this.girlproduct.filter((p) =>
+  //     p.title.toLowerCase().includes(q),
+  //   );
+  //   this.filteredKids = this.kidproducts.filter((p) =>
+  //     p.title.toLowerCase().includes(q),
+  //   );
+  //   // Check if all arrays are empty
+  //   this.noResults =
+  //     this.filteredBoys.length === 0 &&
+  //     this.filteredGirls.length === 0 &&
+  //     this.filteredKids.length === 0;
+  // }
 
   // loadDummyData() {
   //   this.product = [
@@ -191,6 +212,28 @@ export class SaleProductComponent implements OnInit {
 
   //   this.assignCategoryArrays();
   // }
+
+  applySearch(query: string) {
+  const q = query.toLowerCase();
+
+  this.filteredBoys = this.Bosyproducts.filter(p =>
+    p.title.toLowerCase().includes(q)
+  );
+  this.filteredGirls = this.girlproduct.filter(p =>
+    p.title.toLowerCase().includes(q)
+  );
+  this.filteredKids = this.kidproducts.filter(p =>
+    p.title.toLowerCase().includes(q)
+  );
+
+  this.allFilteredProducts = [
+    ...this.filteredBoys,
+    ...this.filteredGirls,
+    ...this.filteredKids
+  ];
+
+  this.noResults = this.allFilteredProducts.length === 0;
+}
 
   getAllProductClassifiedId(id: any) {
     this.api.getItems(id).subscribe((res: any) => {
@@ -413,20 +456,42 @@ export class SaleProductComponent implements OnInit {
     this.groupProductsByCategory();
   }
 
+
   assignCategoryArrays() {
-    this.Bosyproducts = this.product.filter((p) => p.classifiedId === 3);
-    this.girlproduct = this.product.filter((p) => p.classifiedId === 2);
-    this.kidproducts = this.product.filter((p) => p.classifiedId === 1);
+  this.Bosyproducts = this.product.filter((p) => p.classifiedId === 3);
+  this.girlproduct = this.product.filter((p) => p.classifiedId === 2);
+  this.kidproducts = this.product.filter((p) => p.classifiedId === 1);
 
-    this.filteredBoys = [...this.filteredBoys];
-    this.filteredGirls = [...this.girlproduct];
-    this.filteredKids = [...this.kidproducts];
-    console.log('filteredKids', this.filteredKids);
+  // Merge initial filtered arrays
+  this.filteredBoys = [...this.Bosyproducts];
+  this.filteredGirls = [...this.girlproduct];
+  this.filteredKids = [...this.kidproducts];
 
-    console.log('filteredGirls', this.filteredGirls);
+  this.allFilteredProducts = [
+    ...this.filteredBoys,
+    ...this.filteredGirls,
+    ...this.filteredKids
+  ];
 
-    console.log('filteredKids', this.filteredKids);
-  }
+  // Check no results
+  this.noResults =
+    this.allFilteredProducts.length === 0;
+}
+
+  // assignCategoryArrays() {
+  //   this.Bosyproducts = this.product.filter((p) => p.classifiedId === 3);
+  //   this.girlproduct = this.product.filter((p) => p.classifiedId === 2);
+  //   this.kidproducts = this.product.filter((p) => p.classifiedId === 1);
+
+  //   this.filteredBoys = [...this.filteredBoys];
+  //   this.filteredGirls = [...this.girlproduct];
+  //   this.filteredKids = [...this.kidproducts];
+  //   console.log('filteredKids', this.filteredKids);
+
+  //   console.log('filteredGirls', this.filteredGirls);
+
+  //   console.log('filteredKids', this.filteredKids);
+  // }
 
   getCaption(classifiedId: number) {
     switch (classifiedId) {

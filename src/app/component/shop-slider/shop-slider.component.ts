@@ -9,9 +9,9 @@ export class ShopSliderComponent implements OnInit {
   currentIndex = 0;
 
   slides = [
-    { image: 'https://i.pinimg.com/736x/4b/95/2c/4b952cea13038cf60446d7a55ca1cddc.jpg', title: 'New Collection', btn: 'Shop Now' },
-    { image: 'https://i.pinimg.com/736x/b1/6c/10/b16c10c379919a5ab0421ebd3d4ba0ed.jpg', title: 'Big Sale', btn: 'Shop Now' },
-    { image: 'https://i.pinimg.com/736x/de/61/5e/de615e8da87828121a92e12453c03e98.jpg', title: 'Trending Products', btn: 'Shop Now' }
+    { image: 'https://www.shutterstock.com/image-vector/black-friday-sale-banner-shopping-260nw-2545954505.jpg', title: 'New Collection', btn: 'Shop Now' },
+    { image: 'https://www.shutterstock.com/image-vector/vector-black-friday-poster-banner-260nw-2072125574.jpg', title: 'Big Sale', btn: 'Shop Now' },
+    { image: 'https://cdn.vectorstock.com/i/500p/98/69/advertising-banner-design-of-online-grocery-market-vector-55979869.jpg', title: 'Trending Products', btn: 'Shop Now' }
   ];
 
   ngOnInit() {

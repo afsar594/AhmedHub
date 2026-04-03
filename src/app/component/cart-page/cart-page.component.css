@@ -76,20 +76,44 @@
 }
 
 /* ===== QUANTITY CONTROLS ===== */
-.qty-btn {
+/* ===== QUANTITY CONTROL BOX ===== */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background: #0F172A;
-    color: #00F5D4;
-    border-radius: 6px;
+    padding: 6px 10px;
+    border-radius: 10px;
 }
-.qty-btn:hover:not(:disabled) {
+
+/* BUTTON STYLE */
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: #1E293B;
+    color: #00F5D4;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.qty-btn:hover {
     background: #00F5D4;
     color: #0F172A;
 }
+
+/* NUMBER */
 .qty-value {
-    background: #273449;
-    color: #E0E7FF;
-    padding: 6px 12px;
-    border-radius: 6px;
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 /* ================== RIGHT SIDE - ORDER SUMMARY ================== */
@@ -207,6 +231,27 @@ box-shadow: 0 2px 8px rgba(0,245,212,0.3);}
   justify-content: center;
 }
 
+.btn-remove {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 77, 109, 0.1);
+    color: #FF4D6D;
+    border: 1px solid #FF4D6D;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-remove:hover {
+    background: #FF4D6D;
+    color: #fff;
+    transform: scale(1.05);
+}
+
 /* ===== CLEAR ALL BUTTON - MODERN STYLE ===== */
 .cart-actions .btn-outline {
     /* padding: 8px 10px;            */
@@ -231,6 +276,47 @@ box-shadow: 0 2px 8px rgba(0,245,212,0.3);}
 
 .cart-actions .btn-outline i {
     font-size: 16px;               /* icon size */
+}
+
+/* ===== CART ACTIONS BAR ===== */
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* LEFT SIDE (DELETE SELECTED) */
+.btn-delete-selected {
+    background: rgba(255, 77, 109, 0.1);
+    color: #FF4D6D;
+    border: 1px solid #FF4D6D;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-delete-selected:hover {
+    background: #FF4D6D;
+    color: #fff;
+}
+
+/* RIGHT SIDE (CLEAR ALL) */
+.btn-clear-all {
+    background: transparent;
+    color: #00F5D4;
+    border: 2px solid #00F5D4;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-clear-all:hover {
+    background: #00F5D4;
+    color: #1E293B;
 }
 
 /* ===== RESPONSIVE ===== */

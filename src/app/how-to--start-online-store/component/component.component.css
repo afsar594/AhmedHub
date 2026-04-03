@@ -1,0 +1,108 @@
+.blog-page {
+  background: #1E293B;
+  color: #E0E7FF;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  text-align: center;
+  background: #1A2639;
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #94A3B8;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.step-card {
+  background: #273449;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+  border: 1px solid #333F55;
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.step-header img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.step-info h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #00F5D4;
+}
+
+.step-info span {
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+.toggle-icon {
+  margin-left: auto;
+  font-size: 24px;
+  color: #FF4D6D;
+}
+
+.step-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 15px;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.step-content.active {
+  max-height: 500px; /* adjust based on content */
+  padding: 15px;
+}
+
+.step-content p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .step-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .step-header img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .step-info h2 {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,23 @@
+<div class="blog-page">
+  <div class="hero">
+    <h1>How to Start an Online Store in Pakistan (2026)</h1>
+    <p>Learn step-by-step how to launch your online store and start earning from home.</p>
+  </div>
+
+  <div class="steps">
+    <div *ngFor="let step of steps; let i = index" class="step-card">
+      <div class="step-header" (click)="toggleStep(i)">
+        <img [src]="step.img" alt="{{step.title}}">
+        <div class="step-info">
+          <h2>{{step.title}}</h2>
+          <span>{{step.date}}</span>
+        </div>
+        <div class="toggle-icon">{{activeStep === i ? '-' : '+'}}</div>
+      </div>
+      
+      <div class="step-content" [class.active]="activeStep === i">
+        <p>{{step.desc}}</p>
+      </div>
+    </div>
+  </div>
+</div>

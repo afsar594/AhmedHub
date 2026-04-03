@@ -311,26 +311,14 @@ export class SaleProductComponent implements OnInit {
           detail: x.detail,
         }));
 
-        this.Bosyproducts = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 3,
-        );
-        this.girlproduct = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 2,
-        );
-        this.kidproducts = items.filter(
-          (x: { classifiedId: number }) => x.classifiedId === 1,
-        );
 
-        // ✅ Filtered Lists (for UI)
-        this.filteredBoys = [...this.Bosyproducts];
-        this.filteredGirls = [...this.girlproduct];
-        this.filteredKids = [...this.kidproducts];
+        this.allFilteredProducts = [...items];
+     
 
         // ✅ No Result Check
         this.noResults =
-          this.filteredBoys.length === 0 &&
-          this.filteredGirls.length === 0 &&
-          this.filteredKids.length === 0;
+          this.allFilteredProducts.length === 0 
+
       }
     });
   }

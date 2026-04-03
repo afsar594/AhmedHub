@@ -19,7 +19,7 @@
             (click)="deleteSelected()"
           >
             <i class="icon-trash"></i>
-            Delete Selected
+            🗑 Delete Selected
           </button>
           <button
             type="button"
@@ -28,7 +28,7 @@
             (click)="clearAll()"
           >
             <i class="icon-clear"></i>
-            Clear All
+            ❌ Clear All
           </button>
         </div>
       </div>
@@ -84,25 +84,29 @@
           </div>
 
           <div class="item-quantity">
-            <div class="quantity-controls">
-              <button
-                type="button"
-                class="qty-btn qty-decrease"
-                (click)="decreaseQty(item)"
-                [disabled]="item.qty <= 1"
-              >
-                <i class="icon-minus"></i>
-              </button>
-              <span class="qty-value">{{ item.qty }}</span>
-              <button
-                type="button"
-                class="qty-btn qty-increase"
-                (click)="increaseQty(item)"
-              >
-                <i class="icon-plus"></i>
-              </button>
-            </div>
-          </div>
+  <div class="quantity-control">
+
+    <button
+      type="button"
+      class="qty-btn qty-decrease"
+      (click)="decreaseQty(item)"
+      [disabled]="item.qty <= 1"
+    >
+      −
+    </button>
+
+    <span class="qty-value">{{ item.qty }}</span>
+
+    <button
+      type="button"
+      class="qty-btn qty-increase"
+      (click)="increaseQty(item)"
+    >
+      +
+    </button>
+
+  </div>
+</div>
 
           <div class="item-total">
             <span class="total-price"
@@ -111,14 +115,15 @@
           </div>
 
           <div class="item-actions">
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              (click)="removeItem(item.id, item.itemName)"
-            >
-              <i class="icon-remove"></i>
-            </button>
-          </div>
+  <button
+    type="button"
+    class="btn-remove"
+    (click)="removeItem(item.id, item.itemName)"
+    title="Remove Item"
+  >
+    🗑 Remove
+  </button>
+</div>
         </div>
       </div>
 

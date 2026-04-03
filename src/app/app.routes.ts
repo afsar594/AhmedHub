@@ -13,6 +13,8 @@ import { DetailCardComponent } from './component/detail-card/detail-card.compone
 import { BuyNowComponent } from './component/buy-now/buy-now.component';
 import { CartPageComponent } from './component/cart-page/cart-page.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { BlogComponent } from './component/blog/blog.component';
+import { ComponentComponent } from './how-to--start-online-store/component/component.component';
 // import { AdminLoginComponent } from './admin-component/admin-login/admin-login.component';
 // import { AdminDashboardComponent } from './admin-component/admin-dashboard/admin-dashboard.component';
 // import { AdminAddProductComponent } from './admin-component/admin-add-product/admin-add-product.component';
@@ -24,6 +26,8 @@ export const routes: Routes = [
   { path: 'shop', component: SaleProductComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
+  { path: 'ahmedhub-blog', component: BlogComponent },
+  { path: 'how-to-start', component: ComponentComponent  },
   { path: 'faq', component: FAQComponent },
   { path: 'shippingpolicy', component: ShippingPolicyComponent },
   { path: 'terms-conditions', component: TermsConditionsComponent },

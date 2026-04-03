@@ -208,13 +208,14 @@
 /* ===== ACTION BUTTONS ===== */
 .buy-btn,
 .cart-btn {
-  width: 48%;
+  width: 28%;
   padding: 14px;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
+  margin-right: 10px;
 }
 
 .buy-btn {
@@ -225,7 +226,7 @@
 
 .buy-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px #FF4D6D;
+  box-shadow: 0 2px 8px #FF4D6D;
 }
 
 .cart-btn {

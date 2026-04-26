@@ -14,6 +14,8 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrls: ['./sale-product.component.css'],
 })
 export class SaleProductComponent implements OnInit {
+      baseUrl = 'https://localhost:44379';
+
   Bosyproducts: any[] = [];
   girlproduct: any[] = [];
   kidproducts: any[] = [];
@@ -286,10 +288,17 @@ export class SaleProductComponent implements OnInit {
   navigateToDetail(data: any) {
     this.router.navigate(['detail-page'], { state: { data: data } });
   }
-  getItemsAll() {
-    this.api.getItemsAll().subscribe((res: any) => {
-      if (res?.isSuccess && Array.isArray(res.data)) {
-        const items = res.data.map((x: any) => ({
+getItemsAll() {
+  this.api.getItemsAll().subscribe((res: any) => {
+    if (res?.isSuccess && Array.isArray(res.data)) {
+
+      const items = res.data.map((x: any) => {
+
+        // ✅ pick first valid image
+        const firstImage =
+          x.itemImages?.find((img: any) => img.imgPath)?.imgPath || '';
+
+        return {
           id: x.itemId,
           title: x.itemName,
           price: x.price,
@@ -297,31 +306,33 @@ export class SaleProductComponent implements OnInit {
           discount: x.discount,
           qty: x.qty,
 
-          image: x.itemImages?.length
-            ? x.itemImages[0].imgPaths
+          // ✅ FIXED IMAGE
+          image: firstImage
+            ? this.baseUrl + firstImage
             : 'assets/no-image.png',
 
-          images: x.itemImages?.map((img: any) => img.imgPaths) || [],
-          colors: x.itemColors?.map((c: any) => c.colorCodes) || [],
-          sizes: x.itemSizes?.map((s: any) => s.sizeNames) || [],
+          // optional gallery images
+          images:
+            x.itemImages
+              ?.filter((img: any) => img.imgPath)
+              .map((img: any) => this.baseUrl + img.imgPath) || [],
+
+          colors: x.itemColors?.map((c: any) => c.colorCode) || [],
+          sizes: x.itemSizes?.map((s: any) => s.sizeName) || [],
 
           classifiedId: x.classifiedId,
           category: x.category,
           brand: x.brand,
           detail: x.detail,
-        }));
+        };
+      });
 
+      this.allFilteredProducts = [...items];
 
-        this.allFilteredProducts = [...items];
-     
-
-        // ✅ No Result Check
-        this.noResults =
-          this.allFilteredProducts.length === 0 
-
-      }
-    });
-  }
+      this.noResults = this.allFilteredProducts.length === 0;
+    }
+  });
+}
 
   // samina here
 

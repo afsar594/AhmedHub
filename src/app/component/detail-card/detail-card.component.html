@@ -78,8 +78,21 @@
     </div>
 
     <button class="buy-btn" (click)="navigateToForm(record)">Buy Now</button>
-    <button class="cart-btn" (click)="navigateTocart(record)">
+    <button class="cart-btn" (click)="saveToCart(record)">
       Add to Cart
     </button>
   </div>
 </div>
+<app-alert-modal
+  [visible]="showModal"
+  [title]="modalTitle"
+  [message]="modalMessage"
+  (onConfirm)="handleConfirm()"
+  (onCancel)="showModal=false"
+></app-alert-modal>
+
+<!-- TOAST -->
+<div class="toast" *ngIf="showToast">
+  {{ toastMessage }}
+</div>
+

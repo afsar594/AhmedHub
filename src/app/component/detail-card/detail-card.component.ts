@@ -44,7 +44,6 @@ export class DetailCardComponent implements OnInit {
 
   ngOnInit() {
     this.record = history.state?.data || null;
-debugger
     if (!this.record) {
       return;
     }

@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./buy-now.component.css'],
 })
 export class BuyNowComponent implements OnInit {
+  baseUrl = 'https://localhost:44379';
   deliveryForm: FormGroup;
   selectedItems: any;
   checkoutArray: any[] = [];

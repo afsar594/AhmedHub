@@ -3,21 +3,31 @@
 
 <section class="product-sale" *ngIf="allFilteredProducts.length > 0">
   <div class="product-grid">
+
     <div
       class="product-card"
       *ngFor="let item of allFilteredProducts"
       (click)="navigateToDetail(item)"
     >
+
       <div class="img-box">
-        <img [src]="item.image || 'assets/no-image.png'" [alt]="item.title" />
+         <img
+          [src]="item.image"
+          [alt]="item.title"
+          (error)="item.image='assets/no-image.png'"
+        />
       </div>
+
       <h3>{{ item.title }}</h3>
+
       <div class="price-row">
         <span class="price">Rs {{ item.price }}</span>
-        <span class="oldPrice">Rs {{ item.oldPrice }}</span>
-        <span class="discount">-{{ item.discount }}%</span>
+        <span class="oldPrice" *ngIf="item.oldPrice>0 && item.discount>0">Rs {{ item.oldPrice }}</span>
+        <span class="discount" *ngIf="item.discount>0">{{ item.discount }}%</span>
       </div>
+
     </div>
+
   </div>
 </section>
 
@@ -27,3 +37,4 @@
     different keywords or check back later.
   </p>
 </div>
+

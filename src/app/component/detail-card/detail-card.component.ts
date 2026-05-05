@@ -2,44 +2,39 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../service/api.service';
+import { AlertModalComponent } from "../../shared/alert-modal/alert-modal.component";
 
 @Component({
   selector: 'app-detail-card',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, AlertModalComponent],
   templateUrl: './detail-card.component.html',
   styleUrl: './detail-card.component.css',
 })
 export class DetailCardComponent implements OnInit {
+
   quantity = 1;
-  record: any;
+  record: any = null;
 
-  // 🔹 MAIN IMAGE (backend wali)
   activeImage = '';
-
-  allImages: string[] = []; // backend + dummy images
+  allImages: string[] = [];
   hoverImage: string | null = null;
 
-  // 🔹 THUMB CONTROL
   thumbStartIndex = 0;
   thumbLimit = 4;
 
-  // 🔹 DUMMY THUMB IMAGES (neeche cards)
-  dummyThumbs: string[] = [
-    'https://i.pinimg.com/736x/7d/ef/79/7def796393869162ff105356231c22d9.jpg',
-    'https://i.pinimg.com/736x/3b/b0/4b/3bb04b75806c07d3a07266d3aa601881.jpg',
-    'https://i.pinimg.com/736x/1a/ff/d9/1affd9c7e9b5f343ac5547c9b976c14e.jpg',
-    'https://i.pinimg.com/736x/f4/5f/23/f45f2357f6bc0e1184d2eb3fd518fe55.jpg',
-    'https://i.pinimg.com/736x/a0/73/66/a0736626725341b2bf039b51a1b30b66.jpg',
-    'https://i.pinimg.com/736x/9b/64/26/9b6426fc6464d23c9bfa39a67dff8a4f.jpg',
-    'https://i.pinimg.com/736x/0a/13/69/0a1369c5a5bf51268233fb151edc8e75.jpg',
-  ];
-
-  //  selectColor(color:string){
-  //   this.selectColor=color;
-  //  }
-
   selectcolor = '';
   selectedsize = '';
+
+  // ================= MODAL =================
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalAction: (() => void) | null = null;
+
+  // ================= TOAST =================
+  showToast = false;
+  toastMessage = '';
 
   constructor(
     private router: Router,
@@ -48,23 +43,113 @@ export class DetailCardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.record = history.state.data;
-    console.log('record', this.record);
-    this.activeImage = this.record?.images[0];
-    // this.activeImage = this.record?.image;
+    this.record = history.state?.data || null;
+    if (!this.record) {
+      return;
+    }
+
+    // IMAGE HANDLING SAFE
+    if (this.record.images?.length > 0) {
+      this.allImages = this.record.images;
+    } else if (this.record.image) {
+      this.allImages = [this.record.image];
+    } else {
+      this.allImages = ['assets/no-image.png'];
+    }
+
+    this.activeImage = this.allImages[0];
   }
 
-  /* ================= THUMB LOGIC ================= */
+  // ================= CONFIRM MODAL =================
+  confirmAddToCart(data: any) {
+    this.modalTitle = 'Add to Cart';
+    this.modalMessage = `Do you want to add "${data.title}" to cart?`;
 
+    this.modalAction = () => this.saveToCart(data);
+    this.showModal = true;
+  }
+
+  handleConfirm() {
+    if (this.modalAction) {
+      this.modalAction();
+    }
+    this.resetModal();
+  }
+
+  handleCancel() {
+    this.resetModal();
+  }
+
+  private resetModal() {
+    this.showModal = false;
+    this.modalAction = null;
+  }
+
+  // ================= SAVE CART =================
+ saveToCart(data: any) {
+
+  // ================= CONFIRMATION =================
+  this.modalTitle = 'Confirm Add to Cart';
+  this.modalMessage = `Do you want to add "${data.title}" to cart?`;
+
+  this.modalAction = () => {
+
+    // ================= API CALL =================
+    const payload = {
+      id: 0,
+      itemId: data.id,
+      itemName: data.title,
+      price: data.price,
+      oldPrice: data.oldPrice,
+      discount: data.discount,
+      qty: this.quantity,
+      img: this.activeImage,
+      image: this.activeImage,
+      detail: data.detail,
+      color: this.selectcolor,
+      size: this.selectedsize,
+      classifiedId: data.classifiedId ?? 1,
+      category: data.category,
+      brand: data.brand,
+      createdDate: new Date(),
+      currentUser: 'user',
+    };
+
+    this.api.saveCard(payload).subscribe({
+      next: (res: any) => {
+        this.showToastMessage(res?.message || 'Item added to cart successfully');
+      },
+      error: () => {
+        this.showToastMessage('Something went wrong');
+      }
+    });
+
+  };
+
+  // SHOW MODAL
+  this.showModal = true;
+}
+
+  // ================= TOAST =================
+  private showToastMessage(msg: string) {
+    this.toastMessage = msg;
+    this.showToast = true;
+
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
+  }
+
+  // ================= THUMB IMAGES =================
   get visibleThumbs() {
-    return this.record?.images?.slice(
+    return this.allImages.slice(
       this.thumbStartIndex,
-      this.thumbStartIndex + this.thumbLimit,
+      this.thumbStartIndex + this.thumbLimit
     );
   }
 
   nextThumb() {
-    if (this.thumbStartIndex + this.thumbLimit < this.record.images.length) {
+    if (this.thumbStartIndex + this.thumbLimit < this.allImages.length) {
       this.thumbStartIndex++;
     }
   }
@@ -88,18 +173,12 @@ export class DetailCardComponent implements OnInit {
   }
 
   get displayedImage(): string {
-    return this.hoverImage ? this.hoverImage : this.activeImage;
+    return this.hoverImage || this.activeImage;
   }
 
-  /* ================= PRICE ================= */
-
-  totalPriceFix(p: any, q: any) {
-    let total = p * q;
-    return total.toFixed(2);
-  }
-
+  // ================= QUANTITY =================
   increase() {
-    if (this.record.qty && this.quantity < this.record.qty) {
+    if (!this.record?.qty || this.quantity < this.record.qty) {
       this.quantity++;
     }
   }
@@ -110,35 +189,14 @@ export class DetailCardComponent implements OnInit {
     }
   }
 
-  navigateToForm(data:any) {
-    data.qty=this.quantity
-    // this.router.navigate(['buy-now']);
-    this.router.navigate(['buy-now'], { state: { data: data } });
+  // ================= NAVIGATION =================
+  navigateToForm(data: any) {
+    this.router.navigate(['buy-now'], {
+      state: { data: { ...data, qty: this.quantity } }
+    });
   }
 
-  navigateTocart(data: any) {
-    // this.router.navigate(['cart-page'], { state: { data: data } });
-    // // this.router.navigate(['/login']);
-    let payload = {
-      id: 0,
-      itemId: data.id,
-      itemName: data.title,
-      price: data.price,
-      oldPrice: data.oldPrice,
-      discount: data.discount,
-      qty: this.quantity,
-      img: '',
-      image: this.activeImage,
-      detail: data.detail,
-      color: this.selectcolor,
-      classifiedId: data.classifiedId,
-      category: data.category,
-      brand: data.brand,
-      createdDate: '2026-02-01T00:35:26.160Z',
-      currentUser: 'string',
-    };
-    this.api.saveCard(payload).subscribe((res: any) => {
-      alert(res.message);
-    });
+  totalPriceFix(p: number, q: number) {
+    return (p * q).toFixed(2);
   }
 }

@@ -20,10 +20,15 @@ import { ComponentComponent } from './how-to--start-online-store/component/compo
 // import { AdminAddProductComponent } from './admin-component/admin-add-product/admin-add-product.component';
 
 export const routes: Routes = [
-  { path: '', component: SaleProductComponent },
-  // { path: 'home', component: CoverBannerComponent },
-  // {path:'cover-banner', component:CoverBannerComponent},
-  { path: 'shop', component: SaleProductComponent },
+  {
+  path: '',
+  redirectTo: 'shop',
+  pathMatch: 'full'
+},
+{
+  path: 'shop',
+  component: SaleProductComponent
+},
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'ahmedhub-blog', component: BlogComponent },

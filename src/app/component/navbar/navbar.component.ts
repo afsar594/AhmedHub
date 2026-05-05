@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 import { filter } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +21,10 @@ export class NavbarComponent {
   cartCount: any; // example value
   currentUrl: string = '';
   constructor(
-    private router: Router,
+    public router: Router,
     private searchService: SearchService,
     private api: ApiService,
+    private location: Location
   ) {
     this.GetAllItemCard();
   }
@@ -34,6 +36,10 @@ export class NavbarComponent {
         console.log('Updated URL:', this.currentUrl);
       });
   }
+
+  goBack() {
+  this.location.back();
+}
   GetAllItemCard() {
     this.api.cartCount$.subscribe(count => {
       this.cartCount = count;

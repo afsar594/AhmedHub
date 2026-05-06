@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-contact-us',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,AlertModalComponent ],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.css',
 })
@@ -17,6 +18,11 @@ export class ContactUsComponent {
 
   contactForm: FormGroup;
 
+  showModal = false;
+modalTitle = '';
+modalMessage = '';
+modalAction: (() => void) | null = null;
+
   constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
@@ -26,16 +32,20 @@ export class ContactUsComponent {
     });
   }
 
-  sendMessage() {
-    if (this.contactForm.invalid) return;
+sendMessage() {
+  if (this.contactForm.invalid) return;
 
-    const payload = this.contactForm.value;
-    console.log('Contact Message:', payload);
+  const payload = this.contactForm.value;
+  console.log('Contact Message:', payload);
 
-    // 🔴 yahan backend API lagay gi
-    // this.api.sendContactMessage(payload).subscribe()
+  this.modalTitle = 'Success';
+  this.modalMessage = 'Your message has been sent successfully!';
 
-    alert('Your message has been sent successfully!');
-    this.contactForm.reset();
-  }
+  this.showModal = true;
+}
+
+handleOk() {
+  this.showModal = false;
+  this.contactForm.reset();
+}
 }

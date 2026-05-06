@@ -60,3 +60,10 @@
     <p>Sunday: Closed</p>
   </div>
 </div>
+
+<app-alert-modal
+  [visible]="showModal"
+  [title]="modalTitle"
+  [message]="modalMessage"
+  (onConfirm)="handleOk()"
+></app-alert-modal>

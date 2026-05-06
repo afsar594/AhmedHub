@@ -8,6 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./shipping-policy.component.css']
 })
 export class ShippingPolicyComponent {
+
+  revealed = false;
+
+ngOnInit() {
+  setTimeout(() => {
+    this.revealed = true;
+  }, 500); // 2.5 sec
+}
   policySections = [
     {
       id: "collect",

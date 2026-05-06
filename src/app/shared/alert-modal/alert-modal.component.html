@@ -8,3 +8,18 @@
     </div>
   </div>
 </div>
+
+<div class="modal" *ngIf="visible">
+  <div class="modal-box">
+    
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+
+    <div class="modal-actions">
+      <button class="ok-btn" (click)="onConfirm.emit()">
+        OK
+      </button>
+    </div>
+
+  </div>
+</div>

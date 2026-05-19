@@ -92,13 +92,27 @@ h2 {
 }
 
 /* Subtle animation on paragraph fade */
-.section p, .section ul li {
+/* .section p, .section ul li {
     opacity: 0;
     transform: translateY(5px);
     transition: all 0.45s ease;
 }
 
 .section:hover p, .section:hover ul li {
+    opacity: 1;
+    transform: translateY(0);
+} */
+
+.section p,
+.section ul li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+}
+
+/* when page becomes active */
+.show-content .section p,
+.show-content .section ul li {
     opacity: 1;
     transform: translateY(0);
 }

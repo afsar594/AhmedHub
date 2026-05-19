@@ -16,6 +16,8 @@ export class AlertModalComponent {
   @Output() onConfirm = new EventEmitter<void>();
   @Output() onCancel = new EventEmitter<void>();
 
+  
+
   confirm() {
     this.onConfirm.emit();
     this.visible = false;

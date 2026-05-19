@@ -1,13 +1,19 @@
 <nav class="navbar">
 
-<div class="logo">
-<!-- <img [src]="img" width="150" /> -->
+
+  <div class="logo">
+
+    <button class="back-btn" 
+        *ngIf="currentUrl !== '/shop'" 
+        (click)="goBack()">←</button>
+
+<img src="assets/icons/Ahmedhublogo.png" alt="logo" width="150" />
 </div>
 
 
   <div class="menu-toggle" (click)="toggleMenu()">☰</div>
-
-  <ul class="top-links" [class.active]="menuOpen">
+  
+    <ul class="top-links" [class.active]="menuOpen">
     <!-- <li>
       <a
         routerLink="/home"
@@ -72,34 +78,30 @@
         >Privacy Policy</a
       >
     </li>
-    <!-- <li>
-      <a
-        routerLink="/login"
-        (click)="setActive('login')"
-        [class.active]="activeLink === 'login'"
-        >Login</a
-      >
-    </li>
-    <li>
-      <a
-        routerLink="/signup"
-        (click)="setActive('signup')"
-        [class.active]="activeLink === 'signup'"
-        >Signup</a
-      >
-    </li> -->
-    <!-- <li>
-      <a
-        routerLink="/admin-panel"
-        (click)="setActive('admin')"
-        [class.active]="activeLink === 'admin'"
-        >Admin Panel</a
-      >
-    </li> -->
+    
+
+
+  <!-- baaki links -->
+
+  <!-- 👇 Sirf jab /shop na ho -->
+  <li *ngIf="currentUrl !== '/shop'" class="cart-li" (click)="navigateToCart()">
+    <div class="cart-container">
+      <img class="cart-icon"
+        src="https://cdn-icons-png.flaticon.com/128/1170/1170678.png" />
+
+      <span class="cart-badge" *ngIf="cartCount > 0">
+        {{ cartCount }}
+      </span>
+    </div>
+  </li>
+
+    
   </ul>
 </nav>
 
-<div class="search-area" *ngIf="currentUrl=='/shop'">
+<!-- <div class="search-area" *ngIf="currentUrl=='/shop'"> -->
+
+  <div class="search-area" *ngIf="router.url.includes('/shop')">
   <input
     type="text"
     placeholder="Search in AhmedHub"

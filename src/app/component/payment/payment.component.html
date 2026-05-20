@@ -33,10 +33,10 @@
               type="text"
               placeholder="Easypaisa Account Number"
               [(ngModel)]="easypaisaNumber">
-
+<!-- 
             <button (click)="confirmOrder()">
               Pay Now
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -60,9 +60,9 @@
               placeholder="JazzCash Number"
               [(ngModel)]="jazzcashNumber">
 
-            <button (click)="confirmOrder()">
+            <!-- <button (click)="confirmOrder()">
               Pay Now
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -101,9 +101,9 @@
               placeholder="CVV"
               [(ngModel)]="cardDetails.cvv">
 
-            <button (click)="confirmOrder()">
+            <!-- <button (click)="confirmOrder()">
               Pay Now
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -132,9 +132,9 @@
               placeholder="CNIC"
               [(ngModel)]="hblDetails.cnic">
 
-            <button (click)="confirmOrder()">
+            <!-- <button (click)="confirmOrder()">
               Pay Now
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -153,13 +153,13 @@
           <div class="payment-details"
                *ngIf="selected==='cod'">
 
-            <p>
+            <!-- <p>
               Pay in cash upon delivery
-            </p>
+            </p> -->
 
-            <button (click)="confirmOrder()">
+            <!-- <button (click)="confirmOrder()">
               Confirm Order
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -236,9 +236,9 @@
                 placeholder="CVV"
                 [(ngModel)]="installmentCard.cvv">
 
-              <button (click)="confirmOrder()">
+              <!-- <button (click)="confirmOrder()">
                 Pay Now
-              </button>
+              </button> -->
 
             </div>
 

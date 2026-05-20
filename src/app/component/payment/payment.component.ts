@@ -236,65 +236,65 @@ export class PaymentComponent implements OnInit {
     }
 
     // FINAL COMPLETE PAYLOAD
-    this.finalPayload = {
+  this.finalPayload = {
 
-      // CUSTOMER
-      customer: {
+  // CUSTOMER
+  customer: {
 
-        userId:
-          this.userData?.id || 0,
+    userId:
+      this.userData?.id || 0,
 
-        fullName:
-          this.deliveryData?.fullName,
+    fullName:
+      this.deliveryData?.fullName,
 
-        phone:
-          this.deliveryData?.phone,
+    phone:
+      this.deliveryData?.phone,
 
-        province:
-          this.deliveryData?.province,
+    province:
+      this.deliveryData?.province,
 
-        area:
-          this.deliveryData?.area,
+    area:
+      this.deliveryData?.area,
 
-        house:
-          this.deliveryData?.house,
+    house:
+      this.deliveryData?.house,
 
-        colony:
-          this.deliveryData?.colony,
+    colony:
+      this.deliveryData?.colony,
 
-        address:
-          this.deliveryData?.address,
-      },
+    address:
+      this.deliveryData?.address,
+  },
 
-      // PRODUCTS
-      items: this.orderItems,
+  // PRODUCTS
+  items: [
+    ...this.orderItems,
 
-      // CHECKOUT
-      checkout: this.checkoutPayload,
-
-      // PAYMENT
-      payment: paymentDetails,
-
-      // TOTAL
+    // SUMMARY OBJECT
+    {
       summary: {
-
         subtotal: this.total - 100,
-
         shippingFee: 100,
-
         totalAmount: this.total
-      },
+      }
+    }
+  ],
 
-      // ORDER DATE
-      createdDate:
-        new Date().toISOString()
-    };
+  // CHECKOUT
+  checkout: this.checkoutPayload,
 
-    console.log(
-      '🔥 FINAL COMPLETE PAYLOAD:',
-      this.finalPayload
-    );
+  // PAYMENT
+  payment: paymentDetails,
 
+  // ORDER DATE
+  createdDate:
+    new Date().toISOString()
+};
+
+console.log(
+  '🔥 FINAL COMPLETE PAYLOAD:',
+  this.finalPayload
+);
     // CLOSE ALERT
     this.showAlert = false;
 

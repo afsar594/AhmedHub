@@ -18,7 +18,7 @@ export class NavbarComponent {
   menuOpen = false;
   activeLink = '';
   searchTerm: string = '';
-  cartCount: any; // example value
+  cartCount = 0;
   currentUrl: string = '';
   constructor(
     public router: Router,
@@ -26,7 +26,8 @@ export class NavbarComponent {
     private api: ApiService,
     private location: Location
   ) {
-    this.GetAllItemCard();
+    this.api.refreshCartCount();
+    this.subscribeCartCount();
   }
    ngOnInit() {
     this.router.events
@@ -40,8 +41,8 @@ export class NavbarComponent {
   goBack() {
   this.location.back();
 }
-  GetAllItemCard() {
-    this.api.cartCount$.subscribe(count => {
+  subscribeCartCount() {
+    this.api.cartCount$.subscribe((count) => {
       this.cartCount = count;
     });
   }

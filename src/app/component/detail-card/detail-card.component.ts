@@ -117,6 +117,7 @@ export class DetailCardComponent implements OnInit {
 
     this.api.saveCard(payload).subscribe({
       next: (res: any) => {
+        this.api.refreshCartCount();
         this.showToastMessage(res?.message || 'Item added to cart successfully');
       },
       error: () => {

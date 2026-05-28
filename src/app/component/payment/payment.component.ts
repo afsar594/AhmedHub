@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.component';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-payment',
@@ -80,7 +81,8 @@ export class PaymentComponent implements OnInit {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private api: ApiService,
   ) {}
 
   ngOnInit(): void {
@@ -240,30 +242,31 @@ export class PaymentComponent implements OnInit {
 
   // CUSTOMER
   customer: {
+    id:0,
 
     userId:
       this.userData?.id || 0,
 
-    fullName:
-      this.deliveryData?.fullName,
+    name:
+      this.deliveryData?.fullName??0,
 
     phone:
-      this.deliveryData?.phone,
+      this.deliveryData?.phone??0,
 
-    province:
-      this.deliveryData?.province,
+    provinceId:0,
+      //this.deliveryData?.province??0,
 
     area:
-      this.deliveryData?.area,
+      this.deliveryData?.area??'',
 
-    house:
-      this.deliveryData?.house,
+    houseNo:
+      this.deliveryData?.house??'',
 
     colony:
-      this.deliveryData?.colony,
+      this.deliveryData?.colony??'',
 
     address:
-      this.deliveryData?.address,
+      this.deliveryData?.address??'',
   },
 
   // PRODUCTS
@@ -300,5 +303,79 @@ console.log(
 
     // SUCCESS PAGE
     // this.router.navigate(['/success']);
+    this.savecustomer(this.finalPayload.customer);
+    this.savePayment(this.finalPayload.payment);
+    this.saveCheckout(this.finalPayload.checkout);  
   }
+
+savecustomer(data: any): void {
+
+  this.api.UserShippingAddress(data).subscribe({
+
+    next: (res: any) => {
+
+      console.log('Customer response:', res);
+
+      if (!res || !res.isSuccess) {
+        console.error('Customer creation failed:', res);
+        return;
+      }
+
+      if (!res.data || !res.data.id) {
+        console.error('Customer ID missing in response:', res);
+        return;
+      }
+
+      if (!this.finalPayload?.payment) {
+        console.error('Payment object is missing');
+        return;
+      }
+
+      this.finalPayload.payment.userId = res.data.id;
+
+      this.savePayment(this.finalPayload.payment);
+    },
+
+    error: (err) => {
+      console.error('Error creating customer:', err);
+    }
+
+  });
+}
+savePayment(value: any) {
+
+  const payload = {
+    id: 0,
+    orderId: 0,
+    method: value.method || '',
+    accountNumber: value.accountNumber || '',
+    cnic: value.cnic || '',
+    paymentStatus: value.paymentStatus || '',
+    userId: value.userId,
+    createdDate: new Date().toISOString(),
+    amount: value.amount || 0
+  };
+
+  console.log('Saving payment with data:', payload);
+
+  return this.api.CreatePayment(payload).subscribe({
+    next: (res) => {
+      console.log('Payment created:', res);
+    },
+    error: (err) => {
+      console.error('Error creating payment:', err);
+    }
+  });
+}
+
+saveCheckout(data: any) {
+  this.api.postCheckout(data).subscribe({
+    next: (res) => {
+      console.log('Checkout successful:', res);
+    },
+    error: (err) => {
+      console.error('Error during checkout:', err);
+    }
+  }); 
+}
 }

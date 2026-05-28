@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,15 @@ export class ApiService {
 
   setCartCount(count: number) {
     this.cartCount.next(count);
+  }
+
+  refreshCartCount() {
+    this.GetAllItemCard()
+      .pipe(
+        map((r: any) => (r.isSuccess ? (r.data?.length ?? 0) : 0)),
+        catchError(() => of(0)),
+      )
+      .subscribe((count) => this.setCartCount(count));
   }
 
   removeBg(imageBase64: string) {
@@ -63,6 +72,21 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}Checkout`, payload);
   }
    UserShippingAddress(payload: any) {
-    return this.http.post(`${this.baseUrl}UserShippingAddress/signup`, payload);
+    return this.http.post(`${this.baseUrl}UserShippingAddress/Create`, payload);
   }
+  ///payment///////
+CreateCustomer(data: any) {
+  debugger
+  return this.http.post(
+    `${this.baseUrl}/Customer`,
+    data
+  );
+}
+
+CreatePayment(data: any) {
+  return this.http.post(
+    `${this.baseUrl}Payment`,
+    data
+  );
+}
 }

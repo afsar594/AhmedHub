@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
@@ -18,61 +19,29 @@ import { AlertModalComponent } from '../../shared/alert-modal/alert-modal.compon
   styleUrls: ['./cart-page.component.css'],
 })
 export class CartPageComponent implements OnInit {
+
+  baseUrl = 'https://localhost:44379/';
+
   cartItems: any[] = [];
   cartForm!: FormGroup;
+
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalAction: (() => void) | null = null;
 
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
-    this.GetAllItemCard();
+    this.getAllCartItems();
   }
-//   ngOnInit(): void {
-//   this.initializeForm();
 
-//   // Dummy data for cart
-//   this.cartItems = [
-//     {
-//       id: 1,
-//       itemName: 'Wireless Headphones',
-//       price: 59.99,
-//       oldPrice: 79.99,
-//       qty: 1,
-//       image: 'https://i.pinimg.com/736x/4e/a5/c8/4ea5c8c480625906a692bafa65ba7aad.jpg', // placeholder image
-//     },
-//     {
-//       id: 2,
-//       itemName: 'Smart Watch',
-//       price: 120.0,
-//       oldPrice: 149.99,
-//       qty: 2,
-//       image: 'https://i.pinimg.com/1200x/0b/44/0c/0b440ca1bee296393612fab487b6ee53.jpg',
-//     },
-//     {
-//       id: 3,
-//       itemName: 'Gaming Mouse',
-//       price: 35.5,
-//       qty: 1,
-//       image: 'https://i.pinimg.com/736x/69/50/82/695082caa33e275191ef8ee05bd9b316.jpg',
-//     },
-//     {
-//       id: 4,
-//       itemName: 'Mechanical Keyboard',
-//       price: 80.0,
-//       oldPrice: 99.99,
-//       qty: 1,
-//       image: 'https://i.pinimg.com/736x/16/1b/a7/161ba756c0f45c1029b96a3c0a5b1975.jpg',
-//     }
-//   ];
-
-//   this.buildFormArray(); // build form array for dummy data
-// }
-
-  initializeForm() {
+  initializeForm(): void {
     this.cartForm = this.fb.group({
       selectAll: [false],
       items: this.fb.array([]),
@@ -88,149 +57,232 @@ export class CartPageComponent implements OnInit {
   get items(): FormArray {
     return this.cartForm.get('items') as FormArray;
   }
+getAllCartItems(): void {
 
- GetAllItemCard() {
-  this.api.GetAllItemCard().subscribe((r: any) => {
-    if (r.isSuccess) {
-      this.cartItems = (r.data || []).map((x: any) => ({
-        id: x.id,
-        itemId: x.itemId,
-        itemName: x.itemName,
-        price: x.price,
-        oldPrice: x.oldPrice,
-        discount: x.discount,
-        qty: x.qty,
-        detail: x.detail,
-        color: x.color,
-        category: x.category,
-        brand: x.brand,
+  this.api.GetAllItemCard().subscribe({
 
-        // ✅ IMPORTANT FIX (IMAGE)
-        image: x.img
-          ? x.img.startsWith('http')
-            ? x.img
-            : `https://localhost:44379${x.img}`
-          : 'assets/no-image.png',
-      }));
+    next: (r: any) => {
+
+      console.log('Full API Response:', r);
+
+      if (!Array.isArray(r)) {
+        console.error('Response is not array');
+        return;
+      }
+
+      this.cartItems = r.map((x: any) => {
+
+        const img = x?.img || '';
+
+        let imageUrl = 'assets/no-image.png';
+
+        if (img) {
+          if (img.startsWith('http')) {
+            imageUrl = img;
+          } else {
+            imageUrl =
+              this.baseUrl +
+              (img.startsWith('/') ? img.substring(1) : img);
+          }
+        }
+
+        return {
+          id: x.id,
+          itemId: x.itemId,
+          itemName: x.itemName,
+          price: x.price,
+          oldPrice: x.oldPrice,
+          discount: x.discount,
+          qty: x.qty,
+          detail: x.detail,
+          color: x.color,
+          category: x.category,
+          brand: x.brand,
+          image: imageUrl
+        };
+      });
+
+      console.log('Cart items loaded:', this.cartItems);
 
       this.buildFormArray();
+
       this.api.setCartCount(this.cartItems.length);
+    },
+
+    error: (err) => {
+      console.error('API Error:', err);
+    },
+
+    complete: () => {
+      console.log('API call completed');
     }
+
   });
 }
+  buildFormArray(): void {
 
-  buildFormArray() {
     this.items.clear();
 
     this.cartItems.forEach((item) => {
+
       this.items.push(
         this.fb.group({
           id: [item.id],
           selected: [false],
-        }),
+        })
       );
     });
   }
 
-showModal = false;
-modalTitle = '';
-modalMessage = '';
-modalAction: (() => void) | null = null;
+  handleConfirm(): void {
 
-handleConfirm() {
-  if (this.modalAction) this.modalAction();
-  this.showModal = false;
-}
+    if (this.modalAction) {
+      this.modalAction();
+    }
 
+    this.showModal = false;
+  }
 
-  increaseQty(item: any) {
+  increaseQty(item: any): void {
     item.qty++;
   }
 
-  decreaseQty(item: any) {
+  decreaseQty(item: any): void {
+
     if (item.qty > 1) {
       item.qty--;
     }
   }
 
-removeItem(id: number, itemName?: string) {
-  this.modalTitle = 'Remove Item';
-  this.modalMessage = `Are you sure you want to remove "${itemName}" from your cart?`;
-  this.modalAction = () => {
-    this.api.DeleteCart(id).subscribe(() => this.GetAllItemCard());
-  };
-  this.showModal = true;
-}
+  removeItem(id: number, itemName?: string): void {
 
-deleteSelected() {
-  const selectedIds = this.items.controls
-    .filter(c => c.value.selected)
-    .map(c => c.value.id);
+    this.modalTitle = 'Remove Item';
+    this.modalMessage = `Are you sure you want to remove "${itemName}" from your cart?`;
 
-if(selectedIds.length === 0) {
-  this.modalTitle = 'No Item Selected';
-  this.modalMessage = 'Please select at least one item to delete.';
-  this.modalAction = null; // no action needed, just info
-  this.showModal = true;
-  return;
-}
+    this.modalAction = () => {
 
-  this.modalTitle = 'Delete Selected';
-  this.modalMessage = 'Are you sure you want to delete selected items?';
-  this.modalAction = () => {
-    selectedIds.forEach(id => this.api.DeleteCart(id).subscribe());
-    setTimeout(() => this.GetAllItemCard(), 500);
-  };
-  this.showModal = true;
-}
+      this.api.DeleteCart(id).subscribe({
+        next: () => {
+          this.getAllCartItems();
+        },
+        error: (err) => {
+          console.error('Delete failed', err);
+        },
+      });
+    };
 
- clearAll() {
-  this.modalTitle = 'Clear Cart';
-  this.modalMessage = 'Are you sure you want to clear your entire cart?';
-  this.modalAction = () => {
-    this.api.DeleteAll().subscribe(() => {
-      this.cartItems = [];
-      this.buildFormArray();
-    });
-  };
-  this.showModal = true;
-}
+    this.showModal = true;
+  }
+
+  deleteSelected(): void {
+
+    const selectedIds = this.items.controls
+      .filter((c) => c.value.selected)
+      .map((c) => c.value.id);
+
+    if (selectedIds.length === 0) {
+
+      this.modalTitle = 'No Item Selected';
+      this.modalMessage = 'Please select at least one item to delete.';
+      this.modalAction = null;
+      this.showModal = true;
+      return;
+    }
+
+    this.modalTitle = 'Delete Selected';
+    this.modalMessage =
+      'Are you sure you want to delete selected items?';
+
+    this.modalAction = () => {
+
+      const requests = selectedIds.map((id) =>
+        this.api.DeleteCart(id)
+      );
+
+      forkJoin(requests).subscribe({
+        next: () => {
+          this.getAllCartItems();
+        },
+        error: (err) => {
+          console.error('Bulk delete failed', err);
+        },
+      });
+    };
+
+    this.showModal = true;
+  }
+
+  clearAll(): void {
+
+    this.modalTitle = 'Clear Cart';
+    this.modalMessage =
+      'Are you sure you want to clear your entire cart?';
+
+    this.modalAction = () => {
+
+      this.api.DeleteAll().subscribe({
+        next: () => {
+
+          this.cartItems = [];
+          this.buildFormArray();
+          this.api.setCartCount(0);
+        },
+        error: (err) => {
+          console.error('Clear cart failed', err);
+        },
+      });
+    };
+
+    this.showModal = true;
+  }
 
   get total(): number {
-    if (!this.cartItems || this.cartItems.length === 0) return 0;
+
+    if (!this.cartItems?.length) {
+      return 0;
+    }
 
     return this.cartItems.reduce(
-      (acc: number, item: { price: number; qty: number }) =>
-        acc + item.price * item.qty,
-      0,
+      (acc, item) => acc + item.price * item.qty,
+      0
     );
   }
 
-  totalPriceFix(p: any, q: any) {
-    let total = p * q;
-    return total.toFixed(2);
+  totalPriceFix(price: number, qty: number): string {
+    return (price * qty).toFixed(2);
   }
 
-checkout() {
-  const selectedItems = this.items.controls
-    .map((control, index) => ({ selected: control.value.selected, item: this.cartItems[index] }))
-    .filter(x => x.selected)
-    .map(x => x.item);
+  checkout(): void {
 
- if(selectedItems.length === 0) {
-  this.modalTitle = 'No Item Selected';
-  this.modalMessage = 'Please select at least one item to proceed to checkout.';
-  this.modalAction = null; // only info
-  this.showModal = true;
-  return;
-}
+    const selectedItems = this.items.controls
+      .map((control, index) => ({
+        selected: control.value.selected,
+        item: this.cartItems[index],
+      }))
+      .filter((x) => x.selected)
+      .map((x) => x.item);
 
-  this.modalTitle = 'Proceed to Checkout';
-  this.modalMessage = `Are you sure you want to proceed with ${selectedItems.length} item(s)?`;
-  this.modalAction = () => {
-    this.router.navigate(['/buy-now'], { state: { data: selectedItems } });
-  };
-  this.showModal = true;
-}
+    if (selectedItems.length === 0) {
 
+      this.modalTitle = 'No Item Selected';
+      this.modalMessage =
+        'Please select at least one item to proceed to checkout.';
+      this.modalAction = null;
+      this.showModal = true;
+
+      return;
+    }
+
+    this.modalTitle = 'Proceed to Checkout';
+    this.modalMessage = `Are you sure you want to proceed with ${selectedItems.length} item(s)?`;
+
+    this.modalAction = () => {
+
+      this.router.navigate(['/buy-now'], {
+        state: { data: selectedItems },
+      });
+    };
+
+    this.showModal = true;
+  }
 }

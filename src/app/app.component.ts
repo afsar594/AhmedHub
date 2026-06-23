@@ -8,6 +8,7 @@ import { LoaderComponent } from './component/loader/loader.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     RouterOutlet,
     NavbarComponent,

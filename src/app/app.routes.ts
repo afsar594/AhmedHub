@@ -21,14 +21,19 @@ import { ComponentComponent } from './how-to--start-online-store/component/compo
 
 export const routes: Routes = [
   {
-  path: '',
-  redirectTo: 'shop',
-  pathMatch: 'full'
-},
-{
-  path: 'shop',
-  component: SaleProductComponent
-},
+    path: '',
+    redirectTo: 'shop',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    redirectTo: 'shop',
+    pathMatch: 'full'
+  },
+  {
+    path: 'shop',
+    component: SaleProductComponent
+  },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'ahmedhub-blog', component: BlogComponent },
@@ -46,4 +51,5 @@ export const routes: Routes = [
   // { path: 'admin-panel', component: AdminLoginComponent },
   // { path: 'dashboard', component: AdminDashboardComponent },
   // { path: 'adminproductmanagement', component: AdminAddProductComponent },
+  { path: '**', redirectTo: 'shop' },
 ];

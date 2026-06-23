@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { LoaderService } from '../services/loader.service';
+import { CommonModule } from '@angular/common';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-loader',
   standalone: true,
+  imports: [CommonModule],   // 👈 THIS FIXES *ngIf ERROR
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.css'
 })

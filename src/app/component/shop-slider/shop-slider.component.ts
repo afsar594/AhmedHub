@@ -32,4 +32,7 @@ export class ShopSliderComponent implements OnInit {
       this.next();
     }, 3000); // har 3 second me slide change
   }
+
+
+  
 }

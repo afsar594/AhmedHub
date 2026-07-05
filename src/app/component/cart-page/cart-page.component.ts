@@ -59,33 +59,63 @@ export class CartPageComponent implements OnInit {
   }
 getAllCartItems(): void {
 
-  this.api.GetAllItemCard().subscribe({
+  forkJoin({
+    cartRes: this.api.GetAllItemCard(),
+    productRes: this.api.getItemsAll(),
+  }).subscribe({
 
-    next: (r: any) => {
+    next: ({ cartRes, productRes }: any) => {
 
-      console.log('Full API Response:', r);
+      console.log('Full API Response:', cartRes);
 
-      if (!Array.isArray(r)) {
-        console.error('Response is not array');
+      const rows = Array.isArray(cartRes)
+        ? cartRes
+        : Array.isArray(cartRes?.data)
+          ? cartRes.data
+          : [];
+
+      const productRows = Array.isArray(productRes?.data)
+        ? productRes.data
+        : [];
+
+      const productImageMap = new Map<number, string>();
+      productRows.forEach((p: any) => {
+        const imgPath = p?.itemImages?.[0]?.imgPath;
+        if (!imgPath || !p?.itemId) {
+          return;
+        }
+
+        const normalized = String(imgPath).replace(/\\/g, '/').trim();
+        const imageUrl = normalized.startsWith('http')
+          ? normalized
+          : this.baseUrl + (normalized.startsWith('/') ? normalized.substring(1) : normalized);
+
+        productImageMap.set(Number(p.itemId), imageUrl);
+      });
+
+      if (!rows.length) {
+        this.cartItems = [];
+        this.buildFormArray();
+        this.api.setCartCount(0);
         return;
       }
 
-      this.cartItems = r.map((x: any) => {
+      this.cartItems = rows.map((x: any) => {
 
 
         return {
           id: x.id,
           itemId: x.itemId,
-          itemName: x.itemName,
+          itemName: x.itemName || x.title || x.name,
           price: x.price,
           oldPrice: x.oldPrice,
           discount: x.discount,
-          qty: x.qty,
+          qty: x.qty || 1,
           detail: x.detail,
           color: x.color,
           category: x.category,
           brand: x.brand,
-          image: this.resolveImageUrl(x)
+          image: productImageMap.get(Number(x.itemId)) || this.resolveImageUrl(x)
         };
       });
 
@@ -111,19 +141,37 @@ getAllCartItems(): void {
     const img =
       item?.img ||
       item?.image ||
+      item?.imagePath ||
       item?.imgPath ||
+      item?.itemImage ||
+      item?.thumbnail ||
+      item?.item?.img ||
+      item?.item?.image ||
+      item?.item?.imgPath ||
       item?.itemImages?.[0]?.imgPath ||
+      item?.itemImages?.[0]?.imagePath ||
+      item?.itemImages?.[0]?.path ||
       '';
 
     if (!img) {
-      return 'assets/no-image.png';
+      return 'assets/no-image.svg';
     }
 
-    if (img.startsWith('http') || img.startsWith('assets/')) {
-      return img;
+    const normalizedImg = String(img).replace(/\\/g, '/').trim();
+
+    if (normalizedImg.startsWith('data:image/')) {
+      return normalizedImg;
     }
 
-    return this.baseUrl + (img.startsWith('/') ? img.substring(1) : img);
+    if (/^[A-Za-z0-9+/=]+$/.test(normalizedImg) && normalizedImg.length > 100) {
+      return `data:image/jpeg;base64,${normalizedImg}`;
+    }
+
+    if (normalizedImg.startsWith('http') || normalizedImg.startsWith('assets/')) {
+      return normalizedImg;
+    }
+
+    return this.baseUrl + (normalizedImg.startsWith('/') ? normalizedImg.substring(1) : normalizedImg);
   }
 
   buildFormArray(): void {
@@ -257,6 +305,15 @@ getAllCartItems(): void {
 
   totalPriceFix(price: number, qty: number): string {
     return (price * qty).toFixed(2);
+  }
+
+  onImageError(event: Event): void {
+    const imgEl = event.target as HTMLImageElement | null;
+    if (!imgEl) {
+      return;
+    }
+
+    imgEl.src = 'assets/no-image.svg';
   }
 
   checkout(): void {

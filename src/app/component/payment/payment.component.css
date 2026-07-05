@@ -150,6 +150,14 @@
   display: block;
 }
 
+.field-error {
+  display: block;
+  margin-top: -2px;
+  margin-bottom: 6px;
+  color: #ff9fb1;
+  font-size: 12px;
+}
+
 /* buttons small */
 .payment-details button {
   width: 180px;

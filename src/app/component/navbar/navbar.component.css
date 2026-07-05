@@ -18,10 +18,29 @@
   min-width: 200px;
 }
 
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-mask {
+  width: 180px;
+  height: 58px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.4);
+}
+
 .logo-img {
-  width: 150px;
-  height: 80px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  transform: scale(1.22);
 }
 
 
@@ -207,6 +226,15 @@
 
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
+
+  .logo-img {
+    transform: scale(1.18);
+  }
+
+  .logo-mask {
+    width: 150px;
+    height: 48px;
+  }
 
   .menu-toggle {
     display: block;

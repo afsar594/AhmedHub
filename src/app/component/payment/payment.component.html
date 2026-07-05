@@ -32,7 +32,10 @@
             <input
               type="text"
               placeholder="Easypaisa Account Number"
-              [(ngModel)]="easypaisaNumber">
+              [(ngModel)]="easypaisaNumber"
+              maxlength="11"
+              (input)="clearError('easypaisaNumber')">
+            <small class="field-error" *ngIf="paymentErrors['easypaisaNumber']">{{ paymentErrors['easypaisaNumber'] }}</small>
 <!-- 
             <button (click)="confirmOrder()">
               Pay Now
@@ -58,7 +61,10 @@
             <input
               type="text"
               placeholder="JazzCash Number"
-              [(ngModel)]="jazzcashNumber">
+              [(ngModel)]="jazzcashNumber"
+              maxlength="11"
+              (input)="clearError('jazzcashNumber')">
+            <small class="field-error" *ngIf="paymentErrors['jazzcashNumber']">{{ paymentErrors['jazzcashNumber'] }}</small>
 
             <!-- <button (click)="confirmOrder()">
               Pay Now
@@ -84,22 +90,33 @@
             <input
               type="text"
               placeholder="Card Number"
-              [(ngModel)]="cardDetails.number">
+              [(ngModel)]="cardDetails.number"
+              maxlength="19"
+              (input)="clearError('cardNumber')">
+            <small class="field-error" *ngIf="paymentErrors['cardNumber']">{{ paymentErrors['cardNumber'] }}</small>
 
             <input
               type="text"
               placeholder="Name on Card"
-              [(ngModel)]="cardDetails.name">
+              [(ngModel)]="cardDetails.name"
+              (input)="clearError('cardName')">
+            <small class="field-error" *ngIf="paymentErrors['cardName']">{{ paymentErrors['cardName'] }}</small>
 
             <input
               type="text"
               placeholder="Expiry MM/YY"
-              [(ngModel)]="cardDetails.expiry">
+              [(ngModel)]="cardDetails.expiry"
+              maxlength="5"
+              (input)="clearError('cardExpiry')">
+            <small class="field-error" *ngIf="paymentErrors['cardExpiry']">{{ paymentErrors['cardExpiry'] }}</small>
 
             <input
               type="text"
               placeholder="CVV"
-              [(ngModel)]="cardDetails.cvv">
+              [(ngModel)]="cardDetails.cvv"
+              maxlength="4"
+              (input)="clearError('cardCvv')">
+            <small class="field-error" *ngIf="paymentErrors['cardCvv']">{{ paymentErrors['cardCvv'] }}</small>
 
             <!-- <button (click)="confirmOrder()">
               Pay Now
@@ -125,12 +142,18 @@
             <input
               type="text"
               placeholder="Account Number"
-              [(ngModel)]="hblDetails.account">
+              [(ngModel)]="hblDetails.account"
+              maxlength="20"
+              (input)="clearError('hblAccount')">
+            <small class="field-error" *ngIf="paymentErrors['hblAccount']">{{ paymentErrors['hblAccount'] }}</small>
 
             <input
               type="text"
               placeholder="CNIC"
-              [(ngModel)]="hblDetails.cnic">
+              [(ngModel)]="hblDetails.cnic"
+              maxlength="15"
+              (input)="clearError('hblCnic')">
+            <small class="field-error" *ngIf="paymentErrors['hblCnic']">{{ paymentErrors['hblCnic'] }}</small>
 
             <!-- <button (click)="confirmOrder()">
               Pay Now
@@ -194,6 +217,7 @@
 
               </option>
             </select>
+            <small class="field-error" *ngIf="paymentErrors['installmentBank']">{{ paymentErrors['installmentBank'] }}</small>
 
             <!-- TENURE -->
             <select
@@ -212,6 +236,7 @@
 
               </option>
             </select>
+            <small class="field-error" *ngIf="paymentErrors['installmentTenure']">{{ paymentErrors['installmentTenure'] }}</small>
 
             <!-- CARD -->
             <div *ngIf="selectedTenure">
@@ -219,22 +244,33 @@
               <input
                 type="text"
                 placeholder="Card Number"
-                [(ngModel)]="installmentCard.number">
+                [(ngModel)]="installmentCard.number"
+                maxlength="19"
+                (input)="clearError('installmentNumber')">
+              <small class="field-error" *ngIf="paymentErrors['installmentNumber']">{{ paymentErrors['installmentNumber'] }}</small>
 
               <input
                 type="text"
                 placeholder="Name on Card"
-                [(ngModel)]="installmentCard.name">
+                [(ngModel)]="installmentCard.name"
+                (input)="clearError('installmentName')">
+              <small class="field-error" *ngIf="paymentErrors['installmentName']">{{ paymentErrors['installmentName'] }}</small>
 
               <input
                 type="text"
                 placeholder="MM/YY"
-                [(ngModel)]="installmentCard.expiry">
+                [(ngModel)]="installmentCard.expiry"
+                maxlength="5"
+                (input)="clearError('installmentExpiry')">
+              <small class="field-error" *ngIf="paymentErrors['installmentExpiry']">{{ paymentErrors['installmentExpiry'] }}</small>
 
               <input
                 type="text"
                 placeholder="CVV"
-                [(ngModel)]="installmentCard.cvv">
+                [(ngModel)]="installmentCard.cvv"
+                maxlength="4"
+                (input)="clearError('installmentCvv')">
+              <small class="field-error" *ngIf="paymentErrors['installmentCvv']">{{ paymentErrors['installmentCvv'] }}</small>
 
               <!-- <button (click)="confirmOrder()">
                 Pay Now

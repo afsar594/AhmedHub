@@ -16,7 +16,15 @@ export class ApiService {
   refreshCartCount() {
     this.GetAllItemCard()
       .pipe(
-        map((r: any) => (r.isSuccess ? (r.data?.length ?? 0) : 0)),
+        map((r: any) => {
+          const rows = Array.isArray(r)
+            ? r
+            : Array.isArray(r?.data)
+              ? r.data
+              : [];
+
+          return rows.length;
+        }),
         catchError(() => of(0)),
       )
       .subscribe((count) => this.setCartCount(count));

@@ -59,6 +59,8 @@ export class PaymentComponent implements OnInit {
   alertTitle: string = '';
   alertMessage: string = '';
 
+  paymentErrors: Record<string, string> = {};
+
   banks = [
     {
       name: 'Askari Bank',
@@ -114,6 +116,8 @@ export class PaymentComponent implements OnInit {
       this.selected === method
         ? ''
         : method;
+
+    this.paymentErrors = {};
   }
 
   // BANK CHANGE
@@ -155,12 +159,135 @@ export class PaymentComponent implements OnInit {
       return;
     }
 
+    if (!this.validateSelectedPayment()) {
+      this.alertTitle = 'Invalid Payment Details';
+      this.alertMessage = 'Please enter payment information in the correct format.';
+      this.showAlert = true;
+      return;
+    }
+
     this.alertTitle = 'Confirm Order';
 
     this.alertMessage =
       `Are you sure you want to place order using ${this.selected}?`;
 
     this.showAlert = true;
+  }
+
+  clearError(key: string): void {
+    if (this.paymentErrors[key]) {
+      this.paymentErrors[key] = '';
+    }
+  }
+
+  private validateSelectedPayment(): boolean {
+    this.paymentErrors = {};
+
+    switch (this.selected) {
+      case 'easypaisa':
+        if (!this.isPakMobile(this.easypaisaNumber)) {
+          this.paymentErrors['easypaisaNumber'] = 'Enter valid Easypaisa number (03XXXXXXXXX).';
+        }
+        break;
+
+      case 'jazzcash':
+        if (!this.isPakMobile(this.jazzcashNumber)) {
+          this.paymentErrors['jazzcashNumber'] = 'Enter valid JazzCash number (03XXXXXXXXX).';
+        }
+        break;
+
+      case 'card':
+        this.validateCardFields(
+          this.cardDetails.number,
+          this.cardDetails.name,
+          this.cardDetails.expiry,
+          this.cardDetails.cvv,
+          'card'
+        );
+        break;
+
+      case 'hbl':
+        if (!/^\d{10,20}$/.test(this.onlyDigits(this.hblDetails.account))) {
+          this.paymentErrors['hblAccount'] = 'Account number must be 10 to 20 digits.';
+        }
+
+        if (!this.isValidCnic(this.hblDetails.cnic)) {
+          this.paymentErrors['hblCnic'] = 'CNIC format must be 12345-1234567-1.';
+        }
+        break;
+
+      case 'installment':
+        if (!this.selectedBank) {
+          this.paymentErrors['installmentBank'] = 'Please select bank.';
+        }
+
+        if (!this.selectedTenure) {
+          this.paymentErrors['installmentTenure'] = 'Please select tenure.';
+        }
+
+        this.validateCardFields(
+          this.installmentCard.number,
+          this.installmentCard.name,
+          this.installmentCard.expiry,
+          this.installmentCard.cvv,
+          'installment'
+        );
+        break;
+    }
+
+    return Object.values(this.paymentErrors).every((v) => !v);
+  }
+
+  private validateCardFields(
+    number: string,
+    name: string,
+    expiry: string,
+    cvv: string,
+    prefix: 'card' | 'installment'
+  ): void {
+    if (!/^\d{16}$/.test(this.onlyDigits(number))) {
+      this.paymentErrors[`${prefix}Number`] = 'Card number must be 16 digits.';
+    }
+
+    if (!/^[A-Za-z ]{3,}$/.test((name || '').trim())) {
+      this.paymentErrors[`${prefix}Name`] = 'Name on card must be at least 3 letters.';
+    }
+
+    if (!this.isValidExpiry(expiry)) {
+      this.paymentErrors[`${prefix}Expiry`] = 'Expiry must be valid MM/YY and not expired.';
+    }
+
+    if (!/^\d{3,4}$/.test(this.onlyDigits(cvv))) {
+      this.paymentErrors[`${prefix}Cvv`] = 'CVV must be 3 or 4 digits.';
+    }
+  }
+
+  private onlyDigits(value: string): string {
+    return String(value || '').replace(/\D/g, '');
+  }
+
+  private isPakMobile(value: string): boolean {
+    return /^03\d{9}$/.test(this.onlyDigits(value));
+  }
+
+  private isValidCnic(value: string): boolean {
+    return /^\d{5}-\d{7}-\d$/.test(String(value || '').trim());
+  }
+
+  private isValidExpiry(value: string): boolean {
+    const match = String(value || '').trim().match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
+    if (!match) {
+      return false;
+    }
+
+    const month = Number(match[1]);
+    const year = 2000 + Number(match[2]);
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    return year > currentYear || (year === currentYear && month >= currentMonth);
   }
 
   // FINAL ORDER

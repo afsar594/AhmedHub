@@ -5,7 +5,40 @@
     <div class="checkout-card">
       <h2 class="title">Delivery Information</h2>
 
-      <form [formGroup]="deliveryForm" (ngSubmit)="save()">
+      <div class="entry-choice" *ngIf="checkoutMode === 'choose'">
+        <p class="choice-title">Choose how you want to continue checkout</p>
+
+        <div class="choice-grid">
+          <button type="button" class="choice-btn manual" (click)="chooseManualEntry()">
+            <span class="choice-label">Add Manual Entry</span>
+            <span class="choice-desc">Type your delivery details yourself</span>
+          </button>
+
+          <button type="button" class="choice-btn gmail" (click)="chooseGmailEntry()">
+            <span class="choice-label">Get From Gmail ID</span>
+            <span class="choice-desc" *ngIf="gmailAvailable">Use {{ gmailEmail }}</span>
+            <span class="choice-desc" *ngIf="!gmailAvailable">No Gmail profile found, you can still continue</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="entry-active" *ngIf="checkoutMode !== 'choose'">
+        <span>
+          Mode:
+          <strong>{{ checkoutMode === 'gmail' ? 'Gmail ID' : 'Manual Entry' }}</strong>
+        </span>
+        <button type="button" class="link-btn" (click)="changeEntryMode()">Change</button>
+      </div>
+
+      <div class="gmail-lookup" *ngIf="checkoutMode === 'gmail' && !gmailAvailable">
+        <label>Get info from Google account logged in this browser</label>
+        <button type="button" class="gmail-fill-btn" (click)="fetchFromGoogleAccount()" [disabled]="googleLoading">
+          {{ googleLoading ? 'Loading Google info...' : 'Continue with Google' }}
+        </button>
+        <small class="error" *ngIf="gmailLookupError">{{ gmailLookupError }}</small>
+      </div>
+
+      <form [formGroup]="deliveryForm" (ngSubmit)="save()" *ngIf="checkoutMode !== 'choose'">
 
         <div class="form-grid">
 
@@ -16,6 +49,11 @@
             <small class="error" *ngIf="deliveryForm.get('fullName')?.touched && deliveryForm.get('fullName')?.invalid">
               Full Name is required.
             </small>
+          </div>
+
+          <div class="field" *ngIf="checkoutMode === 'gmail'">
+            <label>Gmail ID</label>
+            <input type="email" formControlName="email" readonly />
           </div>
 
           <!-- Phone -->
@@ -78,7 +116,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="checkout-btn" (click)="save()">
+        <button type="submit" class="checkout-btn">
           Place Order
         </button>
       </form>

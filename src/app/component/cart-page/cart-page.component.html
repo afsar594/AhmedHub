@@ -69,6 +69,7 @@
             <img
               [src]="item.image"
               [alt]="item.itemName"
+              (error)="onImageError($event)"
               class="product-image"
             />
           </div>

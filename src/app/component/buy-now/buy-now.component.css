@@ -29,6 +29,117 @@
   color: #00F5D4; /* neon aqua title */
 }
 
+.entry-choice {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #2b3a55;
+  background: #0f172a;
+}
+
+.choice-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.choice-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  border: 1px solid #334155;
+  background: #111827;
+  color: #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.choice-btn:hover {
+  transform: translateY(-1px);
+  border-color: #00f5d4;
+  box-shadow: 0 8px 24px rgba(0, 245, 212, 0.15);
+}
+
+.choice-label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.choice-desc {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.entry-active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  color: #cffafe;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.link-btn {
+  border: none;
+  background: transparent;
+  color: #00f5d4;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gmail-lookup {
+  margin-bottom: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #0f172a;
+}
+
+.gmail-lookup label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.gmail-lookup-row {
+  display: flex;
+  gap: 10px;
+}
+
+.gmail-lookup-row input {
+  flex: 1;
+  padding: 11px;
+  border: 1px solid #333f55;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #1e293b;
+  color: #e0e7ff;
+}
+
+.gmail-fill-btn {
+  border: 1px solid #00f5d4;
+  border-radius: 8px;
+  background: rgba(0, 245, 212, 0.12);
+  color: #00f5d4;
+  font-weight: 700;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
 /* FORM */
 .form-grid {
   display: grid;
@@ -134,6 +245,10 @@
 @media (max-width: 900px) {
   .checkout-wrapper {
     flex-direction: column;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
   }
 
   /* ORDER SUMMARY above form */

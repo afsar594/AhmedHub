@@ -40,6 +40,24 @@ export class LoginComponent {
     this.submitted = true;
     if (this.loginForm.valid) {
       console.log('Form Values:', this.loginForm.value);
+
+      const email = String(this.loginForm.get('email')?.value || '').trim();
+      const displayName = email
+        .split('@')[0]
+        ?.replace(/[._-]+/g, ' ')
+        ?.split(' ')
+        .filter(Boolean)
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+
+      localStorage.setItem(
+        'ahmedhub_gmail_profile',
+        JSON.stringify({
+          email,
+          displayName,
+        })
+      );
+
       alert('Login successful!');
     }
   }

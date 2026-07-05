@@ -11,10 +11,20 @@
 }
 
 /* Logo */
-.logo img {
-  height: 40px;
-  margin-right: 20px;
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
 }
+
+.logo-img {
+  width: 150px;
+  height: 80px;
+  object-fit: contain;
+}
+
+
 
 /* ===== Back Button ===== */
 .back-btn {

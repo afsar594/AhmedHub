@@ -29,14 +29,15 @@ export class NavbarComponent {
     this.api.refreshCartCount();
     this.subscribeCartCount();
   }
-   ngOnInit() {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentUrl = event.url;
-        console.log('Updated URL:', this.currentUrl);
-      });
-  }
+isShopPage: boolean = false;
+
+ngOnInit() {
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.isShopPage = event.urlAfterRedirects.split('?')[0] === '/shop';
+    });
+}
 
   goBack() {
   this.location.back();

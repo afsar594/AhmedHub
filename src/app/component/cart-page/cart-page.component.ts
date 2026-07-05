@@ -72,19 +72,6 @@ getAllCartItems(): void {
 
       this.cartItems = r.map((x: any) => {
 
-        const img = x?.img || '';
-
-        let imageUrl = 'assets/no-image.png';
-
-        if (img) {
-          if (img.startsWith('http')) {
-            imageUrl = img;
-          } else {
-            imageUrl =
-              this.baseUrl +
-              (img.startsWith('/') ? img.substring(1) : img);
-          }
-        }
 
         return {
           id: x.id,
@@ -98,7 +85,7 @@ getAllCartItems(): void {
           color: x.color,
           category: x.category,
           brand: x.brand,
-          image: imageUrl
+          image: this.resolveImageUrl(x)
         };
       });
 
@@ -119,6 +106,26 @@ getAllCartItems(): void {
 
   });
 }
+  private resolveImageUrl(item: any): string {
+
+    const img =
+      item?.img ||
+      item?.image ||
+      item?.imgPath ||
+      item?.itemImages?.[0]?.imgPath ||
+      '';
+
+    if (!img) {
+      return 'assets/no-image.png';
+    }
+
+    if (img.startsWith('http') || img.startsWith('assets/')) {
+      return img;
+    }
+
+    return this.baseUrl + (img.startsWith('/') ? img.substring(1) : img);
+  }
+
   buildFormArray(): void {
 
     this.items.clear();

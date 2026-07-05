@@ -166,6 +166,10 @@ export class PaymentComponent implements OnInit {
   // FINAL ORDER
   placeOrderConfirmed() {
 
+    const amount =
+      this.checkoutPayload?.[0]?.totalAmount ??
+      this.total;
+
     let paymentDetails: any = {};
 
     switch (this.selected) {
@@ -175,6 +179,7 @@ export class PaymentComponent implements OnInit {
 
         paymentDetails = {
           method: 'Easypaisa',
+          amount,
           accountNumber:
             this.easypaisaNumber
         };
@@ -186,6 +191,7 @@ export class PaymentComponent implements OnInit {
 
         paymentDetails = {
           method: 'JazzCash',
+          amount,
           accountNumber:
             this.jazzcashNumber
         };
@@ -197,6 +203,7 @@ export class PaymentComponent implements OnInit {
 
         paymentDetails = {
           method: 'Credit/Debit Card',
+          amount,
           card: this.cardDetails
         };
 
@@ -207,6 +214,7 @@ export class PaymentComponent implements OnInit {
 
         paymentDetails = {
           method: 'HBL',
+          amount,
           account: this.hblDetails.account,
           cnic: this.hblDetails.cnic
         };
@@ -217,7 +225,8 @@ export class PaymentComponent implements OnInit {
       case 'cod':
 
         paymentDetails = {
-          method: 'Cash On Delivery'
+          method: 'Cash On Delivery',
+          amount
         };
 
         break;
@@ -227,6 +236,7 @@ export class PaymentComponent implements OnInit {
 
         paymentDetails = {
           method: 'Installment',
+          amount,
           bank: this.selectedBank,
           tenure: this.selectedTenure,
           processingFee:
@@ -238,7 +248,7 @@ export class PaymentComponent implements OnInit {
     }
 
     // FINAL COMPLETE PAYLOAD
-  this.finalPayload = {
+    this.finalPayload = {
 
   // CUSTOMER
   customer: {
@@ -293,7 +303,7 @@ export class PaymentComponent implements OnInit {
   createdDate:
     new Date().toISOString()
 };
-
+debugger
 console.log(
   '🔥 FINAL COMPLETE PAYLOAD:',
   this.finalPayload
@@ -370,8 +380,11 @@ savePayment(value: any) {
 
 saveCheckout(data: any) {
   this.api.postCheckout(data).subscribe({
-    next: (res) => {
+    next: (res:any) => {
       console.log('Checkout successful:', res);
+      if(res.isSuccess) {
+        alert('Order placed successfully!');
+        this.router.navigate(['/shop']);}
     },
     error: (err) => {
       console.error('Error during checkout:', err);
